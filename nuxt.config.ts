@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui',
     '@nuxtjs/i18n',
-    'nuxt-vue3-google-signin'
+    'nuxt-vue3-google-signin',
+    '@vite-pwa/nuxt'
   ],
   ssr: false,
 
@@ -60,6 +61,50 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       alwaysRedirect: true,
       fallbackLocale: 'id'
+    }
+  },
+
+  pwa: {
+    registerType: 'autoUpdate',
+    workbox: {
+      navigateFallback: undefined
+    },
+    manifest: {
+      name: 'IG Flow',
+      short_name: 'Instagram Flow',
+      description: 'Instagram Flow - Asset Monitoring Teknologi Indonesia',
+      lang: 'en',
+      display: 'standalone',
+      background_color: '#ffffff',
+      theme_color: '#2D4E6F',
+      icons: [
+        {
+          src: '/icons/icon_64x64.png',
+          sizes: '64x64',
+          type: 'image/png'
+        },
+        {
+          src: '/icons/icon_144x144.png',
+          sizes: '144x144',
+          type: 'image/png'
+        },
+        {
+          src: '/icons/icon_192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+
+          src: '/icons/icon_384x384.png',
+          sizes: '384x384',
+          type: 'image/png'
+        },
+        {
+          src: '/icons/icon_512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
     }
   }
 })

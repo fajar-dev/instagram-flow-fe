@@ -12,15 +12,16 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'manifest', href: '/manifest.webmanifest' }
   ],
   htmlAttrs: {
-    lang: 'id'
+    lang: 'en'
   }
 })
 
-const title = 'NusaCall by NusaContact'
-const description = 'Manage all your WhatsApp Calling efficiently with our platform'
+const title = 'Instagram Flow - AMTI'
+const description = 'Manage all your Instagram account efficiently with our platform'
 
 useSeoMeta({
   title,
