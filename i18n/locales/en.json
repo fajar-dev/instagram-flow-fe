@@ -1,0 +1,318 @@
+{
+  "components": {
+    "languageSwitcher": {
+      "ariaLabel": "Change language"
+    },
+    "header": {
+      "openMenu": "Open menu"
+    },
+    "sidebar": {
+      "collapseSidebar": "Collapse sidebar",
+      "expandSidebar": "Expand sidebar",
+      "settings": "Settings",
+      "nav": {
+        "dashboard": "Dashboard",
+        "main": "Main Menu",
+        "menu": "Menu",
+        "subMenu1": "Sub Menu 1",
+        "subMenu2": "Sub Menu 2",
+        "contact": "Contact",
+        "users": "Users"
+      }
+    },
+    "dashboardLayout": {
+      "closeSidebar": "Close sidebar"
+    },
+    "userPopover": {
+      "theme": "Theme",
+      "language": "Language",
+      "logout": "Logout",
+      "logoutSuccess": "Logout success",
+      "profile": "My profile"
+    },
+    "deleteModal": {
+      "defaultTitle": "Delete Confirmation",
+      "defaultDescription": "Are you sure you want to delete {item}? This action cannot be undone.",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "dataTable": {
+      "searchPlaceholder": "Search...",
+      "showing": "Showing {from} to {to} of {total} results"
+    },
+    "contact": {
+      "addModal": {
+        "title": "Add Contact",
+        "description": "Fill in the details to create a new contact.",
+        "salutationLabel": "Salutation",
+        "salutationPlaceholder": "Select salutation",
+        "salutationMr": "Mr.",
+        "salutationMrs": "Mrs.",
+        "nameLabel": "Name",
+        "namePlaceholder": "Enter name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter email",
+        "phoneLabel": "Phone",
+        "phonePlaceholder": "Enter phone number",
+        "typeLabel": "Type",
+        "typeCustomer": "Customer",
+        "typeVendor": "Vendor",
+        "typeSupplier": "Supplier",
+        "typeOther": "Other",
+        "statusLabel": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "cancel": "Cancel",
+        "save": "Save",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneRequired": "Phone is required",
+        "createdSuccess": "Contact created successfully!"
+      },
+      "updateModal": {
+        "title": "Edit Contact",
+        "description": "Update the contact information below.",
+        "salutationLabel": "Salutation",
+        "salutationPlaceholder": "Select salutation",
+        "salutationMr": "Mr.",
+        "salutationMrs": "Mrs.",
+        "nameLabel": "Name",
+        "namePlaceholder": "Enter name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter email",
+        "phoneLabel": "Phone",
+        "phonePlaceholder": "Enter phone number",
+        "typeLabel": "Type",
+        "typeCustomer": "Customer",
+        "typeVendor": "Vendor",
+        "typeSupplier": "Supplier",
+        "typeOther": "Other",
+        "statusLabel": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "cancel": "Cancel",
+        "save": "Save",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneRequired": "Phone is required",
+        "updatedSuccess": "Contact updated successfully!"
+      },
+      "deleteModal": {
+        "title": "Delete Contact",
+        "description": "Are you sure you want to delete {name}? This action cannot be undone.",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "close": "Close",
+        "deletedSuccess": "Contact deleted successfully!",
+        "deleteFailed": "Failed to delete contact",
+        "genericError": "An error occurred"
+      }
+    },
+    "user": {
+      "addModal": {
+        "title": "Add User",
+        "description": "Fill in the details to create a new user account.",
+        "choosePhoto": "Choose Photo",
+        "remove": "Remove",
+        "nameLabel": "Name",
+        "namePlaceholder": "Enter full name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter email address",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Enter password",
+        "statusLabel": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "cancel": "Cancel",
+        "save": "Save",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "passwordMin": "Password must be at least 6 characters",
+        "photoUploadSuccess": "Photo uploaded successfully!",
+        "photoUploadFailed": "Failed to upload photo",
+        "createdSuccess": "User created successfully!"
+      },
+      "updateModal": {
+        "title": "Edit User",
+        "description": "Update the user's information below.",
+        "choosePhoto": "Choose Photo",
+        "remove": "Remove",
+        "nameLabel": "Name",
+        "namePlaceholder": "Enter full name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter email address",
+        "passwordLabel": "New Password (optional)",
+        "passwordPlaceholder": "Leave empty to keep unchanged",
+        "statusLabel": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "cancel": "Cancel",
+        "save": "Save",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "passwordMin": "Password must be at least 6 characters",
+        "photoUploadSuccess": "Photo uploaded successfully!",
+        "photoUploadFailed": "Failed to upload photo",
+        "updatedSuccess": "User updated successfully!"
+      }
+    },
+    "errors": {
+      "title": "Request failed",
+      "unexpected": "Please try again."
+    },
+    "authLayout": {
+      "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia"
+    },
+    "mobileSidebar": {
+      "title": "Navigation",
+      "description": "Choose a page or open a menu."
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Welcome to the admin dashboard"
+    },
+    "contact": {
+      "title": "Contact Customer",
+      "description": "Customer contact list and management",
+      "searchPlaceholder": "Search...",
+      "addContact": "Add Contact",
+      "columnId": "#",
+      "columnName": "Name",
+      "columnEmail": "Email",
+      "columnPhone": "Phone",
+      "columnType": "Type",
+      "columnStatus": "Status",
+      "columnCreatedAt": "Created At",
+      "columnAction": "Action",
+      "actionsDropdown": "Actions dropdown",
+      "editContact": "Edit contact",
+      "deleteContact": "Delete contact",
+      "deleteTitle": "Delete Contact",
+      "deletedSuccess": "Contact deleted successfully!",
+      "typeCustomer": "Customer",
+      "typeVendor": "Vendor",
+      "typeSupplier": "Supplier",
+      "typeOther": "Other",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "user": {
+      "title": "User Management",
+      "description": "Manage system users and their profiles",
+      "searchPlaceholder": "Search...",
+      "addUser": "Add User",
+      "columnProfile": "User Profile",
+      "columnStatus": "Status",
+      "columnJoinedDate": "Joined Date",
+      "columnAction": "Action",
+      "actionsDropdown": "Actions dropdown",
+      "active": "Active",
+      "inactive": "Inactive",
+      "editUser": "Edit User",
+      "deleteUser": "Delete User",
+      "deleteTitle": "Delete User",
+      "deletedSuccess": "User deleted successfully!"
+    },
+    "auth": {
+      "signIn": {
+        "title": "Sign In",
+        "description": "Enter your credentials to sign in",
+        "emailLabel": "Email",
+        "emailPlaceholder": "E-mail",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Password",
+        "login": "Sign In",
+        "or": "OR",
+        "forgotPassword": "Forgot password?",
+        "continueWithGoogle": "Continue with Google",
+        "continueWithMicrosoft": "Continue with Microsoft",
+        "emailRequired": "Email is required",
+        "passwordRequired": "Password is required",
+        "loginSuccess": "Login success! Welcome.",
+        "loginFailed": "Login failed. Please try again.",
+        "togglePasswordVisibility": "Toggle Password Visibility",
+        "emailInvalid": "Enter a valid email address",
+        "googleUnavailable": "Google sign-in is temporarily unavailable. Please sign in with your email."
+      },
+      "forgotPassword": {
+        "title": "Forgot Password",
+        "description": "Enter your email address and we'll send you a link to reset your password.",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter your email",
+        "sendResetLink": "Send Reset Link",
+        "backToSignIn": "Back to Sign In",
+        "checkEmailTitle": "Check your email",
+        "checkEmailDescription": "We've sent a password reset link to your email address. Please check your inbox.",
+        "resendEmail": "Resend Email",
+        "emailRequired": "Email is required",
+        "resetLinkSent": "Reset link sent",
+        "resendCooldown": "Resend in {seconds}s",
+        "emailInvalid": "Enter a valid email address"
+      },
+      "resetPassword": {
+        "validating": "Validating reset link...",
+        "title": "Reset Password",
+        "description": "Enter your new password below.",
+        "newPasswordLabel": "New Password",
+        "newPasswordPlaceholder": "Enter new password",
+        "confirmPasswordLabel": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm new password",
+        "save": "Reset Password",
+        "backToSignIn": "Back to Sign In",
+        "passwordMin": "Password must be at least 8 characters",
+        "confirmPasswordRequired": "Please confirm your password",
+        "passwordMismatch": "Passwords do not match",
+        "invalidLink": "Invalid or expired reset password link",
+        "resetSuccess": "Password reset successfully",
+        "togglePasswordVisibility": "Toggle Password Visibility",
+        "toggleConfirmPasswordVisibility": "Toggle Confirm Password Visibility"
+      }
+    },
+    "profile": {
+      "index": {
+        "title": "My profile",
+        "description": "Manage your account information and password",
+        "tabInformation": "Information",
+        "tabPassword": "Password"
+      },
+      "information": {
+        "photoTitle": "Profile photo",
+        "photoHint": "Upload an image for your account. Save changes to apply it.",
+        "changePhoto": "Change photo",
+        "remove": "Remove",
+        "nameLabel": "Name",
+        "namePlaceholder": "Your name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Your email address",
+        "save": "Save changes",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Enter a valid email address",
+        "photoUploadSuccess": "Photo uploaded. Save changes to apply it.",
+        "photoUploadFailed": "Could not upload photo. Please try again.",
+        "updatedSuccess": "Profile updated successfully"
+      },
+      "password": {
+        "currentPasswordLabel": "Current password",
+        "currentPasswordHint": "Required to confirm this change",
+        "currentPasswordPlaceholder": "Enter your current password",
+        "currentPasswordRequired": "Current password is required",
+        "newPasswordLabel": "New password",
+        "newPasswordPlaceholder": "Enter a new password",
+        "confirmPasswordLabel": "Confirm new password",
+        "confirmPasswordPlaceholder": "Repeat your new password",
+        "save": "Save password",
+        "newPasswordMin": "Password must be at least 6 characters",
+        "confirmPasswordMin": "Confirmation must be at least 6 characters",
+        "passwordMismatch": "Passwords do not match",
+        "updatedSuccess": "Password updated successfully"
+      }
+    }
+  }
+}

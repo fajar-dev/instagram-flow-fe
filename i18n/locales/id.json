@@ -1,0 +1,318 @@
+{
+  "components": {
+    "languageSwitcher": {
+      "ariaLabel": "Ubah bahasa"
+    },
+    "header": {
+      "openMenu": "Buka menu"
+    },
+    "sidebar": {
+      "collapseSidebar": "Tutup sidebar",
+      "expandSidebar": "Buka sidebar",
+      "settings": "Pengaturan",
+      "nav": {
+        "dashboard": "Dasbor",
+        "main": "Menu Utama",
+        "menu": "Menu",
+        "subMenu1": "Sub Menu 1",
+        "subMenu2": "Sub Menu 2",
+        "contact": "Kontak",
+        "users": "Pengguna"
+      }
+    },
+    "dashboardLayout": {
+      "closeSidebar": "Tutup sidebar"
+    },
+    "userPopover": {
+      "theme": "Tema",
+      "language": "Bahasa",
+      "logout": "Keluar",
+      "logoutSuccess": "Berhasil keluar",
+      "profile": "Profil saya"
+    },
+    "deleteModal": {
+      "defaultTitle": "Konfirmasi Hapus",
+      "defaultDescription": "Apakah Anda yakin ingin menghapus {item}? Tindakan ini tidak dapat dibatalkan.",
+      "cancel": "Batal",
+      "delete": "Hapus"
+    },
+    "dataTable": {
+      "searchPlaceholder": "Cari...",
+      "showing": "Menampilkan {from} sampai {to} dari {total} hasil"
+    },
+    "contact": {
+      "addModal": {
+        "title": "Tambah Kontak",
+        "description": "Isi detail berikut untuk membuat kontak baru.",
+        "salutationLabel": "Sapaan",
+        "salutationPlaceholder": "Pilih sapaan",
+        "salutationMr": "Bapak",
+        "salutationMrs": "Ibu",
+        "nameLabel": "Nama",
+        "namePlaceholder": "Masukkan nama",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Masukkan email",
+        "phoneLabel": "Telepon",
+        "phonePlaceholder": "Masukkan nomor telepon",
+        "typeLabel": "Tipe",
+        "typeCustomer": "Pelanggan",
+        "typeVendor": "Vendor",
+        "typeSupplier": "Pemasok",
+        "typeOther": "Lainnya",
+        "statusLabel": "Status",
+        "active": "Aktif",
+        "inactive": "Nonaktif",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "nameRequired": "Nama wajib diisi",
+        "emailRequired": "Email wajib diisi",
+        "emailInvalid": "Masukkan alamat email yang valid",
+        "phoneRequired": "Telepon wajib diisi",
+        "createdSuccess": "Kontak berhasil dibuat!"
+      },
+      "updateModal": {
+        "title": "Ubah Kontak",
+        "description": "Perbarui informasi kontak di bawah ini.",
+        "salutationLabel": "Sapaan",
+        "salutationPlaceholder": "Pilih sapaan",
+        "salutationMr": "Bapak",
+        "salutationMrs": "Ibu",
+        "nameLabel": "Nama",
+        "namePlaceholder": "Masukkan nama",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Masukkan email",
+        "phoneLabel": "Telepon",
+        "phonePlaceholder": "Masukkan nomor telepon",
+        "typeLabel": "Tipe",
+        "typeCustomer": "Pelanggan",
+        "typeVendor": "Vendor",
+        "typeSupplier": "Pemasok",
+        "typeOther": "Lainnya",
+        "statusLabel": "Status",
+        "active": "Aktif",
+        "inactive": "Nonaktif",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "nameRequired": "Nama wajib diisi",
+        "emailRequired": "Email wajib diisi",
+        "emailInvalid": "Masukkan alamat email yang valid",
+        "phoneRequired": "Telepon wajib diisi",
+        "updatedSuccess": "Kontak berhasil diperbarui!"
+      },
+      "deleteModal": {
+        "title": "Hapus Kontak",
+        "description": "Apakah Anda yakin ingin menghapus {name}? Tindakan ini tidak dapat dibatalkan.",
+        "cancel": "Batal",
+        "delete": "Hapus",
+        "close": "Tutup",
+        "deletedSuccess": "Kontak berhasil dihapus!",
+        "deleteFailed": "Gagal menghapus kontak",
+        "genericError": "Terjadi kesalahan"
+      }
+    },
+    "user": {
+      "addModal": {
+        "title": "Tambah Pengguna",
+        "description": "Isi detail berikut untuk membuat akun pengguna baru.",
+        "choosePhoto": "Pilih Foto",
+        "remove": "Hapus",
+        "nameLabel": "Nama",
+        "namePlaceholder": "Masukkan nama lengkap",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Masukkan alamat email",
+        "passwordLabel": "Kata Sandi",
+        "passwordPlaceholder": "Masukkan kata sandi",
+        "statusLabel": "Status",
+        "active": "Aktif",
+        "inactive": "Nonaktif",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "nameRequired": "Nama wajib diisi",
+        "emailRequired": "Email wajib diisi",
+        "emailInvalid": "Masukkan alamat email yang valid",
+        "passwordMin": "Kata sandi minimal 6 karakter",
+        "photoUploadSuccess": "Foto berhasil diunggah!",
+        "photoUploadFailed": "Gagal mengunggah foto",
+        "createdSuccess": "Pengguna berhasil dibuat!"
+      },
+      "updateModal": {
+        "title": "Ubah Pengguna",
+        "description": "Perbarui informasi pengguna di bawah ini.",
+        "choosePhoto": "Pilih Foto",
+        "remove": "Hapus",
+        "nameLabel": "Nama",
+        "namePlaceholder": "Masukkan nama lengkap",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Masukkan alamat email",
+        "passwordLabel": "Kata Sandi Baru (opsional)",
+        "passwordPlaceholder": "Kosongkan jika tidak diubah",
+        "statusLabel": "Status",
+        "active": "Aktif",
+        "inactive": "Nonaktif",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "nameRequired": "Nama wajib diisi",
+        "emailRequired": "Email wajib diisi",
+        "emailInvalid": "Masukkan alamat email yang valid",
+        "passwordMin": "Kata sandi minimal 6 karakter",
+        "photoUploadSuccess": "Foto berhasil diunggah!",
+        "photoUploadFailed": "Gagal mengunggah foto",
+        "updatedSuccess": "Pengguna berhasil diperbarui!"
+      }
+    },
+    "errors": {
+      "title": "Permintaan gagal",
+      "unexpected": "Silakan coba lagi."
+    },
+    "authLayout": {
+      "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia"
+    },
+    "mobileSidebar": {
+      "title": "Navigasi",
+      "description": "Pilih halaman atau buka menu."
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dasbor",
+      "description": "Selamat datang di admin dashboard"
+    },
+    "contact": {
+      "title": "Kontak Pelanggan",
+      "description": "Daftar dan pengelolaan kontak pelanggan",
+      "searchPlaceholder": "Cari...",
+      "addContact": "Tambah Kontak",
+      "columnId": "#",
+      "columnName": "Nama",
+      "columnEmail": "Email",
+      "columnPhone": "Telepon",
+      "columnType": "Tipe",
+      "columnStatus": "Status",
+      "columnCreatedAt": "Dibuat Pada",
+      "columnAction": "Aksi",
+      "actionsDropdown": "Menu aksi",
+      "editContact": "Ubah kontak",
+      "deleteContact": "Hapus kontak",
+      "deleteTitle": "Hapus Kontak",
+      "deletedSuccess": "Kontak berhasil dihapus!",
+      "typeCustomer": "Pelanggan",
+      "typeVendor": "Vendor",
+      "typeSupplier": "Pemasok",
+      "typeOther": "Lainnya",
+      "active": "Aktif",
+      "inactive": "Nonaktif"
+    },
+    "user": {
+      "title": "Manajemen Pengguna",
+      "description": "Kelola pengguna sistem dan profil mereka",
+      "searchPlaceholder": "Cari...",
+      "addUser": "Tambah Pengguna",
+      "columnProfile": "Profil Pengguna",
+      "columnStatus": "Status",
+      "columnJoinedDate": "Tanggal Bergabung",
+      "columnAction": "Aksi",
+      "actionsDropdown": "Menu aksi",
+      "active": "Aktif",
+      "inactive": "Nonaktif",
+      "editUser": "Ubah Pengguna",
+      "deleteUser": "Hapus Pengguna",
+      "deleteTitle": "Hapus Pengguna",
+      "deletedSuccess": "Pengguna berhasil dihapus!"
+    },
+    "auth": {
+      "signIn": {
+        "title": "Masuk",
+        "description": "Masukkan kredensial anda untuk masuk",
+        "emailLabel": "Email",
+        "emailPlaceholder": "E-mail",
+        "passwordLabel": "Kata Sandi",
+        "passwordPlaceholder": "Password",
+        "login": "Masuk",
+        "or": "ATAU",
+        "forgotPassword": "Lupa kata sandi?",
+        "continueWithGoogle": "Lanjutkan dengan Google",
+        "continueWithMicrosoft": "Lanjutkan dengan Microsoft",
+        "emailRequired": "Email wajib diisi",
+        "passwordRequired": "Kata sandi wajib diisi",
+        "loginSuccess": "Berhasil masuk! Selamat datang.",
+        "loginFailed": "Gagal masuk. Silakan coba lagi.",
+        "togglePasswordVisibility": "Tampilkan/Sembunyikan Kata Sandi",
+        "emailInvalid": "Masukkan alamat email yang valid",
+        "googleUnavailable": "Login Google sementara tidak tersedia. Silakan masuk dengan email Anda."
+      },
+      "forgotPassword": {
+        "title": "Lupa Kata Sandi",
+        "description": "Masukkan alamat email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda.",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Masukkan email Anda",
+        "sendResetLink": "Kirim Tautan Reset",
+        "backToSignIn": "Kembali ke Masuk",
+        "checkEmailTitle": "Periksa email Anda",
+        "checkEmailDescription": "Kami telah mengirimkan tautan reset kata sandi ke alamat email Anda. Silakan periksa kotak masuk Anda.",
+        "resendEmail": "Kirim Ulang Email",
+        "emailRequired": "Email wajib diisi",
+        "resetLinkSent": "Tautan reset telah dikirim",
+        "resendCooldown": "Kirim ulang dalam {seconds}d",
+        "emailInvalid": "Masukkan alamat email yang valid"
+      },
+      "resetPassword": {
+        "validating": "Memvalidasi tautan reset...",
+        "title": "Reset Kata Sandi",
+        "description": "Masukkan kata sandi baru Anda di bawah ini.",
+        "newPasswordLabel": "Kata Sandi Baru",
+        "newPasswordPlaceholder": "Masukkan kata sandi baru",
+        "confirmPasswordLabel": "Konfirmasi Kata Sandi",
+        "confirmPasswordPlaceholder": "Konfirmasi kata sandi baru",
+        "save": "Reset Kata Sandi",
+        "backToSignIn": "Kembali ke Masuk",
+        "passwordMin": "Kata sandi minimal 8 karakter",
+        "confirmPasswordRequired": "Silakan konfirmasi kata sandi Anda",
+        "passwordMismatch": "Kata sandi tidak cocok",
+        "invalidLink": "Tautan reset kata sandi tidak valid atau kedaluwarsa",
+        "resetSuccess": "Kata sandi berhasil direset",
+        "togglePasswordVisibility": "Tampilkan/Sembunyikan Kata Sandi",
+        "toggleConfirmPasswordVisibility": "Tampilkan/Sembunyikan Konfirmasi Kata Sandi"
+      }
+    },
+    "profile": {
+      "index": {
+        "title": "Profil saya",
+        "description": "Kelola informasi akun dan kata sandi Anda",
+        "tabInformation": "Informasi",
+        "tabPassword": "Kata sandi"
+      },
+      "information": {
+        "photoTitle": "Foto profil",
+        "photoHint": "Unggah gambar untuk akun Anda. Simpan perubahan untuk menerapkannya.",
+        "changePhoto": "Ubah foto",
+        "remove": "Hapus",
+        "nameLabel": "Nama",
+        "namePlaceholder": "Nama Anda",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Alamat email Anda",
+        "save": "Simpan perubahan",
+        "nameRequired": "Nama wajib diisi",
+        "emailRequired": "Email wajib diisi",
+        "emailInvalid": "Masukkan alamat email yang valid",
+        "photoUploadSuccess": "Foto diunggah. Simpan perubahan untuk menerapkannya.",
+        "photoUploadFailed": "Foto gagal diunggah. Silakan coba lagi.",
+        "updatedSuccess": "Profil berhasil diperbarui"
+      },
+      "password": {
+        "currentPasswordLabel": "Kata sandi saat ini",
+        "currentPasswordHint": "Diperlukan untuk mengonfirmasi perubahan",
+        "currentPasswordPlaceholder": "Masukkan kata sandi saat ini",
+        "currentPasswordRequired": "Kata sandi saat ini wajib diisi",
+        "newPasswordLabel": "Kata sandi baru",
+        "newPasswordPlaceholder": "Masukkan kata sandi baru",
+        "confirmPasswordLabel": "Konfirmasi kata sandi baru",
+        "confirmPasswordPlaceholder": "Ulangi kata sandi baru",
+        "save": "Simpan kata sandi",
+        "newPasswordMin": "Kata sandi minimal 6 karakter",
+        "confirmPasswordMin": "Konfirmasi minimal 6 karakter",
+        "passwordMismatch": "Kata sandi tidak cocok",
+        "updatedSuccess": "Kata sandi berhasil diperbarui"
+      }
+    }
+  }
+}
