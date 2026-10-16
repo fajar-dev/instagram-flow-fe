@@ -1,7 +1,7 @@
 <template>
   <UModal
     v-model:open="open"
-    :ui="{ content: 'sm:max-w-sm', overlay: 'backdrop-blur-xs bg-white/10' }"
+    :ui="{ content: 'sm:max-w-sm' }"
   >
     <template #content>
       <UCard :ui="{ body: 'flex flex-col gap-4 relative' }">
