@@ -17,7 +17,7 @@
       :from="meta.from"
       :to="meta.to"
       :search-placeholder="$t('pages.user.searchPlaceholder')"
-      table-class="min-w-[768px]"
+      table-class="min-w-192"
     >
       <template #actions>
         <UButton
@@ -74,7 +74,6 @@ const { t, locale } = useI18n()
 
 // State
 const data = ref<User[]>([])
-const isLoading = ref(false)
 const selectedUser = ref<User | null>(null)
 
 // Modal states
@@ -91,24 +90,17 @@ const meta = reactive({
 })
 
 // Fetch users from API
-async function fetchUsers() {
-  isLoading.value = true
-  try {
-    const response = await userService.getAll(page.value, perPage.value, search.value, '', sortBy.value, order.value)
-    if (response.success) {
-      data.value = response.data
-      if (response.meta) {
-        meta.total = response.meta.total
-        meta.from = response.meta.from
-        meta.to = response.meta.to
-      }
-    }
-  } catch (error) {
-    handleServiceError(error)
-  } finally {
-    isLoading.value = false
+const { loading: isLoading, load: fetchUsers } = useLatestRequest(
+  () => userService.getAll(page.value, perPage.value, search.value, '', sortBy.value, order.value),
+  (response) => {
+    data.value = response.data
+    meta.total = response.meta?.total ?? 0
+    meta.from = response.meta?.from ?? 0
+    meta.to = response.meta?.to ?? 0
+    const lastPage = Math.max(1, Math.ceil(meta.total / perPage.value))
+    if (page.value > lastPage) page.value = lastPage
   }
-}
+)
 
 const { search, perPage, page, sortBy, order, sortHeader } = useTableQuery(fetchUsers)
 
@@ -211,7 +203,7 @@ function getRowItems(row: Row<User>) {
 // Handle delete
 const toast = useToast()
 const handleDelete = async () => {
-  if (!selectedUser.value) return
+  if (!selectedUser.value || isDeleting.value) return
   isDeleting.value = true
   try {
     const response = await userService.delete(selectedUser.value.id)

@@ -9,74 +9,10 @@
         id="add-contact-form"
         :schema="schema"
         :state="form"
-        class="space-y-2"
+        class="space-y-3"
         @submit="handleSubmit"
       >
-        <UFormField
-          :label="$t('components.contact.addModal.salutationLabel')"
-          name="salutation"
-        >
-          <USelect
-            v-model="form.salutation"
-            :items="salutationOptions"
-            :placeholder="$t('components.contact.addModal.salutationPlaceholder')"
-            class="w-full"
-          />
-        </UFormField>
-        <UFormField
-          :label="$t('components.contact.addModal.nameLabel')"
-          name="name"
-          required
-        >
-          <UInput
-            v-model="form.name"
-            :placeholder="$t('components.contact.addModal.namePlaceholder')"
-            class="w-full"
-          />
-        </UFormField>
-        <UFormField
-          :label="$t('components.contact.addModal.emailLabel')"
-          name="email"
-          required
-        >
-          <UInput
-            v-model="form.email"
-            type="email"
-            :placeholder="$t('components.contact.addModal.emailPlaceholder')"
-            class="w-full"
-          />
-        </UFormField>
-        <UFormField
-          :label="$t('components.contact.addModal.phoneLabel')"
-          name="phone"
-          required
-        >
-          <UInput
-            v-model="form.phone"
-            :placeholder="$t('components.contact.addModal.phonePlaceholder')"
-            class="w-full"
-          />
-        </UFormField>
-        <UFormField
-          :label="$t('components.contact.addModal.typeLabel')"
-          name="type"
-          required
-        >
-          <USelect
-            v-model="form.type"
-            :items="typeOptions"
-            class="w-full"
-          />
-        </UFormField>
-        <UFormField
-          :label="$t('components.contact.addModal.statusLabel')"
-          name="isActive"
-        >
-          <div class="flex items-center gap-2">
-            <USwitch v-model="form.isActive" />
-            <span class="text-sm text-toned">{{ form.isActive ? $t('components.contact.addModal.active') : $t('components.contact.addModal.inactive') }}</span>
-          </div>
-        </UFormField>
+        <ContactFormFields v-model="form" />
       </UForm>
     </template>
     <template #footer>
@@ -88,7 +24,6 @@
           @click="() => { open = false }"
         />
         <UButton
-
           type="submit"
           form="add-contact-form"
           color="primary"
@@ -102,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { z } from 'zod'
+import { contactFormSchema, createContactForm } from '~/util/contact-form'
 import { contactService } from '~/services/contact-service'
 import type { ContactPayload } from '~/types/contact'
 
@@ -115,46 +50,14 @@ const isSubmitting = ref(false)
 
 const { t } = useI18n()
 
-const salutationOptions = computed(() => [
-  { label: t('components.contact.addModal.salutationMr'), value: 'mr' },
-  { label: t('components.contact.addModal.salutationMrs'), value: 'mrs' }
-])
+const schema = computed(() => contactFormSchema(t))
 
-const typeOptions = computed(() => [
-  { label: t('components.contact.addModal.typeCustomer'), value: 'customer' },
-  { label: t('components.contact.addModal.typeVendor'), value: 'vendor' },
-  { label: t('components.contact.addModal.typeSupplier'), value: 'supplier' },
-  { label: t('components.contact.addModal.typeOther'), value: 'other' }
-])
+const form = reactive<ContactPayload>(createContactForm())
 
-const schema = z.object({
-  salutation: z.enum(['mr', 'mrs']).nullable().optional(),
-  name: z.string().min(1, t('components.contact.addModal.nameRequired')),
-  email: z.string().min(1, t('components.contact.addModal.emailRequired')).email(t('components.contact.addModal.emailInvalid')),
-  phone: z.string().min(1, t('components.contact.addModal.phoneRequired')),
-  type: z.enum(['customer', 'vendor', 'supplier', 'other']),
-  isActive: z.boolean()
-})
-
-const form = reactive<ContactPayload>({
-  salutation: undefined,
-  name: '',
-  email: '',
-  phone: '',
-  type: 'customer',
-  isActive: true
-})
-
-const resetForm = () => {
-  form.salutation = undefined
-  form.name = ''
-  form.email = ''
-  form.phone = ''
-  form.type = 'customer'
-  form.isActive = true
-}
+const resetForm = () => Object.assign(form, createContactForm())
 
 const handleSubmit = async () => {
+  if (isSubmitting.value) return
   isSubmitting.value = true
   try {
     const response = await contactService.create(form)
