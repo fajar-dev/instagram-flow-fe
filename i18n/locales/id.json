@@ -38,65 +38,22 @@
     },
     "dataTable": {
       "searchPlaceholder": "Cari...",
-      "showing": "Menampilkan {from} sampai {to} dari {total} hasil"
+      "showing": "Menampilkan {from} sampai {to} dari {total} hasil",
+      "itemsPerPage": "Jumlah per halaman"
     },
     "contact": {
       "addModal": {
         "title": "Tambah Kontak",
         "description": "Isi detail berikut untuk membuat kontak baru.",
-        "salutationLabel": "Sapaan",
-        "salutationPlaceholder": "Pilih sapaan",
-        "salutationMr": "Bapak",
-        "salutationMrs": "Ibu",
-        "nameLabel": "Nama",
-        "namePlaceholder": "Masukkan nama",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Masukkan email",
-        "phoneLabel": "Telepon",
-        "phonePlaceholder": "Masukkan nomor telepon",
-        "typeLabel": "Tipe",
-        "typeCustomer": "Pelanggan",
-        "typeVendor": "Vendor",
-        "typeSupplier": "Pemasok",
-        "typeOther": "Lainnya",
-        "statusLabel": "Status",
-        "active": "Aktif",
-        "inactive": "Nonaktif",
         "cancel": "Batal",
         "save": "Simpan",
-        "nameRequired": "Nama wajib diisi",
-        "emailRequired": "Email wajib diisi",
-        "emailInvalid": "Masukkan alamat email yang valid",
-        "phoneRequired": "Telepon wajib diisi",
         "createdSuccess": "Kontak berhasil dibuat!"
       },
       "updateModal": {
         "title": "Ubah Kontak",
         "description": "Perbarui informasi kontak di bawah ini.",
-        "salutationLabel": "Sapaan",
-        "salutationPlaceholder": "Pilih sapaan",
-        "salutationMr": "Bapak",
-        "salutationMrs": "Ibu",
-        "nameLabel": "Nama",
-        "namePlaceholder": "Masukkan nama",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Masukkan email",
-        "phoneLabel": "Telepon",
-        "phonePlaceholder": "Masukkan nomor telepon",
-        "typeLabel": "Tipe",
-        "typeCustomer": "Pelanggan",
-        "typeVendor": "Vendor",
-        "typeSupplier": "Pemasok",
-        "typeOther": "Lainnya",
-        "statusLabel": "Status",
-        "active": "Aktif",
-        "inactive": "Nonaktif",
         "cancel": "Batal",
         "save": "Simpan",
-        "nameRequired": "Nama wajib diisi",
-        "emailRequired": "Email wajib diisi",
-        "emailInvalid": "Masukkan alamat email yang valid",
-        "phoneRequired": "Telepon wajib diisi",
         "updatedSuccess": "Kontak berhasil diperbarui!"
       },
       "deleteModal": {
@@ -108,6 +65,31 @@
         "deletedSuccess": "Kontak berhasil dihapus!",
         "deleteFailed": "Gagal menghapus kontak",
         "genericError": "Terjadi kesalahan"
+      },
+      "form": {
+        "active": "Aktif",
+        "emailInvalid": "Masukkan alamat email yang valid",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Masukkan email",
+        "emailRequired": "Email wajib diisi",
+        "inactive": "Nonaktif",
+        "nameLabel": "Nama",
+        "namePlaceholder": "Masukkan nama",
+        "nameRequired": "Nama wajib diisi",
+        "phoneLabel": "Telepon",
+        "phonePlaceholder": "Masukkan nomor telepon",
+        "phoneRequired": "Telepon wajib diisi",
+        "salutationLabel": "Sapaan",
+        "salutationMr": "Bapak",
+        "salutationMrs": "Ibu",
+        "salutationPlaceholder": "Pilih sapaan",
+        "statusLabel": "Status",
+        "typeCustomer": "Pelanggan",
+        "typeLabel": "Tipe",
+        "typeOther": "Lainnya",
+        "typeSupplier": "Pemasok",
+        "typeVendor": "Vendor",
+        "typePlaceholder": "Pilih jenis kontak"
       }
     },
     "user": {
@@ -170,6 +152,31 @@
     "mobileSidebar": {
       "title": "Navigasi",
       "description": "Pilih halaman atau buka menu."
+    },
+    "reporting": {
+      "recordList": {
+        "event": "Peristiwa",
+        "actor": "Pelaku",
+        "uploader": "Pengunggah",
+        "actions": "Tindakan"
+      }
+    },
+    "requestState": {
+      "failed": "Data gagal dimuat. Silakan coba lagi."
+    },
+    "content": {
+      "infiniteScroll": {
+        "retry": "Coba muat media lagi",
+        "more": "Muat media lainnya"
+      }
+    },
+    "dateInput": {
+      "selectDate": "Pilih tanggal"
+    },
+    "imagePreview": {
+      "open": "Pratinjau {name}",
+      "title": "Pratinjau gambar",
+      "close": "Tutup pratinjau"
     }
   },
   "pages": {
@@ -265,7 +272,7 @@
         "confirmPasswordPlaceholder": "Konfirmasi kata sandi baru",
         "save": "Reset Kata Sandi",
         "backToSignIn": "Kembali ke Masuk",
-        "passwordMin": "Kata sandi minimal 8 karakter",
+        "passwordMin": "Kata sandi minimal 6 karakter",
         "confirmPasswordRequired": "Silakan konfirmasi kata sandi Anda",
         "passwordMismatch": "Kata sandi tidak cocok",
         "invalidLink": "Tautan reset kata sandi tidak valid atau kedaluwarsa",
@@ -313,6 +320,172 @@
         "passwordMismatch": "Kata sandi tidak cocok",
         "updatedSuccess": "Kata sandi berhasil diperbarui"
       }
+    },
+    "overview": {
+      "overview": "Ringkasan",
+      "scope": "Kurasi dan persetujuan internal. Belum mencakup publish Instagram.",
+      "period": "Periode (hari)",
+      "metrics": {
+        "batches": "Total batch",
+        "assets": "Total foto",
+        "processing": "Sedang diproses",
+        "ready": "Siap review",
+        "failed": "Gagal",
+        "approved": "Disetujui internal"
+      },
+      "periodPlaceholder": "Pilih periode"
+    },
+    "content": {
+      "upload": "Unggah Konten",
+      "media": "Media",
+      "logs": "Log Aktivitas",
+      "previewUnavailable": "Preview tidak tersedia",
+      "search": "Cari proyek atau ID log",
+      "statusLabel": "Status",
+      "empty": "Belum ada data",
+      "photo": "Foto dokumentasi",
+      "download": "Unduh original",
+      "archive": "Arsipkan",
+      "detail": "Detail",
+      "all": "Semua",
+      "uploadHint": "Lengkapi metadata, unggah foto, lalu proses melalui n8n.",
+      "outputs": "Output",
+      "consent": "Saya memastikan izin publikasi foto dan penyebutan klien telah diperoleh.",
+      "consentRequired": "Izin publikasi wajib dikonfirmasi",
+      "outputRequired": "Pilih minimal satu output",
+      "choosePhotos": "Pilih atau tarik foto ke sini",
+      "uploadLimits": "JPG, PNG atau WEBP; maksimal {count} foto, masing-masing {size} MB.",
+      "uploaded": "Terunggah",
+      "remove": "Hapus foto",
+      "staged": "Batch tersimpan. Jika gagal, tekan proses lagi untuk melanjutkan upload yang tersisa.",
+      "process": "Proses dengan AI",
+      "validation": "Periksa nilai dan batas panjang field",
+      "saved": "Perubahan tersimpan",
+      "save": "Simpan",
+      "fields": {
+        "projectName": "Nama proyek",
+        "activity": "Aktivitas",
+        "location": "Lokasi umum",
+        "documentationDate": "Tanggal dokumentasi",
+        "clientName": "Nama klien yang diizinkan",
+        "description": "Deskripsi teknis",
+        "title": "Judul",
+        "caption": "Caption",
+        "hashtags": "Hashtag (pisahkan spasi/koma)"
+      },
+      "status": {
+        "CREATED": "Dibuat",
+        "DRAFT": "Draft",
+        "READY": "Siap",
+        "QUEUED": "Antrean",
+        "DISPATCHED": "Terkirim ke n8n",
+        "PROCESSING": "Diproses",
+        "READY_FOR_REVIEW": "Siap review",
+        "FAILED": "Gagal",
+        "CANCELLED": "Dibatalkan",
+        "COMPLETED": "Selesai",
+        "IN_REVIEW": "Sedang direview",
+        "REVISION_REQUESTED": "Perlu revisi",
+        "APPROVED_INTERNAL": "Disetujui internal",
+        "REJECTED": "Ditolak",
+        "OUTDATED": "Preview usang",
+        "SVG_PREVIEW": "Preview SVG"
+      },
+      "loadingLimits": "Memuat batas upload…",
+      "placeholders": {
+        "projectName": "Masukkan nama proyek",
+        "activity": "Masukkan kegiatan yang didokumentasikan",
+        "location": "Masukkan lokasi kegiatan",
+        "documentationDate": "Pilih tanggal dokumentasi",
+        "clientName": "Masukkan nama klien (opsional)",
+        "description": "Tambahkan konteks proyek atau kegiatan (opsional)",
+        "title": "Masukkan judul postingan",
+        "caption": "Tulis caption Instagram",
+        "hashtags": "Contoh: #AMTI #Monitoring"
+      },
+      "dateHint": "Pilih tanggal saat foto diambil.",
+      "outputPlaceholder": "Pilih format output",
+      "statusPlaceholder": "Pilih status",
+      "fileSize": "File tidak boleh kosong dan maksimal {size} MB.",
+      "fileFormat": "Gunakan JPG, PNG atau WEBP dengan ekstensi yang sesuai.",
+      "fileUnreadable": "Gambar tidak dapat dibaca. Ekspor ulang atau ganti file ini.",
+      "filePixels": "Resolusi gambar tidak boleh melebihi 40 megapiksel.",
+      "fileUploadFailed": "Upload gagal. Coba ulang gambar ini.",
+      "validatingImage": "Memeriksa gambar…",
+      "partialUpload": "{count} gambar berhasil diunggah. Periksa error pada gambar lainnya.",
+      "retryUpload": "Coba ulang upload yang gagal",
+      "processUploaded": "Proses {count} gambar yang berhasil",
+      "title": "Content",
+      "listDescription": "Kelola proses dan review konten berdasarkan status. Menampilkan data 30 hari terakhir.",
+      "backToContent": "Kembali ke Content",
+      "loadingMedia": "Mengambil daftar foto…",
+      "archivePhoto": "Arsipkan {name}",
+      "downloadPhoto": "Unduh {name}",
+      "photos": "Foto proyek",
+      "sliderHint": "Geser atau gunakan panah untuk melihat foto.",
+      "projectSummary": "Ringkasan proyek",
+      "pendingStep": "Belum tercatat",
+      "technicalDetails": "Detail teknis"
+    },
+    "aiJob": {
+      "jobs": "Proses AI",
+      "jobDetail": "Detail Proses",
+      "viewResult": "Lihat hasil",
+      "retry": "Proses ulang",
+      "failed": "Proses gagal",
+      "attempt": "Percobaan",
+      "execution": "Eksekusi n8n",
+      "created": "Dibuat",
+      "started": "Mulai",
+      "finished": "Selesai"
+    },
+    "contentReview": {
+      "studio": "Studio AI",
+      "review": "Review Konten",
+      "previewWarning": "Preview SVG — belum siap publish Instagram",
+      "primaryOnly": "Maksimal 5 foto dapat dipilih AI. Template V0.2 hanya merender foto pertama.",
+      "revision": "Revisi",
+      "rankings": "Peringkat foto dari AI",
+      "setPrimary": "Jadikan foto utama",
+      "outdated": "Preview sudah tidak sesuai revisi",
+      "preview": "Preview konten",
+      "originalFallback": "Menampilkan foto sumber; render ulang revisi belum tersedia.",
+      "saveRevision": "Simpan revisi",
+      "restoreAi": "Kembalikan saran AI",
+      "notes": "Catatan review",
+      "decision": "Keputusan",
+      "submitReview": "Simpan keputusan internal",
+      "saveFirst": "Simpan revisi terlebih dahulu sebelum review.",
+      "reviewHistory": "Riwayat review",
+      "notReady": "Hasil belum tersedia. Periksa status proses.",
+      "notesPlaceholder": "Tambahkan catatan review atau perubahan yang diminta (opsional)",
+      "decisionPlaceholder": "Pilih keputusan review",
+      "editorTitle": "Editor konten",
+      "editorHint": "Rapikan caption dan simpan perubahan sebelum melakukan review.",
+      "rankingsHint": "Bandingkan rekomendasi AI dan pilih foto utama.",
+      "selectedPhoto": "Foto terpilih",
+      "feed": "Feed",
+      "story": "Story",
+      "reviewTitle": "Keputusan review",
+      "unsaved": "Perubahan belum disimpan",
+      "reviewTab": "Review",
+      "historyTab": "Riwayat",
+      "noReviews": "Belum ada riwayat review.",
+      "photosTab": "Foto",
+      "backToCaption": "Lanjut ke caption dan simpan"
+    },
+    "integration": {
+      "settings": "Dispatcher",
+      "settingsHint": "Atur pengiriman job antrean ke n8n. Kredensial deployment dikelola melalui environment.",
+      "configured": "Terkonfigurasi",
+      "notConfigured": "Belum dikonfigurasi",
+      "enableDispatch": "Aktifkan pengiriman job ke n8n",
+      "settingsFields": {
+        "webhookConfigured": "Webhook n8n",
+        "serviceConfigured": "Token callback",
+        "storageConfigured": "Object storage"
+      },
+      "notReady": "Lengkapi webhook HTTPS, object storage, dan secret integrasi sebelum mengaktifkan dispatcher."
     }
   }
 }

@@ -38,65 +38,22 @@
     },
     "dataTable": {
       "searchPlaceholder": "Search...",
-      "showing": "Showing {from} to {to} of {total} results"
+      "showing": "Showing {from} to {to} of {total} results",
+      "itemsPerPage": "Items per page"
     },
     "contact": {
       "addModal": {
         "title": "Add Contact",
         "description": "Fill in the details to create a new contact.",
-        "salutationLabel": "Salutation",
-        "salutationPlaceholder": "Select salutation",
-        "salutationMr": "Mr.",
-        "salutationMrs": "Mrs.",
-        "nameLabel": "Name",
-        "namePlaceholder": "Enter name",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Enter email",
-        "phoneLabel": "Phone",
-        "phonePlaceholder": "Enter phone number",
-        "typeLabel": "Type",
-        "typeCustomer": "Customer",
-        "typeVendor": "Vendor",
-        "typeSupplier": "Supplier",
-        "typeOther": "Other",
-        "statusLabel": "Status",
-        "active": "Active",
-        "inactive": "Inactive",
         "cancel": "Cancel",
         "save": "Save",
-        "nameRequired": "Name is required",
-        "emailRequired": "Email is required",
-        "emailInvalid": "Please enter a valid email address",
-        "phoneRequired": "Phone is required",
         "createdSuccess": "Contact created successfully!"
       },
       "updateModal": {
         "title": "Edit Contact",
         "description": "Update the contact information below.",
-        "salutationLabel": "Salutation",
-        "salutationPlaceholder": "Select salutation",
-        "salutationMr": "Mr.",
-        "salutationMrs": "Mrs.",
-        "nameLabel": "Name",
-        "namePlaceholder": "Enter name",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Enter email",
-        "phoneLabel": "Phone",
-        "phonePlaceholder": "Enter phone number",
-        "typeLabel": "Type",
-        "typeCustomer": "Customer",
-        "typeVendor": "Vendor",
-        "typeSupplier": "Supplier",
-        "typeOther": "Other",
-        "statusLabel": "Status",
-        "active": "Active",
-        "inactive": "Inactive",
         "cancel": "Cancel",
         "save": "Save",
-        "nameRequired": "Name is required",
-        "emailRequired": "Email is required",
-        "emailInvalid": "Please enter a valid email address",
-        "phoneRequired": "Phone is required",
         "updatedSuccess": "Contact updated successfully!"
       },
       "deleteModal": {
@@ -108,6 +65,31 @@
         "deletedSuccess": "Contact deleted successfully!",
         "deleteFailed": "Failed to delete contact",
         "genericError": "An error occurred"
+      },
+      "form": {
+        "active": "Active",
+        "emailInvalid": "Please enter a valid email address",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter email",
+        "emailRequired": "Email is required",
+        "inactive": "Inactive",
+        "nameLabel": "Name",
+        "namePlaceholder": "Enter name",
+        "nameRequired": "Name is required",
+        "phoneLabel": "Phone",
+        "phonePlaceholder": "Enter phone number",
+        "phoneRequired": "Phone is required",
+        "salutationLabel": "Salutation",
+        "salutationMr": "Mr.",
+        "salutationMrs": "Mrs.",
+        "salutationPlaceholder": "Select salutation",
+        "statusLabel": "Status",
+        "typeCustomer": "Customer",
+        "typeLabel": "Type",
+        "typeOther": "Other",
+        "typeSupplier": "Supplier",
+        "typeVendor": "Vendor",
+        "typePlaceholder": "Select a contact type"
       }
     },
     "user": {
@@ -170,6 +152,31 @@
     "mobileSidebar": {
       "title": "Navigation",
       "description": "Choose a page or open a menu."
+    },
+    "reporting": {
+      "recordList": {
+        "event": "Event",
+        "actor": "Actor",
+        "uploader": "Uploader",
+        "actions": "Actions"
+      }
+    },
+    "requestState": {
+      "failed": "Unable to load data. Please try again."
+    },
+    "content": {
+      "infiniteScroll": {
+        "retry": "Retry loading media",
+        "more": "Load more media"
+      }
+    },
+    "dateInput": {
+      "selectDate": "Select a date"
+    },
+    "imagePreview": {
+      "open": "Preview {name}",
+      "title": "Image preview",
+      "close": "Close preview"
     }
   },
   "pages": {
@@ -265,7 +272,7 @@
         "confirmPasswordPlaceholder": "Confirm new password",
         "save": "Reset Password",
         "backToSignIn": "Back to Sign In",
-        "passwordMin": "Password must be at least 8 characters",
+        "passwordMin": "Password must be at least 6 characters",
         "confirmPasswordRequired": "Please confirm your password",
         "passwordMismatch": "Passwords do not match",
         "invalidLink": "Invalid or expired reset password link",
@@ -313,6 +320,172 @@
         "passwordMismatch": "Passwords do not match",
         "updatedSuccess": "Password updated successfully"
       }
+    },
+    "overview": {
+      "overview": "Overview",
+      "scope": "Curation and internal approval. Instagram publishing is not included.",
+      "period": "Period (days)",
+      "metrics": {
+        "batches": "Total batches",
+        "assets": "Total photos",
+        "processing": "Processing",
+        "ready": "Ready for review",
+        "failed": "Failed",
+        "approved": "Approved internally"
+      },
+      "periodPlaceholder": "Select a period"
+    },
+    "content": {
+      "upload": "Upload Content",
+      "media": "Media",
+      "logs": "Activity Logs",
+      "previewUnavailable": "Preview unavailable",
+      "search": "Search project or log ID",
+      "statusLabel": "Status",
+      "empty": "No data yet",
+      "photo": "Documentation photo",
+      "download": "Download original",
+      "archive": "Archive",
+      "detail": "Details",
+      "all": "All",
+      "uploadHint": "Complete metadata, upload photos, then process through n8n.",
+      "outputs": "Outputs",
+      "consent": "I confirm permission to publish these photos and mention the client has been obtained.",
+      "consentRequired": "Publication permission is required",
+      "outputRequired": "Select at least one output",
+      "choosePhotos": "Choose or drop photos here",
+      "uploadLimits": "JPG, PNG or WEBP; up to {count} photos, {size} MB each.",
+      "uploaded": "Uploaded",
+      "remove": "Remove photo",
+      "staged": "Batch saved. If interrupted, process again to resume remaining uploads.",
+      "process": "Process with AI",
+      "validation": "Check the field value and length",
+      "saved": "Changes saved",
+      "save": "Save",
+      "fields": {
+        "projectName": "Project name",
+        "activity": "Activity",
+        "location": "General location",
+        "documentationDate": "Documentation date",
+        "clientName": "Approved client name",
+        "description": "Technical description",
+        "title": "Title",
+        "caption": "Caption",
+        "hashtags": "Hashtags (space/comma separated)"
+      },
+      "status": {
+        "CREATED": "Created",
+        "DRAFT": "Draft",
+        "READY": "Ready",
+        "QUEUED": "Queued",
+        "DISPATCHED": "Dispatched",
+        "PROCESSING": "Processing",
+        "READY_FOR_REVIEW": "Ready for review",
+        "FAILED": "Failed",
+        "CANCELLED": "Cancelled",
+        "COMPLETED": "Completed",
+        "IN_REVIEW": "In review",
+        "REVISION_REQUESTED": "Revision requested",
+        "APPROVED_INTERNAL": "Approved internally",
+        "REJECTED": "Rejected",
+        "OUTDATED": "Outdated",
+        "SVG_PREVIEW": "SVG preview"
+      },
+      "loadingLimits": "Loading upload limits…",
+      "placeholders": {
+        "projectName": "Enter the project name",
+        "activity": "Describe the documented activity",
+        "location": "Enter the activity location",
+        "documentationDate": "Select the documentation date",
+        "clientName": "Enter the client name (optional)",
+        "description": "Add context about the project or activity (optional)",
+        "title": "Enter the post title",
+        "caption": "Write the Instagram caption",
+        "hashtags": "For example: #AMTI #Monitoring"
+      },
+      "dateHint": "Select the date the photos were taken.",
+      "outputPlaceholder": "Select an output format",
+      "statusPlaceholder": "Select a status",
+      "fileSize": "File must be non-empty and no larger than {size} MB.",
+      "fileFormat": "Use JPG, PNG or WEBP with a matching file extension.",
+      "fileUnreadable": "This image cannot be read. Re-export or replace it.",
+      "filePixels": "Image resolution must not exceed 40 megapixels.",
+      "fileUploadFailed": "Upload failed. Try this image again.",
+      "validatingImage": "Checking image…",
+      "partialUpload": "{count} images uploaded. Check the errors on the remaining images.",
+      "retryUpload": "Retry failed uploads",
+      "processUploaded": "Process {count} uploaded images",
+      "title": "Content",
+      "listDescription": "Manage content processing and review by status. Showing the last 30 days.",
+      "backToContent": "Back to Content",
+      "loadingMedia": "Fetching photos…",
+      "archivePhoto": "Archive {name}",
+      "downloadPhoto": "Download {name}",
+      "photos": "Project photos",
+      "sliderHint": "Swipe or use the arrows to explore the photos.",
+      "projectSummary": "Project summary",
+      "pendingStep": "Not yet recorded",
+      "technicalDetails": "Technical details"
+    },
+    "aiJob": {
+      "jobs": "AI Jobs",
+      "jobDetail": "Job Details",
+      "viewResult": "View result",
+      "retry": "Retry",
+      "failed": "Job failed",
+      "attempt": "Attempt",
+      "execution": "n8n execution",
+      "created": "Created",
+      "started": "Started",
+      "finished": "Completed"
+    },
+    "contentReview": {
+      "studio": "AI Studio",
+      "review": "Content Review",
+      "previewWarning": "SVG preview — not ready for Instagram publishing",
+      "primaryOnly": "AI may select up to 5 photos. V0.2 renders only the first selected photo.",
+      "revision": "Revision",
+      "rankings": "AI photo rankings",
+      "setPrimary": "Set as primary photo",
+      "outdated": "Preview is outdated",
+      "preview": "Content preview",
+      "originalFallback": "Showing source photo; revision re-rendering is not yet available.",
+      "saveRevision": "Save revision",
+      "restoreAi": "Restore AI suggestion",
+      "notes": "Review notes",
+      "decision": "Decision",
+      "submitReview": "Save internal decision",
+      "saveFirst": "Save the revision before reviewing.",
+      "reviewHistory": "Review history",
+      "notReady": "Results are not available yet. Check job status.",
+      "notesPlaceholder": "Add review notes or requested changes (optional)",
+      "decisionPlaceholder": "Select a review decision",
+      "editorTitle": "Content editor",
+      "editorHint": "Refine the caption and save your changes before reviewing.",
+      "rankingsHint": "Compare the AI suggestions and choose the primary photo.",
+      "selectedPhoto": "Selected photo",
+      "feed": "Feed",
+      "story": "Story",
+      "reviewTitle": "Review decision",
+      "unsaved": "Unsaved changes",
+      "reviewTab": "Review",
+      "historyTab": "History",
+      "noReviews": "No reviews yet.",
+      "photosTab": "Photos",
+      "backToCaption": "Continue to caption and save"
+    },
+    "integration": {
+      "settings": "Dispatcher",
+      "settingsHint": "Control delivery of queued jobs to n8n. Deployment credentials are managed in the environment.",
+      "configured": "Configured",
+      "notConfigured": "Not configured",
+      "enableDispatch": "Enable job dispatch to n8n",
+      "settingsFields": {
+        "webhookConfigured": "n8n webhook",
+        "serviceConfigured": "Callback token",
+        "storageConfigured": "Object storage"
+      },
+      "notReady": "Configure the HTTPS webhook, object storage and integration secrets before enabling dispatch."
     }
   }
 }
