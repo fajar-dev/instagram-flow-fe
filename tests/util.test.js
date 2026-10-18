@@ -1,3 +1,4 @@
+import { isNavigationActive } from '../app/util/navigation'
 import { expect, test } from 'bun:test'
 import { formatDate, formatDateTime } from '../app/util/date'
 import { buildListQuery, getQueryString } from '../app/util/query'
@@ -43,4 +44,13 @@ test('locale flags share a consistent fallback', () => {
   expect(getLocaleFlag('id')).toBe('circle-flags:id')
   expect(getLocaleFlag('en')).toBe('circle-flags:us')
   expect(getLocaleFlag('unknown')).toBe('circle-flags:us')
+})
+
+test('navigation selects the most specific route and respects path boundaries', () => {
+  const targets = ['/content', '/content/media', '/user', '/']
+  expect(isNavigationActive('/content/media', '/content', targets)).toBe(false)
+  expect(isNavigationActive('/content/job/edit', '/content', targets)).toBe(true)
+  expect(isNavigationActive('/user-other', '/user', targets)).toBe(false)
+  expect(isNavigationActive('/user', '/user', targets)).toBe(true)
+  expect(isNavigationActive('/user', '/', targets)).toBe(false)
 })
