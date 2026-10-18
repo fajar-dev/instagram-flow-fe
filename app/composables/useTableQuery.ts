@@ -15,7 +15,6 @@ export function useTableQuery(onQueryChange: () => void, options: TableQueryOpti
   const { defaultSortBy = '', defaultOrder = 'DESC' } = options
 
   const search = ref('')
-  const limitOptions = ref([10, 25, 50, 100])
   const perPage = ref(10)
   const page = ref(1)
   const sortBy = ref(defaultSortBy)
@@ -30,7 +29,11 @@ export function useTableQuery(onQueryChange: () => void, options: TableQueryOpti
     }
   }
 
-  watch([page, perPage, sortBy, order], onQueryChange)
+  watch(page, onQueryChange)
+  watch([perPage, sortBy, order], () => {
+    if (page.value === 1) onQueryChange()
+    else page.value = 1
+  })
 
   let searchTimeout: ReturnType<typeof setTimeout>
   watch(search, () => {
@@ -88,7 +91,6 @@ export function useTableQuery(onQueryChange: () => void, options: TableQueryOpti
 
   return {
     search,
-    limitOptions,
     perPage,
     page,
     sortBy,

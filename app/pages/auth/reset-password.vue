@@ -144,7 +144,7 @@ const loading = ref(false)
 const isValidating = ref(true)
 
 const resetSchema = computed(() => z.object({
-  password: z.string().min(8, t('pages.auth.resetPassword.passwordMin')),
+  password: z.string().min(6, t('pages.auth.resetPassword.passwordMin')),
   confirmPassword: z.string().min(1, t('pages.auth.resetPassword.confirmPasswordRequired'))
 }).refine(
   data => data.password === data.confirmPassword,

@@ -1,3 +1,5 @@
+const controlSize = 'lg' as const
+
 export default defineAppConfig({
   ui: {
     colors: {
@@ -8,27 +10,27 @@ export default defineAppConfig({
     },
     button: {
       defaultVariants: {
-        size: 'lg'
+        size: controlSize
       }
     },
     input: {
       defaultVariants: {
-        size: 'lg'
+        size: controlSize
       }
     },
     selectMenu: {
       defaultVariants: {
-        size: 'lg'
+        size: controlSize
       }
     },
     select: {
       defaultVariants: {
-        size: 'lg'
+        size: controlSize
       }
     },
     textarea: {
       defaultVariants: {
-        size: 'lg'
+        size: controlSize
       }
     },
     modal: {

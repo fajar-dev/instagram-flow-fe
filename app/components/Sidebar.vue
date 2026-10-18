@@ -12,7 +12,30 @@
         size="sm"
       />
       <!-- Navigation Menus (Scrollable middle area) -->
-      <nav class="flex-1 overflow-y-auto min-h-0 py-2.5 space-y-1 pt-6 scrollbar-thin flex flex-col items-center">
+      <nav class="flex-1 overflow-y-auto min-h-0 py-2.5 space-y-1 pt-4 scrollbar-thin flex flex-col items-center">
+        <!-- Quick Action: Upload Content (Tombol bulat primary, cuma icon awan upload) -->
+        <div
+          class="mb-5 shrink-0"
+        >
+          <UTooltip
+            :text="$t('pages.content.upload')"
+            :content="{ side: 'right', sideOffset: 12 }"
+          >
+            <UButton
+              to="/content/upload"
+              color="primary"
+              variant="solid"
+              icon="i-lucide-cloud-upload"
+              class="rounded-full size-12 justify-center shadow-xs hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              :class="[
+                isUploadActive ? 'ring-2 ring-primary ring-offset-2 ring-offset-bg-default' : ''
+              ]"
+              :ui="{ leadingIcon: 'size-6' }"
+              :aria-label="$t('pages.content.upload')"
+            />
+          </UTooltip>
+        </div>
+
         <template
           v-for="group in navGroups"
           :key="group.id || group.title"
@@ -127,5 +150,8 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
 const { navGroups, isItemActive, isParentActive } = useNavigation()
+
+const isUploadActive = computed(() => route.path.startsWith('/content/upload'))
 </script>

@@ -162,3 +162,7 @@ ui: {
 5. **Google OAuth**: Menggunakan `nuxt-vue3-google-signin` + authorization code flow
 
 Keputusan terbaru pada [audit 2026-10-15](./audit-2026-10-15.md) menjadi acuan refactor auth/API. Error bersama memakai `components.errors.*`, footer auth memakai `components.authLayout.*`; seluruh key tersedia dalam en/id.
+
+## Content automation modules
+
+Features live directly under the existing module/service/component roots: content, AI Job, Content Review, Integration and Reporting. Related children remain together. Backend persistence and HTTP contracts remain compatible. See [feature map](../../backend/docs/content-automation/REFACTOR-2026-10-16.md).

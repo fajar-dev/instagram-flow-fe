@@ -16,13 +16,9 @@
       v-if="isSubmitted"
       class="space-y-6"
     >
-      <UAlert
-        :title="$t('pages.auth.forgotPassword.checkEmailTitle')"
-        :description="$t('pages.auth.forgotPassword.checkEmailDescription')"
-        icon="i-lucide-mail-check"
-        color="success"
-        variant="subtle"
-      />
+      <p class="text-sm text-muted">
+        {{ $t('pages.auth.forgotPassword.checkEmailTitle') }} · {{ $t('pages.auth.forgotPassword.checkEmailDescription') }}
+      </p>
 
       <div class="space-y-3">
         <UButton

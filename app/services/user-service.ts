@@ -1,5 +1,5 @@
 import { buildListQuery } from '../util/query'
-import { authService } from './auth-service'
+import { requestHeaders } from './shared/request-headers'
 import { apiService } from './api-service'
 import type { User, UserPayload } from '../types/user'
 import type { ApiResponse } from '../types/api'
@@ -7,7 +7,7 @@ import type { SortOrder } from '../types/query'
 
 export class UserService {
   private get authHeaders() {
-    return { headers: { Authorization: `Bearer ${authService.token.value}` } }
+    return { headers: requestHeaders() }
   }
 
   async getAll(page = 1, perPage = 10, q = '', isActive = '', sortBy = '', order: SortOrder = 'DESC'): Promise<ApiResponse<User[]>> {
@@ -64,7 +64,7 @@ export class UserService {
       formData,
       {
         headers: {
-          'Authorization': `Bearer ${authService.token.value}`,
+          ...requestHeaders(),
           'Content-Type': 'multipart/form-data'
         }
       }

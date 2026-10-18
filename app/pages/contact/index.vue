@@ -17,7 +17,7 @@
       :from="meta.from"
       :to="meta.to"
       :search-placeholder="$t('pages.contact.searchPlaceholder')"
-      table-class="min-w-[768px]"
+      table-class="min-w-192"
     >
       <template #actions>
         <UButton
@@ -80,7 +80,6 @@ const typeLabels: Record<string, string> = {
 
 // State
 const data = ref<Contact[]>([])
-const isLoading = ref(false)
 const selectedContact = ref<Contact | null>(null)
 
 // Modal states
@@ -97,24 +96,17 @@ const meta = reactive({
 })
 
 // Fetch contacts from API
-async function fetchContacts() {
-  isLoading.value = true
-  try {
-    const response = await contactService.getAll(page.value, perPage.value, search.value, sortBy.value, order.value)
-    if (response.success) {
-      data.value = response.data
-      if (response.meta) {
-        meta.total = response.meta.total
-        meta.from = response.meta.from
-        meta.to = response.meta.to
-      }
-    }
-  } catch (error) {
-    handleServiceError(error)
-  } finally {
-    isLoading.value = false
+const { loading: isLoading, load: fetchContacts } = useLatestRequest(
+  () => contactService.getAll(page.value, perPage.value, search.value, sortBy.value, order.value),
+  (response) => {
+    data.value = response.data
+    meta.total = response.meta?.total ?? 0
+    meta.from = response.meta?.from ?? 0
+    meta.to = response.meta?.to ?? 0
+    const lastPage = Math.max(1, Math.ceil(meta.total / perPage.value))
+    if (page.value > lastPage) page.value = lastPage
   }
-}
+)
 
 const { search, perPage, page, sortBy, order, sortHeader } = useTableQuery(fetchContacts)
 
@@ -218,7 +210,7 @@ function getRowItems(row: Row<Contact>) {
 // Handle delete
 const toast = useToast()
 const handleDelete = async () => {
-  if (!selectedContact.value) return
+  if (!selectedContact.value || isDeleting.value) return
   isDeleting.value = true
   try {
     const response = await contactService.delete(selectedContact.value.id)

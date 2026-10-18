@@ -21,7 +21,7 @@
       v-if="$slots.tabs"
       class="border-b border-default mt-7"
     >
-      <nav class="flex gap-6 -mb-px">
+      <nav class="flex gap-6 -mb-px overflow-x-auto">
         <slot name="tabs" />
       </nav>
     </div>

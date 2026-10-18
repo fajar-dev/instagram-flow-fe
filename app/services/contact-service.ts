@@ -1,5 +1,5 @@
 import { buildListQuery } from '../util/query'
-import { authService } from './auth-service'
+import { requestHeaders } from './shared/request-headers'
 import { apiService } from './api-service'
 import type { Contact, ContactPayload } from '../types/contact'
 import type { SortOrder } from '../types/query'
@@ -7,7 +7,7 @@ import type { ApiResponse } from '../types/api'
 
 export class ContactService {
   private get authHeaders() {
-    return { headers: { Authorization: `Bearer ${authService.token.value}` } }
+    return { headers: requestHeaders() }
   }
 
   async getAll(page = 1, perPage = 10, q = '', sortBy = '', order: SortOrder = 'DESC'): Promise<ApiResponse<Contact[]>> {

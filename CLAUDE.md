@@ -154,10 +154,10 @@ i18n/
 
 ## Design System
 
-- **Primary**: green (`#009838`)
+- **Primary**: custom blue (`#2D4E6F`, source: `app.config.ts` and `main.css`)
 - **Error**: red (`#B91C1C`)
 - **Warning**: yellow (`#D97706`)
-- **Neutral**: slate
+- **Neutral**: neutral
 - **Font**: Geist (Google Fonts)
 - **Button/Input default size**: `lg` (set di `app.config.ts`)
 
@@ -256,3 +256,13 @@ Baca folder `docs/` untuk detail lebih lanjut:
 
 - Fungsi kecil reusable tanpa state ditempatkan di `app/util/` per tanggung jawab dan di-import eksplisit. Gunakan helper tanggal, query, dan locale yang sudah ada sebelum membuat duplikasi.
 - State/lifecycle Vue tetap di composable, HTTP di service, render di komponen. Lihat `docs/coding-standards.md` bagian Helper reusable frontend.
+
+## Feature module boundaries
+
+Read `../backend/docs/content-automation/REFACTOR-2026-10-16.md` before extending content automation. Keep feature modules at the top level, with related children inside their owning feature. Do not recreate a social umbrella module. Reuse existing infrastructure, including MinIO, and preserve transaction/API boundaries.
+
+## Access and media policy — 2026-10-16
+
+All active authenticated users have the same application access. Do not add user roles, role selectors, role middleware or owner-only visibility filters. Keep authentication, n8n service secrets, rate limits and signed private-media access. Creator/uploader/reviewer IDs remain audit metadata, not permissions.
+
+Persist uploaded/generated media only in MinIO. No local media adapter/fallback or inline database SVG storage. Frontend branding/icons are build assets; temporary browser Blob URLs are not persistent media storage. Preserve applied migration history and use forward migrations for schema changes.
