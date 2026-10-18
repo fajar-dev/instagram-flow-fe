@@ -32,6 +32,20 @@
     </template>
 
     <template #body>
+      <div
+        class="pb-3 px-1"
+      >
+        <UButton
+          to="/content/upload"
+          color="primary"
+          variant="solid"
+          icon="i-lucide-cloud-upload"
+          :label="$t('pages.content.upload')"
+          block
+          class="justify-center"
+          @click="open = false"
+        />
+      </div>
       <UNavigationMenu
         orientation="vertical"
         :items="items"

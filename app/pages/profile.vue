@@ -5,28 +5,16 @@
       :description="$t('pages.profile.index.description')"
     >
       <template #tabs>
-        <NuxtLink
+        <HeaderTab
           to="/profile/information"
-          class="pb-3 text-sm font-medium border-b-2 transition-colors cursor-pointer"
-          :class="[
-            $route.path === '/profile/information' || $route.path === '/profile'
-              ? 'border-primary text-primary font-semibold'
-              : 'border-transparent text-muted hover:text-highlighted'
-          ]"
-        >
-          {{ $t('pages.profile.index.tabInformation') }}
-        </NuxtLink>
-        <NuxtLink
+          :label="$t('pages.profile.index.tabInformation')"
+          :active="$route.path === '/profile/information' || $route.path === '/profile'"
+        />
+        <HeaderTab
           to="/profile/password"
-          class="pb-3 text-sm font-medium border-b-2 transition-colors cursor-pointer"
-          :class="[
-            $route.path === '/profile/password'
-              ? 'border-primary text-primary font-semibold'
-              : 'border-transparent text-muted hover:text-highlighted'
-          ]"
-        >
-          {{ $t('pages.profile.index.tabPassword') }}
-        </NuxtLink>
+          :label="$t('pages.profile.index.tabPassword')"
+          :active="$route.path === '/profile/password'"
+        />
       </template>
     </Header>
 
