@@ -4,7 +4,6 @@
       :job-id="jobId"
       :detail="detail"
       editing
-      :dirty="dirty"
     />
     <p
       v-if="failed"
@@ -27,16 +26,33 @@
             :render="render"
           />
         </div>
-        <UCard class="min-w-0 lg:col-span-6 xl:col-span-5">
+        <UCard
+          class="min-w-0 lg:col-span-6 xl:col-span-5 divide-y-0"
+          :ui="{ header: 'pb-0 sm:pb-0' }"
+        >
           <template #header>
             <UTabs
               v-model="activePanel"
               :items="panels"
               :content="false"
-              variant="link"
+              variant="pill"
+              color="primary"
               size="sm"
-              :ui="{ list: 'w-full overflow-x-auto', trigger: 'shrink-0 flex-1 justify-center' }"
+              :ui="{
+                list: 'w-full bg-muted rounded-lg p-1',
+                trigger: 'flex-1 justify-center px-2 py-2 text-sm',
+                indicator: 'shadow-sm rounded-md'
+              }"
             />
+            <UBadge
+              v-if="dirty"
+              color="warning"
+              variant="subtle"
+              size="sm"
+              class="mt-3"
+            >
+              {{ $t('pages.contentReview.unsaved') }}
+            </UBadge>
           </template>
           <div
             v-show="activePanel === 'caption'"
@@ -123,10 +139,10 @@ const jobId = String(useRoute().params.jobId)
 const { t } = useI18n()
 const activePanel = ref('caption')
 const panels = computed(() => [
-  { value: 'caption', label: t('pages.content.fields.caption'), icon: 'i-lucide-text' },
-  { value: 'photos', label: t('pages.contentReview.photosTab'), icon: 'i-lucide-images' },
-  { value: 'review', label: t('pages.contentReview.reviewTab'), icon: 'i-lucide-check-check' },
-  { value: 'history', label: t('pages.contentReview.historyTab'), icon: 'i-lucide-history' }
+  { value: 'caption', label: t('pages.content.fields.caption') },
+  { value: 'photos', label: t('pages.contentReview.photosTab') },
+  { value: 'review', label: t('pages.contentReview.reviewTab') },
+  { value: 'history', label: t('pages.contentReview.historyTab') }
 ])
 const { detail, form, placement, notes, decision, saving, loading, failed, dirty, render, isOutdated, sortedRankings, decisions, schema, restoreAi, save, review } = useContentStudio(jobId)
 </script>

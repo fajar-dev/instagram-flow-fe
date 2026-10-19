@@ -91,7 +91,7 @@ Komponen untuk menampilkan dan mengorganisir data.
 | Empty | `<UEmpty>` | Empty state placeholder | ❌ Belum |
 | Marquee | `<UMarquee>` | Scrolling marquee animation | ❌ Belum |
 | ScrollArea | `<UScrollArea>` | Custom scrollbar container | ❌ Belum |
-| Table | `<UTable>` | Data table dengan sorting | ✅ Ya (contact list) |
+| Table | `<UTable>` | Data table dengan sorting | ✅ Ya (user list) |
 | Timeline | `<UTimeline>` | Timeline/log display | ❌ Belum |
 | Tree | `<UTree>` | Tree view (nested data) | ❌ Belum |
 | User | `<UUser>` | User info display (avatar + name + desc) | ❌ Belum |
@@ -109,7 +109,7 @@ Komponen untuk navigasi dan wayfinding.
 | FooterColumns | `<UFooterColumns>` | Footer dengan kolom links | ❌ Belum |
 | Link | `<ULink>` | Styled link component | ❌ Belum |
 | NavigationMenu | `<UNavigationMenu>` | Top navigation menu | ❌ Belum |
-| Pagination | `<UPagination>` | Page pagination | ✅ Ya (contact list) |
+| Pagination | `<UPagination>` | Page pagination | ✅ Ya (user list) |
 | Stepper | `<UStepper>` | Step-by-step wizard | ❌ Belum |
 | Tabs | `<UTabs>` | Tab navigation | ❌ Belum |
 
@@ -267,17 +267,17 @@ Komponen untuk dark/light mode switching.
 | `UAvatar` | User profile picture | Sidebar, UserPopover |
 | `UButton` | Semua tombol | Seluruh project |
 | `UCard` | Card wrapper | DeleteModal |
-| `UDropdownMenu` | Action dropdown di table; dasar `LanguageSwitcher` | Contact page, User page, `LanguageSwitcher.vue` |
+| `UDropdownMenu` | Action dropdown di table; dasar `LanguageSwitcher` | User page, User page, `LanguageSwitcher.vue` |
 | `UForm` | Form wrapper + validation | Modal forms, Auth pages |
 | `UFormField` | Form field + label + error | Modal forms, Auth pages |
 | `UIcon` | Semua icon (lucide) | Seluruh project |
 | `UInput` | Text/email/password input | Modal forms, Auth pages |
 | `UModal` | Dialog modal | CRUD modals |
-| `UPagination` | Table pagination | Contact page |
+| `UPagination` | Table pagination | User page |
 | `UPopover` | User profile popover | UserPopover |
-| `USelect` | Per-page selector | Contact page |
+| `USelect` | Per-page selector | User page |
 | `USeparator` | Divider "OR" | Sign-in page |
-| `UTable` | Data table | Contact page |
+| `UTable` | Data table | User page |
 | `UTooltip` | Sidebar tooltip | Sidebar |
 | `useToast()` | Toast notifications | Service layer, pages |
 

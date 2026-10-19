@@ -6,6 +6,21 @@
       </h2>
     </template>
     <div class="space-y-5">
+      <div class="flex flex-wrap items-center gap-3">
+        <ContentStatusBadge :status="detail.draft?.reviewStatus || detail.job.status" />
+        <span
+          v-if="detail.revision"
+          class="text-xs text-muted"
+        >
+          {{ $t('pages.contentReview.revision') }} {{ detail.revision.revisionNo }}
+        </span>
+      </div>
+      <p
+        v-if="detail.job.safeError"
+        class="text-sm text-error break-words"
+      >
+        {{ detail.job.errorCode || $t('pages.aiJob.failed') }} · {{ detail.job.safeError }}
+      </p>
       <dl class="space-y-4 text-sm">
         <div
           v-for="field in ['activity', 'location', 'documentationDate', 'clientName'] as const"
@@ -34,14 +49,18 @@
             </UBadge>
           </dd>
         </div>
+        <div
+          v-if="detail.batch.description"
+          class="space-y-1.5"
+        >
+          <dt class="text-muted">
+            {{ $t('pages.content.fields.description') }}
+          </dt>
+          <dd class="text-toned leading-relaxed whitespace-pre-line break-words">
+            {{ detail.batch.description }}
+          </dd>
+        </div>
       </dl>
-      <p
-        v-if="detail.batch.description"
-        class="text-sm text-muted whitespace-pre-line break-words border-t border-default pt-5"
-      >
-        {{ detail.batch.description }}
-      </p>
-      <USeparator />
       <UTimeline
         :items="steps"
         :model-value="currentStep"

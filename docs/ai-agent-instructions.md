@@ -45,7 +45,7 @@ Sebelum menulis kode apapun, baca file-file ini secara berurutan:
 <UButton>Save</UButton>
 
 <!-- ✅ BENAR -->
-<UButton>{{ $t('components.contact.addModal.save') }}</UButton>
+<UButton>{{ $t('components.user.addModal.save') }}</UButton>
 ```
 
 - Semua teks (label, placeholder, toast, pesan Zod, `aria-label`) lewat `$t()` / `t()` dari `useI18n()`
@@ -60,11 +60,11 @@ Sebelum menulis kode apapun, baca file-file ini secara berurutan:
 
 ### 5. Ikuti Pattern yang Ada
 
-- **Service**: Copy pattern dari `contact-service.ts`
-- **Types**: Copy pattern dari `contact.d.ts`
-- **Page CRUD**: Copy pattern dari `pages/contact/index.vue`
-- **Add Modal**: Copy pattern dari `components/contact/AddModal.vue`
-- **Update Modal**: Copy pattern dari `components/contact/UpdateModal.vue`
+- **Service**: Copy pattern dari `user-service.ts`
+- **Types**: Copy pattern dari `user.d.ts`
+- **Page CRUD**: Copy pattern dari `pages/user/index.vue`
+- **Add Modal**: Copy pattern dari `components/user/AddModal.vue`
+- **Update Modal**: Copy pattern dari `components/user/UpdateModal.vue`
 - **Delete**: Gunakan `DeleteModal` global
 
 ### 6. Script Setup Order
@@ -100,11 +100,11 @@ Saat AI agent diminta membuat fitur CRUD baru (misal: `product`):
 
 | Tipe | File Referensi | Gunakan Sebagai Template |
 |------|---------------|-------------------------|
-| Type definition | `app/types/contact.d.ts` | ✅ |
-| Service class | `app/services/contact-service.ts` | ✅ |
-| Add Modal | `app/components/contact/AddModal.vue` | ✅ |
-| Update Modal | `app/components/contact/UpdateModal.vue` | ✅ |
-| CRUD Page | `app/pages/contact/index.vue` | ✅ |
+| Type definition | `app/types/user.d.ts` | ✅ |
+| Service class | `app/services/user-service.ts` | ✅ |
+| Add Modal | `app/components/user/AddModal.vue` | ✅ |
+| Update Modal | `app/components/user/UpdateModal.vue` | ✅ |
+| CRUD Page | `app/pages/user/index.vue` | ✅ |
 | Auth Page | `app/pages/auth/sign-in.vue` | ✅ |
 | Delete Modal | `app/components/DeleteModal.vue` | ❌ Gunakan langsung, jangan buat baru |
 | Sidebar Nav | `app/composables/useNavigation.ts` | Tambah item di sini (pola stable-id) |

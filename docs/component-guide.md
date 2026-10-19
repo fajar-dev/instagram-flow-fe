@@ -37,15 +37,15 @@ Komponen yang digunakan di seluruh aplikasi. Auto-imported oleh Nuxt.
 
 Komponen spesifik untuk fitur tertentu. Dinamakan dengan prefix folder.
 
-**Contoh: `contact/`**
+**Contoh: `user/`**
 
 | Komponen | Fungsi | Props | Emits |
 |----------|--------|-------|-------|
-| `ContactAddModal` | Form tambah contact | `modelValue: boolean` (v-model) | `created` |
-| `ContactUpdateModal` | Form edit contact | `modelValue: boolean`, `contact: Contact \| null` | `updated` |
-| `ContactDeleteModal` | Konfirmasi hapus contact | `modelValue: boolean`, `contact: Contact \| null` | `deleted` |
+| `UserAddModal` | Form tambah user | `modelValue: boolean` (v-model) | `created` |
+| `UserUpdateModal` | Form edit user | `modelValue: boolean`, `user: User \| null` | `updated` |
+| `UserDeleteModal` | Konfirmasi hapus user | `modelValue: boolean`, `user: User \| null` | `deleted` |
 
-> **Auto-naming oleh Nuxt:** File `components/contact/AddModal.vue` otomatis jadi `<ContactAddModal />`.
+> **Auto-naming oleh Nuxt:** File `components/user/AddModal.vue` otomatis jadi `<UserAddModal />`.
 
 ## Aturan Wajib: Modal HARUS Jadi Component
 
@@ -185,12 +185,12 @@ Setiap `<UFormField>` untuk field yang **wajib diisi** di Zod schema (bukan `.op
 
 ```vue
 <!-- ✅ BENAR — field wajib di schema, UFormField diberi required -->
-<UFormField :label="$t('components.contact.addModal.emailLabel')" name="email" required>
+<UFormField :label="$t('components.user.addModal.emailLabel')" name="email" required>
   <UInput v-model="form.email" ... />
 </UFormField>
 
 <!-- ✅ BENAR — field opsional di schema, TIDAK diberi required -->
-<UFormField :label="$t('components.contact.addModal.salutationLabel')" name="salutation">
+<UFormField :label="$t('components.user.addModal.salutationLabel')" name="salutation">
   <USelect v-model="form.salutation" ... />
 </UFormField>
 ```
@@ -365,7 +365,7 @@ Saat menambah fitur CRUD baru (misal: `product`):
    - Interface `ProductPayload` (payload create/update)
 
 2. **Service**: Buat `app/services/product-service.ts`
-   - Class `ProductService` mengikuti pattern `ContactService`
+   - Class `ProductService` mengikuti pattern `UserService`
    - Export singleton: `export const productService = new ProductService()`
 
 3. **Components**: Buat folder `app/components/product/`
@@ -374,7 +374,7 @@ Saat menambah fitur CRUD baru (misal: `product`):
    - Gunakan `DeleteModal` global (jangan buat baru)
 
 4. **Page**: Buat `app/pages/product/index.vue`
-   - Mengikuti pattern `contact/index.vue`
+   - Mengikuti pattern `user/index.vue`
 
 5. **Navigation**: Update `app/composables/useNavigation.ts`
    - Tambahkan nav item baru di `navGroups`, pakai pola stable-`id` (lihat [i18n-guide.md](./i18n-guide.md) §5)
@@ -415,7 +415,7 @@ const open = defineModel<boolean>({ default: false })
 
 Layout dashboard memiliki header mobile sendiri, sehingga navigasi tetap tersedia tanpa komponen Header halaman. MobileSidebar memakai USlideover di sisi kiri dan UNavigationMenu vertikal; submenu dibuka dengan tap, bukan hover. Drawer selebar w-64 (maksimal lebar layar), dengan teks text-sm dan baris menu min-h-9, mendukung Escape, backdrop, tombol tutup, focus trap/restore, dan scroll lock melalui NuxtUI. Pemilihan link atau perubahan route menutup drawer. Saat viewport mencapai breakpoint desktop lg (1024px), drawer ditutup dan listener dibersihkan saat unmount. Layout memakai h-dvh dan min-w-0 agar tinggi mengikuti viewport mobile dan tabel lebar tidak mendorong header. Menu desktop tetap memakai Sidebar.
 
-Verifikasi browser: viewport 320×568, 390×844, 768×1024, dan 1280×900; buka/tutup drawer, tap submenu, navigasi Contact, Escape, klik backdrop, settings, dan resize ke desktop. Typecheck, lint, build, dan 7 test service frontend berhasil.
+Verifikasi browser: viewport 320×568, 390×844, 768×1024, dan 1280×900; buka/tutup drawer, tap submenu, navigasi User, Escape, klik backdrop, settings, dan resize ke desktop. Typecheck, lint, build, dan 7 test service frontend berhasil.
 
 Header mobile dan footer sidebar desktop menggunakan trigger avatar dari UserPopover: foto user atau inisial nama ketika foto kosong. Trigger berupa UButton untuk mendukung keyboard dan tetap membuka pengaturan akun. Deskripsi drawer tetap tersedia untuk pembaca layar tanpa memenuhi header secara visual.
 

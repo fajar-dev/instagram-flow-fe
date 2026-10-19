@@ -16,7 +16,6 @@
         "menu": "Menu",
         "subMenu1": "Sub Menu 1",
         "subMenu2": "Sub Menu 2",
-        "contact": "Kontak",
         "users": "Pengguna"
       }
     },
@@ -40,57 +39,6 @@
       "searchPlaceholder": "Cari...",
       "showing": "Menampilkan {from} sampai {to} dari {total} hasil",
       "itemsPerPage": "Jumlah per halaman"
-    },
-    "contact": {
-      "addModal": {
-        "title": "Tambah Kontak",
-        "description": "Isi detail berikut untuk membuat kontak baru.",
-        "cancel": "Batal",
-        "save": "Simpan",
-        "createdSuccess": "Kontak berhasil dibuat!"
-      },
-      "updateModal": {
-        "title": "Ubah Kontak",
-        "description": "Perbarui informasi kontak di bawah ini.",
-        "cancel": "Batal",
-        "save": "Simpan",
-        "updatedSuccess": "Kontak berhasil diperbarui!"
-      },
-      "deleteModal": {
-        "title": "Hapus Kontak",
-        "description": "Apakah Anda yakin ingin menghapus {name}? Tindakan ini tidak dapat dibatalkan.",
-        "cancel": "Batal",
-        "delete": "Hapus",
-        "close": "Tutup",
-        "deletedSuccess": "Kontak berhasil dihapus!",
-        "deleteFailed": "Gagal menghapus kontak",
-        "genericError": "Terjadi kesalahan"
-      },
-      "form": {
-        "active": "Aktif",
-        "emailInvalid": "Masukkan alamat email yang valid",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Masukkan email",
-        "emailRequired": "Email wajib diisi",
-        "inactive": "Nonaktif",
-        "nameLabel": "Nama",
-        "namePlaceholder": "Masukkan nama",
-        "nameRequired": "Nama wajib diisi",
-        "phoneLabel": "Telepon",
-        "phonePlaceholder": "Masukkan nomor telepon",
-        "phoneRequired": "Telepon wajib diisi",
-        "salutationLabel": "Sapaan",
-        "salutationMr": "Bapak",
-        "salutationMrs": "Ibu",
-        "salutationPlaceholder": "Pilih sapaan",
-        "statusLabel": "Status",
-        "typeCustomer": "Pelanggan",
-        "typeLabel": "Tipe",
-        "typeOther": "Lainnya",
-        "typeSupplier": "Pemasok",
-        "typeVendor": "Vendor",
-        "typePlaceholder": "Pilih jenis kontak"
-      }
     },
     "user": {
       "addModal": {
@@ -183,31 +131,6 @@
     "dashboard": {
       "title": "Dasbor",
       "description": "Selamat datang di admin dashboard"
-    },
-    "contact": {
-      "title": "Kontak Pelanggan",
-      "description": "Daftar dan pengelolaan kontak pelanggan",
-      "searchPlaceholder": "Cari...",
-      "addContact": "Tambah Kontak",
-      "columnId": "#",
-      "columnName": "Nama",
-      "columnEmail": "Email",
-      "columnPhone": "Telepon",
-      "columnType": "Tipe",
-      "columnStatus": "Status",
-      "columnCreatedAt": "Dibuat Pada",
-      "columnAction": "Aksi",
-      "actionsDropdown": "Menu aksi",
-      "editContact": "Ubah kontak",
-      "deleteContact": "Hapus kontak",
-      "deleteTitle": "Hapus Kontak",
-      "deletedSuccess": "Kontak berhasil dihapus!",
-      "typeCustomer": "Pelanggan",
-      "typeVendor": "Vendor",
-      "typeSupplier": "Pemasok",
-      "typeOther": "Lainnya",
-      "active": "Aktif",
-      "inactive": "Nonaktif"
     },
     "user": {
       "title": "Manajemen Pengguna",
@@ -417,7 +340,6 @@
       "processUploaded": "Proses {count} gambar yang berhasil",
       "title": "Content",
       "listDescription": "Kelola proses dan review konten berdasarkan status. Menampilkan data 30 hari terakhir.",
-      "backToContent": "Kembali ke Content",
       "loadingMedia": "Mengambil daftar foto…",
       "archivePhoto": "Arsipkan {name}",
       "downloadPhoto": "Unduh {name}",

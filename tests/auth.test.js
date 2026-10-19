@@ -40,7 +40,7 @@ test('concurrent 401 responses share one refresh and retry with the new token', 
     expect(config.headers['Accept-Language']).toBe('id')
     return response(config)
   }
-  await Promise.all([1, 2].map(() => service.client.get('/contact', { headers: { Authorization: 'Bearer old'
+  await Promise.all([1, 2].map(() => service.client.get('/user', { headers: { Authorization: 'Bearer old'
   }
   })))
   expect(refreshed).toBe(1)
@@ -74,7 +74,7 @@ test('network failure during refresh preserves the session', async () => {
   service.client.defaults.adapter = async (config) => {
     throw unauthorized(config)
   }
-  await expect(service.client.get('/contact', { headers: { Authorization: 'Bearer old'
+  await expect(service.client.get('/user', { headers: { Authorization: 'Bearer old'
   }
   })).rejects.toBeInstanceOf(AxiosError)
   expect(expired).toBe(false)
@@ -94,7 +94,7 @@ test('rejected refresh expires session without retry loops', async () => {
     requests++
     throw unauthorized(config)
   }
-  await expect(service.client.get('/contact', { headers: { Authorization: 'Bearer old'
+  await expect(service.client.get('/user', { headers: { Authorization: 'Bearer old'
   }
   })).rejects.toBeInstanceOf(AxiosError)
   expect(expired).toBe(true)

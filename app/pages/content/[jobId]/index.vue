@@ -15,12 +15,6 @@
       class="h-64 w-full"
     />
     <template v-if="detail">
-      <p
-        v-if="detail.job.safeError"
-        class="text-sm text-muted"
-      >
-        {{ detail.job.errorCode || $t('pages.aiJob.failed') }} · {{ detail.job.safeError }}
-      </p>
       <div class="grid lg:grid-cols-12 gap-6 items-start">
         <div class="min-w-0 lg:col-span-7">
           <ContentAssetSlider

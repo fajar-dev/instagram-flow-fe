@@ -1,6 +1,6 @@
 # Service layer
 
-Acuan: `app/services/contact-service.ts`, `user-service.ts`, dan `auth-service.ts`.
+Acuan: `app/services/user-service.ts`, `user-service.ts`, dan `auth-service.ts`.
 
 ## Kontrak HTTP
 
@@ -29,6 +29,6 @@ Biarkan rejection Axios diteruskan utuh. Service tidak memakai toast, navigateTo
 
 ## Pembagian fitur
 
-Client contact/user/auth berada pada root mengikuti codebase awal. Content, ai-job, content-review, integration, dan reporting memiliki folder fitur. Child upload/download berada dalam content. Tipe ada di app/types, helper stateless di app/util, state Vue di composable, dan render di component/page. Tidak ada facade social-service kedua.
+Client user/auth berada pada root mengikuti codebase awal. Content, ai-job, content-review, integration, dan reporting memiliki folder fitur. Child upload/download berada dalam content. Tipe ada di app/types, helper stateless di app/util, state Vue di composable, dan render di component/page. Tidak ada facade social-service kedua.
 
 Lihat [audit terbaru](audit-2026-10-16.md) untuk kompatibilitas URL dan batas verifikasi.

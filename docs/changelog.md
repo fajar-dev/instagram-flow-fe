@@ -221,3 +221,25 @@ Reusable DateInput uses Nuxt UI segmented date input and calendar popover, keepi
 ## 2026-10-18 — Detail process timeline
 
 - Replaced the plain lifecycle icon list with a vertical Nuxt UI Timeline connecting Created, Started and Completed. Recorded stages use primary color; pending stages remain muted. Timestamps reuse the existing Jakarta formatter and update with job polling.
+
+## 2026-10-19 — Remove Contact
+
+Removed the Contact application feature, endpoints, entities, UI, types, client, translations and dedicated tests. Shared auth, logging, language and pagination tests now use supported User endpoints. User is the active CRUD reference. Historical audit records remain unchanged.
+
+Backend migration `1792368000000-drop-contacts` removes the retired table. Applied migration history is preserved; reverting restores only the empty schema, not deleted data.
+
+## 2026-10-19 — Move job metadata into summary
+
+Moved status, revision number and workflow error into the project summary. Removed the shared header action row and Back to Content button from both detail and editor. Unsaved-edit feedback stays beside the editor controls.
+
+## 2026-10-19 — Summary description styling
+
+Description now uses a labeled full-width summary field with readable body text and preserved line breaks. Removed the surrounding horizontal rules and excessive top padding.
+
+## 2026-10-19 — Visible carousel arrows
+
+Override both base and sm arrow positions so Nuxt UI does not place desktop controls outside the card. Solid, shadowed controls sit above image/lightbox triggers with a consistent touch target. Endpoint disabled states and single-image behavior remain intact.
+
+## 2026-10-19 — Compact editor tabs
+
+Replaced icon/underline editor tabs with text-only segmented pills on a muted track. The active tab uses the primary theme color with contrasting text; removed the extra header divider while retaining tab state and keyboard behavior.

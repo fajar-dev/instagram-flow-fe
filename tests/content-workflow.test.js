@@ -53,7 +53,7 @@ test('reporting and settings clients retain envelopes and query parameters', asy
   expect((await settingsService.settings()).data.dispatchEnabled).toBe(false)
 })
 
-test('all JSON feature clients return the same ApiResponse envelope as contact and user', async () => {
+test('all JSON feature clients return the same ApiResponse envelope as user', async () => {
   const envelope = { status: 'success', message: 'Success', data: { id: 'id' } }
   apiService.client.defaults.adapter = async config => response(config, envelope)
   const results = await Promise.all([
