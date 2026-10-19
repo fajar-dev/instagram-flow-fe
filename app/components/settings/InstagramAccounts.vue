@@ -1,10 +1,10 @@
 <template>
-  <div class="min-w-0 space-y-4">
-    <div class="space-y-1">
+  <section class="space-y-4">
+    <div>
       <h2 class="text-base font-semibold text-highlighted">
         {{ $t('pages.publishing.accountsTitle') }}
       </h2>
-      <p class="text-sm text-muted">
+      <p class="mt-1 text-sm text-muted">
         {{ $t('pages.publishing.accountsHint') }}
       </p>
     </div>
@@ -32,7 +32,7 @@
         <div
           v-for="account in accounts"
           :key="account.key"
-          class="flex flex-col gap-4 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between"
+          class="flex flex-wrap items-center justify-between gap-4 py-4 first:pt-0 last:pb-0"
         >
           <div class="flex items-center gap-3 min-w-0">
             <UAvatar
@@ -54,7 +54,7 @@
               </p>
             </div>
           </div>
-          <div class="flex flex-wrap items-center gap-2 sm:shrink-0">
+          <div class="flex items-center gap-2">
             <UBadge
               :color="account.expired ? 'error' : account.enabled && account.configured ? 'primary' : 'neutral'"
               variant="subtle"
@@ -75,7 +75,7 @@
         </div>
       </div>
     </UCard>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
