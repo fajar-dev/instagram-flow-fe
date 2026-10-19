@@ -19,73 +19,17 @@
       >
         {{ $t(detail.draft?.reviewStatus === 'REJECTED' ? 'pages.publishing.rejectedEmpty' : 'pages.publishing.empty') }}
       </p>
-      <div
+      <PublishingPublicationResult
         v-for="row in rows"
         :key="row.id"
-        class="space-y-2 border-b border-default pb-4 last:border-0 last:pb-0"
-      >
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <p class="text-sm font-medium">
-            {{ row.accountLabel }}
-          </p>
-          <UBadge
-            :color="publicationColor(row.status)"
-            variant="subtle"
-          >
-            {{ $t(`pages.publishing.status.${row.status}`) }}
-          </UBadge>
-        </div>
-        <p class="text-xs text-muted">
-          {{ $t(`pages.contentReview.${row.placement}`) }} · {{ $t('pages.contentReview.revision') }} {{ row.revisionNo }} · {{ formatContentDate(row.publishedAt || row.scheduledAt, locale) }} WIB
-        </p>
-        <p
-          v-if="row.safeError"
-          class="text-sm text-error"
-        >
-          {{ row.safeError }}
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <UButton
-            size="sm"
-            variant="link"
-            color="neutral"
-            :loading="previewing === row.id"
-            @click="preview(row)"
-          >
-            {{ $t('pages.publishing.preview') }}
-          </UButton>
-          <UButton
-            v-if="row.permalink"
-            :to="row.permalink"
-            target="_blank"
-            size="sm"
-            variant="link"
-            icon="i-lucide-external-link"
-          >
-            {{ $t('pages.publishing.viewPost') }}
-          </UButton>
-          <UButton
-            v-if="['QUEUED', 'SCHEDULED', 'FAILED'].includes(row.status)"
-            size="sm"
-            variant="soft"
-            color="neutral"
-            :disabled="!!busy"
-            @click="action(row.id, 'cancel')"
-          >
-            {{ $t('pages.publishing.cancel') }}
-          </UButton>
-          <UButton
-            v-if="row.status === 'FAILED'"
-            size="sm"
-            variant="soft"
-            :disabled="!!busy"
-            :loading="busy === row.id"
-            @click="action(row.id, 'retry')"
-          >
-            {{ $t('pages.publishing.retry') }}
-          </UButton>
-        </div>
-      </div>
+        :publication="row"
+        :busy="!!busy"
+        :retrying="busy === row.id"
+        :previewing="previewing === row.id"
+        @preview="preview(row)"
+        @cancel="action(row.id, 'cancel')"
+        @retry="action(row.id, 'retry')"
+      />
     </div>
     <USkeleton
       v-if="!loaded && !failed"
@@ -124,14 +68,12 @@
 <script setup lang="ts">
 import { publicationService } from '~/services/publishing/publication-service'
 import { mediaService } from '~/services/content/media-service'
-import { publicationColor } from '~/util/publication'
-import { formatContentDate } from '~/util/content'
 import type { Publication } from '~/types/publishing'
 import type { JobDetails } from '~/types/ai-job'
 
 const props = defineProps<{ detail: JobDetails, dirty?: boolean }>()
 const emit = defineEmits<{ changed: [] }>()
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const handleError = useServiceError()
 const toast = useToast()
 const { openLightbox, closeLightbox } = useLightbox()

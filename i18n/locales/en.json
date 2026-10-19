@@ -457,7 +457,9 @@
       "rejectNotes": "Reason (optional)",
       "rejectPlaceholder": "Explain why this content is rejected",
       "rejected": "Content rejected",
-      "rejectedEmpty": "This content is closed and will not be published."
+      "rejectedEmpty": "This content is closed and will not be published.",
+      "publishedAt": "Published at",
+      "scheduledAt": "Scheduled for"
     }
   }
 }

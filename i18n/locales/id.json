@@ -457,7 +457,9 @@
       "rejectNotes": "Alasan (opsional)",
       "rejectPlaceholder": "Jelaskan alasan penolakan konten",
       "rejected": "Konten ditolak",
-      "rejectedEmpty": "Konten ini telah ditutup dan tidak akan dipublikasikan."
+      "rejectedEmpty": "Konten ini telah ditutup dan tidak akan dipublikasikan.",
+      "publishedAt": "Dipublikasikan pada",
+      "scheduledAt": "Dijadwalkan pada"
     }
   }
 }

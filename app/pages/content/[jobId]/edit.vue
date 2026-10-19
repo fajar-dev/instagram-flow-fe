@@ -39,7 +39,10 @@
                 <h2 class="text-base font-semibold text-highlighted">
                   {{ $t('pages.contentReview.editorTitle') }}
                 </h2>
-                <ContentStatusBadge :status="detail.draft.reviewStatus" />
+                <ContentStatusBadge
+                  v-if="activePanel !== 'publish' || detail.draft.reviewStatus !== 'PUBLISH'"
+                  :status="detail.draft.reviewStatus"
+                />
               </div>
               <UTabs
                 v-model="activePanel"

@@ -1,5 +1,7 @@
 # Perapian keputusan konten — 19 Oktober 2026
 
+- Hasil publish dirapikan menjadi header akun/status, metadata dua kolom dan aksi utama Lihat postingan. Komponen PublicationResult memisahkan tampilan hasil dari orchestration; badge tahap Publish yang berulang disembunyikan pada tab Publish.
+
 - Tiga keterangan preview (simulasi, foto sumber, outdated) dihapus sesuai permintaan; pemilihan gambar fallback tetap berfungsi.
 
 - Preview Feed memakai tampilan postingan Instagram: header akun generik, lokasi, gambar, ikon dekoratif dan caption/hashtag dari form. Caption dapat diperluas, Story dan lightbox tetap tersedia.
