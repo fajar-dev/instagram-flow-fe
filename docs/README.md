@@ -1,44 +1,19 @@
-# 📚 Dokumentasi Project — Nuxt Boilerplate
+# Dokumentasi frontend IG Flow
 
-> **WAJIB DIBACA oleh AI Agent sebelum memulai pekerjaan apapun di project ini.**
+Panduan ini menjelaskan dashboard IG Flow yang berjalan di atas API backend AMTI. Versi dependency mengikuti package.json dan lockfile; perilaku halaman mengikuti source route, composable dan service.
 
-## Daftar Dokumentasi
+| Kebutuhan | Dokumen |
+| --- | --- |
+| Setup | [README](../README.md) |
+| Produk, halaman dan struktur | [Overview proyek](project-overview.md) |
+| Aturan implementasi | [Coding standards](coding-standards.md) |
+| Layout dan alur halaman | [Page patterns](page-pattern.md) |
+| Form, media, modal dan feedback | [Component guide](component-guide.md) |
+| Tema dan pilihan komponen | [Nuxt UI](nuxtui-guide.md), [inventaris komponen](nuxtui-components.md) |
+| API client dan auth | [Service layer](service-layer.md) |
+| Bahasa | [i18n](i18n-guide.md) |
+| Kontribusi agent | [AGENTS](../AGENTS.md), [workflow](ai-agent-instructions.md) |
+| Riwayat perubahan | [Changelog](changelog.md) |
+| Backend dan n8n | [Dokumentasi backend](../../backend/docs/README.md) |
 
-| No | Dokumen | Deskripsi |
-|----|---------|-----------|
-| 🔝 | [../AGENTS.md](../AGENTS.md) / [../CLAUDE.md](../CLAUDE.md) | Ringkasan aturan kritis di root project — dibaca duluan sebelum masuk ke `docs/` |
-| ⭐ | [ai-agent-instructions.md](./ai-agent-instructions.md) | **BACA INI PERTAMA** — Instruksi wajib untuk AI agent |
-| 1 | [project-overview.md](./project-overview.md) | Arsitektur project, tech stack, dan struktur folder |
-| 2 | [coding-standards.md](./coding-standards.md) | Standarisasi kode: naming, formatting, aturan ketat |
-| 2b | [i18n-guide.md](./i18n-guide.md) | **WAJIB DIIKUTI** — Aturan i18n (English/Indonesia) untuk semua teks UI |
-| 3 | [nuxtui-guide.md](./nuxtui-guide.md) | Panduan penggunaan komponen NuxtUI — **WAJIB DIIKUTI** |
-| 3b | [nuxtui-components.md](./nuxtui-components.md) | Daftar lengkap 125+ komponen NuxtUI v4 yang tersedia |
-| 4 | [component-guide.md](./component-guide.md) | Pattern pembuatan komponen, modal, form, dan layout |
-| 5 | [service-layer.md](./service-layer.md) | Panduan service, API call, types, dan error handling |
-| 6 | [page-pattern.md](./page-pattern.md) | Pattern halaman CRUD, auth, dan dashboard |
-| 7 | [changelog.md](./changelog.md) | Log perubahan project |
-
-## ⚠️ Aturan Utama (HARUS DIPATUHI)
-
-1. **Gunakan NuxtUI component** — Dilarang membuat custom component jika NuxtUI sudah menyediakan
-2. **Dilarang hardcode class** — Tidak boleh menggunakan `px-[10px]`, `m-[5px]`, `w-[200px]`, dll. Gunakan Tailwind utility class standar (`px-4`, `m-2`, `w-52`, dll)
-3. **Modal di luar page** — Semua modal, dialog, dan popup HARUS dijadikan component terpisah di `app/components/<feature>/`
-4. **Konsisten dengan pattern yang ada** — Baca referensi page dan component yang sudah ada sebelum membuat yang baru
-5. **TypeScript strict** — Semua file menggunakan TypeScript, definisikan type di `app/types/`
-6. **Dilarang hardcode teks UI** — Semua teks yang tampil ke user WAJIB lewat i18n (`$t()` / `t()`), key ditambahkan ke `i18n/locales/en.json` **dan** `id.json`. Lihat [i18n-guide.md](./i18n-guide.md)
-
-## Quick Reference: Tech Stack
-
-| Teknologi | Versi | Fungsi |
-|-----------|-------|--------|
-| Nuxt | ^4.4.6 | Framework utama |
-| @nuxt/ui | ^4.7.1 | UI Component library |
-| @nuxtjs/i18n | ^10.6.0 | Internationalization (English + Bahasa Indonesia) |
-| Tailwind CSS | ^4.3.0 | Utility-first CSS |
-| Zod | ^4.4.3 | Schema validation |
-| Axios | ^1.16.1 | HTTP client |
-| TypeScript | ^6.0.3 | Type safety |
-| Bun | 1.3.1 | Package manager |
-| Icon Set | @iconify-json/lucide | Icon library |
-
-Keputusan terbaru pada [audit 2026-10-15](./audit-2026-10-15.md) menjadi acuan refactor auth/API. Error bersama memakai `components.errors.*`, footer auth memakai `components.authLayout.*`; seluruh key tersedia dalam en/id.
+Audit bertanggal disimpan sebagai arsip. Pernyataan role, Contact, menu lama, atau storage dari audit awal tidak berlaku sebagai petunjuk implementasi sekarang.

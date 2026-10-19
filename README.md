@@ -1,39 +1,37 @@
-# Nuxt 4 FE - frontend boilerplate
+# IG Flow — Frontend
 
-Frontend boilerplate dibangun dengan Nuxt 4, TypeScript, Tailwind CSS, NuxtUI, Zod, Axios
+Dashboard AMTI untuk menyiapkan konten Instagram: unggah dokumentasi kegiatan, pantau pemrosesan AI, perbaiki caption/foto, dan lakukan review internal. Frontend menggunakan Nuxt 4 (SPA), Nuxt UI 4, Tailwind CSS, TypeScript, Axios, Zod, serta bahasa Indonesia/English.
 
-## Quick Start
+## Menjalankan
 
-```bash [Terminal]
-npm create nuxt@latest -- -t ui
-```
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
+```sh
 bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
+# Hanya jika belum memiliki .env:
+cp .env.example .env
 bun run dev
 ```
 
-## Production
+`API_BASE_URL` default `http://localhost:4000/api`; `GOOGLE_CLIENT_ID` diperlukan untuk login Google. Jalankan [backend](../backend/README.md) terlebih dahulu untuk menggunakan data nyata. Jangan menyimpan secret backend, MinIO, atau AI di frontend.
 
-Build the application for production:
+## Halaman utama
 
-```bash
+- Overview: ringkasan aktivitas dan status konten.
+- Content: job dan draft dalam satu menu, tab berdasarkan status dengan count.
+- Detail/Editor: foto carousel, summary/timeline, caption, pemilihan foto, review dan history.
+- Media: galeri masonry, thumbnail blur ke gambar penuh, infinite scroll dan lightbox.
+- Activity Logs, Integration Settings, User dan Profile.
+
+Upload tersedia pada `/content/upload`. Semua user aktif terautentikasi memiliki akses yang sama. `APPROVED_INTERNAL` tidak memublikasikan ke Instagram. Publishing, scheduling, analytics Instagram serta Telegram belum tersedia.
+
+## Verifikasi
+
+```sh
+bun run typecheck
+bun run lint
+bun run test
 bun run build
 ```
 
-Locally preview production build:
+Build lokal dapat dipreview melalui `bun run preview`. Pengujian service memakai adapter terkontrol; verifikasi browser dan integrasi nyata merupakan pemeriksaan terpisah.
 
-```bash
-bun run preview
-```
+Mulai dari [indeks dokumentasi](docs/README.md), [peta halaman](docs/project-overview.md), [panduan UI](docs/component-guide.md), dan [aturan kontribusi](AGENTS.md).

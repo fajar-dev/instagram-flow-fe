@@ -1,168 +1,43 @@
-# 🏗️ Project Overview — Nuxt Boilerplate
+# Produk dan struktur frontend IG Flow
 
-## Tentang Project
+IG Flow membantu tim AMTI mengolah dokumentasi kegiatan menjadi caption serta preview feed/story untuk review internal. Analisis AI dijalankan n8n melalui backend; browser tidak memanggil provider AI atau menyimpan credential integrasi.
 
-**Nuxt Boilerplate** — Starter template admin dashboard.
-SPA (Single Page Application) dengan Nuxt 4, NuxtUI v4, dan Tailwind CSS v4.
+## Peta halaman
 
-- **SSR**: Disabled (`ssr: false`)
-- **Color Mode**: Light only (preference: `light`)
-- **Bahasa**: Multi-language via `@nuxtjs/i18n` — English (`en`) + Bahasa Indonesia (`id`). Lihat [i18n-guide.md](./i18n-guide.md)
-- **Package Manager**: Bun 1.3.1
+| Route | Fungsi |
+| --- | --- |
+| `/` | Mengarahkan ke overview |
+| `/auth/sign-in` | Login email/password dan Google |
+| `/auth/forgot-password` | Request/resend email reset |
+| `/auth/reset-password` | Validasi token dan penggantian password |
+| `/overview` | Ringkasan job/konten |
+| `/content` | List terpadu berdasarkan status, beserta count per tab |
+| `/content/upload` | Metadata batch, validasi dan upload per file, proses AI |
+| `/content/:jobId` | Carousel foto, status/error, metadata dan timeline |
+| `/content/:jobId/edit` | Preview, Caption, Photos, Review dan History |
+| `/content/media` | Library foto, filter, download, archive dan infinite scroll |
+| `/activity-logs` | Jejak aktivitas aplikasi |
+| `/integration-settings` | Sakelar dispatcher dan kesiapan konfigurasi |
+| `/user` | Pengelolaan akun |
+| `/profile/information` | Nama, email dan avatar pengguna |
+| `/profile/password` | Penggantian password |
 
-## Tech Stack
+`/profile` memakai halaman induk untuk tab profil. Alias kompatibilitas masih terdaftar untuk `/ai-jobs`, `/content-review`, `/content-review/studio`, serta detail/editor lama. Navigasi utama selalu memakai `/content`; alias bukan modul atau menu terpisah. Tidak ada route Contact atau prefix social aktif.
 
-| Layer         | Teknologi            | Keterangan                                                        |
-| ------------- | -------------------- | ----------------------------------------------------------------- |
-| Framework     | Nuxt 4               | `nuxt ^4.4.6`                                                     |
-| UI Library    | NuxtUI v4            | `@nuxt/ui ^4.7.1` — **Wajib digunakan**                           |
-| i18n          | @nuxtjs/i18n         | `@nuxtjs/i18n ^10.6.0` — English + Indonesia, **Wajib digunakan** |
-| Styling       | Tailwind CSS v4      | `tailwindcss ^4.3.0`                                              |
-| Icons         | Lucide via Iconify   | `@iconify-json/lucide ^1.2.108`                                   |
-| Validation    | Zod v4               | `zod ^4.4.3`                                                      |
-| HTTP Client   | Axios                | `axios ^1.16.1`                                                   |
-| Auth Provider | Google Sign-In       | `nuxt-vue3-google-signin 0.0.13`                                  |
-| Linting       | ESLint + Nuxt ESLint | `@nuxt/eslint ^1.15.2`                                            |
-| Type Checking | TypeScript + vue-tsc | `typescript ^6.0.3`                                               |
+## Status dan alur
 
-## Struktur Folder
+Tab list berasal dari `app/util/content-tabs.ts`. QUEUED, DISPATCHED, PROCESSING dan FAILED membaca resource jobs; READY_FOR_REVIEW, IN_REVIEW, REVISION_REQUESTED, APPROVED_INTERNAL dan REJECTED membaca resource review. Filter default adalah READY_FOR_REVIEW.
 
-```
-fe/
-├── app/
-│   ├── app.vue                    # Root component (UApp wrapper)
-│   ├── app.config.ts              # NuxtUI theme config (colors, defaults)
-│   ├── assets/
-│   │   └── css/
-│   │       └── main.css           # Font, Tailwind imports, custom color tokens
-│   ├── components/
-│   │   ├── BrandLogo.vue          # Logo + nama app
-│   │   ├── Header.vue             # Page header (title, tabs, actions, mobile nav)
-│   │   ├── Sidebar.vue            # Navigasi sidebar (collapsible, reaktif terhadap locale)
-│   │   ├── LanguageSwitcher.vue   # Switch bahasa (kanan atas Header & auth layout)
-│   │   ├── UserPopover.vue        # User profile dropdown + logout
-│   │   ├── DeleteModal.vue        # Generic delete confirmation modal
-│   │   └── <feature>/             # Feature-specific components
-│   │       └── AddModal.vue       # Auto-named: <FeatureAddModal />
-│   │       └── UpdateModal.vue
-│   │       └── DeleteModal.vue
-│   ├── composables/
-│   │   ├── useAuth.ts             # Auth state accessor (readonly)
-│   │   ├── useNavigation.ts       # Sidebar navigation config + active state (i18n-aware)
-│   │   └── error-helper.ts        # Global error handler untuk service layer
-│   ├── layouts/
-│   │   ├── dashboard.vue          # Layout utama: sidebar + main content
-│   │   └── auth.vue               # Layout auth: split-screen (gradient | form)
-│   ├── middleware/
-│   │   ├── auth.global.ts         # Global guard: redirect ke sign-in jika tidak auth
-│   │   └── guest.ts               # Guest-only: redirect ke home jika sudah login
-│   ├── pages/
-│   │   ├── index.vue              # Dashboard (layout: dashboard)
-│   │   ├── auth/
-│   │   │   ├── sign-in.vue        # Login page (layout: auth, middleware: guest)
-│   │   │   ├── forgot-password.vue
-│   │   │   └── reset-password.vue
-│   │   └── <feature>/
-│   │       └── index.vue          # CRUD listing page
-│   ├── plugins/
-│   │   └── *.client.ts            # Client-only plugin
-│   ├── services/
-│   │   ├── api-service.ts         # Axios instance factory + interceptors
-│   │   ├── auth-service.ts        # Auth: login, logout, refresh, Google OAuth
-│   │   └── <feature>-service.ts   # Feature CRUD service
-│   └── types/
-│       ├── auth.d.ts              # User, AuthData, ApiResponse, AuthResponse
-│       └── <feature>.d.ts         # Feature types + payload + PaginationMeta
-├── i18n/
-│   └── locales/
-│       ├── en.json                # WAJIB sinkron dengan id.json — lihat docs/i18n-guide.md
-│       └── id.json
-├── docs/                          # Dokumentasi project ini
-├── public/                        # Static assets (favicon, SVGs)
-├── nuxt.config.ts                 # Nuxt configuration (termasuk block `i18n`)
-├── package.json
-├── tsconfig.json
-└── eslint.config.mjs
-```
+Editor menyimpan revision terlebih dahulu sebelum review. Review menggunakan revision ID dan content hash; perubahan setelah approval membuat preview lama outdated. History menampilkan keputusan dan catatan review, bukan diff seluruh perubahan caption. Belum ada publishing/scheduling Instagram atau Telegram.
 
-## Konfigurasi Design System
+## Struktur
 
-### Warna (dari `main.css`)
+- `app/pages/`: route dan susunan halaman.
+- `app/components/`: komponen bersama serta folder fitur content, content-review, reporting dan user.
+- `app/composables/`: state, lifecycle, polling, request terbaru, upload, editor dan reporting.
+- `app/services/`: API client/auth/user dan client per fitur; tanpa toast atau navigasi.
+- `app/types/`: kontrak response dan domain.
+- `app/util/`: helper stateless tanggal, query, upload, format konten, locale dan navigasi.
+- `i18n/locales/`: seluruh teks UI en/id.
 
-Project menggunakan custom color palette yang di-override di `@theme static`:
-
-| Nama     | Primary (500) | Fungsi                                 |
-| -------- | ------------- | -------------------------------------- |
-| `green`  | `#009838`     | **Primary** — Brand color utama        |
-| `yellow` | `#D97706`     | **Warning**                            |
-| `red`    | `#B91C1C`     | **Error/Danger**                       |
-| `slate`  | —             | **Neutral** — Teks, border, background |
-
-### Font
-
-- **Font Family**: `Geist` (Google Fonts)
-- Didefinisikan di `main.css`: `--font-sans: 'Geist', sans-serif`
-
-### NuxtUI Default Variants (dari `app.config.ts`)
-
-```typescript
-ui: {
-  colors: {
-    primary: 'green',
-    error: 'red',
-    warning: 'yellow',
-    neutral: 'slate'
-  },
-  button: {
-    defaultVariants: { size: 'lg' }
-  },
-  input: {
-    defaultVariants: { size: 'lg' }
-  }
-}
-```
-
-> **Catatan**: Button dan Input default size adalah `lg`. Tidak perlu menambahkan `size="lg"` secara manual kecuali perlu override.
-
-## Environment Variables
-
-| Variable           | Contoh                      | Keterangan             |
-| ------------------ | --------------------------- | ---------------------- |
-| `API_BASE_URL`     | `http://localhost:4000/api` | Base URL API backend   |
-| `GOOGLE_CLIENT_ID` | —                           | Google OAuth Client ID |
-
-## ESLint Rules
-
-- **CommaDangle**: `never` — Tidak ada trailing comma
-- **BraceStyle**: `1tbs` — One True Brace Style
-
-## Layouts
-
-### 1. `dashboard` Layout
-
-- Sidebar kiri (desktop) + drawer overlay (mobile)
-- Main content area dengan scroll
-- Responsive: sidebar hidden di mobile, diganti hamburger menu
-- State `isMobileMenuOpen` di-share via `useState('isMobileMenuOpen')`
-- `LanguageSwitcher` di kanan atas `Header.vue` (mobile bar + desktop top row)
-
-### 2. `auth` Layout
-
-- Split screen: 60% gradient background (kiri) | 40% form (kanan)
-- Mobile: full-width form only
-- Background menggunakan SVG gradient + grid overlay
-- `LanguageSwitcher` di kanan atas panel form
-
-## Authentication Flow
-
-1. **Global Middleware** (`auth.global.ts`): Cek token di setiap navigasi
-2. **Guest Middleware** (`guest.ts`): Redirect user yang sudah login
-3. **Session Storage**: `localStorage` (accessToken, refreshToken, user JSON)
-4. **Token Refresh**: Auto-refresh via Axios interceptor saat mendapat 401
-5. **Google OAuth**: Menggunakan `nuxt-vue3-google-signin` + authorization code flow
-
-Keputusan terbaru pada [audit 2026-10-15](./audit-2026-10-15.md) menjadi acuan refactor auth/API. Error bersama memakai `components.errors.*`, footer auth memakai `components.authLayout.*`; seluruh key tersedia dalam en/id.
-
-## Content automation modules
-
-Features live directly under the existing module/service/component roots: content, AI Job, Content Review, Integration and Reporting. Related children remain together. Backend persistence and HTTP contracts remain compatible. See [feature map](../../backend/docs/content-automation/REFACTOR-2026-10-16.md).
+Semua pengguna aktif mempunyai navigasi dan akses yang sama. JWT tetap diperlukan. Gambar persisten berasal dari MinIO melalui API/presigned URL; Blob browser hanya untuk preview sementara. Logo/icon statis merupakan aset build.
