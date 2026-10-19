@@ -21,7 +21,7 @@ bun run dev
 - Media: galeri masonry, thumbnail blur ke gambar penuh, infinite scroll dan lightbox.
 - Activity Logs, Integration Settings, User dan Profile.
 
-Upload tersedia pada `/content/upload`. Semua user aktif terautentikasi memiliki akses yang sama. `APPROVED_INTERNAL` tidak memublikasikan ke Instagram. Publishing, scheduling, analytics Instagram serta Telegram belum tersedia.
+Upload tersedia pada `/content/upload`. Semua user aktif terautentikasi memiliki akses yang sama. Ready for review langsung menuju Publish atau Reject. Satu project dipublikasikan satu kali ke satu akun, sekarang atau terjadwal. Analytics Instagram dan Telegram belum tersedia.
 
 ## Verifikasi
 

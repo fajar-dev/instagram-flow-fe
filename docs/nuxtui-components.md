@@ -17,7 +17,7 @@ Daftar ini memetakan kebutuhan aplikasi ke komponen yang sudah ada, bukan katalo
 | Preview gambar | ImagePreview, ImageLightbox, useLightbox | UModal, UButton |
 | Preview privat/progresif | content/PrivateImage, ProgressiveImage | ImagePreview |
 | Editor | content-review/EditorForm, PreviewPanel, RankingsPanel | UForm, UCard, UButton |
-| Review/history | content-review/ReviewForm, ReviewHistory | Form dan badge |
+| Keputusan konten | publishing/PublicationPanel, RejectModal; content-review/RejectionNotice | Aksi Publish/Reject dan catatan penolakan |
 | Feedback aksi | useToast, useServiceError | Toast Nuxt UI |
 
 Nama path lengkap mengikuti `app/components/`; Nuxt auto-import menyertakan prefix folder, misalnya `content/JobSummary.vue` digunakan sebagai ContentJobSummary. Jangan menduplikasi komponen global dengan versi fitur yang hanya mengganti label.

@@ -6,7 +6,7 @@ Seluruh teks yang terlihat pengguna berasal dari `i18n/locales/id.json` dan `en.
 
 Gunakan namespace fitur yang sudah ada, misalnya pages.content, pages.contentReview atau components.user. Tambahkan key pada kedua locale dengan struktur yang sama. Template memakai `$t`, script setup memakai `const { t } = useI18n()`.
 
-Label, placeholder, toast, empty/error state, validation message dan aria-label harus diterjemahkan. Status domain/API seperti APPROVED_INTERNAL tetap stabil; label tampilan diterjemahkan. Jangan menerjemahkan key JSON atau nilai enum backend.
+Label, placeholder, toast, empty/error state, validation message dan aria-label harus diterjemahkan. Status domain/API seperti PUBLISH tetap stabil; label tampilan diterjemahkan. Jangan menerjemahkan key JSON atau nilai enum backend.
 
 Computed tabs/navigation harus bergantung pada locale agar berubah tanpa reload. Jangan menyimpan hasil terjemahan sekali pada constructor service. Service meneruskan error; UI menerjemahkan fallback melalui useServiceError.
 

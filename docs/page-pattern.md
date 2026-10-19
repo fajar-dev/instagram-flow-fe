@@ -8,7 +8,7 @@ Gunakan `app/pages/user/index.vue` sebagai referensi list CRUD: Header, DataTabl
 
 `app/pages/content/index.vue` menampilkan HeaderTab berdasarkan `app/util/content-tabs.ts`, count dari reporting service, serta ReportingRecordList sesuai resource/status. List job dan draft tetap mempunyai kontrak data berbeda; halaman menyatukannya melalui mapping tab, bukan memaksakan satu bentuk entity.
 
-Detail menyusun AssetSlider dan JobSummary. Status, revision, error, deskripsi, timeline dan informasi teknis berada di Summary. Editor menyusun PreviewPanel dan card tab Caption/Photos/Review/History. Pertahankan state saat pindah panel, optimistic revision guard, dan penanda preview outdated.
+Detail menyusun AssetSlider dan JobSummary. Status, revision, error, deskripsi, timeline dan informasi teknis berada di Summary. Editor menyusun PreviewPanel dan card tab Caption/Photos/Publish. Preview tetap di kiri; form publikasi dan status pengiriman berada dalam tab Publish, dengan Reject sebagai aksi sekunder. Pertahankan state saat pindah panel, optimistic revision guard, dan penanda preview outdated.
 
 ## Upload dan Media
 

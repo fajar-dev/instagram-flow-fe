@@ -17,3 +17,5 @@ Panduan ini menjelaskan dashboard IG Flow yang berjalan di atas API backend AMTI
 | Backend dan n8n | [Dokumentasi backend](../../backend/docs/README.md) |
 
 Audit bertanggal disimpan sebagai arsip. Pernyataan role, Contact, menu lama, atau storage dari audit awal tidak berlaku sebagai petunjuk implementasi sekarang.
+
+Konfigurasi akun dan operasi worker publishing dijelaskan pada [panduan backend](../../backend/docs/INSTAGRAM_PUBLISHING.md).
