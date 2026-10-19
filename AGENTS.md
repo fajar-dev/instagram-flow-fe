@@ -25,7 +25,7 @@ Plugin API adalah composition root. Jangan memanggil composable Nuxt atau reques
 
 Ambil useServiceError saat setup sebelum await. Auth state readonly; pertahankan single refresh coordination dan jangan logout karena network error biasa. Gunakan useLatestRequest/polling sesuai lifecycle. Review/edit harus mempertahankan revision guard serta indikator preview outdated.
 
-Semua user aktif memiliki akses yang sama. Callback secret hanya milik backend/n8n. Tidak ada credential AI/MinIO di frontend. Approval internal tidak berarti Instagram publish.
+Semua user aktif memiliki akses yang sama. Callback secret hanya milik backend/n8n. Tidak ada credential AI/MinIO di frontend. READY_FOR_REVIEW langsung menuju PUBLISH atau REJECTED.
 
 ## Gaya kode dan verifikasi
 
@@ -34,3 +34,7 @@ Dua spasi, single quote, tanpa trailing comma; script setup TypeScript; import t
 Untuk implementasi jalankan bun run typecheck, bun run lint, bun run test dan bun run build. Uji desktop/mobile bila browser tersedia dan laporkan batas verifikasi. Dokumentasi-only cukup pemeriksaan fakta/link; tidak perlu test yang menyalin teks dokumen. Update changelog untuk perubahan berarti.
 
 Jangan install library jika Nuxt UI/Tailwind sudah mencukupi. Jangan ubah api-service, auth-service, layout, nuxt.config atau design tokens di luar scope permintaan. Jangan commit .env atau secret. Audit bertanggal adalah arsip, bukan acuan perilaku saat ini.
+
+## Instagram publishing — 19 Oktober 2026
+
+Publikasi Graph API memakai Instagram Login (graph.instagram.com, Instagram User access token, tanpa Facebook Page) melalui aksi eksplisit mendukung daftar multi-account, tetapi satu project hanya boleh diposting satu kali ke satu akun, langsung/terjadwal. Credential hanya di JSON privat server (bukan database); contoh tanpa secret boleh di-commit. Ready for review hanya mempunyai keputusan Publish atau Reject. Snapshot dan jadwal berada di tabel publications (migration tabel ke-14; constraint dan normalisasi ditambahkan pada migration 15–18). Worker posts:dispatch terpisah dari jobs:dispatch. Settings menampilkan daftar akun dan kontrol dispatcher AI. Jangan mengulang publish saat hasil jaringan ambigu; lakukan rekonsiliasi container.

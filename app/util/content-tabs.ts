@@ -6,9 +6,7 @@ export const contentTabs = [
   { value: 'DISPATCHED', resource: 'jobs' },
   { value: 'PROCESSING', resource: 'jobs' },
   { value: 'READY_FOR_REVIEW', resource: 'review' },
-  { value: 'IN_REVIEW', resource: 'review' },
-  { value: 'REVISION_REQUESTED', resource: 'review' },
-  { value: 'APPROVED_INTERNAL', resource: 'review' },
+  { value: 'PUBLISH', resource: 'review' },
   { value: 'REJECTED', resource: 'review' },
   { value: 'FAILED', resource: 'jobs' }
 ] as const

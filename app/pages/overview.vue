@@ -58,7 +58,7 @@ import { reportingService } from '~/services/reporting/reporting-service'
 definePageMeta({ layout: 'dashboard' })
 const days = ref(30)
 const counts = ref<Record<string, number> | null>(null)
-const metrics = ['batches', 'assets', 'processing', 'ready', 'failed', 'approved']
+const metrics = ['batches', 'assets', 'processing', 'ready', 'failed', 'publish']
 const { loading, failed, load } = useLatestRequest(
   () => reportingService.overview(days.value),
   (response) => { counts.value = response.data }

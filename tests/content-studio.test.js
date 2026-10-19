@@ -23,7 +23,7 @@ test('failed refresh after saving a revision reports the error without a success
   try {
     jobService.details = async () => ({ data: {
       job: { requestedOutputs: ['feed'] },
-      draft: { id: 'draft' },
+      draft: { id: 'draft', reviewStatus: 'READY_FOR_REVIEW' },
       revision: { id: 'revision', title: 'Title', caption: 'Caption', hashtags: [], primaryAssetId: 'asset', location: 'Location', activity: 'Activity' },
       renders: [], reviews: []
     } })

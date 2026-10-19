@@ -10,13 +10,12 @@ class DraftService {
     return (await apiService.client.patch<ApiResponse<Revision>>(`/drafts/${draftId}`, payload, { headers: requestHeaders() })).data
   }
 
-  async review(draftId: string, payload: {
+  async reject(draftId: string, payload: {
     revisionId: string
     contentHash: string
-    decision: string
     notes: string
   }) {
-    return (await apiService.client.post<ApiResponse<Draft>>(`/drafts/${draftId}/review`, payload, { headers: requestHeaders() })).data
+    return (await apiService.client.post<ApiResponse<Draft>>(`/drafts/${draftId}/reject`, payload, { headers: requestHeaders() })).data
   }
 }
 export const draftService = new DraftService()

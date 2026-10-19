@@ -1,4 +1,31 @@
+# Perapian keputusan konten — 19 Oktober 2026
+
+- Hasil publish dirapikan menjadi header akun/status, metadata dua kolom dan aksi utama Lihat postingan. Komponen PublicationResult memisahkan tampilan hasil dari orchestration; badge tahap Publish yang berulang disembunyikan pada tab Publish.
+
+- Tiga keterangan preview (simulasi, foto sumber, outdated) dihapus sesuai permintaan; pemilihan gambar fallback tetap berfungsi.
+
+- Preview Feed memakai tampilan postingan Instagram: header akun generik, lokasi, gambar, ikon dekoratif dan caption/hashtag dari form. Caption dapat diperluas, Story dan lightbox tetap tersedia.
+
+- Preview duplikat dalam tab Publish dihapus; field publikasi memakai lebar penuh tab. Preview utama tetap di kiri.
+
+- Publishing disatukan sebagai tab ketiga di Content editor: Caption, Photos, Publish. PublicationForm menggantikan PublishModal; akun, jadwal, snapshot dan status delivery tersedia inline tanpa card bertingkat. Reject menjadi aksi sekunder di bawah form. State dipertahankan saat pindah tab.
+
+- Panel Instagram publishing dipusatkan di Content editor; duplikasi panel pada halaman detail dihapus.
+
+- Layout editor memakai preview sticky di kiri dan form lebih luas di kanan; panel Publish/Reject berada setelah form. Lokasi/aktivitas sejajar di desktop dan bertumpuk di mobile.
+- Editor hanya memakai tab Caption dan Photos; komponen History dan terjemahan tidak terpakai dihapus.
+- Catatan penolakan revisi aktif tampil di Summary dan editor, tanpa ID teknis. Riwayat backend tetap dipertahankan untuk audit.
+- Editor setelah keputusan menampilkan petunjuk baca saja dan menyembunyikan aksi simpan/restore. Pesan publikasi kosong dibedakan untuk konten yang ditolak.
+
 # Riwayat perubahan IG Flow — frontend
+
+## 2026-10-19 — Instagram multi-account publishing
+
+- Credential JSON privat, daftar akun di Settings, dan pemeriksaan koneksi.
+- Publikasi langsung/terjadwal untuk gambar feed/story dengan snapshot revisi/JPEG di MinIO.
+- Worker terpisah dengan lease, idempotency, cancellation, retry dan rekonsiliasi outcome ambigu.
+- Migration publications, kontrak API, terjemahan dan test regresi.
+- Belum diuji ke akun Instagram nyata karena credential belum diisi.
 
 > Entri lama adalah riwayat pada tanggalnya, bukan panduan aktif. Lihat [indeks dokumentasi](README.md) untuk implementasi saat ini.
 
@@ -252,3 +279,15 @@ Override both base and sm arrow positions so Nuxt UI does not place desktop cont
 ## 2026-10-19 — Compact editor tabs
 
 Replaced icon/underline editor tabs with text-only segmented pills on a muted track. The active tab uses the primary theme color with contrasting text; removed the extra header divider while retaining tab state and keyboard behavior.
+
+## Instagram Login
+
+Publishing memakai graph.instagram.com dan Instagram User access token. Kebutuhan Facebook Page serta pageId/pageAccessToken dihapus dari konfigurasi dan kontrak akun. Token lama tidak dikonversi otomatis; isi accessToken Instagram Login di JSON privat.
+
+## Settings layout
+
+Settings displays the AI dispatcher above Instagram accounts with a shared content width. Headings remain above the existing cards, without tabs or side-by-side columns.
+
+## 2026-10-19 — Ready → Publish / Reject
+
+Removed intermediate review decisions. One project now targets one account and one publication, enforced with a unique project constraint and serialized decisions. Publish starts delivery directly; Reject preserves the revision/hash guard. The editor locks after either decision, and failed delivery retries the same publication. Content tabs, counts, overview, API contracts, translations and migration history are aligned.

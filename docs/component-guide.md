@@ -14,7 +14,7 @@ Form memakai UForm, schema Zod, UFormField, label, placeholder dan atribut requi
 - `content/JobSummary.vue`: status, revision, safe error, metadata/deskripsi, timeline created/started/completed, dan detail teknis.
 - `content/AssetSlider.vue`: carousel dengan panah di dalam frame pada mobile/desktop; panah/dots hanya jika lebih dari satu aset.
 - `content-review/PreviewPanel.vue`: preview feed/story dan keadaan outdated.
-- `EditorForm`, `RankingsPanel`, `ReviewForm`, `ReviewHistory`: form caption, pemilihan foto, keputusan review dan riwayat keputusan.
+- `EditorForm`, `RankingsPanel`: form caption dan pemilihan foto. `RejectionNotice` menampilkan catatan penolakan revisi aktif; keputusan Publish/Reject berada pada panel publishing.
 
 Tab editor memakai UTabs pill compact dengan color primary. Panel memakai v-show agar state form tidak hilang saat pindah tab. Perubahan belum disimpan tetap ditandai sebelum review.
 
@@ -29,3 +29,7 @@ Lightbox memakai modal transparan, image object-contain, close button, dan menut
 ## Feedback dan aksesibilitas
 
 Gunakan toast untuk hasil mutation. Field validation tetap inline. Error job di Summary dan error load halaman harus bertahan sampai state berubah; keduanya bukan toast sekali lewat. Semua tombol ikon mempunyai aria-label terjemahan, status memakai label selain warna, dan tab/carousel/lightbox tetap dapat dioperasikan lewat keyboard.
+
+## Publishing dan Settings
+
+PublishingPublicationPanel berada di tab Publish dalam Content editor, menampilkan satu publikasi project atau PublicationForm secara inline. Reject menjadi aksi sekunder pada bagian bawah form; state dan idempotency berada di usePublicationForm. DateInput plus input jam menerima jadwal WIB. Snapshot final dapat dibuka melalui lightbox. Unknown outcome tidak mempunyai tombol retry agar tidak membuat duplikasi. Settings memakai InstagramAccounts dan DispatcherPanel, tanpa mengekspos credential.

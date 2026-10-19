@@ -1,12 +1,16 @@
 <template>
-  <div class="space-y-6">
-    <Header
-      :title="$t('pages.integration.settings')"
-      :description="$t('pages.integration.settingsHint')"
-    />
+  <div class="min-w-0 space-y-4">
+    <div class="space-y-1">
+      <h2 class="text-base font-semibold text-highlighted">
+        {{ $t('pages.integration.dispatcher') }}
+      </h2>
+      <p class="text-sm text-muted">
+        {{ $t('pages.integration.dispatcherHint') }}
+      </p>
+    </div>
     <USkeleton
       v-if="loading"
-      class="h-64 w-full max-w-2xl"
+      class="h-64 w-full"
     />
     <p
       v-else-if="failed"
@@ -16,7 +20,7 @@
     </p>
     <div
       v-else-if="settings"
-      class="max-w-2xl space-y-6"
+      class="space-y-4"
     >
       <p
         v-if="!settings.ready"
@@ -25,7 +29,7 @@
         {{ $t('pages.integration.notReady') }}
       </p>
       <UCard>
-        <dl class="grid sm:grid-cols-2 gap-4 text-sm">
+        <dl class="grid grid-cols-1 gap-5 text-sm sm:grid-cols-3">
           <div
             v-for="key in flags"
             :key="key"
@@ -37,21 +41,22 @@
             </dd>
           </div>
         </dl>
-        <USwitch
-          v-model="enabled"
-          :label="$t('pages.integration.enableDispatch')"
-          :disabled="saving || (!settings.ready && !enabled)"
-          class="mt-6"
-        />
-        <UButton
-          class="mt-4"
-          icon="i-lucide-save"
-          :disabled="saving || enabled === settings.dispatchEnabled"
-          :loading="saving"
-          @click="save"
-        >
-          {{ $t('pages.content.save') }}
-        </UButton>
+        <div class="mt-6 flex flex-col gap-4 border-t border-default pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <USwitch
+            v-model="enabled"
+            :label="$t('pages.integration.enableDispatch')"
+            :disabled="saving || (!settings.ready && !enabled)"
+          />
+          <UButton
+            class="self-start sm:self-auto"
+            icon="i-lucide-save"
+            :disabled="saving || enabled === settings.dispatchEnabled"
+            :loading="saving"
+            @click="save"
+          >
+            {{ $t('pages.content.save') }}
+          </UButton>
+        </div>
       </UCard>
     </div>
   </div>
@@ -61,7 +66,6 @@
 import { settingsService } from '~/services/integration/settings-service'
 import type { Settings } from '~/types/integration'
 
-definePageMeta({ layout: 'dashboard' })
 const handleError = useServiceError()
 const { t } = useI18n()
 const toast = useToast()

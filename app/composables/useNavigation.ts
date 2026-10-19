@@ -28,7 +28,7 @@ export const useNavigation = () => {
       { id: 'content', label: t('pages.content.title'), to: '/content', icon: 'i-lucide-file-image' },
       { id: 'media', label: t('pages.content.media'), to: '/content/media', icon: 'i-lucide-images' },
       { id: 'logs', label: t('pages.content.logs'), to: '/activity-logs', icon: 'i-lucide-scroll-text' },
-      { id: 'settings', label: t('pages.integration.settings'), to: '/integration-settings', icon: 'i-lucide-settings-2' },
+      { id: 'settings', label: t('pages.integration.settings'), to: '/settings', icon: 'i-lucide-settings-2' },
       { id: 'users', label: t('components.sidebar.nav.users'), to: '/user', icon: 'i-lucide-users' }
     ]
   }])

@@ -14,21 +14,21 @@ IG Flow membantu tim AMTI mengolah dokumentasi kegiatan menjadi caption serta pr
 | `/content` | List terpadu berdasarkan status, beserta count per tab |
 | `/content/upload` | Metadata batch, validasi dan upload per file, proses AI |
 | `/content/:jobId` | Carousel foto, status/error, metadata dan timeline |
-| `/content/:jobId/edit` | Preview, Caption, Photos, Review dan History |
+| `/content/:jobId/edit` | Preview, Caption, Photos dan Publish |
 | `/content/media` | Library foto, filter, download, archive dan infinite scroll |
 | `/activity-logs` | Jejak aktivitas aplikasi |
-| `/integration-settings` | Sakelar dispatcher dan kesiapan konfigurasi |
+| `/settings` | Akun Instagram dan sakelar dispatcher AI |
 | `/user` | Pengelolaan akun |
 | `/profile/information` | Nama, email dan avatar pengguna |
 | `/profile/password` | Penggantian password |
 
-`/profile` memakai halaman induk untuk tab profil. Alias kompatibilitas masih terdaftar untuk `/ai-jobs`, `/content-review`, `/content-review/studio`, serta detail/editor lama. Navigasi utama selalu memakai `/content`; alias bukan modul atau menu terpisah. Tidak ada route Contact atau prefix social aktif.
+`/integration-settings` tetap alias kompatibilitas ke Settings. `/profile` memakai halaman induk untuk tab profil. Alias kompatibilitas masih terdaftar untuk `/ai-jobs`, `/content-review`, `/content-review/studio`, serta detail/editor lama. Navigasi utama selalu memakai `/content`; alias bukan modul atau menu terpisah. Tidak ada route Contact atau prefix social aktif.
 
 ## Status dan alur
 
-Tab list berasal dari `app/util/content-tabs.ts`. QUEUED, DISPATCHED, PROCESSING dan FAILED membaca resource jobs; READY_FOR_REVIEW, IN_REVIEW, REVISION_REQUESTED, APPROVED_INTERNAL dan REJECTED membaca resource review. Filter default adalah READY_FOR_REVIEW.
+Tab list berasal dari `app/util/content-tabs.ts`. QUEUED, DISPATCHED, PROCESSING dan FAILED membaca resource jobs; READY_FOR_REVIEW, PUBLISH dan REJECTED membaca resource review. Filter default adalah READY_FOR_REVIEW.
 
-Editor menyimpan revision terlebih dahulu sebelum review. Review menggunakan revision ID dan content hash; perubahan setelah approval membuat preview lama outdated. History menampilkan keputusan dan catatan review, bukan diff seluruh perubahan caption. Belum ada publishing/scheduling Instagram atau Telegram.
+Editor menyimpan revision terlebih dahulu sebelum Publish atau Reject. Reject menggunakan revision ID dan content hash. Setelah keputusan, editor terkunci. Catatan penolakan tampil di Summary detail dan editor; data keputusan tetap tersimpan untuk audit tanpa tab History. Publikasi feed/story langsung atau terjadwal berada pada tab Publish di Content editor; Telegram belum tersedia.
 
 ## Struktur
 
@@ -41,3 +41,7 @@ Editor menyimpan revision terlebih dahulu sebelum review. Review menggunakan rev
 - `i18n/locales/`: seluruh teks UI en/id.
 
 Semua pengguna aktif mempunyai navigasi dan akses yang sama. JWT tetap diperlukan. Gambar persisten berasal dari MinIO melalui API/presigned URL; Blob browser hanya untuk preview sementara. Logo/icon statis merupakan aset build.
+
+## Publikasi
+
+Panel Instagram publishing hanya tersedia di Content editor setelah ada draft. Halaman detail menyediakan ringkasan dan tautan menuju editor. Publikasi memerlukan revisi tersimpan READY_FOR_REVIEW dan consent batch. Pilih akun dari JSON server, foto/desain, feed/story, post sekarang atau jadwal WIB. Desain lama tidak dapat dipilih setelah edit revisi. Project yang sudah masuk publikasi tidak dapat diedit atau dipublikasikan lagi. Retry memakai record yang sama; pembatalan mengakhiri project sebagai REJECTED. Worker backend harus aktif.

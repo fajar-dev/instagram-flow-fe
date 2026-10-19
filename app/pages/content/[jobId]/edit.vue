@@ -17,109 +17,106 @@
     />
     <template v-else-if="detail?.revision && detail.draft">
       <div class="grid lg:grid-cols-12 gap-6 items-start">
-        <div class="min-w-0 lg:col-span-6 xl:col-span-7 lg:sticky lg:top-6">
+        <div class="min-w-0 lg:col-span-5 lg:sticky lg:top-6">
           <ContentReviewPreviewPanel
             v-model="placement"
             :outputs="detail.job.requestedOutputs"
             :primary-asset-id="form.primaryAssetId"
+            :caption="form.caption"
+            :hashtags="parseHashtags(form.hashtagText)"
+            :location="form.location"
             :is-outdated="isOutdated"
             :render="render"
           />
         </div>
-        <UCard
-          class="min-w-0 lg:col-span-6 xl:col-span-5 divide-y-0"
-          :ui="{ header: 'pb-0 sm:pb-0' }"
-        >
-          <template #header>
-            <UTabs
-              v-model="activePanel"
-              :items="panels"
-              :content="false"
-              variant="pill"
-              color="primary"
-              size="sm"
-              :ui="{
-                list: 'w-full bg-muted rounded-lg p-1',
-                trigger: 'flex-1 justify-center px-2 py-2 text-sm',
-                indicator: 'shadow-sm rounded-md'
-              }"
-            />
-            <UBadge
-              v-if="dirty"
-              color="warning"
-              variant="subtle"
-              size="sm"
-              class="mt-3"
-            >
-              {{ $t('pages.contentReview.unsaved') }}
-            </UBadge>
-          </template>
-          <div
-            v-show="activePanel === 'caption'"
-            class="space-y-5"
+        <div class="min-w-0 lg:col-span-7 space-y-6">
+          <UCard
+            class="divide-y-0"
+            :ui="{ header: 'pb-0 sm:pb-0' }"
           >
-            <p class="text-sm text-muted">
-              {{ $t('pages.contentReview.editorHint') }}
-            </p>
-            <ContentReviewEditorForm
-              :model-value="form"
-              :schema="schema"
-              :saving="saving"
-              :loading="loading"
-              @update:model-value="Object.assign(form, $event)"
-              @submitted="save"
-              @restored="restoreAi"
-            />
-          </div>
-          <div v-show="activePanel === 'photos'">
-            <ContentReviewRankingsPanel
-              :rankings="sortedRankings"
-              :primary-asset-id="form.primaryAssetId"
-              :disabled="saving || loading"
-              @selected="form.primaryAssetId = $event"
-            />
-            <UButton
-              v-if="dirty"
-              color="neutral"
-              variant="outline"
-              icon="i-lucide-arrow-right"
-              class="mt-5"
-              @click="activePanel = 'caption'"
+            <template #header>
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h2 class="text-base font-semibold text-highlighted">
+                  {{ $t('pages.contentReview.editorTitle') }}
+                </h2>
+                <ContentStatusBadge
+                  v-if="activePanel !== 'publish' || detail.draft.reviewStatus !== 'PUBLISH'"
+                  :status="detail.draft.reviewStatus"
+                />
+              </div>
+              <UTabs
+                v-model="activePanel"
+                :items="panels"
+                :content="false"
+                variant="pill"
+                color="primary"
+                size="sm"
+                :ui="{
+                  list: 'w-full bg-muted rounded-lg p-1',
+                  trigger: 'flex-1 justify-center px-2 py-2 text-sm',
+                  indicator: 'shadow-sm rounded-md'
+                }"
+              />
+              <UBadge
+                v-if="dirty && editable"
+                color="warning"
+                variant="subtle"
+                size="sm"
+                class="mt-3"
+              >
+                {{ $t('pages.contentReview.unsaved') }}
+              </UBadge>
+            </template>
+            <div
+              v-show="activePanel === 'caption'"
+              class="space-y-5"
             >
-              {{ $t('pages.contentReview.backToCaption') }}
-            </UButton>
-          </div>
-          <div v-show="activePanel === 'review'">
-            <ContentReviewReviewForm
-              v-model:notes="notes"
-              v-model:decision="decision"
-              :saving="saving"
-              :loading="loading"
-              :dirty="dirty"
-              :decisions="decisions"
-              @submitted="review"
-            />
-            <UButton
-              v-if="dirty"
-              color="neutral"
-              variant="outline"
-              icon="i-lucide-arrow-left"
-              class="mt-4"
-              @click="activePanel = 'caption'"
+              <p class="text-sm text-muted">
+                {{ $t(editable ? 'pages.contentReview.editorHint' : 'pages.contentReview.readOnlyHint') }}
+              </p>
+              <ContentReviewEditorForm
+                :model-value="form"
+                :schema="schema"
+                :saving="saving"
+                :loading="loading"
+                :readonly="!editable"
+                @update:model-value="Object.assign(form, $event)"
+                @submitted="save"
+                @restored="restoreAi"
+              />
+            </div>
+            <div v-show="activePanel === 'photos'">
+              <ContentReviewRankingsPanel
+                :rankings="sortedRankings"
+                :primary-asset-id="form.primaryAssetId"
+                :disabled="saving || loading || !editable"
+                @selected="form.primaryAssetId = $event"
+              />
+              <UButton
+                v-if="dirty && editable"
+                color="neutral"
+                variant="outline"
+                icon="i-lucide-arrow-right"
+                class="mt-5"
+                @click="activePanel = 'caption'"
+              >
+                {{ $t('pages.contentReview.backToCaption') }}
+              </UButton>
+            </div>
+            <div
+              v-show="activePanel === 'publish'"
+              class="space-y-5"
             >
-              {{ $t('pages.contentReview.backToCaption') }}
-            </UButton>
-          </div>
-          <div v-show="activePanel === 'history'">
-            <ContentReviewReviewHistory :reviews="detail.reviews" />
-            <p
-              v-if="!detail.reviews.length"
-              class="text-sm text-muted py-8 text-center"
-            >
-              {{ $t('pages.contentReview.noReviews') }}
-            </p>
-          </div>
-        </UCard>
+              <ContentReviewRejectionNotice :detail="detail" />
+              <PublishingPublicationPanel
+                v-if="detail.draft"
+                :detail="detail"
+                :dirty="dirty"
+                @changed="load"
+              />
+            </div>
+          </UCard>
+        </div>
       </div>
     </template>
     <p
@@ -132,6 +129,7 @@
 </template>
 
 <script setup lang="ts">
+import { parseHashtags } from '~/util/content'
 import { useContentStudio } from '~/composables/content-review/useContentStudio'
 
 definePageMeta({ layout: 'dashboard', alias: ['/content-review/studio/:jobId'], key: route => route.path })
@@ -141,8 +139,7 @@ const activePanel = ref('caption')
 const panels = computed(() => [
   { value: 'caption', label: t('pages.content.fields.caption') },
   { value: 'photos', label: t('pages.contentReview.photosTab') },
-  { value: 'review', label: t('pages.contentReview.reviewTab') },
-  { value: 'history', label: t('pages.contentReview.historyTab') }
+  { value: 'publish', label: t('pages.publishing.publish') }
 ])
-const { detail, form, placement, notes, decision, saving, loading, failed, dirty, render, isOutdated, sortedRankings, decisions, schema, restoreAi, save, review } = useContentStudio(jobId)
+const { detail, editable, form, placement, saving, loading, failed, dirty, render, isOutdated, sortedRankings, schema, restoreAi, save, load } = useContentStudio(jobId)
 </script>

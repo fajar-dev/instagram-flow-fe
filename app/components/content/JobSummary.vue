@@ -21,6 +21,7 @@
       >
         {{ detail.job.errorCode || $t('pages.aiJob.failed') }} · {{ detail.job.safeError }}
       </p>
+      <ContentReviewRejectionNotice :detail="detail" />
       <dl class="space-y-4 text-sm">
         <div
           v-for="field in ['activity', 'location', 'documentationDate', 'clientName'] as const"
