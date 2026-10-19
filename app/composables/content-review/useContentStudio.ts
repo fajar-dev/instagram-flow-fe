@@ -12,16 +12,14 @@ export function useContentStudio(jobId: string) {
   const form = reactive({ title: '', caption: '', hashtagText: '', primaryAssetId: '', location: '', activity: '' })
   const snapshot = ref('')
   const placement = ref('feed')
-  const notes = ref('')
-  const decision = ref('IN_REVIEW')
   const saving = ref(false)
   const loading = ref(false)
   const failed = ref(false)
+  const editable = computed(() => detail.value?.draft?.reviewStatus === 'READY_FOR_REVIEW')
   const dirty = computed(() => snapshot.value !== JSON.stringify(form))
   const render = computed(() => detail.value?.renders.find(item => item.placement === placement.value))
   const isOutdated = computed(() => dirty.value || render.value?.renderState === 'OUTDATED')
   const sortedRankings = computed(() => [...(detail.value?.aiResult?.rankings || [])].sort((a, b) => b.score - a.score))
-  const decisions = computed(() => ['IN_REVIEW', 'APPROVED_INTERNAL', 'REVISION_REQUESTED', 'REJECTED'].map(value => ({ value, label: t(`pages.content.status.${value}`) })))
   const schema = computed(() => z.object({ title: z.string().trim().min(1, t('pages.content.validation')).max(300), caption: z.string().trim().min(1, t('pages.content.validation')).max(10000), activity: z.string().min(1).max(200), location: z.string().min(1).max(200), hashtagText: z.string().refine((value) => {
     const tags = parseHashtags(value)
     return tags.length <= 30 && tags.every(tag => tag.length <= 100)
@@ -54,13 +52,13 @@ export function useContentStudio(jobId: string) {
     }
   }
   function restoreAi() {
-    if (!detail.value?.aiResult)
+    if (!detail.value?.aiResult || !editable.value)
       return
     const ai = detail.value.aiResult
     Object.assign(form, { title: ai.rawTitle, caption: ai.rawCaption, hashtagText: ai.rawHashtags.join(' '), primaryAssetId: ai.selectedAssetIds[0], location: detail.value.batch.location, activity: detail.value.batch.activity })
   }
   async function save() {
-    if (!detail.value?.draft || !detail.value.revision || saving.value || loading.value)
+    if (!detail.value?.draft || !editable.value || !detail.value.revision || saving.value || loading.value)
       return
     saving.value = true
     try {
@@ -74,20 +72,6 @@ export function useContentStudio(jobId: string) {
       saving.value = false
     }
   }
-  async function review() {
-    if (!detail.value?.draft || !detail.value.revision || saving.value || loading.value || dirty.value)
-      return
-    saving.value = true
-    try {
-      await draftService.review(detail.value.draft.id, { revisionId: detail.value.revision.id, contentHash: detail.value.revision.contentHash, decision: decision.value, notes: notes.value })
-      await refresh()
-      toast.add({ title: t('pages.content.saved'), color: 'success' })
-    } catch (error) {
-      handleError(error)
-    } finally {
-      saving.value = false
-    }
-  }
   onMounted(load)
-  return { detail, form, placement, notes, decision, saving, loading, failed, dirty, render, isOutdated, sortedRankings, decisions, schema, load, restoreAi, save, review }
+  return { detail, editable, form, placement, saving, loading, failed, dirty, render, isOutdated, sortedRankings, schema, load, restoreAi, save }
 }

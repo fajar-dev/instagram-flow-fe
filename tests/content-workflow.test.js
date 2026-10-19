@@ -33,7 +33,7 @@ test('draft client preserves revision guards and media requests remain private b
     return response(config, new Blob(['private preview']))
   }
   await draftService.edit('draft-1', { expectedRevisionId: 'revision-1', title: 'Updated' })
-  await draftService.review('draft-1', { revisionId: 'revision-1', contentHash: 'hash', decision: 'APPROVED_INTERNAL', notes: '' })
+  await draftService.reject('draft-1', { revisionId: 'revision-1', contentHash: 'hash', notes: '' })
   await mediaService.file('renders/render-1')
   expect(JSON.parse(calls[0].data).expectedRevisionId).toBe('revision-1')
   expect(JSON.parse(calls[1].data).contentHash).toBe('hash')
@@ -60,7 +60,7 @@ test('all JSON feature clients return the same ApiResponse envelope as user', as
     batchService.limits(), batchService.batch({}, 'batch-key'),
     batchService.upload('batch', new File(['x'], 'image.png'), () => {}),
     jobService.details('job'), jobService.process('batch', ['feed'], 'process-key'), jobService.retry('job', 'retry-key'),
-    draftService.edit('draft', {}), draftService.review('draft', {}), mediaService.archive('asset'),
+    draftService.edit('draft', {}), draftService.reject('draft', {}), mediaService.archive('asset'),
     settingsService.settings(), settingsService.updateSettings(false), reportingService.overview(30)
   ])
   for (const result of results) expect(result).toEqual(envelope)
@@ -70,9 +70,9 @@ test('content tab counts use one summary request with the list date scope', asyn
   apiService.client.defaults.adapter = async (config) => {
     expect(config.url).toBe('/content/counts')
     expect(config.params).toEqual({ days: 30 })
-    return response(config, { data: { QUEUED: 2, READY_FOR_REVIEW: 0, APPROVED_INTERNAL: 4 } })
+    return response(config, { data: { QUEUED: 2, READY_FOR_REVIEW: 0, PUBLISH: 4 } })
   }
-  expect((await reportingService.contentCounts(30)).data.APPROVED_INTERNAL).toBe(4)
+  expect((await reportingService.contentCounts(30)).data.PUBLISH).toBe(4)
 })
 
 test('progressive media requests authenticated URLs rather than downloading the full image first', async () => {

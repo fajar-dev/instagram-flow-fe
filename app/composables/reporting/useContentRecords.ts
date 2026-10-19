@@ -22,7 +22,7 @@ export function useContentRecords(props: { resource: ReportResource, days: numbe
     if (!value)
       archiveId.value = ''
   } })
-  const statuses = computed(() => [{ label: t('pages.content.all'), value: 'ALL' }, ...(props.resource === 'review' ? ['READY_FOR_REVIEW', 'IN_REVIEW', 'REVISION_REQUESTED', 'APPROVED_INTERNAL', 'REJECTED'] : ['QUEUED', 'DISPATCHED', 'PROCESSING', 'READY_FOR_REVIEW', 'FAILED']).map(value => ({ label: t(`pages.content.status.${value}`), value }))])
+  const statuses = computed(() => [{ label: t('pages.content.all'), value: 'ALL' }, ...(props.resource === 'review' ? ['READY_FOR_REVIEW', 'PUBLISH', 'REJECTED'] : ['QUEUED', 'DISPATCHED', 'PROCESSING', 'READY_FOR_REVIEW', 'FAILED']).map(value => ({ label: t(`pages.content.status.${value}`), value }))])
   const { loading, failed, load } = useLatestRequest(
     async () => {
       queryChanging.value = false

@@ -16,7 +16,7 @@ export interface Draft {
   id: string
   jobId: string
   currentRevisionId: string
-  reviewStatus: string
+  reviewStatus: 'READY_FOR_REVIEW' | 'PUBLISH' | 'REJECTED'
   createdAt: string
 }
 
