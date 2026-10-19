@@ -33,3 +33,7 @@ Gunakan toast untuk hasil mutation. Field validation tetap inline. Error job di 
 ## Publishing dan Settings
 
 PublishingPublicationPanel berada di tab Publish dalam Content editor, menampilkan satu publikasi project atau PublicationForm secara inline. Reject menjadi aksi sekunder pada bagian bawah form; state dan idempotency berada di usePublicationForm. DateInput plus input jam menerima jadwal WIB. Snapshot final dapat dibuka melalui lightbox. Unknown outcome tidak mempunyai tombol retry agar tidak membuat duplikasi. Settings memakai InstagramAccounts dan DispatcherPanel, tanpa mengekspos credential.
+
+## Navigasi mobile
+
+`MobileNavbar` berada di bawah area scroll layout dashboard pada layar di bawah breakpoint lg. Urutannya Overview, Content, Upload (ikon bulat), Media, Utility. Padding safe-area mengikuti perangkat; navbar tidak menutupi konten. `MobileUtilitySidebar` hanya berisi Activity logs, Settings dan Users, memakai sumber menu yang sama dari `useNavigation`. Drawer menutup setelah navigasi dan ketika viewport berpindah ke desktop. Logo dan avatar tetap di header mobile; sidebar desktop tetap tersedia pada lg.

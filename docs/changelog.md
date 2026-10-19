@@ -1,5 +1,11 @@
 # Perapian keputusan konten — 19 Oktober 2026
 
+- Header mobile memakai logo, judul halaman dan breadcrumb yang dapat dinavigasi, serta avatar di kanan. Breadcrumb mengikuti hierarki Content dan Profile tanpa menampilkan ID internal.
+
+- Header mobile menampilkan logo, identitas IG Flow dan nama halaman aktif dengan avatar tetap di kanan. Header dipisahkan ke MobileHeader.
+
+- Navigasi mobile menjadi navbar bawah lima posisi: Overview, Content, Upload, Media, Utility. Drawer Utility berisi Activity logs, Settings dan Users; menu hamburger lama di header dihapus. Active route membedakan Upload/Media dari Content.
+
 - Hasil publish dirapikan menjadi header akun/status, metadata dua kolom dan aksi utama Lihat postingan. Komponen PublicationResult memisahkan tampilan hasil dari orchestration; badge tahap Publish yang berulang disembunyikan pada tab Publish.
 
 - Tiga keterangan preview (simulasi, foto sumber, outdated) dihapus sesuai permintaan; pemilihan gambar fallback tetap berfungsi.
