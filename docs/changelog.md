@@ -1,4 +1,13 @@
-# 📋 Changelog
+# Riwayat perubahan IG Flow — frontend
+
+> Entri lama adalah riwayat pada tanggalnya, bukan panduan aktif. Lihat [indeks dokumentasi](README.md) untuk implementasi saat ini.
+
+## 2026-10-19 — Dokumentasi produk
+
+- Mengganti panduan template dengan dokumentasi produk IG Flow berdasarkan source aktif.
+- Menyelaraskan setup, peta fitur/halaman, API, storage, migration, UI, dan aturan kontribusi.
+- Menandai audit/PRD lama sebagai arsip; membedakan batas fitur, konfigurasi dan hasil uji nyata.
+- Tidak mengubah runtime, environment, schema database atau workflow deployment.
 
 Semua perubahan penting pada project ini didokumentasikan di file ini.
 
@@ -10,7 +19,7 @@ Format: [Semantic Versioning](https://semver.org/) — `MAJOR.MINOR.PATCH`
 
 ### 🎉 Initial Release
 
-- Nuxt Boilerplate — Starter template admin dashboard
+- Fondasi awal dashboard Nuxt yang kemudian dikembangkan menjadi IG Flow
 - Nuxt 4, NuxtUI v4, Tailwind CSS v4, TypeScript, Zod, Axios
 - Authentication (email/password, Google OAuth, forgot/reset password)
 - User management CRUD
