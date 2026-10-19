@@ -7,13 +7,20 @@
     :ui="{ content: 'w-64 max-w-full', header: 'min-h-14 p-3 sm:p-3', title: 'text-sm', description: 'sr-only', body: 'p-2 sm:p-2' }"
   >
     <UButton
-      icon="i-lucide-menu"
       color="neutral"
       variant="ghost"
-      size="sm"
-      class="size-9 justify-center"
-      :aria-label="$t('components.header.openMenu')"
-    />
+      class="min-h-14 w-full flex-col justify-center gap-1 rounded-lg px-1 py-2 text-xs font-medium focus-visible:ring-2 focus-visible:ring-primary"
+      :class="active || open ? 'text-primary bg-primary/10' : 'text-muted'"
+      :aria-label="$t('components.mobileSidebar.title')"
+      :aria-expanded="open"
+      aria-haspopup="dialog"
+    >
+      <UIcon
+        name="i-lucide-layout-grid"
+        class="size-5"
+      />
+      <span>{{ $t('components.mobileSidebar.title') }}</span>
+    </UButton>
 
     <template #title>
       <BrandLogo />
@@ -32,20 +39,6 @@
     </template>
 
     <template #body>
-      <div
-        class="pb-3 px-1"
-      >
-        <UButton
-          to="/content/upload"
-          color="primary"
-          variant="solid"
-          icon="i-lucide-cloud-upload"
-          :label="$t('pages.content.upload')"
-          block
-          class="justify-center"
-          @click="open = false"
-        />
-      </div>
       <UNavigationMenu
         orientation="vertical"
         :items="items"
@@ -59,28 +52,19 @@
 
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
-import type { NavItem } from '~/composables/useNavigation'
 
 const route = useRoute()
-const { navGroups, isItemActive, isParentActive } = useNavigation()
+const { utilityItems, isItemActive } = useNavigation()
 const open = ref(false)
 
-function toMobileItem(item: NavItem): NavigationMenuItem {
-  const hasChildren = Boolean(item.children?.length)
-  return {
-    label: item.label,
-    icon: item.icon,
-    value: item.id,
-    to: hasChildren || item.to === '#' ? undefined : item.to,
-    disabled: !hasChildren && item.to === '#',
-    active: hasChildren ? isParentActive(item) : isItemActive(item),
-    defaultOpen: hasChildren && isParentActive(item),
-    children: item.children?.map(toMobileItem),
-    onSelect: hasChildren ? undefined : () => { open.value = false }
-  }
-}
-
-const items = computed(() => navGroups.value.map(group => group.items.map(toMobileItem)))
+const active = computed(() => utilityItems.value.some(isItemActive))
+const items = computed<NavigationMenuItem[]>(() => utilityItems.value.map(item => ({
+  label: item.label,
+  icon: item.icon,
+  to: item.to,
+  active: isItemActive(item),
+  onSelect: () => { open.value = false }
+})))
 
 watch(() => route.fullPath, () => {
   open.value = false

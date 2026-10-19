@@ -98,8 +98,8 @@
       "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia"
     },
     "mobileSidebar": {
-      "title": "Navigasi",
-      "description": "Pilih halaman atau buka menu."
+      "title": "Utility",
+      "description": "Log aktivitas, pengaturan, dan pengelolaan pengguna."
     },
     "reporting": {
       "recordList": {
@@ -125,6 +125,9 @@
       "open": "Pratinjau {name}",
       "title": "Pratinjau gambar",
       "close": "Tutup pratinjau"
+    },
+    "mobileNavbar": {
+      "label": "Navigasi seluler"
     }
   },
   "pages": {

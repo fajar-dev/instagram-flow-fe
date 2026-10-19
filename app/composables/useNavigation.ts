@@ -33,10 +33,21 @@ export const useNavigation = () => {
     ]
   }])
 
+  const utilityItems = computed(() => navGroups.value.flatMap(group => group.items)
+    .filter(item => ['logs', 'settings', 'users'].includes(item.id)))
+  const mobileItems = computed<NavItem[]>(() => {
+    const items = navGroups.value.flatMap(group => group.items)
+    return [
+      ...items.filter(item => ['overview', 'content'].includes(item.id)),
+      { id: 'upload', label: t('pages.content.upload'), to: '/content/upload', icon: 'i-lucide-cloud-upload' },
+      ...items.filter(item => item.id === 'media')
+    ]
+  })
+
   const isItemActive = (item: NavItem) => isNavigationActive(
     route.path.startsWith('/ai-jobs') || route.path.startsWith('/content-review') ? '/content' : route.path,
     item.to,
-    navGroups.value.flatMap(group => group.items.flatMap(entry => [entry.to, ...(entry.children?.map(child => child.to) ?? [])]))
+    [...navGroups.value.flatMap(group => group.items.flatMap(entry => [entry.to, ...(entry.children?.map(child => child.to) ?? [])])), '/content/upload']
   )
 
   const isParentActive = (item: NavItem) => {
@@ -60,6 +71,8 @@ export const useNavigation = () => {
   return {
     isCollapsed,
     navGroups,
+    mobileItems,
+    utilityItems,
     isItemActive,
     isParentActive,
     toggleExpanded,

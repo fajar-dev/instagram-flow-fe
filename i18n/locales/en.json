@@ -98,8 +98,8 @@
       "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia"
     },
     "mobileSidebar": {
-      "title": "Navigation",
-      "description": "Choose a page or open a menu."
+      "title": "Utility",
+      "description": "Activity logs, settings and user management."
     },
     "reporting": {
       "recordList": {
@@ -125,6 +125,9 @@
       "open": "Preview {name}",
       "title": "Image preview",
       "close": "Close preview"
+    },
+    "mobileNavbar": {
+      "label": "Mobile navigation"
     }
   },
   "pages": {
