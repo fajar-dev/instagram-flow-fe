@@ -22,7 +22,13 @@
       :items="assets"
       :arrows="assets.length > 1"
       :dots="assets.length > 1"
-      :ui="{ prev: 'start-2', next: 'end-2', dots: 'static mt-4' }"
+      :prev="{ color: 'neutral', variant: 'solid', size: 'sm' }"
+      :next="{ color: 'neutral', variant: 'solid', size: 'sm' }"
+      :ui="{
+        prev: 'start-3 sm:start-3 z-20 size-9 justify-center shadow-md',
+        next: 'end-3 sm:end-3 z-20 size-9 justify-center shadow-md',
+        dots: 'static mt-4'
+      }"
     >
       <ContentProgressiveImage
         :asset-id="item.id"
