@@ -1,5 +1,5 @@
 <template>
-  <UCard :ui="{ body: 'bg-muted/40' }">
+  <UCard :ui="{ body: 'bg-muted/40 space-y-4' }">
     <template #header>
       <div class="flex flex-wrap items-center justify-between gap-3">
         <h2 class="text-base font-semibold text-highlighted">
@@ -14,36 +14,30 @@
         />
       </div>
     </template>
-    <p
-      v-if="isOutdated"
-      class="text-sm text-muted"
+    <ContentReviewInstagramFeedPreview
+      v-if="placement === 'feed'"
+      :path="imagePath"
+      :caption="caption"
+      :hashtags="hashtags"
+      :location="location"
+    />
+    <div
+      v-else
+      class="max-w-80 mx-auto py-3"
     >
-      {{ $t('pages.contentReview.outdated') }}
-    </p>
-    <div class="max-w-80 mx-auto py-3">
       <ContentPrivateImage
-        :path="!isOutdated && render ? `renders/${render.id}` : `assets/${primaryAssetId}/preview`"
+        :path="imagePath"
         :alt="$t('pages.contentReview.preview')"
         :placement="placement"
       />
     </div>
-    <p
-      v-if="isOutdated || !render"
-      class="text-sm text-muted mt-3"
-    >
-      {{ $t('pages.contentReview.originalFallback') }}
-    </p>
-    <template #footer>
-      <p class="text-xs text-muted leading-relaxed">
-        {{ $t('pages.contentReview.previewWarning') }} · {{ $t('pages.contentReview.primaryOnly') }}
-      </p>
-    </template>
   </UCard>
 </template>
 
 <script setup lang="ts">
 import type { Render } from '~/types/ai-job'
 
-defineProps<{ outputs: string[], primaryAssetId: string, isOutdated: boolean, render?: Render }>()
+const props = defineProps<{ outputs: string[], primaryAssetId: string, isOutdated: boolean, render?: Render, caption: string, hashtags: string[], location: string }>()
 const placement = defineModel<string>({ required: true })
+const imagePath = computed(() => !props.isOutdated && props.render ? `renders/${props.render.id}` : `assets/${props.primaryAssetId}/preview`)
 </script>
