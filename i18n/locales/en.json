@@ -16,7 +16,6 @@
         "menu": "Menu",
         "subMenu1": "Sub Menu 1",
         "subMenu2": "Sub Menu 2",
-        "contact": "Contact",
         "users": "Users"
       }
     },
@@ -40,57 +39,6 @@
       "searchPlaceholder": "Search...",
       "showing": "Showing {from} to {to} of {total} results",
       "itemsPerPage": "Items per page"
-    },
-    "contact": {
-      "addModal": {
-        "title": "Add Contact",
-        "description": "Fill in the details to create a new contact.",
-        "cancel": "Cancel",
-        "save": "Save",
-        "createdSuccess": "Contact created successfully!"
-      },
-      "updateModal": {
-        "title": "Edit Contact",
-        "description": "Update the contact information below.",
-        "cancel": "Cancel",
-        "save": "Save",
-        "updatedSuccess": "Contact updated successfully!"
-      },
-      "deleteModal": {
-        "title": "Delete Contact",
-        "description": "Are you sure you want to delete {name}? This action cannot be undone.",
-        "cancel": "Cancel",
-        "delete": "Delete",
-        "close": "Close",
-        "deletedSuccess": "Contact deleted successfully!",
-        "deleteFailed": "Failed to delete contact",
-        "genericError": "An error occurred"
-      },
-      "form": {
-        "active": "Active",
-        "emailInvalid": "Please enter a valid email address",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Enter email",
-        "emailRequired": "Email is required",
-        "inactive": "Inactive",
-        "nameLabel": "Name",
-        "namePlaceholder": "Enter name",
-        "nameRequired": "Name is required",
-        "phoneLabel": "Phone",
-        "phonePlaceholder": "Enter phone number",
-        "phoneRequired": "Phone is required",
-        "salutationLabel": "Salutation",
-        "salutationMr": "Mr.",
-        "salutationMrs": "Mrs.",
-        "salutationPlaceholder": "Select salutation",
-        "statusLabel": "Status",
-        "typeCustomer": "Customer",
-        "typeLabel": "Type",
-        "typeOther": "Other",
-        "typeSupplier": "Supplier",
-        "typeVendor": "Vendor",
-        "typePlaceholder": "Select a contact type"
-      }
     },
     "user": {
       "addModal": {
@@ -183,31 +131,6 @@
     "dashboard": {
       "title": "Dashboard",
       "description": "Welcome to the admin dashboard"
-    },
-    "contact": {
-      "title": "Contact Customer",
-      "description": "Customer contact list and management",
-      "searchPlaceholder": "Search...",
-      "addContact": "Add Contact",
-      "columnId": "#",
-      "columnName": "Name",
-      "columnEmail": "Email",
-      "columnPhone": "Phone",
-      "columnType": "Type",
-      "columnStatus": "Status",
-      "columnCreatedAt": "Created At",
-      "columnAction": "Action",
-      "actionsDropdown": "Actions dropdown",
-      "editContact": "Edit contact",
-      "deleteContact": "Delete contact",
-      "deleteTitle": "Delete Contact",
-      "deletedSuccess": "Contact deleted successfully!",
-      "typeCustomer": "Customer",
-      "typeVendor": "Vendor",
-      "typeSupplier": "Supplier",
-      "typeOther": "Other",
-      "active": "Active",
-      "inactive": "Inactive"
     },
     "user": {
       "title": "User Management",
@@ -417,7 +340,6 @@
       "processUploaded": "Process {count} uploaded images",
       "title": "Content",
       "listDescription": "Manage content processing and review by status. Showing the last 30 days.",
-      "backToContent": "Back to Content",
       "loadingMedia": "Fetching photos…",
       "archivePhoto": "Archive {name}",
       "downloadPhoto": "Download {name}",
