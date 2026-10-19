@@ -54,3 +54,14 @@ test('navigation selects the most specific route and respects path boundaries', 
   expect(isNavigationActive('/user', '/user', targets)).toBe(true)
   expect(isNavigationActive('/user', '/', targets)).toBe(false)
 })
+
+test('mobile navigation keeps upload and media distinct from content detail', () => {
+  const targets = ['/overview', '/content', '/content/upload', '/content/media', '/activity-logs', '/settings', '/user']
+  for (const path of ['/content/upload', '/content/media']) {
+    expect(isNavigationActive(path, '/content', targets)).toBe(false)
+    expect(isNavigationActive(path, path, targets)).toBe(true)
+  }
+  expect(isNavigationActive('/content/job-1/edit', '/content', targets)).toBe(true)
+  expect(isNavigationActive('/user/12', '/user', targets)).toBe(true)
+  expect(isNavigationActive('/settings', '/content', targets)).toBe(false)
+})
