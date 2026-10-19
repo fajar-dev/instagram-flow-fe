@@ -1,34 +1,19 @@
-# Service layer
+# API client frontend IG Flow
 
-Acuan: `app/services/user-service.ts`, `user-service.ts`, dan `auth-service.ts`.
+`app/services/api-service.ts` menyediakan satu Axios client. Plugin client mengatur API base URL, callback bahasa, refresh token, session expiry dan inisialisasi auth. Service fitur tidak memanggil composable Nuxt dari constructor atau membuat client sendiri.
 
-## Kontrak HTTP
+## Kontrak
 
-Service hanya melakukan request melalui singleton apiService. Semua operasi JSON fitur mengembalikan `Promise<ApiResponse<T>>` dari `response.data`, termasuk mutation. UI membaca `response.data` untuk payload dan `response.meta` untuk pagination. File download mengembalikan Blob. Auth mempertahankan kontrak khusus pengelolaan session dan refresh yang sudah ada.
+Service JSON fitur mengembalikan `ApiResponse<T>` dari response.data Axios. UI membaca `.data` untuk payload dan `.meta` untuk pagination. Download/media binary mengembalikan Blob. Auth mempertahankan kontrak sesi dan refresh tersendiri.
 
-```typescript
-import { apiService } from '../api-service'
-import { requestHeaders } from '../shared/request-headers'
-import type { ApiResponse } from '~/types/api'
-import type { Batch } from '~/types/content'
+Referensi CRUD: `app/services/user-service.ts`. Client konten berada di folder content, ai-job, content-review, integration dan reporting. Tipe envelope ada di `app/types/api.d.ts`. Jangan membuat facade social atau tipe response lain yang identik.
 
-async function getById(id: string): Promise<ApiResponse<Batch>> {
-  const response = await apiService.client.get<ApiResponse<Batch>>(
-    `/batches/${encodeURIComponent(id)}`,
-    { headers: requestHeaders() }
-  )
-  return response.data
-}
-```
+`app/services/shared/request-headers.ts` membaca token terbaru setiap request dan menambahkan Idempotency-Key jika diberikan. `app/util/query.ts` membangun query list. Jangan menyimpan snapshot token di constructor atau menulis ulang escaping/query di setiap halaman.
 
-`requestHeaders(key?)` membaca token terbaru saat request dan menambahkan Idempotency-Key bila diberikan. Jangan menyimpan token pada constructor atau menduplikasi header di setiap service. Gunakan buildListQuery dari app/util/query untuk parameter list CRUD.
+## Error dan concurrency
 
-## Error dan lifecycle
+Biarkan rejection Axios tetap utuh. Service tidak menampilkan toast, menavigasi, atau mengubah kegagalan menjadi undefined. UI mengambil useServiceError saat setup, lalu mengatur loading/error dengan try/catch/finally.
 
-Biarkan rejection Axios diteruskan utuh. Service tidak memakai toast, navigateTo, useI18n, useRuntimeConfig, atau catch yang mengganti error menjadi undefined. Plugin Nuxt mengonfigurasi HTTP/auth. UI memanggil useServiceError saat setup, lalu menangani error dan loading dalam try/catch/finally.
+Pertahankan koordinasi refresh token pada api-service dan jangan menghapus sesi karena kegagalan jaringan biasa. Request list memakai useLatestRequest; editor mengirim expectedRevisionId atau revisionId/contentHash agar edit/review yang terlambat ditolak backend.
 
-## Pembagian fitur
-
-Client user/auth berada pada root mengikuti codebase awal. Content, ai-job, content-review, integration, dan reporting memiliki folder fitur. Child upload/download berada dalam content. Tipe ada di app/types, helper stateless di app/util, state Vue di composable, dan render di component/page. Tidak ada facade social-service kedua.
-
-Lihat [audit terbaru](audit-2026-10-16.md) untuk kompatibilitas URL dan batas verifikasi.
+Signed URL dan Blob adalah akses sementara. Jangan menyimpan URL presigned sebagai identitas permanen aset atau memodifikasi host/query signature. Object key dan asset ID tetap dikelola backend.
