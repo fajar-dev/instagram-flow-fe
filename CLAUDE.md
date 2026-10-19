@@ -85,7 +85,7 @@ Jangan install package baru jika NuxtUI/Tailwind sudah bisa menangani kebutuhan 
 
 ```
 ❌ SALAH:  <UButton>Save</UButton>
-✅ BENAR:  <UButton>{{ $t('components.contact.addModal.save') }}</UButton>
+✅ BENAR:  <UButton>{{ $t('components.user.addModal.save') }}</UButton>
 ```
 
 Semua teks yang tampil ke user (label, placeholder, judul, toast, pesan validasi Zod, `aria-label`)
@@ -166,10 +166,10 @@ i18n/
 Saat diminta membuat fitur baru (contoh: `product`):
 
 1. `app/types/product.d.ts` — Interface `Product` + `ProductPayload`
-2. `app/services/product-service.ts` — Copy pattern dari `contact-service.ts`
-3. `app/components/product/AddModal.vue` — Copy pattern dari `contact/AddModal.vue`
-4. `app/components/product/UpdateModal.vue` — Copy pattern dari `contact/UpdateModal.vue`
-5. `app/pages/product/index.vue` — Copy pattern dari `contact/index.vue`
+2. `app/services/product-service.ts` — Copy pattern dari `user-service.ts`
+3. `app/components/product/AddModal.vue` — Copy pattern dari `user/AddModal.vue`
+4. `app/components/product/UpdateModal.vue` — Copy pattern dari `user/UpdateModal.vue`
+5. `app/pages/product/index.vue` — Copy pattern dari `user/index.vue`
 6. `app/composables/useNavigation.ts` — Tambah nav item baru (pakai pola stable-id, lihat `docs/i18n-guide.md` §5)
 7. `i18n/locales/en.json` **dan** `i18n/locales/id.json` — Tambah key untuk semua teks baru (lihat `docs/i18n-guide.md`)
 8. `docs/changelog.md` — Catat perubahan

@@ -12,12 +12,12 @@
 
 | Layout      | Halaman                                                          | Middleware               |
 | ----------- | ---------------------------------------------------------------- | ------------------------ |
-| `dashboard` | `/`, `/contact`, dan semua halaman protected                     | `auth.global` (otomatis) |
+| `dashboard` | `/`, `/user`, dan semua halaman protected                     | `auth.global` (otomatis) |
 | `auth`      | `/auth/sign-in`, `/auth/sign-up`, `/auth/forgot-password`, `/auth/reset-password` | `guest`                  |
 
 ## Pattern 1: Dashboard Page (CRUD Listing)
 
-Referensi: `app/pages/contact/index.vue`, `app/pages/user/index.vue`
+Referensi: `app/pages/user/index.vue`, `app/pages/user/index.vue`
 
 > ⚠️ Semua teks (`title`, `description`, `placeholder`, label button, header kolom tabel, toast)
 > WAJIB lewat `$t()` / `t()`. Lihat [i18n-guide.md](./i18n-guide.md). Namespace di bawah:
@@ -235,7 +235,7 @@ onMounted(() => {
 
 ### Aturan DataTable / useTableQuery
 
-- **Service `getAll`** harus menerima `sortBy`/`order` sebagai parameter tambahan dan meneruskannya ke query string (`sortBy`, `order`) — lihat `contact-service.ts`/`user-service.ts`. Query string per-page pakai nama `limit` (bukan `perPage`), sesuai konvensi backend (`docs/API_CONVENTIONS.md`).
+- **Service `getAll`** harus menerima `sortBy`/`order` sebagai parameter tambahan dan meneruskannya ke query string (`sortBy`, `order`) — lihat `user-service.ts`/`user-service.ts`. Query string per-page pakai nama `limit` (bukan `perPage`), sesuai konvensi backend (`docs/API_CONVENTIONS.md`).
 - **`sortHeader(labelFn, columnKey, align?)`** — `labelFn` HARUS function (`() => t('...')`), bukan string langsung, supaya label tetap reaktif ganti bahasa. `columnKey` harus persis sama dengan key di whitelist `SORTABLE_COLUMNS` backend module tersebut.
 - Kolom yang **tidak** perlu sortable (mis. `id`, `actions`, kolom hasil komputasi) tetap pakai `header: () => t('...')` biasa, jangan dibungkus `sortHeader`.
 - `DataTable` sudah merender teks "Showing X to Y of Z results" sendiri (key `components.dataTable.showing`) — jangan tambah key `pages.[feature].showingResults` lagi di halaman.
@@ -437,7 +437,7 @@ const { t } = useI18n();
 
 // Success toast (setelah create/update/delete berhasil)
 toast.add({
-  title: t("components.contact.addModal.createdSuccess"),
+  title: t("components.user.addModal.createdSuccess"),
   color: "success",
   icon: "i-lucide-circle-check",
 });
@@ -451,7 +451,7 @@ toast.add({
 
 // Error toast (manual, biasanya sudah di-handle oleh error-helper)
 toast.add({
-  title: t("components.contact.deleteModal.genericError"),
+  title: t("components.user.deleteModal.genericError"),
   color: "error",
   icon: "i-lucide-circle-x",
 });

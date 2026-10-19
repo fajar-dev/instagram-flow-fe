@@ -11,11 +11,11 @@
 ```vue
 <!-- ❌ SALAH -->
 <UButton>Save</UButton>
-<h1>Add Contact</h1>
+<h1>Add User</h1>
 
 <!-- ✅ BENAR -->
-<UButton>{{ $t('components.contact.addModal.save') }}</UButton>
-<h1>{{ $t('components.contact.addModal.title') }}</h1>
+<UButton>{{ $t('components.user.addModal.save') }}</UButton>
+<h1>{{ $t('components.user.addModal.title') }}</h1>
 ```
 
 Pengecualian (boleh hardcode) — lihat [§7 Apa yang TIDAK Perlu Diterjemahkan](#7-apa-yang-tidak-perlu-diterjemahkan).
@@ -28,7 +28,7 @@ Pengecualian (boleh hardcode) — lihat [§7 Apa yang TIDAK Perlu Diterjemahkan]
 | Locale tersedia | `en` (English), `id` (Bahasa Indonesia) |
 | Config | `nuxt.config.ts` → key `i18n` |
 | File locale | `i18n/locales/en.json`, `i18n/locales/id.json` (**di root project, BUKAN di `app/`**) |
-| Strategy | `no_prefix` — tidak ada prefix locale di URL (`/contact`, bukan `/en/contact`) |
+| Strategy | `no_prefix` — tidak ada prefix locale di URL (`/user`, bukan `/en/user`) |
 | SSR | Disabled (`ssr: false`) — semua i18n berjalan client-side |
 
 Cek isi `i18n` block di `nuxt.config.ts` untuk detail persis (locale codes, default locale, mekanisme deteksi/persist bahasa) — **jangan asumsikan**, baca konfigurasi aktual karena bisa berubah.
@@ -60,35 +60,35 @@ Root JSON hanya punya 2 top-level key:
 | Sumber teks | Masuk ke | Contoh path key |
 |-------------|----------|------------------|
 | File di `app/components/<File>.vue` | `components.<camelCaseFileName>.*` | `components.header.openMenu` |
-| File di `app/components/<feature>/<File>.vue` | `components.<feature>.<camelCaseFileName>.*` | `components.contact.addModal.title` |
+| File di `app/components/<feature>/<File>.vue` | `components.<feature>.<camelCaseFileName>.*` | `components.user.addModal.title` |
 | File di `app/pages/<file>.vue` | `pages.<camelCaseFileName>.*` | `pages.dashboard.title` |
-| File di `app/pages/<feature>/<file>.vue` | `pages.<feature>.<camelCaseFileName>.*` | `pages.contact.title`, `pages.auth.signIn.title` |
-| File di `app/pages/<feature>/index.vue` | `pages.<feature>.*` (tanpa sub-key `index`) | `pages.contact.title` |
+| File di `app/pages/<feature>/<file>.vue` | `pages.<feature>.<camelCaseFileName>.*` | `pages.user.title`, `pages.auth.signIn.title` |
+| File di `app/pages/<feature>/index.vue` | `pages.<feature>.*` (tanpa sub-key `index`) | `pages.user.title` |
 | File di `app/pages/profile/information.vue` (nested, bukan index) | `pages.profile.information.*` | `pages.profile.information.save` |
 
 Key di dalam tiap section pakai **camelCase**, deskriptif berdasarkan fungsi elemen (`nameLabel`, `nameRequired`, `emailPlaceholder`, `deletedSuccess`) — bukan berdasarkan isi teks literal.
 
-### Contoh Lengkap (mengikuti pattern `contact` feature)
+### Contoh Lengkap (mengikuti pattern `user` feature)
 
 ```json
 // i18n/locales/en.json
 {
   "components": {
-    "contact": {
+    "user": {
       "addModal": {
-        "title": "Add Contact",
+        "title": "Add User",
         "nameLabel": "Name",
         "namePlaceholder": "Enter name",
         "nameRequired": "Name is required",
         "save": "Save",
-        "createdSuccess": "Contact created successfully!"
+        "createdSuccess": "User created successfully!"
       }
     }
   },
   "pages": {
-    "contact": {
-      "title": "Contact Customer",
-      "addContact": "Add Contact",
+    "user": {
+      "title": "Users",
+      "addUser": "Add User",
       "columnName": "Name"
     }
   }
@@ -99,21 +99,21 @@ Key di dalam tiap section pakai **camelCase**, deskriptif berdasarkan fungsi ele
 // i18n/locales/id.json — SAMA PERSIS strukturnya
 {
   "components": {
-    "contact": {
+    "user": {
       "addModal": {
-        "title": "Tambah Kontak",
+        "title": "Tambah Pengguna",
         "nameLabel": "Nama",
         "namePlaceholder": "Masukkan nama",
         "nameRequired": "Nama wajib diisi",
         "save": "Simpan",
-        "createdSuccess": "Kontak berhasil dibuat!"
+        "createdSuccess": "Pengguna berhasil dibuat!"
       }
     }
   },
   "pages": {
-    "contact": {
-      "title": "Kontak Pelanggan",
-      "addContact": "Tambah Kontak",
+    "user": {
+      "title": "Pengguna Pelanggan",
+      "addUser": "Tambah Pengguna",
       "columnName": "Nama"
     }
   }
@@ -127,9 +127,9 @@ Key di dalam tiap section pakai **camelCase**, deskriptif berdasarkan fungsi ele
 Gunakan `$t('key.path')` — global helper, tidak perlu import:
 
 ```vue
-<UButton>{{ $t('components.contact.addModal.save') }}</UButton>
-<UFormField :label="$t('components.contact.addModal.nameLabel')">
-  <UInput :placeholder="$t('components.contact.addModal.namePlaceholder')" />
+<UButton>{{ $t('components.user.addModal.save') }}</UButton>
+<UFormField :label="$t('components.user.addModal.nameLabel')">
+  <UInput :placeholder="$t('components.user.addModal.namePlaceholder')" />
 </UFormField>
 <UButton :aria-label="$t('components.header.openMenu')" icon="i-lucide-menu" />
 ```
@@ -143,24 +143,24 @@ const { t } = useI18n()
 
 // Toast
 toast.add({
-  title: t('components.contact.addModal.createdSuccess'),
+  title: t('components.user.addModal.createdSuccess'),
   color: 'success',
   icon: 'i-lucide-circle-check'
 })
 
 // Zod schema — pesan error WAJIB via t()
 const schema = z.object({
-  name: z.string().min(1, t('components.contact.addModal.nameRequired')),
-  email: z.string().min(1, t('components.contact.addModal.emailRequired'))
-    .email(t('components.contact.addModal.emailInvalid'))
+  name: z.string().min(1, t('components.user.addModal.nameRequired')),
+  email: z.string().min(1, t('components.user.addModal.emailRequired'))
+    .email(t('components.user.addModal.emailInvalid'))
 })
 
 // useHead (page title tab browser)
 useHead({ title: t('pages.auth.signIn.title') })
 
 // TableColumn header (render function, bukan string statis)
-const columns: TableColumn<Contact>[] = [
-  { accessorKey: 'name', header: () => t('pages.contact.columnName') }
+const columns: TableColumn<User>[] = [
+  { accessorKey: 'name', header: () => t('pages.user.columnName') }
 ]
 ```
 
@@ -174,7 +174,7 @@ const columns: TableColumn<Contact>[] = [
 ```
 
 ```vue
-{{ $t('pages.contact.showingResults', { from: meta.from, to: meta.to, total: meta.total }) }}
+{{ $t('pages.user.showingResults', { from: meta.from, to: meta.to, total: meta.total }) }}
 ```
 
 ```typescript
@@ -251,7 +251,7 @@ Cek `nuxt.config.ts` → `i18n.detectBrowserLanguage` untuk mekanisme aktual (co
 
 | Kesalahan | Akibat | Solusi |
 |-----------|--------|--------|
-| Key ditambahkan cuma di satu locale file | Teks fallback ke key literal (`pages.contact.title` tampil apa adanya) di locale yang belum punya key | Selalu tambah ke **kedua** file, sekaligus |
+| Key ditambahkan cuma di satu locale file | Teks fallback ke key literal (`pages.user.title` tampil apa adanya) di locale yang belum punya key | Selalu tambah ke **kedua** file, sekaligus |
 | `locale.value = 'id'` langsung (bukan `setLocale()`) | Pesan locale baru belum ter-load, UI stuck di key literal walau locale sudah pindah | Selalu pakai `await setLocale(code)` |
 | Nav array statis (bukan `computed()`) | Sidebar tidak berubah bahasa saat switch locale tanpa reload manual | Bungkus dengan `computed(() => [...])` |
 | Pakai `label`/`title` (teks) sebagai `:key` atau identity untuk expand-state | Submenu collapse/reset saat ganti bahasa | Tambah field `id` stabil, pakai itu untuk key & state |
@@ -262,8 +262,8 @@ Cek `nuxt.config.ts` → `i18n.detectBrowserLanguage` untuk mekanisme aktual (co
 
 | Kebutuhan | Contoh File |
 |-----------|-------------|
-| Halaman CRUD lengkap dengan i18n | `app/pages/contact/index.vue` |
-| Modal Add/Update dengan Zod + i18n | `app/components/contact/AddModal.vue`, `app/components/contact/UpdateModal.vue` |
+| Halaman CRUD lengkap dengan i18n | `app/pages/user/index.vue` |
+| Modal Add/Update dengan Zod + i18n | `app/components/user/AddModal.vue`, `app/components/user/UpdateModal.vue` |
 | Halaman auth dengan i18n | `app/pages/auth/sign-in.vue` |
 | Sidebar dengan pola stable-id | `app/composables/useNavigation.ts` + `app/components/Sidebar.vue` |
 | Language switcher | `app/components/LanguageSwitcher.vue` |

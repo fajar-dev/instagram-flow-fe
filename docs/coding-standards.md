@@ -85,7 +85,7 @@
 const data: any = response.data
 
 // ✅ BENAR
-const data: Contact[] = response.data
+const data: User[] = response.data
 ```
 
 ### ❌ Dilarang Hardcode Teks UI (Wajib i18n)
@@ -96,8 +96,8 @@ const data: Contact[] = response.data
 <UInput placeholder="Enter name" />
 
 <!-- ✅ BENAR -->
-<UButton>{{ $t('components.contact.addModal.save') }}</UButton>
-<UInput :placeholder="$t('components.contact.addModal.namePlaceholder')" />
+<UButton>{{ $t('components.user.addModal.save') }}</UButton>
+<UInput :placeholder="$t('components.user.addModal.namePlaceholder')" />
 ```
 
 Berlaku juga untuk toast title, pesan validasi Zod, `useHead({ title })`, header kolom `UTable`,
@@ -111,23 +111,23 @@ dan `aria-label` yang berisi kata-kata. Baca `docs/i18n-guide.md` untuk aturan l
 |------|-----------|--------|
 | Pages | `kebab-case.vue` | `forgot-password.vue` |
 | Components (global) | `PascalCase.vue` | `BrandLogo.vue`, `DeleteModal.vue` |
-| Components (feature) | `PascalCase.vue` di subfolder | `contact/AddModal.vue` |
+| Components (feature) | `PascalCase.vue` di subfolder | `user/AddModal.vue` |
 | Composables | `camelCase.ts` dengan prefix `use` | `useAuth.ts`, `useNavigation.ts` |
-| Services | `kebab-case.ts` dengan suffix `-service` | `auth-service.ts`, `contact-service.ts` |
-| Types | `kebab-case.d.ts` | `auth.d.ts`, `contact.d.ts` |
+| Services | `kebab-case.ts` dengan suffix `-service` | `auth-service.ts`, `user-service.ts` |
+| Types | `kebab-case.d.ts` | `auth.d.ts`, `user.d.ts` |
 | Middleware | `kebab-case.ts` | `auth.global.ts`, `guest.ts` |
-| i18n key | `camelCase`, nested per file (lihat `docs/i18n-guide.md`) | `components.contact.addModal.nameRequired` |
+| i18n key | `camelCase`, nested per file (lihat `docs/i18n-guide.md`) | `components.user.addModal.nameRequired` |
 
 ### Variable & Function Naming
 
 | Tipe | Convention | Contoh |
 |------|-----------|--------|
-| Variables | `camelCase` | `isLoading`, `selectedContact` |
-| Functions | `camelCase` dengan prefix verb | `handleSubmit`, `fetchContacts` |
+| Variables | `camelCase` | `isLoading`, `selectedUser` |
+| Functions | `camelCase` dengan prefix verb | `handleSubmit`, `fetchUsers` |
 | Reactive state | `camelCase` | `const form = reactive({})` |
 | Ref | `camelCase` | `const isSubmitting = ref(false)` |
 | Constants | `UPPER_SNAKE_CASE` (di service) | `ACCESS_TOKEN_KEY` |
-| Interface/Type | `PascalCase` | `Contact`, `ContactPayload` |
+| Interface/Type | `PascalCase` | `User`, `UserPayload` |
 | Emits | `past-tense` verb | `created`, `updated`, `deleted` |
 
 ### Component Naming (Auto-import oleh Nuxt)
@@ -135,8 +135,8 @@ dan `aria-label` yang berisi kata-kata. Baca `docs/i18n-guide.md` untuk aturan l
 ```
 app/components/BrandLogo.vue        → <BrandLogo />
 app/components/DeleteModal.vue      → <DeleteModal />
-app/components/contact/AddModal.vue → <ContactAddModal />
-app/components/contact/UpdateModal.vue → <ContactUpdateModal />
+app/components/user/AddModal.vue → <UserAddModal />
+app/components/user/UpdateModal.vue → <UserUpdateModal />
 ```
 
 ## 3. Script Setup Convention
@@ -147,15 +147,15 @@ Urutan penulisan dalam `<script setup lang="ts">`:
 <script setup lang="ts">
 // 1. Imports
 import { z } from 'zod'
-import { contactService } from '~/services/contact-service'
-import type { Contact, ContactPayload } from '~/types/contact'
+import { userService } from '~/services/user-service'
+import type { User, UserPayload } from '~/types/user'
 
 // 2. Page/Component Meta
 definePageMeta({ layout: 'dashboard' })
 
 // 3. Model & Props & Emits
 const open = defineModel<boolean>({ default: false })
-const props = defineProps<{ contact: Contact | null }>()
+const props = defineProps<{ user: User | null }>()
 const emit = defineEmits<{ updated: [] }>()
 
 // 4. Composables & Injections
@@ -165,14 +165,14 @@ const { t } = useI18n()
 
 // 5. Reactive State
 const isSubmitting = ref(false)
-const form = reactive<ContactPayload>({ name: '', email: '', phone: '' })
+const form = reactive<UserPayload>({ name: '', email: '', phone: '' })
 
 // 6. Computed Properties
 const isValid = computed(() => form.name.length > 0)
 
 // 7. Validation Schema (pesan error WAJIB via t(), lihat docs/i18n-guide.md)
 const schema = z.object({
-  name: z.string().min(1, t('components.contact.addModal.nameRequired'))
+  name: z.string().min(1, t('components.user.addModal.nameRequired'))
 })
 
 // 8. Functions/Methods
@@ -195,7 +195,7 @@ Urutan atribut pada element:
 <UButton
   v-model="value"                    <!-- 1. v-model / v-if / v-for -->
   type="submit"                       <!-- 2. Native attributes -->
-  form="add-contact-form"            <!-- 3. Binding attributes -->
+  form="add-user-form"            <!-- 3. Binding attributes -->
   color="primary"                     <!-- 4. Component props -->
   variant="outline"                   <!-- 5. Variant/style props -->
   :loading="isSubmitting"             <!-- 6. Dynamic bindings -->
@@ -249,7 +249,7 @@ Setiap feature HARUS memiliki file type di `app/types/<feature>.d.ts`:
 
 ```typescript
 // Interface untuk data dari API
-export interface Contact {
+export interface User {
   id: number
   name: string
   email: string
@@ -257,7 +257,7 @@ export interface Contact {
 }
 
 // Interface untuk payload (create/update)
-export interface ContactPayload {
+export interface UserPayload {
   name: string
   email: string
   phone: string
@@ -287,10 +287,10 @@ export interface ApiResponse<T = any> {
 
 ```typescript
 // Gunakan `import type` untuk type-only imports
-import type { Contact, ContactPayload } from '~/types/contact'
+import type { User, UserPayload } from '~/types/user'
 
 // Bukan:
-import { Contact } from '~/types/contact'
+import { User } from '~/types/user'
 ```
 
 ## 8. Git Commit Convention
@@ -308,7 +308,7 @@ Format: `<type>(<scope>): <description>`
 
 Contoh:
 ```
-feat(contact): add create contact modal
+feat(user): add create user modal
 fix(auth): handle token refresh race condition
 docs: update component guide
 refactor(service): extract error handler
