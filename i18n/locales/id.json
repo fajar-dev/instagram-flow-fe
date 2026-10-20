@@ -101,10 +101,12 @@
     },
     "mobileSidebar": {
       "title": "Utility",
-      "description": "Log aktivitas, pengaturan, dan pengelolaan pengguna."
+      "description": "Media, log aktivitas, pengaturan, dan pengelolaan pengguna."
     },
     "reporting": {
       "recordList": {
+        "photos": "Foto",
+        "outputs": "Output",
         "event": "Peristiwa",
         "actor": "Pelaku",
         "uploader": "Pengunggah",
@@ -261,6 +263,7 @@
       "periodPlaceholder": "Pilih periode",
       "bannerTitle": "Jadikan cerita proyek sebagai postingan berikutnya.",
       "bannerDescription": "Kumpulkan dokumentasi, sempurnakan konten berbantuan AI, dan siapkan publikasi Instagram Anda berikutnya.",
+      "reviewSubtitle": "Lima proyek terbaru yang siap untuk Anda review.",
       "viewContent": "Lihat konten",
       "workspace": "AMTI · Ruang kerja konten",
       "reviewHint": "Periksa caption dan foto, lalu publikasikan atau tolak."
@@ -450,9 +453,66 @@
       "rejectNotes": "Alasan (opsional)",
       "rejectPlaceholder": "Jelaskan alasan penolakan konten",
       "rejected": "Konten ditolak",
-      "rejectedEmpty": "Konten ini telah ditutup dan tidak akan dipublikasikan.",
       "publishedAt": "Dipublikasikan pada",
       "scheduledAt": "Dijadwalkan pada"
+    },
+    "analytics": {
+      "title": "Analitik",
+      "description": "Performa akun dan insight postingan Instagram.",
+      "account": "Akun Instagram",
+      "period": "Periode",
+      "chartLabel": "Metrik Instagram",
+      "chartEmpty": "Metrik belum tersedia.",
+      "updated": "Pembaruan terakhir {time} WIB",
+      "post": "Postingan",
+      "type": "Jenis",
+      "publishedAt": "Dipublikasikan",
+      "metrics": {
+        "views": "Tayangan",
+        "reach": "Jangkauan",
+        "total_interactions": "Interaksi",
+        "likes": "Suka",
+        "comments": "Komentar",
+        "saved": "Disimpan",
+        "shares": "Dibagikan",
+        "replies": "Balasan",
+        "navigation": "Navigasi Story",
+        "accounts_engaged": "Akun berinteraksi",
+        "saves": "Disimpan",
+        "reposts": "Repost",
+        "profile_links_taps": "Klik tautan profil",
+        "follows": "Mengikuti",
+        "profile_visits": "Kunjungan profil",
+        "profile_activity": "Aktivitas profil"
+      },
+      "engagementRate": "Engagement rate",
+      "rateHint": "Interaksi ÷ jangkauan × 100%. Tidak tersedia jika jangkauan nol atau belum ada.",
+      "topPosts": "Postingan terbaik",
+      "topPostsHint": "Seluruh postingan Feed/Reels yang tersedia, diurutkan berdasarkan interaksi sepanjang umur lalu jangkauan. Tidak mengikuti periode akun di atas.",
+      "loadingPosts": "Memuat postingan… {count} sudah dimuat.",
+      "periods": {
+        "today": "Hari ini",
+        "this_week": "Minggu ini",
+        "this_month": "Bulan ini",
+        "last_7_days": "7 hari terakhir",
+        "last_30_days": "30 hari terakhir"
+      },
+      "accountRadar": "Perbandingan performa akun",
+      "comparisonUnavailable": "Metrik pembanding belum cukup untuk menampilkan radar.",
+      "radarHint": "Skala relatif per metrik: nilai terbesar dari kedua periode menjadi 100. Nol tetap nol; metrik yang belum tersedia tidak diplot. Membandingkan bagian periode yang telah berjalan; angka asli tampil di samping.",
+      "currentPeriod": "Periode terpilih",
+      "previousPeriod": "Periode sebelumnya",
+      "previousValue": "Sebelumnya: {value}",
+      "performance": "Performa akun",
+      "comparedWithPrevious": "vs. periode sebelumnya",
+      "fromZero": "Dari nol",
+      "percentagePoints": "{value} poin",
+      "trend": {
+        "up": "Meningkat",
+        "down": "Menurun",
+        "flat": "Tidak berubah",
+        "unavailable": "Perbandingan belum tersedia"
+      }
     }
   }
 }

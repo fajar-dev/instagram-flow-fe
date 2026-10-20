@@ -1,3 +1,85 @@
+## 20 Oktober 2026 — Penataan dokumentasi
+
+Memisahkan aturan, arsitektur, fitur, referensi, operasional backend, dan arsip audit. Indeks per kategori serta tautan silang diperbarui. Tidak mengubah runtime aplikasi.
+
+## 20 Oktober 2026 — Radar statistik akun
+
+## Audit kode — 20 Oktober 2026
+
+Audit lifecycle upload/retry/publish, invalidasi request analytics, sorting keyboard, penghapusan opsi/tipes tidak terpakai dan pembaruan dokumentasi. Lihat [laporan audit](archive/audits/audit-code-2026-10-20.md).
+
+Statistik akun dirapikan menjadi empat ringkasan utama dan grid metrik pendukung dengan indikator tren. Perubahan count memakai persentase terhadap periode sebelumnya; engagement rate memakai poin persentase. Baseline nol ditandai tanpa persentase palsu, data tidak tersedia tetap dibedakan dari nol. Radar lebih ringkas; rincian rentang dan skala tersedia melalui tooltip. Insight Content tidak berubah.
+
+Statistik akun memakai radar dua periode dengan skala relatif per metrik dan nilai asli di samping. API account menambahkan previous dan range; pembanding memakai bagian periode sebelumnya yang setara, dengan batas bulan. Content tetap radial.
+
+## 20 Oktober 2026 — Pilihan periode kalender Analytics
+
+Mengganti query days dengan period: Today, This week, This month, Last 7 days dan Last 30 days. Perhitungan memakai WIB, awal minggu Senin, dan cache mengikuti batas kalender.
+
+## 20 Oktober 2026 — Aksi Top posts tetap terlihat
+
+Aksi View post memakai ikon dengan tooltip dan aria-label tanpa teks tombol. Kolomnya diposisikan sticky di sisi kanan tabel Top posts agar dapat diakses tanpa menggulir melewati semua kolom metrik.
+
+## 20 Oktober 2026 — Tabel Top posts lengkap
+
+Mengganti daftar Instagram posts dan dialog insight dengan tabel Top posts lengkap, termasuk tipe, tanggal publish dan semua angka metrik. Memuat seluruh cursor tanpa batas lima/20 total, mempertahankan null, serta membuka View post langsung. Insight Content mempertahankan tampilan metrik semula.
+
+## 20 Oktober 2026 — Metrik tambahan, engagement rate dan postingan terbaik
+
+Menambah metrik yang terverifikasi dengan credential saat ini, engagement rate berbasis reach dengan penanganan null/nol, serta ranking lima terbaik dari 20 postingan terbaru. UI memakai komponen Metrics/DataTable yang konsisten; scope ranking dan rumus ditampilkan jelas.
+
+## 20 Oktober 2026 — Switch jadwal publikasi
+
+Pilihan waktu publikasi memakai switch Jadwalkan. Mati berarti post sekarang; aktif menampilkan tanggal dan jam, dengan validasi jadwal yang sama.
+
+## 20 Oktober 2026 — Form langsung pada Ready for review
+
+Form publish tampil langsung tanpa langkah Continue to publish. Aksi Reject tersedia di samping Publish/Jadwalkan. Menghapus komponen ringkasan review, composable persiapan, tes mode persiapan dan terjemahan yang tidak lagi digunakan. Layout preview, card utama dan card Summary tetap.
+
+## 20 Oktober 2026 — Card utama dan Summary
+
+Mengembalikan satu card utama pada kolom kanan untuk semua status serta satu card Summary di bawahnya. Preview tetap di kiri tanpa pembungkus tambahan. Komponen isi tidak memiliki card bersarang; alur satu halaman dan Lanjut publish tetap dipertahankan.
+
+## 20 Oktober 2026 — Panel Content tanpa card
+
+Menghapus card pembungkus panel kanan dan kotak metadata hasil publikasi. Status/tanggal review disatukan; tombol aksi berdekatan dan form tetap di posisi yang sama. Summary menjadi metadata kecil di bawah tanpa accordion pembungkus, dengan timeline dan rincian teknis tetap dapat dibuka. Tipografi memakai text-base untuk judul dan text-sm untuk konten seperti Profile.
+
+## 20 Oktober 2026 — Review sebelum persiapan publish
+
+Layout Content menggunakan preview kiri dan panel status kanan dengan summary yang dapat dibuka di bawah untuk semua status. Ready for review menampilkan hasil baca-saja dan aksi Lanjut publish/Reject. Form hanya dibuka saat Lanjut publish; Batal mengembalikan konten dan preview semula tanpa request penyimpanan. Mode persiapan bukan status database. Timeline dipisahkan agar tidak menggandakan status dan pesan error pada summary.
+
+## 20 Oktober 2026 — Satu halaman Content
+
+Detail dan Publish digabung di `/content/:jobId`. Proses AI menampilkan foto dan timeline; draft siap review menampilkan preview dan form publish/reject; publikasi terjadwal/berhasil memakai panel status dan insight; penolakan menampilkan alasan. Halaman Publish, header tab dan composable lama dihapus. Polling detail berhenti setelah draft tersedia untuk menjaga edit pengguna.
+
+## 20 Oktober 2026 — Tata letak insight publikasi
+
+Insight pada Publish langsung menampilkan grafik tanpa judul/subtitle tambahan. View post berada di kanan informasi akun, tanpa separator antara akun dan grafik. Catatan keterlambatan data dihapus dari UI dan label waktu menjadi Last update/Pembaruan terakhir.
+
+## 20 Oktober 2026 — Ringkasan publikasi
+
+Hasil publikasi berhasil hanya menampilkan akun dan tanggal publish. Card metadata serta tombol View post dan Preview image pada ringkasan tersebut dihapus; kontrol publikasi terjadwal/gagal tetap tersedia.
+
+## 20 Oktober 2026 — Insight di Publish dan radial chart
+
+Memindahkan insight postingan dari Detail Content ke Publish setelah publikasi berhasil. Menghapus wrapper polling insight yang redundan. Statistik akun dan postingan memakai radial chart nuxt-charts dengan legenda, nilai asli dan penanganan data tidak tersedia.
+
+## 20 Oktober 2026 — Urutan navigasi Analytics
+
+Analytics ditempatkan setelah Overview pada desktop dan mobile. Navbar mobile menjadi Overview, Analytics, tombol Upload tengah, Content, Utility. Media dipindahkan ke Utility bersama Activity logs, Settings, dan Users.
+
+## 20 Oktober 2026 — Kolom Overview dan Content
+
+Overview menampilkan proyek (tautan detail), uploader, jumlah foto, output dan tanggal. Content memakai kolom yang sama ditambah Aksi. Lokasi menggantikan ID di bawah nama proyek; status tetap mengikuti tab tanpa kolom tambahan.
+
+## 20 Oktober 2026 — Ringkasan review di Overview
+
+Antrean Overview menampilkan maksimal lima draft terbaru yang siap direview, disertai subtitle. Search, pilihan limit, dan pagination disembunyikan melalui mode preview komponen tabel bersama; request API dibatasi lima baris. Halaman daftar lainnya tetap memakai kontrol lengkap.
+
+## 20 Oktober 2026 — Analytics akun dan postingan
+
+Menambah halaman Analytics dengan pilihan akun, periode 7/30 hari, statistik akun, daftar postingan cursor-based, pencarian baris yang sudah dimuat, dan dialog insight postingan. Detail Content menampilkan insight setelah publikasi berhasil. Menu mobile tersedia melalui Utility. Komponen mengikuti Header, DataTable, Nuxt UI dan token dashboard. Lihat [panduan Analytics](features/analytics.md).
+
 ## 20 Oktober 2026 — Warna default toast sukses
 
 Semua toast sukses menggunakan warna default tanpa atribut color, termasuk helper login yang melayani sukses dan error. Toast error dan peringatan tetap memakai warna sesuai jenisnya. Aturan ini ditambahkan ke panduan frontend.
@@ -152,7 +234,7 @@ Format: [Semantic Versioning](https://semver.org/) — `MAJOR.MINOR.PATCH`
 - Perbaiki logout, redirect dashboard, kontrak ApiResponse, encoding email reset, dan inisialisasi sesi melalui plugin.
 - Pisahkan error presentation dari service; deduplikasi refresh paralel dan lindungi sesi dari refresh terlambat.
 - Pertahankan Google login dengan penanganan konfigurasi kosong; pusatkan footer/i18n auth, cleanup timer/blob preview, dan rapikan lint.
-- Tambah test service Bun. Rincian keputusan dan batas pengujian: [audit-2026-10-15.md](./audit-2026-10-15.md).
+- Tambah test service Bun. Rincian keputusan dan batas pengujian: [audit-2026-10-15.md](archive/audits/audit-2026-10-15.md).
 
 ## 2026-10-15 — Sidebar mobile
 
@@ -203,11 +285,11 @@ Format: [Semantic Versioning](https://semver.org/) — `MAJOR.MINOR.PATCH`
 - Polling berhenti ketika halaman tersembunyi dan mencegah request tumpang tindih. Studio memakai revisi/hash untuk menolak edit dan approval basi.
 - Preview SVG adalah pratinjau, bukan file siap publikasi. Perubahan konten menandai preview kedaluwarsa. Tidak ada publish Instagram atau metrik engagement buatan.
 - Teks tersedia en/id menggunakan NuxtUI dan layout project. Gambar privat diambil dengan bearer auth lalu object URL dibersihkan.
-- Setup integrasi dan batas workflow V0.2: lihat `../../backend/README_SETUP.md`.
+- Setup integrasi dan batas workflow V0.2: lihat `../../backend/docs/operations/setup.md`.
 
 ## 2026-10-16 — Social structure cleanup
 
-Split API clients by feature, move upload/studio/list state into explicit composables, and extract studio panels. Fix dropped filter reloads during active requests. Add API contract regression tests. Details: [refactor notes](../../backend/docs/content-automation/REFACTOR-2026-10-16.md).
+Split API clients by feature, move upload/studio/list state into explicit composables, and extract studio panels. Fix dropped filter reloads during active requests. Add API contract regression tests. Details: [refactor notes](../../backend/docs/archive/audits/refactor-2026-10-16.md).
 
 ### Final feature layout and storage correction
 
@@ -227,7 +309,7 @@ Hapus aggregator src/modules/workflow.module.ts; routes dan CLI mengimpor module
 - Reuse contact/user DataTable controls and pagination for automation lists; media retains a gallery through the shared content slot.
 - Align body text, section headings, card spacing and form widths with contact/user/profile; preserve existing palette and avatars.
 - Add reusable latest-request handling, loading/error states, page reset/clamping and duplicate-submit guards. Fix dynamic job/studio state when navigating between IDs.
-- See `docs/audit-2026-10-16.md` for decisions and verification limits.
+- See `docs/archive/audits/audit-2026-10-16.md` for decisions and verification limits.
 
 ### 2026-10-16 — Equal access and feature component cleanup
 
@@ -247,11 +329,11 @@ Removed the /api/social prefix. Feature resources now live directly under /api (
 
 ## 2026-10-16 — Reset baseline dan audit struktur
 
-Baseline migration/database direset atas instruksi pengguna. Runtime tidak lagi memakai nama social; config dan terjemahan dipisah per fitur, dispatcher menjadi jobs:dispatch. Form contact berbagi fields/validasi dan tidak lagi tertutup saat klik di dalam modal. Lihat backend/docs/AUDIT-BASELINE-2026-10-16.md untuk detail dan batas verifikasi.
+Baseline migration/database direset atas instruksi pengguna. Runtime tidak lagi memakai nama social; config dan terjemahan dipisah per fitur, dispatcher menjadi jobs:dispatch. Form contact berbagi fields/validasi dan tidak lagi tertutup saat klik di dalam modal. Lihat backend/docs/archive/audits/audit-baseline-2026-10-16.md untuk detail dan batas verifikasi.
 
 ## 2026-10-16 — Dispatcher dan notifikasi
 
-Kontrol dispatcher dashboard dipertahankan sesuai pilihan pengguna. Status statis/deployment yang tidak diperlukan dihapus; readiness divalidasi saat toggle dan worker tick. Upload mengikuti batas backend melalui /batches/limits. UAlert frontend dihapus; toast menjadi notifikasi utama, dengan teks untuk status kontekstual. Lihat backend/docs/AUDIT-DISPATCHER-2026-10-16.md.
+Kontrol dispatcher dashboard dipertahankan sesuai pilihan pengguna. Status statis/deployment yang tidak diperlukan dihapus; readiness divalidasi saat toggle dan worker tick. Upload mengikuti batas backend melalui /batches/limits. UAlert frontend dihapus; toast menjadi notifikasi utama, dengan teks untuk status kontekstual. Lihat backend/docs/archive/audits/audit-dispatcher-2026-10-16.md.
 
 ## 2026-10-16 — Konsistensi placeholder dan form
 
@@ -259,7 +341,7 @@ Lengkapi placeholder bilingual untuk upload konten, editor judul/caption/hashtag
 
 ## 2026-10-18 — MinIO presigned media
 
-n8n preview URLs now reuse MinIO presigning. Removed MEDIA_SIGNING_SECRET and the custom media-access route; manifest/render validation and dispatcher readiness were updated. See backend/docs/AUDIT-PRESIGNED-MEDIA-2026-10-18.md.
+n8n preview URLs now reuse MinIO presigning. Removed MEDIA_SIGNING_SECRET and the custom media-access route; manifest/render validation and dispatcher readiness were updated. See backend/docs/archive/audits/audit-presigned-media-2026-10-18.md.
 
 ## 2026-10-18 — Independent image uploads
 

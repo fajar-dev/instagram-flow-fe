@@ -17,4 +17,4 @@ Gunakan UButton/UInput/UForm/UFormField, USelect/USelectMenu, UTextarea, UCheckb
 
 Untuk behavior rinci, baca type/theme dependency yang terpasang dan `.nuxt/ui/` setelah Nuxt prepare. File `.nuxt` adalah hasil generate dan tidak boleh diedit. Jangan menyalin katalog dokumentasi vendor ke repo; panduan ini hanya memuat keputusan UI aplikasi.
 
-Lihat [inventaris komponen](nuxtui-components.md) dan [pola komponen](component-guide.md). Perubahan token tema global harus dipisahkan dari perbaikan satu halaman agar tidak mengubah seluruh dashboard tanpa sengaja.
+Lihat [inventaris komponen](ui-components.md) dan [pola komponen](../rules/component-guide.md). Perubahan token tema global harus dipisahkan dari perbaikan satu halaman agar tidak mengubah seluruh dashboard tanpa sengaja.

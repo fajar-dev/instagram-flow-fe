@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="detail.draft?.reviewStatus === 'REJECTED'"
-    class="space-y-2 rounded-lg bg-muted p-4"
+    class="space-y-2"
   >
     <h3 class="text-sm font-medium text-highlighted">
       {{ $t('pages.contentReview.rejectionTitle') }}

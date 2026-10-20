@@ -7,6 +7,7 @@ import { reportingService } from '../../services/reporting/reporting-service'
 export function useContentRecords(props: {
   resource: ReportResource
   days?: number
+  previewLimit?: number
   fixedStatus?: string
 }) {
   const { t } = useI18n()
@@ -45,9 +46,9 @@ export function useContentRecords(props: {
         rows.value = []
       }
       const result = await reportingService.list<ContentRecord>(props.resource, {
-        page: page.value,
-        limit: perPage.value,
-        q: search.value,
+        page: props.previewLimit ? 1 : page.value,
+        limit: props.previewLimit || perPage.value,
+        q: props.previewLimit ? '' : search.value,
         ...(props.days === undefined ? {} : { days: props.days }),
         ...(status.value !== 'ALL' ? { status: status.value } : {})
       })

@@ -91,9 +91,14 @@
       </div>
     </dl>
     <div class="flex items-center justify-between gap-3">
-      <h2 class="text-base font-semibold text-highlighted">
-        {{ $t('pages.content.status.READY_FOR_REVIEW') }}
-      </h2>
+      <div class="space-y-1">
+        <h2 class="text-base font-semibold text-highlighted">
+          {{ $t('pages.content.status.READY_FOR_REVIEW') }}
+        </h2>
+        <p class="text-sm text-muted">
+          {{ $t('pages.overview.reviewSubtitle') }}
+        </p>
+      </div>
       <UButton
         to="/content?status=READY_FOR_REVIEW"
         variant="link"
@@ -106,6 +111,7 @@
     <ReportingRecordList
       resource="review"
       fixed-status="READY_FOR_REVIEW"
+      :preview-limit="5"
     />
   </div>
 </template>

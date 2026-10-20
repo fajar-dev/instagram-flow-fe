@@ -72,13 +72,11 @@
       <UFormField
         :label="$t('pages.publishing.mode')"
         name="mode"
-        required
       >
-        <USelect
-          v-model="form.mode"
-          :items="modes"
+        <USwitch
+          v-model="scheduled"
+          :label="$t('pages.publishing.schedule')"
           :disabled="disabled || submitting"
-          class="w-full"
         />
       </UFormField>
       <div
@@ -118,7 +116,7 @@
     <p class="text-xs text-muted">
       {{ $t('pages.publishing.snapshotHint') }}
     </p>
-    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-default pt-4">
+    <div class="flex flex-wrap items-center gap-2 pt-2">
       <slot
         name="secondary"
         :submitting="submitting"
@@ -161,10 +159,13 @@ const sources = computed(() => [
   { label: t('pages.publishing.photo'), value: 'photo' },
   { label: t('pages.publishing.design'), value: 'design', disabled: !design.value }
 ])
-const modes = computed(() => [
-  { label: t('pages.publishing.now'), value: 'now' },
-  { label: t('pages.publishing.schedule'), value: 'schedule' }
-])
+const scheduled = computed({
+  get: () => form.mode === 'schedule',
+  set: (value: boolean) => {
+    form.mode = value ? 'schedule' : 'now'
+  }
+})
+
 watch(
   placement,
   (value) => {

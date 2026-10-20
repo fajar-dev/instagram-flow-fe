@@ -128,7 +128,7 @@ export function useContentUpload() {
   }
 
   async function processUploaded() {
-    if (busy.value || !uploadedCount.value || validating.value) {
+    if (disposed || busy.value || !uploadedCount.value || validating.value) {
       return
     }
     if (!schema.value.safeParse(form).success) {
@@ -140,9 +140,13 @@ export function useContentUpload() {
       submittedOutputs ??= [...form.requestedOutputs]
       processingRequested.value = true
       const result = (await jobService.process(batchId.value, submittedOutputs, processKey)).data
-      await navigateTo(`/content/${result.jobId}`)
+      if (!disposed) {
+        await navigateTo(`/content/${result.jobId}`)
+      }
     } catch (error) {
-      handleError(error)
+      if (!disposed) {
+        handleError(error)
+      }
     } finally {
       busy.value = false
     }
@@ -150,7 +154,8 @@ export function useContentUpload() {
 
   async function submit() {
     if (
-      !limits.value
+      disposed
+      || !limits.value
       || busy.value
       || validating.value
       || fileError.value
@@ -163,6 +168,9 @@ export function useContentUpload() {
       if (!batchId.value) {
         const { requestedOutputs, ...metadata } = form
         batchId.value = (await batchService.batch(metadata, batchKey)).data.id
+      }
+      if (disposed) {
+        return
       }
       await uploadPendingFiles(
         entries.value,
@@ -177,8 +185,12 @@ export function useContentUpload() {
             = axios.isAxiosError(error) && typeof error.response?.data?.message === 'string'
               ? error.response.data.message
               : t('pages.content.fileUploadFailed')
-        }
+        },
+        () => !disposed
       )
+      if (disposed) {
+        return
+      }
       if (hasErrors.value) {
         toast.add({
           title: t('pages.content.partialUpload', { count: uploadedCount.value }),
@@ -187,7 +199,9 @@ export function useContentUpload() {
         return
       }
     } catch (error) {
-      handleError(error)
+      if (!disposed) {
+        handleError(error)
+      }
     } finally {
       busy.value = false
     }

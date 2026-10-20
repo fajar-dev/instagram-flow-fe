@@ -2,8 +2,8 @@ import { expect, test } from 'bun:test'
 import { computed } from 'vue'
 import { useBreadcrumbs } from '../app/composables/useBreadcrumbs'
 
-test('publish breadcrumbs link to the content review', () => {
-  const route = { path: '/content/example/publish' }
+test('content has one breadcrumb destination for review and publishing', () => {
+  const route = { path: '/content/example' }
   const replacements = {
     computed,
     useRoute: () => route,
@@ -19,11 +19,6 @@ test('publish breadcrumbs link to the content review', () => {
   )
   Object.assign(globalThis, replacements)
   try {
-    const current = useBreadcrumbs().breadcrumbs.value
-    expect(current[1].to).toBe('/content/example')
-    expect(current[2].label).toBe('pages.publishing.publish')
-    expect(current[2].to).toBeUndefined()
-    route.path = '/content/example'
     expect(useBreadcrumbs().breadcrumbs.value).toEqual([
       { label: 'pages.content.title', to: '/content' },
       { label: 'pages.content.detail' }

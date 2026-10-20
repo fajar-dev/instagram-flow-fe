@@ -90,11 +90,13 @@ export function useTableQuery(onQueryChange: () => void, options: TableQueryOpti
       const justifyClass
         = align === 'center' ? 'justify-center' : align === 'end' ? 'justify-end' : ''
       return h(
-        'div',
+        'button',
         {
-          class:
+          'type': 'button',
+          'aria-pressed': isActive,
+          'class':
             `flex items-center gap-1 cursor-pointer select-none hover:text-primary transition-colors ${justifyClass}`.trim(),
-          onClick: () => toggleSort(column)
+          'onClick': () => toggleSort(column)
         },
         [
           h('span', label()),

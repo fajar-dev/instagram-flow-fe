@@ -101,10 +101,12 @@
     },
     "mobileSidebar": {
       "title": "Utility",
-      "description": "Activity logs, settings and user management."
+      "description": "Media, activity logs, settings and user management."
     },
     "reporting": {
       "recordList": {
+        "photos": "Photos",
+        "outputs": "Output",
         "event": "Event",
         "actor": "Actor",
         "uploader": "Uploader",
@@ -261,6 +263,7 @@
       "periodPlaceholder": "Select a period",
       "bannerTitle": "Turn project stories into your next post.",
       "bannerDescription": "Bring your documentation together, refine AI-assisted content and prepare your next Instagram publication.",
+      "reviewSubtitle": "The five latest projects ready for your review.",
       "viewContent": "View content",
       "workspace": "AMTI · Content workspace",
       "reviewHint": "Review the caption and photos, then publish or reject."
@@ -450,9 +453,66 @@
       "rejectNotes": "Reason (optional)",
       "rejectPlaceholder": "Explain why this content is rejected",
       "rejected": "Content rejected",
-      "rejectedEmpty": "This content is closed and will not be published.",
       "publishedAt": "Published at",
       "scheduledAt": "Scheduled for"
+    },
+    "analytics": {
+      "title": "Analytics",
+      "description": "Account performance and Instagram post insights.",
+      "account": "Instagram account",
+      "period": "Period",
+      "chartLabel": "Instagram metrics",
+      "chartEmpty": "Metrics are not available yet.",
+      "updated": "Last update {time} WIB",
+      "post": "Post",
+      "type": "Type",
+      "publishedAt": "Published",
+      "metrics": {
+        "views": "Views",
+        "reach": "Reach",
+        "total_interactions": "Interactions",
+        "likes": "Likes",
+        "comments": "Comments",
+        "saved": "Saves",
+        "shares": "Shares",
+        "replies": "Replies",
+        "navigation": "Story navigation",
+        "accounts_engaged": "Accounts engaged",
+        "saves": "Saves",
+        "reposts": "Reposts",
+        "profile_links_taps": "Profile link taps",
+        "follows": "Follows",
+        "profile_visits": "Profile visits",
+        "profile_activity": "Profile activity"
+      },
+      "engagementRate": "Engagement rate",
+      "rateHint": "Interactions ÷ reach × 100%. Not available when reach is zero or missing.",
+      "topPosts": "Top posts",
+      "topPostsHint": "All available Feed/Reels posts, ranked by lifetime interactions, then reach. Independent of the account period above.",
+      "loadingPosts": "Loading posts… {count} loaded.",
+      "periods": {
+        "today": "Today",
+        "this_week": "This week",
+        "this_month": "This month",
+        "last_7_days": "Last 7 days",
+        "last_30_days": "Last 30 days"
+      },
+      "accountRadar": "Account performance comparison",
+      "comparisonUnavailable": "Not enough comparable metrics to display the radar.",
+      "radarHint": "Relative scale per metric: the larger value across the two periods is 100. Zero remains zero; missing metrics are omitted. Compare the elapsed part of each period; actual values are shown alongside.",
+      "currentPeriod": "Selected period",
+      "previousPeriod": "Previous period",
+      "previousValue": "Previous: {value}",
+      "performance": "Account performance",
+      "comparedWithPrevious": "vs. previous period",
+      "fromZero": "From zero",
+      "percentagePoints": "{value} pp",
+      "trend": {
+        "up": "Increased",
+        "down": "Decreased",
+        "flat": "No change",
+        "unavailable": "Comparison unavailable"
+      }
     }
   }
 }

@@ -1,7 +1,10 @@
 <template>
   <div class="space-y-4">
     <!-- Controls -->
-    <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+    <div
+      v-if="controls"
+      class="flex flex-col xl:flex-row xl:items-center justify-between gap-3"
+    >
       <div class="flex flex-col sm:flex-row sm:items-center gap-2">
         <div class="flex flex-row items-center gap-2">
           <UInput
@@ -100,6 +103,7 @@ withDefaults(
   defineProps<{
     columns: TableColumn<T>[]
     data: T[]
+    controls?: boolean
     pagination?: boolean
     loading?: boolean
     total?: number
@@ -110,6 +114,7 @@ withDefaults(
     tableClass?: string
   }>(),
   {
+    controls: true,
     pagination: true,
     loading: false,
     total: 0,

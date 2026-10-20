@@ -14,6 +14,9 @@ test('changing page size or sort resets to the first page with one reload', asyn
         calls++
       })
     )
+    const header = query.sortHeader(() => 'Name', 'name')()
+    expect(header.type).toBe('button')
+    expect(header.props.type).toBe('button')
     query.page.value = 4
     await nextTick()
     calls = 0

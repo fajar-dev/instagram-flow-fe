@@ -7,11 +7,15 @@ test('publish submits edited content once, preserves retries, and does not requi
   const errors = []
   const calls = []
   let completed = 0
+  let dispose
   const replacements = {
     computed,
     reactive,
     ref,
     watch,
+    onUnmounted: (callback) => {
+      dispose = callback
+    },
     useI18n: () => ({ t: key => key }),
     useToast: () => ({ add() {} }),
     useServiceError: () => error => errors.push(error)
@@ -70,6 +74,16 @@ test('publish submits edited content once, preserves retries, and does not requi
     expect(state.submitting.value).toBe(false)
     content.title = ''
     expect(state.schema.value.safeParse(state.form).success).toBe(false)
+    let finish
+    publicationService.create = () =>
+      new Promise((resolve) => {
+        finish = resolve
+      })
+    const late = state.submit()
+    dispose()
+    finish()
+    await late
+    expect(completed).toBe(2)
   } finally {
     publicationService.create = originalCreate
     for (const [key, value] of Object.entries(previous)) {

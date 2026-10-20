@@ -17,3 +17,5 @@ Biarkan rejection Axios tetap utuh. Service tidak menampilkan toast, menavigasi,
 Pertahankan koordinasi refresh token pada api-service dan jangan menghapus sesi karena kegagalan jaringan biasa. Request list memakai useLatestRequest; publish mengirim expectedContentHash dan konten final, sedangkan reject mengirim contentHash. Backend memvalidasi status dan menyimpan keputusan secara atomik.
 
 Signed URL dan Blob adalah akses sementara. Jangan menyimpan URL presigned sebagai identitas permanen aset atau memodifikasi host/query signature. Object key dan asset ID tetap dikelola backend.
+
+`useLatestRequest.invalidate()` membatalkan penerapan respons aktif tanpa mengirim request baru, misalnya ketika pilihan akun dikosongkan. Mutation/upload harus memeriksa lifecycle sebelum toast, navigasi atau melanjutkan antrean setelah await. Request yang sudah terkirim tidak dianggap dibatalkan di server.

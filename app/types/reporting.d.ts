@@ -1,19 +1,13 @@
 export type ReportResource = 'jobs' | 'review' | 'media' | 'audit-logs'
 
-export interface AuditEntry {
-  id: string
-  actorId: number | null
-  event: string
-  entityType: string
-  entityId: string
-  createdAt: string
-}
-
 /** Common, serialized fields returned by the reporting lists. */
 export interface ContentRecord {
   id: string
   createdAt: string
   projectName?: string
+  projectLocation?: string
+  photoCount?: number
+  requestedOutputs?: string[]
   uploaderName?: string
   uploaderPhoto?: string | null
   event?: string
