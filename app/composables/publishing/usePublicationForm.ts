@@ -29,6 +29,11 @@ export function usePublicationForm(
   })
   let requestKey = crypto.randomUUID()
   let requestBody = ''
+  let disposed = false
+
+  onUnmounted(() => {
+    disposed = true
+  })
   const design = computed(() => {
     const ai = detail().aiResult
     const original
@@ -98,20 +103,27 @@ export function usePublicationForm(
   )
 
   async function loadAccounts() {
+    if (disposed) {
+      return
+    }
     loading.value = true
     try {
-      accounts.value = (await instagramService.accounts()).data.filter(
-        a => a.enabled && a.configured && !a.expired
-      )
+      const response = await instagramService.accounts()
+      if (disposed) {
+        return
+      }
+      accounts.value = response.data.filter(a => a.enabled && a.configured && !a.expired)
     } catch (error) {
-      handleError(error)
+      if (!disposed) {
+        handleError(error)
+      }
     } finally {
       loading.value = false
     }
   }
 
   async function submit() {
-    if (submitting.value || !detail().draft) {
+    if (disposed || submitting.value || !detail().draft) {
       return
     }
     submitting.value = true
@@ -137,10 +149,15 @@ export function usePublicationForm(
         requestBody = body
       }
       await publicationService.create(detail().draft!.id, payload, requestKey)
+      if (disposed) {
+        return
+      }
       toast.add({ title: t('pages.publishing.queued') })
       completed()
     } catch (error) {
-      handleError(error)
+      if (!disposed) {
+        handleError(error)
+      }
     } finally {
       submitting.value = false
     }

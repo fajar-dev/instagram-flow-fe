@@ -9,9 +9,7 @@
         :items="
           outputs.map((value) => ({
             label:
-              value === 'story'
-                ? $t('pages.contentReview.story')
-                : $t('pages.contentReview.feed'),
+              value === 'story' ? $t('pages.contentReview.story') : $t('pages.contentReview.feed'),
             value
           }))
         "

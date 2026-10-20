@@ -20,17 +20,8 @@ export function useBreadcrumbs() {
         }
       ]
     }
-    if (
-      /^\/content\/[^/]+(?:\/publish)?$/.test(path)
-      && !['/content/upload', '/content/media'].includes(path)
-    ) {
-      const detailPath = path.replace(/\/publish$/, '')
-      const isPublishing = path.endsWith('/publish')
-      return [
-        content,
-        { label: t('pages.content.detail'), ...(isPublishing ? { to: detailPath } : {}) },
-        ...(isPublishing ? [{ label: t('pages.publishing.publish') }] : [])
-      ]
+    if (/^\/content\/[^/]+$/.test(path) && !['/content/upload', '/content/media'].includes(path)) {
+      return [content, { label: t('pages.content.detail') }]
     }
     const item = [...mobileItems.value, ...utilityItems.value].find(isItemActive)
     if (item?.id === 'overview') {

@@ -5,11 +5,18 @@
         icon="i-lucide-instagram"
         size="lg"
       />
-      <div class="min-w-0 space-y-1.5">
+      <div class="min-w-0 flex-1 space-y-1.5">
         <p class="text-sm font-semibold text-highlighted break-words">
           {{ publication.accountLabel }}
         </p>
+        <p
+          v-if="publication.status === 'PUBLISHED'"
+          class="text-sm text-muted"
+        >
+          {{ formatContentDate(publication.publishedAt, locale) }} WIB
+        </p>
         <UBadge
+          v-else
           :color="publicationColor(publication.status)"
           variant="subtle"
           size="sm"
@@ -17,8 +24,22 @@
           {{ $t(`pages.publishing.status.${publication.status}`) }}
         </UBadge>
       </div>
+      <UButton
+        v-if="publication.status === 'PUBLISHED' && publication.permalink"
+        :to="publication.permalink"
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="link"
+        trailing-icon="i-lucide-external-link"
+        class="shrink-0"
+      >
+        {{ $t('pages.publishing.viewPost') }}
+      </UButton>
     </div>
-    <dl class="grid grid-cols-2 gap-x-6 gap-y-4 rounded-lg bg-muted p-4 text-sm">
+    <dl
+      v-if="publication.status !== 'PUBLISHED'"
+      class="grid grid-cols-2 gap-x-6 gap-y-4 text-sm"
+    >
       <div class="space-y-1">
         <dt class="text-muted">
           {{ $t('pages.publishing.placement') }}
@@ -57,15 +78,10 @@
     >
       {{ publication.safeError }}
     </p>
-    <div class="flex flex-wrap items-center gap-2">
-      <UButton
-        v-if="publication.permalink"
-        :to="publication.permalink"
-        target="_blank"
-        icon="i-lucide-external-link"
-      >
-        {{ $t('pages.publishing.viewPost') }}
-      </UButton>
+    <div
+      v-if="publication.status !== 'PUBLISHED'"
+      class="flex flex-wrap items-center gap-2"
+    >
       <UButton
         v-if="publication.status === 'FAILED'"
         icon="i-lucide-rotate-ccw"

@@ -32,6 +32,12 @@ export const useNavigation = () => {
           icon: 'i-lucide-layout-dashboard'
         },
         {
+          id: 'analytics',
+          label: t('pages.analytics.title'),
+          to: '/analytics',
+          icon: 'i-lucide-chart-no-axes-combined'
+        },
+        {
           id: 'content',
           label: t('pages.content.title'),
           to: '/content',
@@ -68,19 +74,19 @@ export const useNavigation = () => {
   const utilityItems = computed(() =>
     navGroups.value
       .flatMap(group => group.items)
-      .filter(item => ['logs', 'settings', 'users'].includes(item.id))
+      .filter(item => ['media', 'logs', 'settings', 'users'].includes(item.id))
   )
   const mobileItems = computed<NavItem[]>(() => {
     const items = navGroups.value.flatMap(group => group.items)
     return [
-      ...items.filter(item => ['overview', 'content'].includes(item.id)),
+      ...items.filter(item => ['overview', 'analytics'].includes(item.id)),
       {
         id: 'upload',
         label: t('pages.content.upload'),
         to: '/content/upload',
         icon: 'i-lucide-cloud-upload'
       },
-      ...items.filter(item => item.id === 'media')
+      ...items.filter(item => item.id === 'content')
     ]
   })
 

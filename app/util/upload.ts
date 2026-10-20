@@ -45,9 +45,13 @@ export async function validateUploadImage(
 export async function uploadPendingFiles<T extends { status: string }>(
   entries: T[],
   upload: (entry: T) => Promise<void>,
-  failed: (entry: T, error: unknown) => void
+  failed: (entry: T, error: unknown) => void,
+  shouldContinue: () => boolean = () => true
 ) {
   for (const entry of entries) {
+    if (!shouldContinue()) {
+      return
+    }
     if (!['ready', 'failed'].includes(entry.status)) {
       continue
     }

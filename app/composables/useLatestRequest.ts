@@ -8,6 +8,12 @@ export function useLatestRequest<T>(request: () => Promise<T>, apply: (result: T
   let version = 0
   let disposed = false
 
+  function invalidate() {
+    version++
+    loading.value = false
+    failed.value = false
+  }
+
   async function load() {
     if (disposed) {
       return
@@ -36,7 +42,7 @@ export function useLatestRequest<T>(request: () => Promise<T>, apply: (result: T
 
   onUnmounted(() => {
     disposed = true
-    version++
+    invalidate()
   })
-  return { loading, failed, load }
+  return { loading, failed, load, invalidate }
 }

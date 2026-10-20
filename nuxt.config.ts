@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/i18n',
     'nuxt-vue3-google-signin',
-    '@vite-pwa/nuxt'
+    '@vite-pwa/nuxt',
+    'nuxt-charts'
   ],
   ssr: false,
 

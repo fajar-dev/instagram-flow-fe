@@ -4,7 +4,8 @@
       v-model:search="search"
       v-model:page="page"
       v-model:per-page="perPage"
-      :pagination="resource !== 'media'"
+      :pagination="!previewLimit && resource !== 'media'"
+      :controls="!previewLimit"
       :data="rows"
       :columns="columns"
       :loading="loading"
@@ -12,7 +13,7 @@
       :from="from"
       :to="to"
       :search-placeholder="$t('pages.content.search')"
-      table-class="min-w-192"
+      :table-class="previewLimit ? 'min-w-160' : 'min-w-192'"
     >
       <template #filters>
         <USelect
@@ -61,6 +62,7 @@ import { formatContentDate } from '~/util/content'
 const props = defineProps<{
   resource: ReportResource
   days?: number
+  previewLimit?: number
   fixedStatus?: string
 }>()
 const { t, locale } = useI18n()
@@ -86,7 +88,13 @@ const {
 } = useContentRecords(props)
 const UButton = resolveComponent('UButton')
 const UAvatar = resolveComponent('UAvatar')
-const StatusBadge = resolveComponent('ContentStatusBadge')
+const NuxtLink = resolveComponent('NuxtLink')
+const isContent = computed(() => props.resource === 'jobs' || props.resource === 'review')
+
+function detailPath(row: ContentRecord) {
+  return `/content/${props.resource === 'review' ? row.jobId : row.id}`
+}
+
 const columns = computed<TableColumn<ContentRecord>[]>(() => [
   {
     id: 'record',
@@ -99,11 +107,28 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
     cell: ({ row }) =>
       h('div', { class: 'space-y-1 max-w-sm whitespace-normal' }, [
         h(
-          'p',
-          { class: 'font-medium text-highlighted break-words' },
+          isContent.value ? NuxtLink : 'p',
+          {
+            class: 'font-medium text-highlighted break-words',
+            ...(isContent.value
+              ? {
+                  to: detailPath(row.original),
+                  class:
+                    'font-medium text-highlighted break-words hover:text-primary focus-visible:outline-primary'
+                }
+              : {})
+          },
           row.original.event || row.original.projectName || row.original.id
         ),
-        h('p', { class: 'text-xs text-muted break-all' }, row.original.entityId || row.original.id),
+        isContent.value
+          ? row.original.projectLocation
+            ? h('p', { class: 'text-xs text-muted break-words' }, row.original.projectLocation)
+            : null
+          : h(
+              'p',
+              { class: 'text-xs text-muted break-all' },
+              row.original.entityId || row.original.id
+            ),
         row.original.safeError
           ? h('p', { class: 'text-sm text-error' }, row.original.safeError)
           : null
@@ -130,22 +155,34 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
             h('span', { class: 'font-medium' }, row.original.uploaderName || '—')
           ])
   },
-  ...(props.resource === 'audit-logs'
-    ? []
-    : [
+  ...(isContent.value
+    ? [
         {
-          id: 'status',
-          header: () => t('pages.content.statusLabel'),
+          id: 'photos',
+          header: () => t('components.reporting.recordList.photos'),
           cell: ({ row }: { row: { original: ContentRecord } }) =>
-            h(StatusBadge, { status: row.original.status || row.original.reviewStatus || '' })
+            h('span', { class: 'tabular-nums' }, String(row.original.photoCount ?? '—'))
         }
-      ]),
+      ]
+    : []),
+  ...(isContent.value
+    ? [
+        {
+          id: 'outputs',
+          header: () => t('components.reporting.recordList.outputs'),
+          cell: ({ row }: { row: { original: ContentRecord } }) =>
+            (row.original.requestedOutputs || [])
+              .map(output => t(`pages.contentReview.${output}`))
+              .join(' · ') || '—'
+        }
+      ]
+    : []),
   {
     accessorKey: 'createdAt',
     header: () => t('pages.aiJob.created'),
     cell: ({ row }) => `${formatContentDate(row.original.createdAt, locale.value)} WIB`
   },
-  ...(props.resource === 'audit-logs'
+  ...(props.resource === 'audit-logs' || props.previewLimit
     ? []
     : [
         {
@@ -154,10 +191,7 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
           meta: { class: { td: 'text-right', th: 'text-right' } },
           cell: ({ row }: { row: { original: ContentRecord } }) =>
             h(UButton, {
-              'to':
-                props.resource === 'review'
-                  ? `/content/${row.original.jobId}`
-                  : `/content/${row.original.id}`,
+              'to': detailPath(row.original),
               'color': 'neutral',
               'variant': 'ghost',
               'icon': 'i-lucide-arrow-up-right',

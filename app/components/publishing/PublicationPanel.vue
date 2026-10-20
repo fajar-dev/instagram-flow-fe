@@ -1,58 +1,59 @@
 <template>
   <div class="space-y-5">
-    <div class="space-y-4">
+    <div
+      v-if="rows.length || (!failed && loaded && !canDecide)"
+      class="space-y-4"
+    >
       <p
         v-if="!failed && loaded && !rows.length && !canDecide"
         class="text-sm text-muted"
       >
-        {{
-          $t(
-            detail.draft?.reviewStatus === 'REJECTED'
-              ? 'pages.publishing.rejectedEmpty'
-              : 'pages.publishing.empty'
-          )
-        }}
+        {{ $t('pages.publishing.empty') }}
       </p>
-      <PublishingPublicationResult
+      <div
         v-for="row in rows"
         :key="row.id"
-        :publication="row"
-        :busy="!!busy"
-        :retrying="busy === row.id"
-        :previewing="previewing === row.id"
-        @preview="preview(row)"
-        @cancel="action(row.id, 'cancel')"
-        @retry="action(row.id, 'retry')"
-      />
+        class="space-y-6"
+      >
+        <PublishingPublicationResult
+          :publication="row"
+          :busy="!!busy"
+          :retrying="busy === row.id"
+          :previewing="previewing === row.id"
+          @preview="preview(row)"
+          @cancel="action(row.id, 'cancel')"
+          @retry="action(row.id, 'retry')"
+        />
+        <AnalyticsPostInsights
+          v-if="row.status === 'PUBLISHED' && row.mediaId"
+          :publication-id="row.id"
+        />
+      </div>
     </div>
     <USkeleton
       v-if="!loaded && !failed"
       class="h-48 w-full"
     />
-    <template v-if="canDecide">
-      <p class="text-sm text-muted">
-        {{ $t('pages.publishing.description') }}
-      </p>
-      <PublishingPublicationForm
-        v-model="content"
-        v-model:placement="placement"
-        :detail="detail"
-        :disabled="!canPublish || !!busy"
-        @preview="emit('preview', $event)"
-        @created="changed"
-      >
-        <template #secondary="{ submitting }">
-          <UButton
-            color="error"
-            variant="ghost"
-            :disabled="submitting || !!busy || failed"
-            @click="rejectOpen = true"
-          >
-            {{ $t('pages.publishing.reject') }}
-          </UButton>
-        </template>
-      </PublishingPublicationForm>
-    </template>
+    <PublishingPublicationForm
+      v-if="canDecide && detail.draft"
+      v-model="content"
+      v-model:placement="placement"
+      :detail="detail"
+      :disabled="!canPublish || !!busy"
+      @preview="emit('preview', $event)"
+      @created="changed"
+    >
+      <template #secondary="{ submitting }">
+        <UButton
+          color="error"
+          variant="ghost"
+          :disabled="submitting || !!busy || failed"
+          @click="rejectOpen = true"
+        >
+          {{ $t('pages.publishing.reject') }}
+        </UButton>
+      </template>
+    </PublishingPublicationForm>
     <PublishingRejectModal
       v-if="detail.draft"
       v-model="rejectOpen"
@@ -77,11 +78,14 @@ const { rows, loaded, busy, previewing, canDecide, canPublish, failed, changed, 
     () => props.detail,
     () => emit('changed')
   )
-watch(rows, (publications) => {
+
+watch(rows, (publications, previous) => {
   const publication = publications[0]
   if (publication) {
     placement.value = publication.placement
     emit('preview', `publications/${publication.id}/image`)
+  } else if (previous?.length) {
+    emit('preview', '')
   }
 })
 </script>
