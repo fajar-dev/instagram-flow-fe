@@ -11,7 +11,7 @@
           :to="{ path: '/content', query: { status: tab.value } }"
           :label="$t(`pages.content.status.${tab.value}`)"
           :active="activeTab.value === tab.value"
-          :count="counts ? counts[tab.value] ?? 0 : null"
+          :count="counts ? (counts[tab.value] ?? 0) : null"
         />
       </template>
     </Header>
@@ -27,13 +27,18 @@
 import { contentTabs, resolveContentTab } from '~/util/content-tabs'
 import { reportingService } from '~/services/reporting/reporting-service'
 
-definePageMeta({ layout: 'dashboard', alias: ['/ai-jobs', '/content-review', '/content-review/studio'] })
+definePageMeta({
+  layout: 'dashboard',
+  alias: ['/ai-jobs', '/content-review', '/content-review/studio']
+})
 const route = useRoute()
 const activeTab = computed(() => resolveContentTab(route.query.status))
 const counts = ref<Record<string, number> | null>(null)
 const { load } = useLatestRequest(
-  () => reportingService.contentCounts(30),
-  (response) => { counts.value = response.data }
+  () => reportingService.contentCounts(),
+  (response) => {
+    counts.value = response.data
+  }
 )
 watch(() => activeTab.value.value, load)
 usePolling(load, 20000)
