@@ -1,21 +1,29 @@
 # Dokumentasi frontend IG Flow
 
-Panduan ini menjelaskan dashboard IG Flow yang berjalan di atas API backend AMTI. Versi dependency mengikuti package.json dan lockfile; perilaku halaman mengikuti source route, composable dan service.
+Mulai dari [README project](../README.md) untuk menjalankan aplikasi dan [AGENTS.md](../AGENTS.md) untuk aturan kontribusi.
 
-| Kebutuhan | Dokumen |
+## Panduan aktif
+
+| Kategori | Isi |
 | --- | --- |
-| Setup | [README](../README.md) |
-| Produk, halaman dan struktur | [Overview proyek](project-overview.md) |
-| Aturan implementasi | [Coding standards](coding-standards.md) |
-| Layout dan alur halaman | [Page patterns](page-pattern.md) |
-| Form, media, modal dan feedback | [Component guide](component-guide.md) |
-| Tema dan pilihan komponen | [Nuxt UI](nuxtui-guide.md), [inventaris komponen](nuxtui-components.md) |
-| API client dan auth | [Service layer](service-layer.md) |
-| Bahasa | [i18n](i18n-guide.md) |
-| Kontribusi agent | [AGENTS](../AGENTS.md), [workflow](ai-agent-instructions.md) |
-| Riwayat perubahan | [Changelog](changelog.md) |
-| Backend dan n8n | [Dokumentasi backend](../../backend/docs/README.md) |
+| [Aturan pengembangan](rules/README.md) | Standar implementasi, halaman, komponen, bahasa, dan alur kerja agent. |
+| [Arsitektur](architecture/README.md) | Struktur dashboard dan komunikasi dengan backend. |
+| [Fitur](features/README.md) | Panduan analytics dan aset hero autentikasi. |
+| [Referensi](reference/README.md) | Penggunaan dan inventaris komponen Nuxt UI. |
+| [Arsip](archive/README.md) | Laporan audit dan keputusan historis; bukan aturan aktif. |
+| [Changelog](changelog.md) | Ringkasan perubahan lintas fitur. |
 
-Audit bertanggal disimpan sebagai arsip. Pernyataan role, Contact, menu lama, atau storage dari audit awal tidak berlaku sebagai petunjuk implementasi sekarang.
+## Penempatan dokumentasi
 
-Konfigurasi akun dan operasi worker publishing dijelaskan pada [panduan backend](../../backend/docs/INSTAGRAM_PUBLISHING.md).
+- Aturan yang harus diikuti masuk `rules/`; laporan hasil audit masuk `archive/audits/`.
+- Penjelasan struktur dan batas layer masuk `architecture/`; perilaku fitur masuk `features/`.
+- Referensi komponen atau kontrak masuk `reference/`. Runbook backend berada di `operations/`.
+- Perbarui panduan aktif ketika implementasi berubah; jangan menyalin runbook ke laporan audit.
+- Gunakan nama file kebab-case dan tautan relatif. Tambahkan dokumen baru ke indeks kategorinya.
+- Simpan credential di konfigurasi privat, bukan dokumentasi.
+
+## Acuan implementasi
+
+Source, validator, konfigurasi dan tes menjelaskan perilaku yang berjalan; dokumentasi aktif harus diselaraskan dengannya. Jika perubahan menyentuh aturan, perbarui AGENTS.md dan CLAUDE.md secara identik. Riwayat audit tidak menggantikan aturan aktif.
+
+[Operasional backend dan integrasi](../../backend/docs/operations/README.md).

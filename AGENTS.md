@@ -1,6 +1,6 @@
 # IG Flow — Aturan proyek frontend
 
-Dashboard Nuxt untuk pengolahan konten Instagram AMTI dan review internal. Baca [overview](docs/project-overview.md), [konvensi kode](docs/coding-standards.md) dan panduan fitur sebelum perubahan. AGENTS.md dan CLAUDE.md harus identik.
+Dashboard Nuxt untuk pengolahan konten Instagram AMTI dan review internal. Baca [overview](docs/architecture/overview.md), [konvensi kode](docs/rules/coding-standards.md) dan panduan fitur sebelum perubahan. AGENTS.md dan CLAUDE.md harus identik.
 
 ## Stack dan struktur
 
@@ -12,12 +12,12 @@ Page menyusun layout; component menangani UI; composable mengelola state/lifecyc
 
 - Wajib gunakan Nuxt UI, token tema dan class Tailwind standar. Tidak memakai arbitrary values atau CSS hardcoded untuk meniru komponen yang tersedia.
 - Tema primary biru AMTI, font Geist, default button/input lg. Rujuk app/app.config.ts dan app/assets/css/main.css; jangan ubah token global untuk memperbaiki satu halaman.
-- Label, placeholder, toast, validation message dan aria-label memakai i18n di kedua locale. Baca docs/i18n-guide.md sebelum menambah teks.
+- Label, placeholder, toast, validation message dan aria-label memakai i18n di kedua locale. Baca docs/rules/i18n.md sebelum menambah teks.
 - Form memakai UForm/Zod/UFormField; field wajib diberi required. Modal fitur menjadi component terpisah; gunakan DeleteModal bersama.
 - Gunakan toast untuk hasil aksi. Toast sukses tidak memakai atribut `color`; gunakan warna default. Error field/page/job yang perlu menetap dapat inline. Jangan menambah tombol refresh manual, role selector atau menu Contact.
 - DateInput digunakan untuk tanggal. Formatter umum di util/date, formatter waktu workflow Asia/Jakarta di util/content.
 - Gambar selain avatar dapat dibuka melalui shared lightbox. Gunakan UAvatar untuk avatar. Media memakai progressive preview dan MinIO; Blob sementara harus dibersihkan.
-- Content menyatukan job/studio/review dalam tab status. Halaman Publish memakai satu form konten, foto, akun dan jadwal tanpa tab editor. Media memakai infinite scroll, bukan pagination footer.
+- Content menyatukan job/studio/review dalam tab status. Halaman Content `/content/:jobId` menyatukan detail dan publikasi berdasarkan status; hasil siap review langsung menampilkan form konten, foto, akun serta jadwal dengan aksi Reject dan Publish/Jadwalkan, tanpa langkah persiapan tambahan. Tidak ada tab atau halaman Publish terpisah. Media memakai infinite scroll, bukan pagination footer.
 
 ## API dan state
 

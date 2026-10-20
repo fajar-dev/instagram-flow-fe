@@ -11,10 +11,10 @@ IG Flow membantu tim AMTI mengolah dokumentasi kegiatan menjadi caption serta pr
 | `/auth/forgot-password` | Request/resend email reset |
 | `/auth/reset-password` | Validasi token dan penggantian password |
 | `/overview` | Ringkasan job/konten |
+| `/analytics` | Statistik akun, tren terhadap periode sebelumnya dan top posts |
 | `/content` | List terpadu berdasarkan status, beserta count per tab |
 | `/content/upload` | Metadata batch, validasi dan upload per file, proses AI |
 | `/content/:jobId` | Carousel foto, status/error, metadata dan timeline |
-| `/content/:jobId/publish` | Penyesuaian caption/foto dan publikasi langsung atau terjadwal |
 | `/content/media` | Library foto, filter, download, archive dan infinite scroll |
 | `/activity-logs` | Jejak aktivitas aplikasi |
 | `/settings` | Akun Instagram dan sakelar dispatcher AI |
@@ -22,7 +22,7 @@ IG Flow membantu tim AMTI mengolah dokumentasi kegiatan menjadi caption serta pr
 | `/profile/information` | Nama, email dan avatar pengguna |
 | `/profile/password` | Penggantian password |
 
-Navigasi memakai `/content`, `/content/:jobId`, `/content/:jobId/publish`, dan `/settings`. Alias URL AI Jobs, Studio, editor lama, dan Integration Settings sudah dihapus. `/profile` tetap memakai halaman induk untuk tab profil.
+Navigasi memakai `/content`, `/content/:jobId`, dan `/settings`. Alias URL AI Jobs, Studio, editor lama, dan Integration Settings sudah dihapus. `/profile` tetap memakai halaman induk untuk tab profil.
 
 ## Status dan alur
 
@@ -44,4 +44,14 @@ Semua pengguna aktif mempunyai navigasi dan akses yang sama. JWT tetap diperluka
 
 ## Publikasi
 
-Halaman detail menampilkan draft dan keputusan Publish/Reject. Halaman Publish memuat preview di kiri serta form konten, foto, akun dan jadwal di kanan. Publikasi memerlukan status READY_FOR_REVIEW dan consent batch. Pilih akun dari JSON server, foto/desain, feed/story, post sekarang atau jadwal WIB. Desain AI hanya dapat dipilih jika isi form masih cocok dengan hasil AI. Project yang sudah masuk publikasi tidak dapat diedit atau dipublikasikan lagi. Retry memakai record yang sama; pembatalan mengakhiri project sebagai REJECTED. Worker backend harus aktif.
+Satu halaman `/content/:jobId` memuat preview di kiri, card utama di kanan dan card Summary di bawah. Saat ready for review, form konten, foto, akun dan jadwal langsung muncul dengan aksi Publish/Reject. Publikasi memerlukan status READY_FOR_REVIEW dan consent batch. Pilih akun dari JSON server, foto/desain, feed/story, post sekarang atau jadwal WIB. Desain AI hanya dapat dipilih jika isi form masih cocok dengan hasil AI. Project yang sudah masuk publikasi tidak dapat diedit atau dipublikasikan lagi. Retry memakai record yang sama; pembatalan mengakhiri project sebagai REJECTED. Worker backend harus aktif.
+
+## Instagram Analytics
+
+`/analytics` menampilkan statistik akun dan postingan melalui child module Instagram di backend. Detail Content juga menampilkan insight publikasi yang berhasil. Lihat [Analytics](../features/analytics.md) untuk periode, cache, dan batasan data.
+
+Halaman `/content/:jobId` menyatukan proses AI, review, form publish/reject, jadwal dan hasil publikasi beserta insight. Tidak ada halaman Publish terpisah. Polling detail berhenti saat draft tersedia agar edit form tidak tertimpa; panel publikasi memantau jadwal/hasil secara terpisah.
+
+Ready for review langsung menampilkan form konten, foto, akun dan jadwal dengan aksi Reject atau Publish/Jadwalkan. Card utama kanan dan card Summary di bawahnya tetap pada posisi yang sama untuk proses AI, review, penolakan, jadwal, dan hasil publikasi.
+
+Tampilan Content mengikuti tipografi Profile: judul text-base, caption/form text-sm, metadata ringkasan text-sm. Aksi review berdekatan; timeline berada pada Summary dan rincian teknis dapat dibuka. Card dimiliki halaman, bukan komponen isinya, sehingga tidak ada card bersarang.

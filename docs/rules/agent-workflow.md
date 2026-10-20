@@ -1,6 +1,6 @@
 # Panduan kontribusi agent — IG Flow frontend
 
-Baca [AGENTS](../AGENTS.md), [overview](project-overview.md), dan panduan fitur yang disentuh. Gunakan User/Profile sebagai referensi aktif untuk struktur dan visual.
+Baca [AGENTS](../../AGENTS.md), [overview](../architecture/overview.md), dan panduan fitur yang disentuh. Gunakan User/Profile sebagai referensi aktif untuk struktur dan visual.
 
 1. Periksa perubahan lokal pengguna sebelum mengedit. Tentukan apakah perubahan milik page, component, composable, service atau util.
 2. Reuse Nuxt UI, tema aplikasi dan shared component. Jangan menambah CSS arbitrary, formatter atau client HTTP duplikat.

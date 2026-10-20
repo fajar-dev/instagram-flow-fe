@@ -17,12 +17,12 @@ bun run dev
 
 - Overview: ringkasan aktivitas dan status konten.
 - Content: job dan draft dalam satu menu, tab berdasarkan status dengan count.
-- Review: foto carousel, summary/timeline, caption dan keputusan Publish/Reject.
-- Publish: penyesuaian caption/foto dan pemilihan akun serta jadwal dalam satu form.
+- Detail Content: preview, summary/timeline, form caption/foto, akun dan jadwal, keputusan Publish/Reject serta hasil publikasi dalam satu halaman.
+- Analytics: statistik akun, perbandingan periode dan top posts.
 - Media: galeri masonry, thumbnail blur ke gambar penuh, infinite scroll dan lightbox.
-- Activity Logs, Integration Settings, User dan Profile.
+- Activity Logs, Settings, User dan Profile.
 
-Upload tersedia pada `/content/upload`. Semua user aktif terautentikasi memiliki akses yang sama. Ready for review langsung menuju Publish atau Reject. Satu project dipublikasikan satu kali ke satu akun, sekarang atau terjadwal. Analytics Instagram dan Telegram belum tersedia.
+Upload tersedia pada `/content/upload`. Semua user aktif terautentikasi memiliki akses yang sama. Ready for review langsung menuju Publish atau Reject. Satu project dipublikasikan satu kali ke satu akun, sekarang atau terjadwal. Insight tersedia untuk postingan yang berhasil dipublikasikan. Telegram belum tersedia.
 
 ## Verifikasi
 
@@ -35,4 +35,4 @@ bun run build
 
 Build lokal dapat dipreview melalui `bun run preview`. Pengujian service memakai adapter terkontrol; verifikasi browser dan integrasi nyata merupakan pemeriksaan terpisah.
 
-Mulai dari [indeks dokumentasi](docs/README.md), [peta halaman](docs/project-overview.md), [panduan UI](docs/component-guide.md), dan [aturan kontribusi](AGENTS.md).
+Mulai dari [indeks dokumentasi](docs/README.md), [peta halaman](docs/architecture/overview.md), [panduan UI](docs/rules/component-guide.md), dan [aturan kontribusi](AGENTS.md).
