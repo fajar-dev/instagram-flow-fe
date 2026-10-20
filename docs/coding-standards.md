@@ -27,3 +27,7 @@ Gunakan shared lightbox untuk gambar selain avatar. Avatar memakai UAvatar. Revo
 ## Verifikasi
 
 Jalankan typecheck, lint, test dan build untuk perubahan implementasi. Periksa browser desktop/mobile bila tersedia, terutama overflow, fokus keyboard, carousel, empty/error states dan transisi halaman. Laporkan jika pemeriksaan visual tidak dapat dilakukan. Perubahan dokumentasi diverifikasi terhadap source dan link tanpa menambah test salinan teks.
+
+## Format otomatis
+
+Jalankan `bun run format` untuk source Vue/TypeScript, tests dan konfigurasi frontend, kemudian `bun run lint`. Pisahkan fungsi/method dan import dari deklarasi dengan baris kosong; selalu gunakan braces pada kondisi/loop dan satu statement per baris. Prettier membungkus baris panjang, ESLint menjaga format Vue/Nuxt. Media, secret dan output build tidak diformat.
