@@ -1,0 +1,7 @@
+# Hero AMTI Instagram Flow
+
+Asset: `public/hero.png` (1024 × 1536). Diperbarui pada 20 Oktober 2026 menggunakan built-in imagegen. Edit terakhir menambahkan detail background blueprint dan garis alur pada ilustrasi yang sudah ada. Layout dan form tetap. Ini merupakan asset branding aplikasi, bukan media pengguna.
+
+## Prompt final
+
+Use case: precise-object-edit. Edit the supplied AMTI Instagram Flow hero by changing ONLY its background. Keep all six foreground glass tiles, their exact icons, AMTI lettering and emblem, colors, sizes, positions, connector lines and lighting unchanged. The current navy background is too plain. Enrich it with a sophisticated visible yet subdued engineering-blueprint atmosphere: thin blue grid fragments, fine curved orbital/data-flow paths, small junction dots, sparse circular drafting marks, and soft layered blue ambient illumination behind the composition. Make these details visible around the top and side margins and between the tiles, providing depth and a technical AMTI social automation identity. Background details should remain lower contrast than the main illustration, fine rather than chunky. Preserve the deep navy base and existing pink/orange Instagram accents. Gradually fade the background details to dark navy across the lower quarter, leaving readable space for white webpage copy. No extra lettering, no new foreground objects, no new logos, no photoreal scenery, no stars, no watermark or border. Preserve portrait 2:3 framing and existing composition exactly.

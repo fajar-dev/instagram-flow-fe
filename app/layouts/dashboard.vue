@@ -1,6 +1,6 @@
 <template>
-  <div class="flex h-dvh w-full overflow-hidden font-sans text-sm text-highlighted">
-    <div class="hidden h-full lg:block">
+  <div class="flex h-dvh w-full overflow-hidden bg-muted/40 font-sans text-sm text-highlighted">
+    <div class="hidden h-full shrink-0 py-3 pl-3 lg:block">
       <Sidebar />
     </div>
 

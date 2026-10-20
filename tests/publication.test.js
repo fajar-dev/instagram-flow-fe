@@ -14,14 +14,15 @@ test('WIB calendar scheduling converts to UTC and rejects impossible dates', () 
   expect(publicationSchedule('', '12:00')).toBeNull()
 })
 
-test('publication requests preserve account selection, schedule, snapshot revision and idempotency', async () => {
+test('publication requests preserve account selection, schedule, final content and idempotency', async () => {
   const calls = []
   apiService.client.defaults.adapter = async (config) => {
     calls.push(config)
     return { config, data: { success: true, data: [] }, status: 200, statusText: 'OK', headers: {} }
   }
   const payload = {
-    revisionId: 'revision',
+    expectedContentHash: 'hash',
+    content: { title: 'Final', caption: 'Edited at publish' },
     accountKey: 'one',
     source: 'photo',
     placement: 'feed',

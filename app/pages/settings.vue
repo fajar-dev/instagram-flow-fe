@@ -12,5 +12,5 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: 'dashboard', alias: ['/integration-settings'] })
+definePageMeta({ layout: 'dashboard' })
 </script>

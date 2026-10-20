@@ -1,4 +1,48 @@
+## 20 Oktober 2026 — Warna default toast sukses
+
+Semua toast sukses menggunakan warna default tanpa atribut color, termasuk helper login yang melayani sukses dan error. Toast error dan peringatan tetap memakai warna sesuai jenisnya. Aturan ini ditambahkan ke panduan frontend.
+
+## 20 Oktober 2026 — Antrean review di Overview
+
+Daftar Overview menampilkan draft berstatus READY_FOR_REVIEW melalui resource review, bukan seluruh aktivitas job. Judul dan tautan menuju Content mengikuti status yang sama; konten yang sudah publish atau ditolak tidak masuk antrean ini.
+
+## 20 Oktober 2026 — Mockup Instagram Story
+
+Preview Story memakai bingkai vertikal 9:16 dengan progress bar, identitas akun, dan area balasan seperti Instagram. Kontrol mockup bersifat dekoratif; gambar tetap dapat dibuka melalui lightbox. Komponen digunakan pada form Publish tanpa card pembungkus tambahan.
+
+## 20 Oktober 2026 — Error pemuatan melalui toast
+
+Menghapus pesan gagal memuat inline yang menduplikasi toast dari Overview, Content, Publish, daftar data, dan Settings. State kegagalan tetap digunakan untuk menjaga guard publikasi, infinite scroll, serta mencegah tampilan akun kosong ketika request gagal. Key terjemahan yang tidak digunakan dihapus dari kedua locale.
+
+## 20 Oktober 2026 — Baseline final dan pembersihan alur lama
+
+Migration disusun ulang menjadi 13 file untuk 13 tabel (1792490400000–1792490400012), langsung memakai schema Review → Publish/Reject. Migration transisi dan tabel revisi tidak lagi disertakan. Setiap file memiliki up/down untuk satu tabel; dependency diuji melalui rollback dan reapply. Schema lokal dibandingkan dengan database test yang dibuat dari baseline sebelum ledger diselaraskan, setelah backup SQL privat; data aplikasi dipertahankan.
+
+Alias URL editor, AI Jobs, Studio, dan Integration Settings beserta penanganan navigasinya dihapus. Teks UI serta import yang tidak dipakai dibersihkan. Formatter kini menormalkan struktur dengan ESLint sebelum Prettier agar perbaikan braces tidak meninggalkan indentasi yang rusak. Adapter n8n legacy tetap digunakan karena merupakan kontrak integrasi aktif, bukan sisa alur editor.
+
+## 20 Oktober 2026 — Review langsung ke Publish atau Reject
+
+Menghapus langkah simpan revisi. Detail menampilkan hasil dan keputusan; form Publish menyatukan caption, foto, akun dan waktu posting. Backend menerima konten final dalam request publish, menyimpan draft dan snapshot atomik, serta mempertahankan idempotency dan satu postingan per project. History database lama diarsipkan sebelum konsolidasi. Endpoint PATCH draft, entity revisi, nomor revisi dan UI editor lama dihapus. URL editor lama hanya alias menuju Publish.
+
+Validasi: 160 tes backend dan 44 tes frontend lulus; typecheck, lint, dan build kedua project lulus. Lima migration telah diterapkan pada database development lokal setelah backup SQL privat. Pengujian visual browser terhalang saved origin permission; tidak ada publikasi nyata ke Instagram pada refactor ini.
+
 ## 2026-10-20 — Keterbacaan kode
+
+## 20 Oktober 2026 — autentikasi berdasarkan referensi
+
+Layout auth menggunakan panel visual AMTI Instagram Flow di kiri dengan logo atas dan teks bawah, serta form di kanan. Hero Instagram AMTI (`public/hero.png`) disempurnakan mengikuti ilustrasi awal: logo AMTI, Instagram, komentar, like, foto, dan grafik pada latar navy. Latar dilengkapi grid blueprint, garis alur melengkung, dan titik koneksi biru; detail memudar di bagian bawah agar ruang teks tetap terbaca. Style form login/reset/lupa password tetap seperti semula. Google login dan alur autentikasi tetap dipertahankan.
+
+## 20 Oktober 2026 — ringkasan Overview
+
+Overview kembali memakai desain banner awal: latar primary lembut, judul dan aksi di kiri, kartu Siap review di kanan. Empat metrik pendukung ditampilkan di bawah dengan angka tetap terlihat saat polling. Daftar pekerjaan diberi judul Aktivitas konten. Tidak mengubah cakupan data atau alur publikasi.
+
+## 20 Oktober 2026 — navigasi melayang
+
+Latar dashboard memakai token bg-muted agar navigasi dan panel terpisah secara visual dalam light/dark mode. Sidebar desktop diberi jarak dari tepi layar, border penuh, sudut membulat dan shadow tipis. Bottom bar mobile memakai inset serupa dengan safe area perangkat; tetap berada dalam alur flex agar konten tidak tertutup. Tombol upload tengah tetap terangkat.
+
+## 20 Oktober 2026 — style tabel bersama
+
+DataTable memakai header kolom ringkas, padding baris konsisten, hover ringan, border tipis dan footer pagination dalam satu panel. Toolbar membungkus pada viewport menengah agar filter/aksi tidak bertumpuk. Berlaku untuk Users, Content, Overview dan Activity Logs; galeri Media dan layout halaman dipertahankan. Tidak mengubah query atau aksi data.
 
 ## 20 Oktober 2026 — audit struktur lanjutan
 

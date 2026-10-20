@@ -4,12 +4,6 @@
       :job-id="jobId"
       :detail="detail"
     />
-    <p
-      v-if="failed"
-      class="text-sm text-muted"
-    >
-      {{ $t('components.requestState.failed') }}
-    </p>
     <USkeleton
       v-if="loading && !detail"
       class="h-64 w-full"
@@ -24,13 +18,39 @@
         </div>
         <div class="min-w-0 lg:col-span-5 space-y-5">
           <ContentJobSummary :detail="detail" />
+          <UCard v-if="detail.draft">
+            <h2 class="text-base font-semibold mb-3">
+              {{ detail.draft.title }}
+            </h2>
+            <p class="text-sm whitespace-pre-line">
+              {{ detail.draft.caption }}
+            </p>
+            <p class="mt-3 text-sm text-primary">
+              {{ detail.draft.hashtags.join(' ') }}
+            </p>
+          </UCard>
           <UButton
+            v-if="detail.draft?.reviewStatus === 'READY_FOR_REVIEW'"
+            color="error"
+            variant="outline"
+            block
+            @click="rejectOpen = true"
+          >
+            {{ $t('pages.publishing.reject') }}
+          </UButton>
+          <PublishingRejectModal
             v-if="detail.draft"
-            :to="`/content/${jobId}/edit`"
-            icon="i-lucide-pencil-line"
+            v-model="rejectOpen"
+            :detail="detail"
+            @rejected="load"
+          />
+          <UButton
+            v-if="detail.draft && detail.draft.reviewStatus !== 'REJECTED'"
+            :to="`/content/${jobId}/publish`"
+            icon="i-lucide-send"
             block
           >
-            {{ $t('pages.aiJob.viewResult') }}
+            {{ $t('pages.publishing.publish') }}
           </UButton>
           <UButton
             v-if="detail.job.retryable && detail.job.status === 'FAILED'"
@@ -51,13 +71,14 @@
 import { jobService } from '~/services/ai-job/job-service'
 import type { JobDetails } from '~/types/ai-job'
 
-definePageMeta({ layout: 'dashboard', alias: ['/ai-jobs/:jobId'], key: route => route.path })
+definePageMeta({ layout: 'dashboard', key: route => route.path })
 const jobId = String(useRoute().params.jobId)
 const handleError = useServiceError()
 const detail = ref<JobDetails | null>(null)
 const retrying = ref(false)
+const rejectOpen = ref(false)
 const retryKey = crypto.randomUUID()
-const { loading, failed, load } = useLatestRequest(
+const { loading, load } = useLatestRequest(
   () => jobService.details(jobId),
   (response) => {
     detail.value = response.data

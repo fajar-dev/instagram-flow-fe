@@ -2,7 +2,7 @@
 <template>
   <div class="relative h-full shrink-0">
     <aside
-      class="flex flex-col h-full bg-default border-r border-default shrink-0 justify-between select-none w-24 px-1 py-3"
+      class="flex flex-col h-full bg-default border border-default rounded-xl shrink-0 justify-between select-none w-24 px-1 py-3"
     >
       <!-- Top Section: App/Brand Logo Header -->
       <div class="flex flex-col items-center pb-6 pt-1.5 shrink-0 gap-1">

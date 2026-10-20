@@ -35,14 +35,7 @@
           {{ $t(`pages.publishing.${publication.source}`) }}
         </dd>
       </div>
-      <div class="space-y-1">
-        <dt class="text-muted">
-          {{ $t('pages.contentReview.revision') }}
-        </dt>
-        <dd class="font-medium text-highlighted">
-          {{ publication.revisionNo }}
-        </dd>
-      </div>
+
       <div class="space-y-1">
         <dt class="text-muted">
           {{

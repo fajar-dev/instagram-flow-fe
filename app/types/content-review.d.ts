@@ -1,26 +1,21 @@
-export interface Revision {
-  id: string
-  draftId: string
-  revisionNo: number
+export interface PublishContent {
   primaryAssetId: string
   title: string
   caption: string
   hashtags: string[]
   location: string
   activity: string
-  contentHash: string
-  createdAt: string
 }
 
-export interface Draft {
+export interface Draft extends PublishContent {
   id: string
   jobId: string
-  currentRevisionId: string
+  contentHash: string
   reviewStatus: 'READY_FOR_REVIEW' | 'PUBLISH' | 'REJECTED'
   createdAt: string
 }
 
-export interface StudioForm {
+export interface PublishFormContent {
   title: string
   caption: string
   hashtagText: string

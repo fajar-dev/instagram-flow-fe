@@ -85,21 +85,15 @@ export const useNavigation = () => {
   })
 
   const isItemActive = (item: NavItem) =>
-    isNavigationActive(
-      route.path.startsWith('/ai-jobs') || route.path.startsWith('/content-review')
-        ? '/content'
-        : route.path,
-      item.to,
-      [
-        ...navGroups.value.flatMap(group =>
-          group.items.flatMap(entry => [
-            entry.to,
-            ...(entry.children?.map(child => child.to) ?? [])
-          ])
-        ),
-        '/content/upload'
-      ]
-    )
+    isNavigationActive(route.path, item.to, [
+      ...navGroups.value.flatMap(group =>
+        group.items.flatMap(entry => [
+          entry.to,
+          ...(entry.children?.map(child => child.to) ?? [])
+        ])
+      ),
+      '/content/upload'
+    ])
 
   const isParentActive = (item: NavItem) => {
     if (!item.children) {

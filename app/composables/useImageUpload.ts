@@ -54,7 +54,6 @@ export function useImageUpload(options: ImageUploadOptions) {
       options.onUploaded(response.data.path)
       toast.add({
         title: options.successMessage(),
-        color: 'success',
         icon: 'i-lucide-circle-check'
       })
     } catch {

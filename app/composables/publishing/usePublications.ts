@@ -3,11 +3,7 @@ import { mediaService } from '../../services/content/media-service'
 import type { Publication } from '~/types/publishing'
 import type { JobDetails } from '~/types/ai-job'
 
-export function usePublications(
-  detail: () => JobDetails,
-  dirty: () => boolean,
-  completed: () => void
-) {
+export function usePublications(detail: () => JobDetails, completed: () => void) {
   const { t } = useI18n()
   const handleError = useServiceError()
   const toast = useToast()
@@ -22,7 +18,7 @@ export function usePublications(
     () => detail().draft?.reviewStatus === 'READY_FOR_REVIEW' && loaded.value && !rows.value.length
   )
   const canPublish = computed(
-    () => canDecide.value && !failed.value && !dirty() && detail().batch.publicationPermission
+    () => canDecide.value && !failed.value && detail().batch.publicationPermission
   )
   const { failed, load } = useLatestRequest(
     async () => {
@@ -52,7 +48,7 @@ export function usePublications(
       if (disposed) {
         return
       }
-      toast.add({ title: t('pages.publishing.updated'), color: 'success' })
+      toast.add({ title: t('pages.publishing.updated') })
       await changed()
     } catch (error) {
       if (!disposed) {

@@ -1,3 +1,5 @@
+import type { PublishContent } from './content-review'
+
 export interface InstagramAccount {
   key: string
   label: string
@@ -21,8 +23,6 @@ export type PublicationStatus
 export interface Publication {
   id: string
   draftId: string
-  revisionId: string
-  revisionNo: number
   accountKey: string
   accountLabel: string
   caption: string
@@ -38,7 +38,8 @@ export interface Publication {
 }
 
 export interface PublicationPayload {
-  revisionId: string
+  expectedContentHash: string
+  content: PublishContent
   accountKey: string
   source: 'photo' | 'design'
   placement: 'feed' | 'story'

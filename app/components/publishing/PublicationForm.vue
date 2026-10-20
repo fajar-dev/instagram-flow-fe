@@ -5,6 +5,17 @@
     class="space-y-4"
     @submit="!disabled && submit()"
   >
+    <ContentReviewPublishFields
+      v-model="form.content"
+      :disabled="disabled || submitting"
+    />
+    <ContentReviewRankingsPanel
+      :rankings="detail.aiResult?.rankings || []"
+      :primary-asset-id="form.content.primaryAssetId"
+      :disabled="disabled || submitting"
+      @selected="form.content.primaryAssetId = $event"
+    />
+    <USeparator />
     <div class="space-y-4">
       <UFormField
         :label="$t('pages.publishing.accountsTitle')"
@@ -126,14 +137,18 @@
 
 <script setup lang="ts">
 import { usePublicationForm } from '~/composables/publishing/usePublicationForm'
+import type { PublishFormContent } from '~/types/content-review'
 import type { JobDetails } from '~/types/ai-job'
 
+const placement = defineModel<string>('placement', { required: true })
+const content = defineModel<PublishFormContent>({ required: true })
 const props = defineProps<{ detail: JobDetails, disabled?: boolean }>()
-const emit = defineEmits<{ created: [] }>()
+const emit = defineEmits<{ created: [], preview: [path: string] }>()
 const { t } = useI18n()
 const { accounts, loading, submitting, form, schema, design, loadAccounts, submit }
   = usePublicationForm(
     () => props.detail,
+    content.value,
     () => {
       emit('created')
     }
@@ -150,5 +165,26 @@ const modes = computed(() => [
   { label: t('pages.publishing.now'), value: 'now' },
   { label: t('pages.publishing.schedule'), value: 'schedule' }
 ])
+watch(
+  placement,
+  (value) => {
+    form.placement = value === 'story' ? 'story' : 'feed'
+  },
+  { immediate: true }
+)
+watch(
+  () => form.placement,
+  (value) => {
+    placement.value = value
+  }
+)
+watch(
+  () =>
+    form.source === 'design' && design.value
+      ? `renders/${design.value.id}`
+      : `assets/${form.content.primaryAssetId}/preview`,
+  path => emit('preview', path),
+  { immediate: true }
+)
 onMounted(loadAccounts)
 </script>

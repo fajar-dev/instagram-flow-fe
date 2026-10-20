@@ -1,5 +1,5 @@
 import type { Batch, Asset } from './content'
-import type { Revision, Draft } from './content-review'
+import type { Draft } from './content-review'
 
 export interface Job {
   id: string
@@ -42,8 +42,6 @@ export interface JobDetails {
   batch: Batch
   assets: Asset[]
   draft: Draft | null
-  revision: Revision | null
-  revisions: Revision[]
   aiResult: AiResult | null
   renders: Render[]
   reviews: {
@@ -51,7 +49,6 @@ export interface JobDetails {
     decision: string
     notes: string
     reviewerId: number
-    revisionId: string
     createdAt: string
   }[]
 }

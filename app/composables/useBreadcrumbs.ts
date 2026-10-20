@@ -8,8 +8,6 @@ export function useBreadcrumbs() {
     const overview = { label: t('pages.overview.overview'), to: '/overview' }
     const content = { label: t('pages.content.title'), to: '/content' }
     const path = route.path
-      .replace(/^\/content-review\/studio\//, '/content/')
-      .replace(/^\/ai-jobs(?=\/|$)/, '/content')
     if (path.startsWith('/profile')) {
       return [
         { label: t('components.userPopover.profile'), to: '/profile/information' },
@@ -23,15 +21,15 @@ export function useBreadcrumbs() {
       ]
     }
     if (
-      /^\/content\/[^/]+(?:\/edit)?$/.test(path)
+      /^\/content\/[^/]+(?:\/publish)?$/.test(path)
       && !['/content/upload', '/content/media'].includes(path)
     ) {
-      const detailPath = path.replace(/\/edit$/, '')
-      const isEditor = path.endsWith('/edit') || route.path.startsWith('/content-review/studio/')
+      const detailPath = path.replace(/\/publish$/, '')
+      const isPublishing = path.endsWith('/publish')
       return [
         content,
-        { label: t('pages.content.detail'), ...(isEditor ? { to: detailPath } : {}) },
-        ...(isEditor ? [{ label: t('pages.contentReview.editorTitle') }] : [])
+        { label: t('pages.content.detail'), ...(isPublishing ? { to: detailPath } : {}) },
+        ...(isPublishing ? [{ label: t('pages.publishing.publish') }] : [])
       ]
     }
     const item = [...mobileItems.value, ...utilityItems.value].find(isItemActive)
@@ -44,10 +42,7 @@ export function useBreadcrumbs() {
     return [
       overview,
       {
-        label:
-          route.path === '/integration-settings'
-            ? t('pages.integration.settings')
-            : item?.label || content.label
+        label: item?.label || content.label
       }
     ]
   })

@@ -1,11 +1,5 @@
 <template>
   <div class="space-y-6">
-    <p
-      v-if="failed"
-      class="text-sm text-muted"
-    >
-      {{ $t('components.requestState.failed') }}
-    </p>
     <DataTable
       v-model:search="search"
       v-model:page="page"
@@ -162,7 +156,7 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
             h(UButton, {
               'to':
                 props.resource === 'review'
-                  ? `/content/${row.original.jobId}/edit`
+                  ? `/content/${row.original.jobId}`
                   : `/content/${row.original.id}`,
               'color': 'neutral',
               'variant': 'ghost',

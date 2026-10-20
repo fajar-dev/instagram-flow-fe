@@ -14,6 +14,6 @@ Referensi CRUD: `app/services/user-service.ts`. Client konten berada di folder c
 
 Biarkan rejection Axios tetap utuh. Service tidak menampilkan toast, menavigasi, atau mengubah kegagalan menjadi undefined. UI mengambil useServiceError saat setup, lalu mengatur loading/error dengan try/catch/finally.
 
-Pertahankan koordinasi refresh token pada api-service dan jangan menghapus sesi karena kegagalan jaringan biasa. Request list memakai useLatestRequest; editor mengirim expectedRevisionId atau revisionId/contentHash agar edit/review yang terlambat ditolak backend.
+Pertahankan koordinasi refresh token pada api-service dan jangan menghapus sesi karena kegagalan jaringan biasa. Request list memakai useLatestRequest; publish mengirim expectedContentHash dan konten final, sedangkan reject mengirim contentHash. Backend memvalidasi status dan menyimpan keputusan secara atomik.
 
 Signed URL dan Blob adalah akses sementara. Jangan menyimpan URL presigned sebagai identitas permanen aset atau memodifikasi host/query signature. Object key dan asset ID tetap dikelola backend.

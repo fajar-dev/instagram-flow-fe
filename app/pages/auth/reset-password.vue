@@ -15,7 +15,6 @@
 
     <template v-else>
       <div class="flex flex-col gap-5 mb-6">
-        <BrandLogo />
         <div class="space-y-1">
           <h1 class="text-3xl font-bold text-highlighted">
             {{ $t('pages.auth.resetPassword.title') }}
@@ -189,7 +188,6 @@ const handleReset = async () => {
     await authService.resetPassword(token.value, state.password)
     toast.add({
       title: t('pages.auth.resetPassword.resetSuccess'),
-      color: 'success',
       icon: 'i-lucide-circle-check'
     })
     navigateTo('/auth/sign-in')

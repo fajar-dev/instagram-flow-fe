@@ -95,7 +95,9 @@
       "unexpected": "Silakan coba lagi."
     },
     "authLayout": {
-      "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia"
+      "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia",
+      "headline": "Bagikan cerita di balik setiap project.",
+      "description": "Siapkan, tinjau, dan publikasikan konten Instagram bersama AMTI."
     },
     "mobileSidebar": {
       "title": "Utility",
@@ -108,9 +110,6 @@
         "uploader": "Pengunggah",
         "actions": "Tindakan"
       }
-    },
-    "requestState": {
-      "failed": "Data gagal dimuat. Silakan coba lagi."
     },
     "content": {
       "infiniteScroll": {
@@ -259,7 +258,12 @@
         "failed": "Gagal",
         "publish": "Publikasi"
       },
-      "periodPlaceholder": "Pilih periode"
+      "periodPlaceholder": "Pilih periode",
+      "bannerTitle": "Jadikan cerita proyek sebagai postingan berikutnya.",
+      "bannerDescription": "Kumpulkan dokumentasi, sempurnakan konten berbantuan AI, dan siapkan publikasi Instagram Anda berikutnya.",
+      "viewContent": "Lihat konten",
+      "workspace": "AMTI · Ruang kerja konten",
+      "reviewHint": "Periksa caption dan foto, lalu publikasikan atau tolak."
     },
     "content": {
       "upload": "Unggah Konten",
@@ -363,30 +367,17 @@
       "finished": "Selesai"
     },
     "contentReview": {
-      "studio": "Studio AI",
-      "review": "Review Konten",
-      "previewWarning": "Preview SVG — belum siap publish Instagram",
-      "primaryOnly": "Maksimal 5 foto dapat dipilih AI. Template V0.2 hanya merender foto pertama.",
-      "revision": "Revisi",
       "rankings": "Peringkat foto dari AI",
       "setPrimary": "Jadikan foto utama",
       "preview": "Preview konten",
-      "saveRevision": "Simpan revisi",
-      "restoreAi": "Kembalikan saran AI",
-      "notReady": "Hasil belum tersedia. Periksa status proses.",
-      "editorTitle": "Editor konten",
-      "editorHint": "Rapikan caption dan simpan perubahan sebelum melakukan review.",
       "rankingsHint": "Bandingkan rekomendasi AI dan pilih foto utama.",
       "selectedPhoto": "Foto terpilih",
       "feed": "Feed",
       "story": "Story",
-      "unsaved": "Perubahan belum disimpan",
-      "photosTab": "Foto",
-      "backToCaption": "Lanjut ke caption dan simpan",
-      "readOnlyHint": "Konten hanya dapat dilihat setelah masuk publikasi atau ditolak.",
       "rejectionTitle": "Catatan penolakan",
       "rejectionEmpty": "Konten ini ditolak tanpa catatan.",
       "instagramAccount": "Akun Instagram",
+      "storyReply": "Kirim pesan",
       "fullCaption": "Lihat caption lengkap",
       "lessCaption": "Tampilkan lebih sedikit"
     },
@@ -407,7 +398,7 @@
     },
     "publishing": {
       "title": "Publikasi Instagram",
-      "description": "Publikasikan project satu kali ke satu akun Instagram, sekarang atau terjadwal.",
+      "description": "Sesuaikan caption dan foto, lalu pilih akun untuk posting sekarang atau terjadwal.",
       "publish": "Publikasikan",
       "accountsTitle": "Akun Instagram",
       "accountsHint": "Kelola akun Instagram dan periksa status koneksinya.",
@@ -420,12 +411,12 @@
       "verify": "Periksa koneksi",
       "verified": "Akun Instagram berhasil diverifikasi",
       "selectAccounts": "Pilih satu akun Instagram",
-      "accountRequired": "Pilih setidaknya satu akun",
+      "accountRequired": "Pilih satu akun",
       "placement": "Penempatan",
       "source": "Sumber gambar",
       "photo": "Foto terpilih",
       "design": "Desain AI",
-      "designUnavailable": "Desain AI tersedia untuk revisi awal yang belum diubah dan memiliki render sesuai. Foto terpilih tetap bisa dipublikasikan.",
+      "designUnavailable": "Desain AI memerlukan konten AI yang belum diubah dan render yang sesuai. Setelah mengedit, Anda bisa memublikasikan foto terpilih.",
       "mode": "Waktu publikasi",
       "date": "Tanggal (WIB)",
       "time": "Jam (WIB)",
@@ -436,7 +427,7 @@
       "preview": "Preview gambar",
       "imageHint": "JPEG final menyesuaikan format pilihan dengan latar putih bila diperlukan.",
       "storyHint": "Story memerlukan akun Instagram Business. Caption tidak disertakan pada gambar story.",
-      "snapshotHint": "Satu project menghasilkan satu postingan. Setelah diajukan, konten dan akun terkunci. Pengiriman gagal dapat dicoba ulang pada postingan yang sama; pembatalan bersifat final. Worker harus tetap aktif.",
+      "snapshotHint": "Perubahan disimpan saat Anda memublikasikan atau menjadwalkan. Satu project menghasilkan satu postingan; konten dan akun kemudian terkunci.",
       "close": "Tutup",
       "queued": "Publikasi masuk antrean",
       "empty": "Belum ada publikasi untuk konten ini.",
@@ -454,7 +445,6 @@
         "UNKNOWN": "Perlu verifikasi",
         "CANCELLED": "Dibatalkan"
       },
-      "readyRequired": "Simpan revisi terbaru sebelum memublikasikan atau menolak.",
       "reject": "Tolak",
       "rejectTitle": "Tolak konten ini?",
       "rejectNotes": "Alasan (opsional)",

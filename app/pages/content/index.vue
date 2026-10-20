@@ -28,8 +28,7 @@ import { contentTabs, resolveContentTab } from '~/util/content-tabs'
 import { reportingService } from '~/services/reporting/reporting-service'
 
 definePageMeta({
-  layout: 'dashboard',
-  alias: ['/ai-jobs', '/content-review', '/content-review/studio']
+  layout: 'dashboard'
 })
 const route = useRoute()
 const activeTab = computed(() => resolveContentTab(route.query.status))

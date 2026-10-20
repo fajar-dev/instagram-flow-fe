@@ -2,7 +2,7 @@
   <UModal
     v-model:open="open"
     :title="$t('pages.publishing.rejectTitle')"
-    :description="detail.revision?.title"
+    :description="detail.draft?.title"
     :dismissible="!saving"
   >
     <template #body>
@@ -65,18 +65,17 @@ const form = reactive({ notes: '' })
 const schema = z.object({ notes: z.string().max(2000) })
 
 async function submit() {
-  const { draft, revision } = props.detail
-  if (saving.value || !draft || !revision) {
+  const { draft } = props.detail
+  if (saving.value || !draft) {
     return
   }
   saving.value = true
   try {
     await draftService.reject(draft.id, {
-      revisionId: revision.id,
-      contentHash: revision.contentHash,
+      contentHash: draft.contentHash,
       notes: form.notes
     })
-    toast.add({ title: t('pages.publishing.rejected'), color: 'success' })
+    toast.add({ title: t('pages.publishing.rejected') })
     open.value = false
     emit('rejected')
   } catch (error) {
