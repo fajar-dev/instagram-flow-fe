@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
     "test": "bun test tests",
-    "format": "prettier --write \"app/**/*.{vue,ts,js}\" \"tests/**/*.js\" nuxt.config.ts eslint.config.mjs && eslint . --fix"
+    "format": "eslint . --fix && prettier --write \"app/**/*.{vue,ts,js}\" \"tests/**/*.js\" nuxt.config.ts eslint.config.mjs && eslint . --fix"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.108",
