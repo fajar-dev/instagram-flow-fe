@@ -123,3 +123,20 @@ test('repeated polling failures keep one error notification until recovery', () 
     await state.load()
     expect(errors).toEqual([failure, failure])
   }))
+
+test('invalidating an empty selection discards the in-flight result without a replacement request', () =>
+  withRequest(async ({ errors }) => {
+    const pending = deferred()
+    const applied = []
+    const state = useLatestRequest(
+      () => pending.promise,
+      result => applied.push(result)
+    )
+    const running = state.load()
+    state.invalidate()
+    pending.resolve('stale account')
+    await running
+    expect(applied).toEqual([])
+    expect(errors).toEqual([])
+    expect(state.loading.value).toBe(false)
+  }))

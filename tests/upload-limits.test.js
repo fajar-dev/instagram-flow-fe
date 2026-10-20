@@ -82,3 +82,21 @@ test('a failed upload does not stop later files; retry skips successful and inva
   )
   expect(calls).toEqual(['b'])
 })
+
+test('leaving upload stops the remaining queue without resending completed files', async () => {
+  const { uploadPendingFiles } = await import('../app/util/upload')
+  const entries = [{ status: 'ready' }, { status: 'ready' }]
+  let active = true
+  let calls = 0
+  await uploadPendingFiles(
+    entries,
+    async () => {
+      calls++
+      active = false
+    },
+    () => {},
+    () => active
+  )
+  expect(calls).toBe(1)
+  expect(entries.map(entry => entry.status)).toEqual(['uploaded', 'ready'])
+})
