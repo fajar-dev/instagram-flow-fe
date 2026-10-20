@@ -4,14 +4,7 @@
       :title="$t('pages.overview.overview')"
       :description="$t('pages.overview.scope')"
     />
-    <div class="flex justify-between gap-3">
-      <USelect
-        v-model="days"
-        :placeholder="$t('pages.overview.periodPlaceholder')"
-        :items="[7, 30, 90]"
-        :aria-label="$t('pages.overview.period')"
-        class="w-24"
-      />
+    <div class="flex justify-end gap-3">
       <UButton
         to="/content/upload"
         icon="i-lucide-upload"
@@ -45,10 +38,7 @@
         </p>
       </UCard>
     </div>
-    <ReportingRecordList
-      resource="jobs"
-      :days="days"
-    />
+    <ReportingRecordList resource="jobs" />
   </div>
 </template>
 
@@ -56,13 +46,13 @@
 import { reportingService } from '~/services/reporting/reporting-service'
 
 definePageMeta({ layout: 'dashboard' })
-const days = ref(30)
 const counts = ref<Record<string, number> | null>(null)
 const metrics = ['batches', 'assets', 'processing', 'ready', 'failed', 'publish']
 const { loading, failed, load } = useLatestRequest(
-  () => reportingService.overview(days.value),
-  (response) => { counts.value = response.data }
+  () => reportingService.overview(),
+  (response) => {
+    counts.value = response.data
+  }
 )
-watch(days, load)
 usePolling(load, 20000)
 </script>

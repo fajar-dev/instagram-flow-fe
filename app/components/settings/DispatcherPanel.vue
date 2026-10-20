@@ -36,12 +36,19 @@
           >
             <dt class="text-muted">
               {{ $t(`pages.integration.settingsFields.${key}`) }}
-            </dt><dd class="mt-1 font-medium text-highlighted">
-              {{ $t(settings[key] ? 'pages.integration.configured' : 'pages.integration.notConfigured') }}
+            </dt>
+            <dd class="mt-1 font-medium text-highlighted">
+              {{
+                $t(
+                  settings[key] ? 'pages.integration.configured' : 'pages.integration.notConfigured'
+                )
+              }}
             </dd>
           </div>
         </dl>
-        <div class="mt-6 flex flex-col gap-4 border-t border-default pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <div
+          class="mt-6 flex flex-col gap-4 border-t border-default pt-5 sm:flex-row sm:items-center sm:justify-between"
+        >
           <USwitch
             v-model="enabled"
             :label="$t('pages.integration.enableDispatch')"
@@ -83,8 +90,11 @@ const { loading, failed, load } = useLatestRequest(
 onMounted(() => {
   load()
 })
+
 async function save() {
-  if (saving.value) return
+  if (saving.value) {
+    return
+  }
   saving.value = true
   try {
     settings.value = (await settingsService.updateSettings(enabled.value)).data

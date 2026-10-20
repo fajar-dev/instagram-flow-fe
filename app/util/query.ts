@@ -9,7 +9,13 @@ interface ListQueryOptions {
 }
 
 /** Return mutable parameters so services can add feature-specific filters. */
-export function buildListQuery({ page = 1, perPage = 10, q = '', sortBy = '', order = 'DESC' }: ListQueryOptions = {}): URLSearchParams {
+export function buildListQuery({
+  page = 1,
+  perPage = 10,
+  q = '',
+  sortBy = '',
+  order = 'DESC'
+}: ListQueryOptions = {}): URLSearchParams {
   const params = new URLSearchParams({ page: String(page), limit: String(perPage), q })
   if (sortBy) {
     params.set('sortBy', sortBy)

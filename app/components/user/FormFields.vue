@@ -47,7 +47,9 @@
           v-model="form.isActive"
           :disabled="disabled"
         />
-        <span class="text-sm text-toned">{{ form.isActive ? $t(`${translationPrefix}.active`) : $t(`${translationPrefix}.inactive`) }}</span>
+        <span class="text-sm text-toned">{{
+          form.isActive ? $t(`${translationPrefix}.active`) : $t(`${translationPrefix}.inactive`)
+        }}</span>
       </div>
     </UFormField>
   </div>

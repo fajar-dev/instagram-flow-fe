@@ -1,3 +1,20 @@
+## 2026-10-20 — Keterbacaan kode
+
+## 20 Oktober 2026 — audit struktur lanjutan
+
+Audit struktur publikasi: state, polling, aksi dan lifecycle preview dipindahkan dari PublicationPanel ke usePublications. Cleanup hanya menutup lightbox miliknya; hasil/error yang terlambat setelah unmount diabaikan. Breadcrumb alias editor kini menautkan detail yang sama dengan route utama.
+
+- Merapikan source dan tests: jarak fungsi/method, blok import, indentasi, kondisi berkurung kurawal dan pemecahan object/parameter panjang.
+- Menambahkan command format dan aturan lint untuk menjaga pola yang sama. Perubahan alur reporting/breadcrumb yang sudah ada tetap dipertahankan.
+
+## 2026-10-20 — Seluruh periode pada reporting
+
+Overview, daftar Content dan count status tidak lagi memakai batas default 30 hari. Parameter days tetap opsional untuk filter eksplisit; pagination tetap berlaku.
+
+## 2026-10-20 — Breadcrumb desktop
+
+- Breadcrumb tampil di kanan atas header halaman pada desktop. Mobile dan desktop memakai useBreadcrumbs yang sama agar hierarki konsisten.
+
 # Perapian keputusan konten — 19 Oktober 2026
 
 - Header mobile memakai logo, judul halaman dan breadcrumb yang dapat dinavigasi, serta avatar di kanan. Breadcrumb mengikuti hierarki Content dan Profile tanpa menampilkan ID internal.

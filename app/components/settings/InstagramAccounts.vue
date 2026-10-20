@@ -44,22 +44,46 @@
                 {{ account.label }}
               </p>
               <p class="text-xs text-muted break-all">
-                {{ usernames[account.key] ? `@${usernames[account.key]}` : account.instagramUserId || account.key }}
+                {{
+                  usernames[account.key]
+                    ? `@${usernames[account.key]}`
+                    : account.instagramUserId || account.key
+                }}
               </p>
               <p
                 v-if="account.tokenExpiresAt"
                 class="text-xs text-muted mt-1"
               >
-                {{ $t('pages.publishing.tokenExpiry', { date: formatContentDate(account.tokenExpiresAt, locale) }) }}
+                {{
+                  $t('pages.publishing.tokenExpiry', {
+                    date: formatContentDate(account.tokenExpiresAt, locale)
+                  })
+                }}
               </p>
             </div>
           </div>
           <div class="flex items-center gap-2">
             <UBadge
-              :color="account.expired ? 'error' : account.enabled && account.configured ? 'primary' : 'neutral'"
+              :color="
+                account.expired
+                  ? 'error'
+                  : account.enabled && account.configured
+                    ? 'primary'
+                    : 'neutral'
+              "
               variant="subtle"
             >
-              {{ $t(account.expired ? 'pages.publishing.expired' : !account.enabled ? 'pages.publishing.disabled' : account.configured ? 'pages.publishing.configured' : 'pages.publishing.notConfigured') }}
+              {{
+                $t(
+                  account.expired
+                    ? 'pages.publishing.expired'
+                    : !account.enabled
+                      ? 'pages.publishing.disabled'
+                      : account.configured
+                        ? 'pages.publishing.configured'
+                        : 'pages.publishing.notConfigured'
+                )
+              }}
             </UBadge>
             <UButton
               size="sm"
@@ -89,10 +113,14 @@ const handleError = useServiceError()
 const accounts = ref<InstagramAccount[]>([])
 const usernames = ref<Record<string, string>>({})
 const checking = ref('')
-const { loading, failed, load } = useLatestRequest(() => instagramService.accounts(), (response) => {
-  accounts.value = response.data
-})
+const { loading, failed, load } = useLatestRequest(
+  () => instagramService.accounts(),
+  (response) => {
+    accounts.value = response.data
+  }
+)
 onMounted(load)
+
 async function verify(key: string) {
   checking.value = key
   try {

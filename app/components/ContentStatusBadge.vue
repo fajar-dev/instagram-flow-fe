@@ -11,5 +11,11 @@
 const props = defineProps<{
   status: string
 }>()
-const color = computed(() => ['FAILED', 'REJECTED', 'OUTDATED'].includes(props.status) ? 'error' : ['READY_FOR_REVIEW', 'PUBLISH', 'COMPLETED'].includes(props.status) ? 'success' : 'neutral')
+const color = computed(() =>
+  ['FAILED', 'REJECTED', 'OUTDATED'].includes(props.status)
+    ? 'error'
+    : ['READY_FOR_REVIEW', 'PUBLISH', 'COMPLETED'].includes(props.status)
+        ? 'success'
+        : 'neutral'
+)
 </script>

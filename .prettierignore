@@ -1,0 +1,7 @@
+node_modules
+bun.lock
+.nuxt
+.output
+coverage
+public
+.env*

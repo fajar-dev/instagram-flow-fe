@@ -32,7 +32,11 @@
             {{ $t(`pages.content.fields.${field}`) }}
           </dt>
           <dd class="font-medium text-highlighted break-words">
-            {{ field === 'documentationDate' ? formatDate(detail.batch[field], locale) : detail.batch[field] || '—' }}
+            {{
+              field === 'documentationDate'
+                ? formatDate(detail.batch[field], locale)
+                : detail.batch[field] || '—'
+            }}
           </dd>
         </div>
         <div class="grid grid-cols-2 gap-4">
@@ -77,15 +81,21 @@
         }"
       />
 
-      <UAccordion :items="[{ label: $t('pages.content.technicalDetails'), slot: 'technical', icon: 'i-lucide-info' }]">
+      <UAccordion
+        :items="[
+          { label: $t('pages.content.technicalDetails'), slot: 'technical', icon: 'i-lucide-info' }
+        ]"
+      >
         <template #technical>
           <dl class="grid grid-cols-2 gap-3 text-xs pb-3">
             <dt class="text-muted">
               {{ $t('pages.aiJob.attempt') }}
-            </dt><dd>{{ detail.job.attemptNo }}</dd>
+            </dt>
+            <dd>{{ detail.job.attemptNo }}</dd>
             <dt class="text-muted">
               {{ $t('pages.aiJob.execution') }}
-            </dt><dd class="break-all">
+            </dt>
+            <dd class="break-all">
               {{ detail.job.lastExecutionId || '—' }}
             </dd>
           </dl>
@@ -103,15 +113,27 @@ import { formatDate } from '~/util/date'
 const props = defineProps<{ detail: JobDetails }>()
 const { t, locale } = useI18n()
 const milestones = computed(() => [
-  { label: t('pages.aiJob.created'), icon: 'i-lucide-cloud-upload', date: props.detail.job.createdAt },
+  {
+    label: t('pages.aiJob.created'),
+    icon: 'i-lucide-cloud-upload',
+    date: props.detail.job.createdAt
+  },
   { label: t('pages.aiJob.started'), icon: 'i-lucide-sparkles', date: props.detail.job.startedAt },
-  { label: t('pages.aiJob.finished'), icon: 'i-lucide-check-check', date: props.detail.job.completedAt }
+  {
+    label: t('pages.aiJob.finished'),
+    icon: 'i-lucide-check-check',
+    date: props.detail.job.completedAt
+  }
 ])
 
 const currentStep = computed(() => milestones.value.findLastIndex(step => Boolean(step.date)))
-const steps = computed(() => milestones.value.map(step => ({
-  title: step.label,
-  icon: step.icon,
-  description: step.date ? `${formatContentDate(step.date, locale.value)} WIB` : t('pages.content.pendingStep')
-})))
+const steps = computed(() =>
+  milestones.value.map(step => ({
+    title: step.label,
+    icon: step.icon,
+    description: step.date
+      ? `${formatContentDate(step.date, locale.value)} WIB`
+      : t('pages.content.pendingStep')
+  }))
+)
 </script>

@@ -1,7 +1,13 @@
 import { expect, test } from 'bun:test'
 import { latestRejection } from '../app/util/rejection'
 
-const review = (id, decision, revisionId, createdAt) => ({ id, decision, revisionId, createdAt, notes: id })
+const review = (id, decision, revisionId, createdAt) => ({
+  id,
+  decision,
+  revisionId,
+  createdAt,
+  notes: id
+})
 const detail = {
   draft: { reviewStatus: 'REJECTED' },
   revision: { id: 'current' },

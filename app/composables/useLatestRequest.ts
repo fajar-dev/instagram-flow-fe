@@ -9,7 +9,9 @@ export function useLatestRequest<T>(request: () => Promise<T>, apply: (result: T
   let disposed = false
 
   async function load() {
-    if (disposed) return
+    if (disposed) {
+      return
+    }
     const current = ++version
     loading.value = true
     try {
@@ -20,11 +22,15 @@ export function useLatestRequest<T>(request: () => Promise<T>, apply: (result: T
       }
     } catch (error) {
       if (!disposed && current === version) {
-        if (!failed.value) handleError(error)
+        if (!failed.value) {
+          handleError(error)
+        }
         failed.value = true
       }
     } finally {
-      if (!disposed && current === version) loading.value = false
+      if (!disposed && current === version) {
+        loading.value = false
+      }
     }
   }
 

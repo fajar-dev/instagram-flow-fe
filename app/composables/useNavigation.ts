@@ -21,37 +21,90 @@ export const useNavigation = () => {
   const isCollapsed = useState('sidebar-collapsed', () => false)
   const expandedItems = useState<string[]>('sidebar-expanded', () => ['group:main'])
 
-  const navGroups = computed<NavGroup[]>(() => [{
-    id: 'content',
-    items: [
-      { id: 'overview', label: t('pages.overview.overview'), to: '/overview', icon: 'i-lucide-layout-dashboard' },
-      { id: 'content', label: t('pages.content.title'), to: '/content', icon: 'i-lucide-file-image' },
-      { id: 'media', label: t('pages.content.media'), to: '/content/media', icon: 'i-lucide-images' },
-      { id: 'logs', label: t('pages.content.logs'), to: '/activity-logs', icon: 'i-lucide-scroll-text' },
-      { id: 'settings', label: t('pages.integration.settings'), to: '/settings', icon: 'i-lucide-settings-2' },
-      { id: 'users', label: t('components.sidebar.nav.users'), to: '/user', icon: 'i-lucide-users' }
-    ]
-  }])
+  const navGroups = computed<NavGroup[]>(() => [
+    {
+      id: 'content',
+      items: [
+        {
+          id: 'overview',
+          label: t('pages.overview.overview'),
+          to: '/overview',
+          icon: 'i-lucide-layout-dashboard'
+        },
+        {
+          id: 'content',
+          label: t('pages.content.title'),
+          to: '/content',
+          icon: 'i-lucide-file-image'
+        },
+        {
+          id: 'media',
+          label: t('pages.content.media'),
+          to: '/content/media',
+          icon: 'i-lucide-images'
+        },
+        {
+          id: 'logs',
+          label: t('pages.content.logs'),
+          to: '/activity-logs',
+          icon: 'i-lucide-scroll-text'
+        },
+        {
+          id: 'settings',
+          label: t('pages.integration.settings'),
+          to: '/settings',
+          icon: 'i-lucide-settings-2'
+        },
+        {
+          id: 'users',
+          label: t('components.sidebar.nav.users'),
+          to: '/user',
+          icon: 'i-lucide-users'
+        }
+      ]
+    }
+  ])
 
-  const utilityItems = computed(() => navGroups.value.flatMap(group => group.items)
-    .filter(item => ['logs', 'settings', 'users'].includes(item.id)))
+  const utilityItems = computed(() =>
+    navGroups.value
+      .flatMap(group => group.items)
+      .filter(item => ['logs', 'settings', 'users'].includes(item.id))
+  )
   const mobileItems = computed<NavItem[]>(() => {
     const items = navGroups.value.flatMap(group => group.items)
     return [
       ...items.filter(item => ['overview', 'content'].includes(item.id)),
-      { id: 'upload', label: t('pages.content.upload'), to: '/content/upload', icon: 'i-lucide-cloud-upload' },
+      {
+        id: 'upload',
+        label: t('pages.content.upload'),
+        to: '/content/upload',
+        icon: 'i-lucide-cloud-upload'
+      },
       ...items.filter(item => item.id === 'media')
     ]
   })
 
-  const isItemActive = (item: NavItem) => isNavigationActive(
-    route.path.startsWith('/ai-jobs') || route.path.startsWith('/content-review') ? '/content' : route.path,
-    item.to,
-    [...navGroups.value.flatMap(group => group.items.flatMap(entry => [entry.to, ...(entry.children?.map(child => child.to) ?? [])])), '/content/upload']
-  )
+  const isItemActive = (item: NavItem) =>
+    isNavigationActive(
+      route.path.startsWith('/ai-jobs') || route.path.startsWith('/content-review')
+        ? '/content'
+        : route.path,
+      item.to,
+      [
+        ...navGroups.value.flatMap(group =>
+          group.items.flatMap(entry => [
+            entry.to,
+            ...(entry.children?.map(child => child.to) ?? [])
+          ])
+        ),
+        '/content/upload'
+      ]
+    )
 
   const isParentActive = (item: NavItem) => {
-    if (!item.children) return false
+    if (!item.children) {
+      return false
+    }
     return item.children.some(child => isItemActive(child))
   }
 

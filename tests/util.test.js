@@ -23,7 +23,13 @@ test('list queries preserve reserved characters and only include ordering with a
   const defaults = buildListQuery()
   expect(defaults.get('page')).toBe('1')
   expect(defaults.has('order')).toBe(false)
-  const params = buildListQuery({ page: 2, perPage: 25, q: 'a+b & c@example.com', sortBy: 'name', order: 'ASC' })
+  const params = buildListQuery({
+    page: 2,
+    perPage: 25,
+    q: 'a+b & c@example.com',
+    sortBy: 'name',
+    order: 'ASC'
+  })
   const decoded = new URLSearchParams(params.toString())
   expect(decoded.get('q')).toBe('a+b & c@example.com')
   expect(decoded.get('limit')).toBe('25')
@@ -56,7 +62,15 @@ test('navigation selects the most specific route and respects path boundaries', 
 })
 
 test('mobile navigation keeps upload and media distinct from content detail', () => {
-  const targets = ['/overview', '/content', '/content/upload', '/content/media', '/activity-logs', '/settings', '/user']
+  const targets = [
+    '/overview',
+    '/content',
+    '/content/upload',
+    '/content/media',
+    '/activity-logs',
+    '/settings',
+    '/user'
+  ]
   for (const path of ['/content/upload', '/content/media']) {
     expect(isNavigationActive(path, '/content', targets)).toBe(false)
     expect(isNavigationActive(path, path, targets)).toBe(true)

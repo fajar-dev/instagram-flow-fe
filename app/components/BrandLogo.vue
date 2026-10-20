@@ -19,10 +19,13 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
-  isCollapsed?: boolean
-  to?: string
-}>(), {
-  to: '/'
-})
+withDefaults(
+  defineProps<{
+    isCollapsed?: boolean
+    to?: string
+  }>(),
+  {
+    to: '/'
+  }
+)
 </script>

@@ -21,8 +21,16 @@ test('split batch/job clients preserve idempotency headers and request payloads'
   expect((await batchService.batch({ projectName: 'AMTI' }, 'batch-key')).data.id).toBe('batch-1')
   expect((await jobService.process('batch-1', ['feed'], 'process-key')).data.jobId).toBe('job-1')
   await jobService.retry('job-1', 'retry-key')
-  expect(calls.map(call => call.headers['Idempotency-Key'])).toEqual(['batch-key', 'process-key', 'retry-key'])
-  expect(calls.map(call => call.url)).toEqual(['/batches', '/batches/batch-1/process', '/jobs/job-1/retry'])
+  expect(calls.map(call => call.headers['Idempotency-Key'])).toEqual([
+    'batch-key',
+    'process-key',
+    'retry-key'
+  ])
+  expect(calls.map(call => call.url)).toEqual([
+    '/batches',
+    '/batches/batch-1/process',
+    '/jobs/job-1/retry'
+  ])
   expect(JSON.parse(calls[1].data)).toEqual({ requestedOutputs: ['feed'] })
 })
 
@@ -57,29 +65,43 @@ test('all JSON feature clients return the same ApiResponse envelope as user', as
   const envelope = { status: 'success', message: 'Success', data: { id: 'id' } }
   apiService.client.defaults.adapter = async config => response(config, envelope)
   const results = await Promise.all([
-    batchService.limits(), batchService.batch({}, 'batch-key'),
+    batchService.limits(),
+    batchService.batch({}, 'batch-key'),
     batchService.upload('batch', new File(['x'], 'image.png'), () => {}),
-    jobService.details('job'), jobService.process('batch', ['feed'], 'process-key'), jobService.retry('job', 'retry-key'),
-    draftService.edit('draft', {}), draftService.reject('draft', {}), mediaService.archive('asset'),
-    settingsService.settings(), settingsService.updateSettings(false), reportingService.overview(30)
+    jobService.details('job'),
+    jobService.process('batch', ['feed'], 'process-key'),
+    jobService.retry('job', 'retry-key'),
+    draftService.edit('draft', {}),
+    draftService.reject('draft', {}),
+    mediaService.archive('asset'),
+    settingsService.settings(),
+    settingsService.updateSettings(false),
+    reportingService.overview(30)
   ])
-  for (const result of results) expect(result).toEqual(envelope)
+  for (const result of results) {
+    expect(result).toEqual(envelope)
+  }
 })
 
-test('content tab counts use one summary request with the list date scope', async () => {
+test('content tab counts include all dates when no period is selected', async () => {
   apiService.client.defaults.adapter = async (config) => {
     expect(config.url).toBe('/content/counts')
-    expect(config.params).toEqual({ days: 30 })
+    expect(config.params).toEqual({})
     return response(config, { data: { QUEUED: 2, READY_FOR_REVIEW: 0, PUBLISH: 4 } })
   }
-  expect((await reportingService.contentCounts(30)).data.PUBLISH).toBe(4)
+  expect((await reportingService.contentCounts()).data.PUBLISH).toBe(4)
 })
 
 test('progressive media requests authenticated URLs rather than downloading the full image first', async () => {
   apiService.client.defaults.adapter = async (config) => {
     expect(config.url).toBe('/assets/asset-1/previews')
     expect(config.responseType).not.toBe('blob')
-    return response(config, { data: { previewUrl: 'https://storage.test/preview', thumbnailUrl: 'https://storage.test/thumbnail' } })
+    return response(config, {
+      data: {
+        previewUrl: 'https://storage.test/preview',
+        thumbnailUrl: 'https://storage.test/thumbnail'
+      }
+    })
   }
   expect((await mediaService.previews('asset-1')).data.thumbnailUrl).toContain('/thumbnail')
 })

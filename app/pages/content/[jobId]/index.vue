@@ -59,10 +59,15 @@ const retrying = ref(false)
 const retryKey = crypto.randomUUID()
 const { loading, failed, load } = useLatestRequest(
   () => jobService.details(jobId),
-  (response) => { detail.value = response.data }
+  (response) => {
+    detail.value = response.data
+  }
 )
+
 async function retry() {
-  if (retrying.value) return
+  if (retrying.value) {
+    return
+  }
   retrying.value = true
   try {
     const job = (await jobService.retry(jobId, retryKey)).data
@@ -73,5 +78,6 @@ async function retry() {
     retrying.value = false
   }
 }
+
 usePolling(load)
 </script>

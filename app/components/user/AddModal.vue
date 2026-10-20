@@ -36,7 +36,11 @@
           :label="$t('components.user.addModal.cancel')"
           color="neutral"
           variant="soft"
-          @click="() => { open = false }"
+          @click="
+            () => {
+              open = false
+            }
+          "
         />
         <UButton
           type="submit"
@@ -69,7 +73,10 @@ const { t } = useI18n()
 
 const schema = z.object({
   name: z.string().min(1, t('components.user.addModal.nameRequired')),
-  email: z.string().min(1, t('components.user.addModal.emailRequired')).email(t('components.user.addModal.emailInvalid')),
+  email: z
+    .string()
+    .min(1, t('components.user.addModal.emailRequired'))
+    .email(t('components.user.addModal.emailInvalid')),
   password: z.string().min(6, t('components.user.addModal.passwordMin')),
   isActive: z.boolean()
 })
@@ -91,7 +98,9 @@ const resetForm = () => {
 }
 
 const handleSubmit = async () => {
-  if (isSubmitting.value || isUploading.value) return
+  if (isSubmitting.value || isUploading.value) {
+    return
+  }
   isSubmitting.value = true
   try {
     const response = await userService.create(form)
@@ -113,6 +122,8 @@ const handleSubmit = async () => {
 }
 
 watch(open, (val) => {
-  if (!val) resetForm()
+  if (!val) {
+    resetForm()
+  }
 })
 </script>

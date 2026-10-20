@@ -37,7 +37,11 @@
           :label="$t('components.user.updateModal.cancel')"
           color="neutral"
           variant="soft"
-          @click="() => { open = false }"
+          @click="
+            () => {
+              open = false
+            }
+          "
         />
         <UButton
           type="submit"
@@ -76,8 +80,15 @@ const { t } = useI18n()
 // Schema for updating (password is optional, min 6 if filled)
 const schema = z.object({
   name: z.string().min(1, t('components.user.updateModal.nameRequired')),
-  email: z.string().min(1, t('components.user.updateModal.emailRequired')).email(t('components.user.updateModal.emailInvalid')),
-  password: z.string().min(6, t('components.user.updateModal.passwordMin')).optional().or(z.literal('')),
+  email: z
+    .string()
+    .min(1, t('components.user.updateModal.emailRequired'))
+    .email(t('components.user.updateModal.emailInvalid')),
+  password: z
+    .string()
+    .min(6, t('components.user.updateModal.passwordMin'))
+    .optional()
+    .or(z.literal('')),
   isActive: z.boolean()
 })
 
@@ -100,8 +111,12 @@ const populateForm = () => {
 }
 
 const handleSubmit = async () => {
-  if (isSubmitting.value || isUploading.value) return
-  if (!props.user) return
+  if (isSubmitting.value || isUploading.value) {
+    return
+  }
+  if (!props.user) {
+    return
+  }
   isSubmitting.value = true
 
   // Build payload

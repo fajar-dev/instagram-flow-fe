@@ -82,19 +82,25 @@ const formPassword = reactive({
 
 const requiresCurrentPassword = computed(() => authState.user?.hasPassword !== false)
 
-const passwordSchema = computed(() => z.object({
-  oldPassword: requiresCurrentPassword.value
-    ? z.string().min(1, t('pages.profile.password.currentPasswordRequired'))
-    : z.string().optional(),
-  newPassword: z.string().min(6, t('pages.profile.password.newPasswordMin')),
-  confirmPassword: z.string().min(6, t('pages.profile.password.confirmPasswordMin'))
-}).refine(
-  data => data.confirmPassword === data.newPassword,
-  { message: t('pages.profile.password.passwordMismatch'), path: ['confirmPassword'] }
-))
+const passwordSchema = computed(() =>
+  z
+    .object({
+      oldPassword: requiresCurrentPassword.value
+        ? z.string().min(1, t('pages.profile.password.currentPasswordRequired'))
+        : z.string().optional(),
+      newPassword: z.string().min(6, t('pages.profile.password.newPasswordMin')),
+      confirmPassword: z.string().min(6, t('pages.profile.password.confirmPasswordMin'))
+    })
+    .refine(data => data.confirmPassword === data.newPassword, {
+      message: t('pages.profile.password.passwordMismatch'),
+      path: ['confirmPassword']
+    })
+)
 
 const handlePasswordSubmit = async () => {
-  if (isSavingPassword.value) return
+  if (isSavingPassword.value) {
+    return
+  }
   isSavingPassword.value = true
 
   const payload: UpdatePasswordPayload = {

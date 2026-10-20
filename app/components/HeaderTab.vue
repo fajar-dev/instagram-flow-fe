@@ -3,7 +3,11 @@
     :to="to"
     :aria-current="active ? 'page' : undefined"
     class="pb-3 text-sm font-medium border-b-2 transition-colors cursor-pointer shrink-0 inline-flex items-center gap-2"
-    :class="active ? 'border-primary text-primary font-semibold' : 'border-transparent text-muted hover:text-highlighted'"
+    :class="
+      active
+        ? 'border-primary text-primary font-semibold'
+        : 'border-transparent text-muted hover:text-highlighted'
+    "
   >
     {{ label }}
     <UBadge

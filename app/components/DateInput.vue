@@ -36,7 +36,9 @@ const model = defineModel<string>({ default: '' })
 defineProps<{ disabled?: boolean }>()
 const inputDate = useTemplateRef('inputDate')
 const date = computed<DateValue | undefined>({
-  get: () => model.value ? parseDate(model.value) : undefined,
-  set: (value) => { model.value = value?.toString() ?? '' }
+  get: () => (model.value ? parseDate(model.value) : undefined),
+  set: (value) => {
+    model.value = value?.toString() ?? ''
+  }
 })
 </script>

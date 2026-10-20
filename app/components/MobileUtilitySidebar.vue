@@ -4,7 +4,13 @@
     side="left"
     :title="$t('components.mobileSidebar.title')"
     :description="$t('components.mobileSidebar.description')"
-    :ui="{ content: 'w-64 max-w-full', header: 'min-h-14 p-3 sm:p-3', title: 'text-sm', description: 'sr-only', body: 'p-2 sm:p-2' }"
+    :ui="{
+      content: 'w-64 max-w-full',
+      header: 'min-h-14 p-3 sm:p-3',
+      title: 'text-sm',
+      description: 'sr-only',
+      body: 'p-2 sm:p-2'
+    }"
   >
     <UButton
       color="neutral"
@@ -43,7 +49,11 @@
         orientation="vertical"
         :items="items"
         :aria-label="$t('components.mobileSidebar.title')"
-        :ui="{ link: 'min-h-9 text-sm px-2.5 py-2', linkLeadingIcon: 'size-4', childLink: 'min-h-9 text-sm px-2.5 py-2' }"
+        :ui="{
+          link: 'min-h-9 text-sm px-2.5 py-2',
+          linkLeadingIcon: 'size-4',
+          childLink: 'min-h-9 text-sm px-2.5 py-2'
+        }"
         class="w-full"
       />
     </template>
@@ -58,22 +68,33 @@ const { utilityItems, isItemActive } = useNavigation()
 const open = ref(false)
 
 const active = computed(() => utilityItems.value.some(isItemActive))
-const items = computed<NavigationMenuItem[]>(() => utilityItems.value.map(item => ({
-  label: item.label,
-  icon: item.icon,
-  to: item.to,
-  active: isItemActive(item),
-  onSelect: () => { open.value = false }
-})))
+const items = computed<NavigationMenuItem[]>(() =>
+  utilityItems.value.map(item => ({
+    label: item.label,
+    icon: item.icon,
+    to: item.to,
+    active: isItemActive(item),
+    onSelect: () => {
+      open.value = false
+    }
+  }))
+)
 
-watch(() => route.fullPath, () => {
-  open.value = false
-})
+watch(
+  () => route.fullPath,
+  () => {
+    open.value = false
+  }
+)
 
 let desktopQuery: MediaQueryList | undefined
+
 function closeOnDesktop() {
-  if (desktopQuery?.matches) open.value = false
+  if (desktopQuery?.matches) {
+    open.value = false
+  }
 }
+
 onMounted(() => {
   desktopQuery = window.matchMedia('(min-width: 1024px)')
   desktopQuery.addEventListener('change', closeOnDesktop)

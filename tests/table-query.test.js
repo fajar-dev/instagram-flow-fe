@@ -9,9 +9,11 @@ test('changing page size or sort resets to the first page with one reload', asyn
   const scope = effectScope()
   let calls = 0
   try {
-    const query = scope.run(() => useTableQuery(() => {
-      calls++
-    }))
+    const query = scope.run(() =>
+      useTableQuery(() => {
+        calls++
+      })
+    )
     query.page.value = 4
     await nextTick()
     calls = 0
@@ -30,8 +32,11 @@ test('changing page size or sort resets to the first page with one reload', asyn
   } finally {
     scope.stop()
     for (const [key, value] of Object.entries(old)) {
-      if (value === undefined) delete globalThis[key]
-      else globalThis[key] = value
+      if (value === undefined) {
+        delete globalThis[key]
+      } else {
+        globalThis[key] = value
+      }
     }
   }
 })

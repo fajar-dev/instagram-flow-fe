@@ -6,18 +6,28 @@ import type { UpdatePasswordPayload, UpdateProfilePayload } from '../types/profi
 
 export class AuthService {
   private readonly userState = ref<User | null>(null)
+
   private readonly tokenState = ref<string | null>(null)
+
   readonly user = readonly(this.userState)
+
   readonly token = readonly(this.tokenState)
+
   private sessionVersion = 0
 
   async initialize() {
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined') {
+      return
+    }
     this.tokenState.value = localStorage.getItem('accessToken')
-    if (!this.token.value) return
+    if (!this.token.value) {
+      return
+    }
     try {
       const stored = localStorage.getItem('user')
-      if (stored) this.userState.value = JSON.parse(stored)
+      if (stored) {
+        this.userState.value = JSON.parse(stored)
+      }
     } catch {
       this.clearSession()
       return
@@ -27,7 +37,12 @@ export class AuthService {
       const response = await apiService.client.get<ApiResponse<User>>('/auth/me', {
         headers: { Authorization: `Bearer ${this.token.value}` }
       })
-      if (!this.token.value || (version !== this.sessionVersion && this.user.value?.id !== response.data.data.id)) return
+      if (
+        !this.token.value
+        || (version !== this.sessionVersion && this.user.value?.id !== response.data.data.id)
+      ) {
+        return
+      }
       this.userState.value = response.data.data
       localStorage.setItem('user', JSON.stringify(response.data.data))
     } catch {
@@ -39,17 +54,27 @@ export class AuthService {
     this.sessionVersion++
     this.tokenState.value = null
     this.userState.value = null
-    if (typeof window === 'undefined') return
-    for (const key of ['accessToken', 'refreshToken', 'user']) localStorage.removeItem(key)
+    if (typeof window === 'undefined') {
+      return
+    }
+    for (const key of ['accessToken', 'refreshToken', 'user']) {
+      localStorage.removeItem(key)
+    }
   }
 
   async refreshToken(): Promise<string | null> {
-    if (typeof window === 'undefined') return null
+    if (typeof window === 'undefined') {
+      return null
+    }
     const refreshToken = localStorage.getItem('refreshToken')
-    if (!refreshToken) return null
+    if (!refreshToken) {
+      return null
+    }
     const version = this.sessionVersion
     const response = await apiService.client.post<AuthResponse>('/auth/refresh', { refreshToken })
-    if (version !== this.sessionVersion) return null
+    if (version !== this.sessionVersion) {
+      return null
+    }
     this.setSession(response.data)
     return response.data.data.accessToken
   }
@@ -67,17 +92,24 @@ export class AuthService {
   }
 
   async forgotPassword(email: string): Promise<ApiResponse<null>> {
-    const response = await apiService.client.post<ApiResponse<null>>('/auth/forgot-password', { email })
+    const response = await apiService.client.post<ApiResponse<null>>('/auth/forgot-password', {
+      email
+    })
     return response.data
   }
 
   async validateResetPassword(email: string, token: string): Promise<ApiResponse<null>> {
-    const response = await apiService.client.get<ApiResponse<null>>('/auth/validate-reset-token', { params: { email, token } })
+    const response = await apiService.client.get<ApiResponse<null>>('/auth/validate-reset-token', {
+      params: { email, token }
+    })
     return response.data
   }
 
   async resetPassword(token: string, newPassword: string): Promise<ApiResponse<null>> {
-    const response = await apiService.client.post<ApiResponse<null>>('/auth/reset-password', { token, newPassword })
+    const response = await apiService.client.post<ApiResponse<null>>('/auth/reset-password', {
+      token,
+      newPassword
+    })
     return response.data
   }
 
@@ -88,7 +120,9 @@ export class AuthService {
     })
     if (response.data.success && this.token.value && this.user.value?.id === userId) {
       this.userState.value = response.data.data
-      if (typeof window !== 'undefined') localStorage.setItem('user', JSON.stringify(response.data.data))
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(response.data.data))
+      }
     }
     return response.data
   }
@@ -98,9 +132,16 @@ export class AuthService {
     const response = await apiService.client.put<ApiResponse<null>>('/auth/password', payload, {
       headers: { Authorization: `Bearer ${this.token.value}` }
     })
-    if (response.data.success && this.token.value && this.user.value?.id === userId && this.userState.value) {
+    if (
+      response.data.success
+      && this.token.value
+      && this.user.value?.id === userId
+      && this.userState.value
+    ) {
       this.userState.value = { ...this.userState.value, hasPassword: true }
-      if (typeof window !== 'undefined') localStorage.setItem('user', JSON.stringify(this.userState.value))
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(this.userState.value))
+      }
     }
     return response.data
   }
@@ -120,7 +161,9 @@ export class AuthService {
     const { user, accessToken, refreshToken } = response.data
     this.tokenState.value = accessToken
     this.userState.value = user
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined') {
+      return
+    }
     localStorage.setItem('accessToken', accessToken)
     localStorage.setItem('refreshToken', refreshToken)
     localStorage.setItem('user', JSON.stringify(user))

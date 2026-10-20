@@ -131,11 +131,24 @@ import type { JobDetails } from '~/types/ai-job'
 const props = defineProps<{ detail: JobDetails, disabled?: boolean }>()
 const emit = defineEmits<{ created: [] }>()
 const { t } = useI18n()
-const { accounts, loading, submitting, form, schema, design, loadAccounts, submit } = usePublicationForm(() => props.detail, () => {
-  emit('created')
-})
-const placements = computed(() => [{ label: t('pages.contentReview.feed'), value: 'feed' }, { label: t('pages.contentReview.story'), value: 'story' }])
-const sources = computed(() => [{ label: t('pages.publishing.photo'), value: 'photo' }, { label: t('pages.publishing.design'), value: 'design', disabled: !design.value }])
-const modes = computed(() => [{ label: t('pages.publishing.now'), value: 'now' }, { label: t('pages.publishing.schedule'), value: 'schedule' }])
+const { accounts, loading, submitting, form, schema, design, loadAccounts, submit }
+  = usePublicationForm(
+    () => props.detail,
+    () => {
+      emit('created')
+    }
+  )
+const placements = computed(() => [
+  { label: t('pages.contentReview.feed'), value: 'feed' },
+  { label: t('pages.contentReview.story'), value: 'story' }
+])
+const sources = computed(() => [
+  { label: t('pages.publishing.photo'), value: 'photo' },
+  { label: t('pages.publishing.design'), value: 'design', disabled: !design.value }
+])
+const modes = computed(() => [
+  { label: t('pages.publishing.now'), value: 'now' },
+  { label: t('pages.publishing.schedule'), value: 'schedule' }
+])
 onMounted(loadAccounts)
 </script>

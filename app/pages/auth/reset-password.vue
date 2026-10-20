@@ -52,7 +52,11 @@
                 :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
                 class="text-dimmed hover:text-toned p-1 hover:bg-transparent cursor-pointer"
                 :aria-label="$t('pages.auth.resetPassword.togglePasswordVisibility')"
-                @click="() => { showPassword = !showPassword }"
+                @click="
+                  () => {
+                    showPassword = !showPassword
+                  }
+                "
               />
             </template>
           </UInput>
@@ -78,7 +82,11 @@
                 :icon="showConfirmPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
                 class="text-dimmed hover:text-toned p-1 hover:bg-transparent cursor-pointer"
                 :aria-label="$t('pages.auth.resetPassword.toggleConfirmPasswordVisibility')"
-                @click="() => { showConfirmPassword = !showConfirmPassword }"
+                @click="
+                  () => {
+                    showConfirmPassword = !showConfirmPassword
+                  }
+                "
               />
             </template>
           </UInput>
@@ -143,16 +151,17 @@ const showConfirmPassword = ref(false)
 const loading = ref(false)
 const isValidating = ref(true)
 
-const resetSchema = computed(() => z.object({
-  password: z.string().min(6, t('pages.auth.resetPassword.passwordMin')),
-  confirmPassword: z.string().min(1, t('pages.auth.resetPassword.confirmPasswordRequired'))
-}).refine(
-  data => data.password === data.confirmPassword,
-  {
-    message: t('pages.auth.resetPassword.passwordMismatch'),
-    path: ['confirmPassword']
-  }
-))
+const resetSchema = computed(() =>
+  z
+    .object({
+      password: z.string().min(6, t('pages.auth.resetPassword.passwordMin')),
+      confirmPassword: z.string().min(1, t('pages.auth.resetPassword.confirmPasswordRequired'))
+    })
+    .refine(data => data.password === data.confirmPassword, {
+      message: t('pages.auth.resetPassword.passwordMismatch'),
+      path: ['confirmPassword']
+    })
+)
 
 onMounted(async () => {
   if (!token.value || !email.value) {

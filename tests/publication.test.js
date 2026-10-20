@@ -20,7 +20,13 @@ test('publication requests preserve account selection, schedule, snapshot revisi
     calls.push(config)
     return { config, data: { success: true, data: [] }, status: 200, statusText: 'OK', headers: {} }
   }
-  const payload = { revisionId: 'revision', accountKey: 'one', source: 'photo', placement: 'feed', scheduledAt: '2026-10-20T02:30:00.000Z' }
+  const payload = {
+    revisionId: 'revision',
+    accountKey: 'one',
+    source: 'photo',
+    placement: 'feed',
+    scheduledAt: '2026-10-20T02:30:00.000Z'
+  }
   await publicationService.create('draft', payload, 'unique-publication-key')
   await publicationService.list('draft')
   await publicationService.cancel('publication')
@@ -29,5 +35,12 @@ test('publication requests preserve account selection, schedule, snapshot revisi
   await instagramService.verify('account')
   expect(JSON.parse(calls[0].data)).toEqual(payload)
   expect(calls[0].headers['Idempotency-Key']).toBe('unique-publication-key')
-  expect(calls.map(call => call.url)).toEqual(['/drafts/draft/publications', '/drafts/draft/publications', '/publications/publication/cancel', '/publications/publication/retry', '/instagram/accounts', '/instagram/accounts/account/verify'])
+  expect(calls.map(call => call.url)).toEqual([
+    '/drafts/draft/publications',
+    '/drafts/draft/publications',
+    '/publications/publication/cancel',
+    '/publications/publication/retry',
+    '/instagram/accounts',
+    '/instagram/accounts/account/verify'
+  ])
 })

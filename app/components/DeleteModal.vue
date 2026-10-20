@@ -30,15 +30,17 @@
           <UButton
             color="neutral"
             variant="outline"
-
             class="flex-1 justify-center"
-            @click="() => { open = false }"
+            @click="
+              () => {
+                open = false
+              }
+            "
           >
             {{ $t('components.deleteModal.cancel') }}
           </UButton>
           <UButton
             color="error"
-
             :loading="loading"
             class="flex-1 justify-center"
             @click="$emit('confirm')"
@@ -54,15 +56,18 @@
 <script setup lang="ts">
 const open = defineModel<boolean>({ default: false })
 
-withDefaults(defineProps<{
-  title?: string
-  itemName?: string
-  loading?: boolean
-}>(), {
-  title: '',
-  itemName: '',
-  loading: false
-})
+withDefaults(
+  defineProps<{
+    title?: string
+    itemName?: string
+    loading?: boolean
+  }>(),
+  {
+    title: '',
+    itemName: '',
+    loading: false
+  }
+)
 
 defineEmits<{ confirm: [] }>()
 </script>

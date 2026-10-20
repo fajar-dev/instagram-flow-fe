@@ -13,10 +13,17 @@
 const props = defineProps<{ src?: string | null, alt: string }>()
 const { lightboxImage, openLightbox, closeLightbox } = useLightbox()
 
-watch(() => props.src, (_, previous) => {
-  if (previous && lightboxImage.value === previous) closeLightbox()
-})
+watch(
+  () => props.src,
+  (_, previous) => {
+    if (previous && lightboxImage.value === previous) {
+      closeLightbox()
+    }
+  }
+)
 onBeforeUnmount(() => {
-  if (props.src && lightboxImage.value === props.src) closeLightbox()
+  if (props.src && lightboxImage.value === props.src) {
+    closeLightbox()
+  }
 })
 </script>

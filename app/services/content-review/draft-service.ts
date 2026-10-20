@@ -4,18 +4,36 @@ import { requestHeaders } from '../shared/request-headers'
 import type { Draft, Revision } from '~/types/content-review'
 
 class DraftService {
-  async edit(draftId: string, payload: Pick<Revision, 'primaryAssetId' | 'title' | 'caption' | 'hashtags' | 'location' | 'activity'> & {
-    expectedRevisionId: string
-  }) {
-    return (await apiService.client.patch<ApiResponse<Revision>>(`/drafts/${draftId}`, payload, { headers: requestHeaders() })).data
+  async edit(
+    draftId: string,
+    payload: Pick<
+      Revision,
+      'primaryAssetId' | 'title' | 'caption' | 'hashtags' | 'location' | 'activity'
+    > & {
+      expectedRevisionId: string
+    }
+  ) {
+    return (
+      await apiService.client.patch<ApiResponse<Revision>>(`/drafts/${draftId}`, payload, {
+        headers: requestHeaders()
+      })
+    ).data
   }
 
-  async reject(draftId: string, payload: {
-    revisionId: string
-    contentHash: string
-    notes: string
-  }) {
-    return (await apiService.client.post<ApiResponse<Draft>>(`/drafts/${draftId}/reject`, payload, { headers: requestHeaders() })).data
+  async reject(
+    draftId: string,
+    payload: {
+      revisionId: string
+      contentHash: string
+      notes: string
+    }
+  ) {
+    return (
+      await apiService.client.post<ApiResponse<Draft>>(`/drafts/${draftId}/reject`, payload, {
+        headers: requestHeaders()
+      })
+    ).data
   }
 }
+
 export const draftService = new DraftService()

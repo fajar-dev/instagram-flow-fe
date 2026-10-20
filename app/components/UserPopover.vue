@@ -48,7 +48,11 @@
             variant="ghost"
             icon="i-lucide-user-round"
             class="w-full justify-start"
-            @click="() => { open = false }"
+            @click="
+              () => {
+                open = false
+              }
+            "
           >
             {{ $t('components.userPopover.profile') }}
           </UButton>
@@ -143,7 +147,9 @@ const themeOptions = [
 ]
 
 const currentThemeIcon = computed(() => {
-  if (colorMode.value === 'dark') return 'i-lucide-moon'
+  if (colorMode.value === 'dark') {
+    return 'i-lucide-moon'
+  }
   return 'i-lucide-sun'
 })
 

@@ -127,7 +127,11 @@
             class="text-xs text-error mt-2"
             role="status"
           >
-            {{ entry.validationError ? $t(`pages.content.${entry.validationError}`, { size: limits?.maxUploadMb }) : entry.error }}
+            {{
+              entry.validationError
+                ? $t(`pages.content.${entry.validationError}`, { size: limits?.maxUploadMb })
+                : entry.error
+            }}
           </p>
           <UButton
             v-if="entry.status !== 'uploaded' && !processingRequested"
@@ -152,7 +156,12 @@
         type="submit"
         icon="i-lucide-sparkles"
         :loading="busy"
-        :disabled="!limits || validating || !entries.some(entry => entry.status !== 'invalid') || Boolean(fileError)"
+        :disabled="
+          !limits
+            || validating
+            || !entries.some((entry) => entry.status !== 'invalid')
+            || Boolean(fileError)
+        "
       >
         {{ $t(batchId && hasErrors ? 'pages.content.retryUpload' : 'pages.content.process') }}
       </UButton>
@@ -182,5 +191,23 @@ import { useContentUpload } from '~/composables/content/useContentUpload'
 import { formatFileSize } from '~/util/content'
 
 definePageMeta({ layout: 'dashboard' })
-const { limits, uploadHint, fields, form, schema, files, entries, batchId, uploadedCount, hasErrors, validating, busy, processingRequested, fileError, remove, submit, processUploaded } = useContentUpload()
+const {
+  limits,
+  uploadHint,
+  fields,
+  form,
+  schema,
+  files,
+  entries,
+  batchId,
+  uploadedCount,
+  hasErrors,
+  validating,
+  busy,
+  processingRequested,
+  fileError,
+  remove,
+  submit,
+  processUploaded
+} = useContentUpload()
 </script>

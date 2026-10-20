@@ -1,7 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="relative h-full shrink-0">
-    <aside class="flex flex-col h-full bg-default border-r border-default shrink-0 justify-between select-none w-24 px-1 py-3">
+    <aside
+      class="flex flex-col h-full bg-default border-r border-default shrink-0 justify-between select-none w-24 px-1 py-3"
+    >
       <!-- Top Section: App/Brand Logo Header -->
       <div class="flex flex-col items-center pb-6 pt-1.5 shrink-0 gap-1">
         <BrandLogo :is-collapsed="true" />
@@ -12,11 +14,11 @@
         size="sm"
       />
       <!-- Navigation Menus (Scrollable middle area) -->
-      <nav class="flex-1 overflow-y-auto min-h-0 py-2.5 space-y-1 pt-4 scrollbar-thin flex flex-col items-center">
+      <nav
+        class="flex-1 overflow-y-auto min-h-0 py-2.5 space-y-1 pt-4 scrollbar-thin flex flex-col items-center"
+      >
         <!-- Quick Action: Upload Content (Tombol bulat primary, cuma icon awan upload) -->
-        <div
-          class="mb-5 shrink-0"
-        >
+        <div class="mb-5 shrink-0">
           <UTooltip
             :text="$t('pages.content.upload')"
             :content="{ side: 'right', sideOffset: 12 }"
@@ -53,7 +55,11 @@
             >
               <button
                 class="flex flex-col items-center justify-center w-full py-1 px-1 rounded-xl transition-colors cursor-pointer group"
-                :class="[isParentActive(item) ? 'text-primary font-medium' : 'text-muted hover:text-highlighted']"
+                :class="[
+                  isParentActive(item)
+                    ? 'text-primary font-medium'
+                    : 'text-muted hover:text-highlighted'
+                ]"
               >
                 <div
                   class="w-14 h-8.5 rounded-full flex items-center justify-center transition-all duration-200"
@@ -71,7 +77,11 @@
                 </div>
                 <span
                   class="text-xs font-medium mt-0.5 text-center truncate max-w-full leading-tight"
-                  :class="[isParentActive(item) ? 'text-primary font-semibold' : 'text-muted group-hover:text-highlighted']"
+                  :class="[
+                    isParentActive(item)
+                      ? 'text-primary font-semibold'
+                      : 'text-muted group-hover:text-highlighted'
+                  ]"
                 >
                   {{ item.label }}
                 </span>
@@ -110,7 +120,11 @@
               v-else
               :to="item.to"
               class="flex flex-col items-center justify-center w-full py-1 px-1 rounded-xl transition-colors cursor-pointer group"
-              :class="[isItemActive(item) ? 'text-primary font-medium' : 'text-muted hover:text-highlighted']"
+              :class="[
+                isItemActive(item)
+                  ? 'text-primary font-medium'
+                  : 'text-muted hover:text-highlighted'
+              ]"
             >
               <div
                 class="w-14 h-8.5 rounded-full flex items-center justify-center transition-all duration-200"
@@ -128,7 +142,11 @@
               </div>
               <span
                 class="text-xs font-medium mt-0.5 text-center truncate max-w-full leading-tight"
-                :class="[isItemActive(item) ? 'text-primary font-semibold' : 'text-muted group-hover:text-highlighted']"
+                :class="[
+                  isItemActive(item)
+                    ? 'text-primary font-semibold'
+                    : 'text-muted group-hover:text-highlighted'
+                ]"
               >
                 {{ item.label }}
               </span>
@@ -143,7 +161,9 @@
           class="px-5"
           size="sm"
         />
-        <UserPopover :popover-props="{ content: { side: 'right', sideOffset: 12, align: 'end' } }" />
+        <UserPopover
+          :popover-props="{ content: { side: 'right', sideOffset: 12, align: 'end' } }"
+        />
       </div>
     </aside>
   </div>

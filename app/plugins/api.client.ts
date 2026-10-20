@@ -4,7 +4,10 @@ import { authService } from '~/services/auth-service'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const config = useRuntimeConfig()
-  apiService.configure(config.public.apiUrl as string, () => (nuxtApp.$i18n as Composer).locale.value)
+  apiService.configure(
+    config.public.apiUrl as string,
+    () => (nuxtApp.$i18n as Composer).locale.value
+  )
   apiService.setAuthHandlers({
     refresh: () => authService.refreshToken(),
     token: () => authService.token.value,
