@@ -1,19 +1,17 @@
 <template>
-  <div class="space-y-5">
+  <div class="space-y-4">
     <!-- Controls -->
-    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+    <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-3">
       <div class="flex flex-col sm:flex-row sm:items-center gap-2">
         <div class="flex flex-row items-center gap-2">
-          <!-- Search -->
           <UInput
             v-model="search"
             icon="i-lucide-search"
             variant="outline"
             :placeholder="searchPlaceholder ?? $t('components.dataTable.searchPlaceholder')"
+            :aria-label="searchPlaceholder ?? $t('components.dataTable.searchPlaceholder')"
             class="w-full sm:w-64"
           />
-
-          <!-- Items per page -->
           <USelect
             v-if="pagination"
             v-model="perPage"
@@ -23,8 +21,6 @@
             class="w-20"
           />
         </div>
-
-        <!-- Extra filter controls -->
         <div
           v-if="$slots.filters"
           class="w-full sm:w-auto"
@@ -32,55 +28,62 @@
           <slot name="filters" />
         </div>
       </div>
-
-      <!-- Custom Top-Right Actions Slot -->
       <div
         v-if="$slots.actions"
-        class="w-full lg:w-auto"
+        class="w-full xl:w-auto"
       >
         <slot name="actions" />
       </div>
     </div>
-
-    <!-- Table -->
-    <slot name="content">
-      <div class="overflow-x-auto">
-        <UTable
-          v-model:expanded="expanded"
-          :expanded-options="{ getRowCanExpand: () => true }"
-          :data="data"
-          :columns="columns"
-          :loading="loading"
-          :ui="{
-            th: 'bg-muted py-2.5',
-            td: 'text-highlighted py-3'
-          }"
-          :class="['border border-default rounded-md', tableClass]"
-        >
-          <template #expanded="{ row }">
-            <slot
-              name="expanded"
-              :row="row"
-            />
-          </template>
-        </UTable>
-      </div>
-    </slot>
-
-    <!-- Pagination -->
     <div
-      v-if="pagination"
-      class="flex flex-col sm:flex-row items-center justify-between gap-3"
+      :class="
+        $slots.content ? 'space-y-4' : 'overflow-hidden rounded-lg border border-default bg-default'
+      "
     >
-      <span class="text-sm text-muted">
-        {{ $t('components.dataTable.showing', { from: from || 0, to: to || 0, total }) }}
-      </span>
-      <UPagination
-        v-model:page="page"
-        size="md"
-        :total="total"
-        :items-per-page="perPage"
-      />
+      <!-- Table -->
+      <slot name="content">
+        <div class="overflow-x-auto">
+          <UTable
+            v-model:expanded="expanded"
+            :expanded-options="{ getRowCanExpand: () => true }"
+            :data="data"
+            :columns="columns"
+            :loading="loading"
+            :ui="{
+              thead: 'bg-muted',
+              th: 'px-5 py-3 text-xs font-semibold whitespace-nowrap',
+              td: 'px-5 py-4 text-sm text-highlighted',
+              tr: 'transition-colors hover:bg-muted/30 motion-reduce:transition-none',
+              empty: 'py-12 text-center text-sm text-muted'
+            }"
+            :class="['w-full', tableClass]"
+          >
+            <template #expanded="{ row }">
+              <slot
+                name="expanded"
+                :row="row"
+              />
+            </template>
+          </UTable>
+        </div>
+      </slot>
+
+      <!-- Pagination -->
+      <div
+        v-if="pagination"
+        class="flex flex-col sm:flex-row items-center justify-between gap-3"
+        :class="!$slots.content ? 'border-t border-default bg-muted px-5 py-3' : ''"
+      >
+        <span class="text-xs tabular-nums">
+          {{ $t('components.dataTable.showing', { from: from || 0, to: to || 0, total }) }}
+        </span>
+        <UPagination
+          v-model:page="page"
+          size="sm"
+          :total="total"
+          :items-per-page="perPage"
+        />
+      </div>
     </div>
   </div>
 </template>

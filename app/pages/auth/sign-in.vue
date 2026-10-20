@@ -1,7 +1,6 @@
 <template>
   <div class="w-full max-w-md mx-auto">
     <div class="flex flex-col gap-5 mb-6">
-      <BrandLogo />
       <div class="space-y-1">
         <h1 class="text-3xl font-bold text-highlighted">
           {{ $t('pages.auth.signIn.login') }}
@@ -83,7 +82,7 @@
 
         <USeparator
           :label="$t('pages.auth.signIn.or')"
-          color="neutral"
+          class="my-2"
         />
 
         <UButton
@@ -120,6 +119,39 @@
             </svg>
           </template>
           {{ $t('pages.auth.signIn.continueWithGoogle') }}
+        </UButton>
+        <UButton
+          type="button"
+          block
+          variant="soft"
+          color="neutral"
+        >
+          <template #leading>
+            <svg
+              class="w-4 h-4 shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1h10v10H1z"
+                fill="#F25022"
+              />
+              <path
+                d="M13 1h10v10H13z"
+                fill="#7FBA00"
+              />
+              <path
+                d="M1 13h10v10H1z"
+                fill="#00A4EF"
+              />
+              <path
+                d="M13 13h10v10H13z"
+                fill="#FFB900"
+              />
+            </svg>
+          </template>
+          {{ $t('pages.auth.signIn.continueWithMicrosoft') }}
         </UButton>
         <p
           v-if="!googleClient"
@@ -163,7 +195,7 @@ const toast = useToast()
 const showToast = (type: 'success' | 'error', title: string) => {
   toast.add({
     title,
-    color: type === 'success' ? 'success' : 'error',
+    ...(type === 'error' ? { color: 'error' as const } : {}),
     icon: type === 'success' ? 'i-lucide-circle-check' : 'i-lucide-circle-x'
   })
 }

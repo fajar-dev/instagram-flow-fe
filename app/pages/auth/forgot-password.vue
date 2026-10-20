@@ -1,7 +1,6 @@
 <template>
   <div class="w-full max-w-md mx-auto">
     <div class="flex flex-col gap-5 mb-6">
-      <BrandLogo />
       <div class="space-y-1">
         <h1 class="text-3xl font-bold text-highlighted">
           {{ $t('pages.auth.forgotPassword.title') }}
@@ -153,7 +152,6 @@ const handleSubmit = async () => {
     isSubmitted.value = true
     toast.add({
       title: t('pages.auth.forgotPassword.resetLinkSent'),
-      color: 'success',
       icon: 'i-lucide-circle-check'
     })
     startResendCooldown()
@@ -170,7 +168,6 @@ const handleResend = async () => {
     await authService.forgotPassword(state.email)
     toast.add({
       title: t('pages.auth.forgotPassword.resetLinkSent'),
-      color: 'success',
       icon: 'i-lucide-circle-check'
     })
     startResendCooldown()

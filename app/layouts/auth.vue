@@ -1,51 +1,52 @@
 <template>
-  <div class="flex min-h-screen w-full select-none">
-    <div class="hidden lg:flex lg:w-2/5 relative overflow-hidden">
+  <div class="flex min-h-dvh w-full bg-muted/40 p-2">
+    <aside
+      class="relative isolate hidden w-2/5 shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-neutral-950 p-8 text-white lg:flex xl:p-12"
+    >
+      <img
+        src="/hero.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 -z-20 size-full object-cover object-center"
+      >
       <div
-        class="absolute inset-0 z-0 bg-[url('/hero.png')] bg-cover bg-right pointer-events-none"
+        class="absolute inset-0 -z-10 bg-linear-to-t from-neutral-950/90 via-transparent to-black/30"
       />
-      <div
-        class="absolute inset-0 z-0 bg-[url('/grid.svg')] bg-cover bg-center opacity-40 pointer-events-none"
-      />
-      <div
-        class="absolute inset-0 z-10 bg-gradient-to-t from-black/50 via-black/10 to-black/20 pointer-events-none"
-      />
-      <div class="absolute inset-0 z-20 pointer-events-none shadow-inner" />
-
-      <div class="relative z-30 flex w-full flex-col justify-end p-14 text-white">
+      <div class="flex items-center gap-3">
+        <img
+          src="/logo-light.png"
+          alt="AMTI"
+          class="h-15 w-auto"
+        >
+      </div>
+      <div class="max-w-md space-y-5 pt-80 pb-6">
         <slot name="hero">
-          <img
-            src="/ig.png"
-            alt="instagram-logo"
-            width="48px"
-            height="48px"
-            class="drop-shadow-lg"
-          >
-          <h1 class="text-3xl font-semibold leading-tight drop-shadow-md mt-5">
-            Instagram Flow
-          </h1>
-          <p class="text-lg text-white/90 drop-shadow-sm">
-            Asset Monitoring Teknologi Indonesia
+          <h2 class="text-3xl font-semibold leading-tight tracking-tight xl:text-4xl">
+            {{ $t('components.authLayout.headline') }}
+          </h2>
+          <p class="max-w-sm text-sm leading-relaxed text-white/70 xl:text-base">
+            {{ $t('components.authLayout.description') }}
           </p>
         </slot>
       </div>
-    </div>
-
-    <div
-      class="relative z-50 flex flex-1 lg:w-3/5 lg:flex-none items-center justify-center bg-default px-6 py-12 lg:shadow-xl"
-    >
-      <div class="absolute top-6 right-6 z-30 flex items-center gap-2">
-        <UColorModeButton
-          color="neutral"
-          variant="ghost"
-        />
-        <LanguageSwitcher variant="ghost" />
-      </div>
-
-      <slot />
-      <p class="absolute bottom-6 inset-x-0 text-center text-sm text-toned px-4">
+    </aside>
+    <div class="flex min-w-0 flex-1 flex-col px-4 sm:px-8 lg:px-12">
+      <header class="flex min-h-16 items-center justify-between gap-3 py-3">
+        <BrandLogo class="lg:hidden" />
+        <div class="ml-auto flex items-center gap-1">
+          <UColorModeButton
+            color="neutral"
+            variant="ghost"
+          />
+          <LanguageSwitcher variant="ghost" />
+        </div>
+      </header>
+      <main class="flex w-full flex-1 items-center py-10 sm:py-16">
+        <slot />
+      </main>
+      <footer class="py-5 text-center text-sm leading-relaxed text-muted">
         {{ $t('components.authLayout.copyright', { year: new Date().getFullYear() }) }}
-      </p>
+      </footer>
     </div>
   </div>
 </template>
