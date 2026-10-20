@@ -30,12 +30,12 @@
               {{ $t('pages.content.upload') }}
             </UButton>
             <UButton
-              to="/content/media"
+              to="/analytics"
               color="neutral"
               variant="outline"
-              icon="i-lucide-images"
+              icon="i-lucide-chart-no-axes-combined"
             >
-              {{ $t('pages.content.media') }}
+              {{ $t('pages.analytics.title') }}
             </UButton>
           </div>
         </div>
