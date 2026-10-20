@@ -6,13 +6,17 @@ import { draftService } from '../app/services/content-review/draft-service'
 
 test('failed refresh after saving a revision reports the error without a success toast', async () => {
   const replacements = {
-    ref, reactive, computed,
+    ref,
+    reactive,
+    computed,
     useI18n: () => ({ t: key => key }),
     useToast: () => ({ add: message => toasts.push(message) }),
     useServiceError: () => error => errors.push(error),
     onMounted: () => {}
   }
-  const previous = Object.fromEntries(Object.keys(replacements).map(key => [key, globalThis[key]]))
+  const previous = Object.fromEntries(
+    Object.keys(replacements).map(key => [key, globalThis[key]])
+  )
   const originalDetails = jobService.details
   const originalEdit = draftService.edit
   const toasts = []
@@ -21,12 +25,23 @@ test('failed refresh after saving a revision reports the error without a success
   const failure = new Error('Reload failed')
   Object.assign(globalThis, replacements)
   try {
-    jobService.details = async () => ({ data: {
-      job: { requestedOutputs: ['feed'] },
-      draft: { id: 'draft', reviewStatus: 'READY_FOR_REVIEW' },
-      revision: { id: 'revision', title: 'Title', caption: 'Caption', hashtags: [], primaryAssetId: 'asset', location: 'Location', activity: 'Activity' },
-      renders: [], reviews: []
-    } })
+    jobService.details = async () => ({
+      data: {
+        job: { requestedOutputs: ['feed'] },
+        draft: { id: 'draft', reviewStatus: 'READY_FOR_REVIEW' },
+        revision: {
+          id: 'revision',
+          title: 'Title',
+          caption: 'Caption',
+          hashtags: [],
+          primaryAssetId: 'asset',
+          location: 'Location',
+          activity: 'Activity'
+        },
+        renders: [],
+        reviews: []
+      }
+    })
     draftService.edit = async () => {
       saved++
     }
@@ -47,8 +62,11 @@ test('failed refresh after saving a revision reports the error without a success
     jobService.details = originalDetails
     draftService.edit = originalEdit
     for (const key of Object.keys(replacements)) {
-      if (previous[key] === undefined) delete globalThis[key]
-      else globalThis[key] = previous[key]
+      if (previous[key] === undefined) {
+        delete globalThis[key]
+      } else {
+        globalThis[key] = previous[key]
+      }
     }
   }
 })

@@ -25,7 +25,11 @@
           variant="solid"
           icon="i-lucide-plus-circle"
           class="w-full sm:w-auto justify-center"
-          @click="() => { showAddModal = true }"
+          @click="
+            () => {
+              showAddModal = true
+            }
+          "
         >
           {{ $t('pages.user.addUser') }}
         </UButton>
@@ -98,7 +102,9 @@ const { loading: isLoading, load: fetchUsers } = useLatestRequest(
     meta.from = response.meta?.from ?? 0
     meta.to = response.meta?.to ?? 0
     const lastPage = Math.max(1, Math.ceil(meta.total / perPage.value))
-    if (page.value > lastPage) page.value = lastPage
+    if (page.value > lastPage) {
+      page.value = lastPage
+    }
   }
 )
 
@@ -203,7 +209,9 @@ function getRowItems(row: Row<User>) {
 // Handle delete
 const toast = useToast()
 const handleDelete = async () => {
-  if (!selectedUser.value || isDeleting.value) return
+  if (!selectedUser.value || isDeleting.value) {
+    return
+  }
   isDeleting.value = true
   try {
     const response = await userService.delete(selectedUser.value.id)

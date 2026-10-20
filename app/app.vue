@@ -9,9 +9,7 @@
 
 <script setup>
 useHead({
-  meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
-  ],
+  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
   link: [
     { rel: 'icon', href: '/favicon.ico' },
     { rel: 'manifest', href: '/manifest.webmanifest' }

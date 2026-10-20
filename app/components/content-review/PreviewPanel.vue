@@ -7,7 +7,15 @@
         </h2>
         <UTabs
           v-model="placement"
-          :items="outputs.map(value => ({ label: value === 'story' ? $t('pages.contentReview.story') : $t('pages.contentReview.feed'), value }))"
+          :items="
+            outputs.map((value) => ({
+              label:
+                value === 'story'
+                  ? $t('pages.contentReview.story')
+                  : $t('pages.contentReview.feed'),
+              value
+            }))
+          "
           :content="false"
           size="sm"
           variant="pill"
@@ -37,7 +45,19 @@
 <script setup lang="ts">
 import type { Render } from '~/types/ai-job'
 
-const props = defineProps<{ outputs: string[], primaryAssetId: string, isOutdated: boolean, render?: Render, caption: string, hashtags: string[], location: string }>()
+const props = defineProps<{
+  outputs: string[]
+  primaryAssetId: string
+  isOutdated: boolean
+  render?: Render
+  caption: string
+  hashtags: string[]
+  location: string
+}>()
 const placement = defineModel<string>({ required: true })
-const imagePath = computed(() => !props.isOutdated && props.render ? `renders/${props.render.id}` : `assets/${props.primaryAssetId}/preview`)
+const imagePath = computed(() =>
+  !props.isOutdated && props.render
+    ? `renders/${props.render.id}`
+    : `assets/${props.primaryAssetId}/preview`
+)
 </script>

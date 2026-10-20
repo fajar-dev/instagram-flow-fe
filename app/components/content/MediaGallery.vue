@@ -25,18 +25,28 @@
           :height="row.height"
           :alt="row.projectName || $t('pages.content.photo')"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none" />
-        <div class="absolute top-3 right-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none">
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none"
+        />
+        <div
+          class="absolute top-3 right-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none"
+        >
           <UButton
             size="sm"
             color="neutral"
             variant="solid"
             icon="i-lucide-archive"
-            :aria-label="$t('pages.content.archivePhoto', { name: row.projectName || $t('pages.content.photo') })"
+            :aria-label="
+              $t('pages.content.archivePhoto', {
+                name: row.projectName || $t('pages.content.photo')
+              })
+            "
             @click="$emit('archived', row.id)"
           />
         </div>
-        <div class="absolute inset-x-0 bottom-0 pointer-events-none flex items-end justify-between gap-3 p-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none">
+        <div
+          class="absolute inset-x-0 bottom-0 pointer-events-none flex items-end justify-between gap-3 p-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none"
+        >
           <div class="min-w-0 text-white">
             <p class="text-sm font-medium truncate">
               {{ row.projectName || $t('pages.content.photo') }}
@@ -62,7 +72,11 @@
             variant="solid"
             icon="i-lucide-download"
             class="pointer-events-auto"
-            :aria-label="$t('pages.content.downloadPhoto', { name: row.projectName || $t('pages.content.photo') })"
+            :aria-label="
+              $t('pages.content.downloadPhoto', {
+                name: row.projectName || $t('pages.content.photo')
+              })
+            "
             @click="$emit('downloaded', row.id)"
           />
         </div>

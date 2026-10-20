@@ -16,7 +16,9 @@ export function useImageUpload(options: ImageUploadOptions) {
   let objectUrl: string | null = null
 
   function releasePreview() {
-    if (objectUrl) URL.revokeObjectURL(objectUrl)
+    if (objectUrl) {
+      URL.revokeObjectURL(objectUrl)
+    }
     objectUrl = null
   }
 
@@ -32,7 +34,9 @@ export function useImageUpload(options: ImageUploadOptions) {
   }
 
   async function uploadFile(file: File) {
-    if (isUploading.value) return
+    if (isUploading.value) {
+      return
+    }
     const version = ++requestVersion
     const previous = previewUrl.value
     const previousObjectUrl = objectUrl
@@ -41,19 +45,33 @@ export function useImageUpload(options: ImageUploadOptions) {
     isUploading.value = true
     try {
       const response = await options.upload(file)
-      if (version !== requestVersion) return
-      if (!response.success || !response.data?.path) throw new Error('Upload failed')
+      if (version !== requestVersion) {
+        return
+      }
+      if (!response.success || !response.data?.path) {
+        throw new Error('Upload failed')
+      }
       options.onUploaded(response.data.path)
-      toast.add({ title: options.successMessage(), color: 'success', icon: 'i-lucide-circle-check' })
+      toast.add({
+        title: options.successMessage(),
+        color: 'success',
+        icon: 'i-lucide-circle-check'
+      })
     } catch {
-      if (version !== requestVersion) return
+      if (version !== requestVersion) {
+        return
+      }
       releasePreview()
       previewUrl.value = previous
       objectUrl = previousObjectUrl
       toast.add({ title: options.errorMessage(), color: 'error', icon: 'i-lucide-circle-alert' })
     } finally {
-      if (previousObjectUrl && objectUrl !== previousObjectUrl) URL.revokeObjectURL(previousObjectUrl)
-      if (version === requestVersion) isUploading.value = false
+      if (previousObjectUrl && objectUrl !== previousObjectUrl) {
+        URL.revokeObjectURL(previousObjectUrl)
+      }
+      if (version === requestVersion) {
+        isUploading.value = false
+      }
     }
   }
 

@@ -10,7 +10,14 @@ export class UserService {
     return { headers: requestHeaders() }
   }
 
-  async getAll(page = 1, perPage = 10, q = '', isActive = '', sortBy = '', order: SortOrder = 'DESC'): Promise<ApiResponse<User[]>> {
+  async getAll(
+    page = 1,
+    perPage = 10,
+    q = '',
+    isActive = '',
+    sortBy = '',
+    order: SortOrder = 'DESC'
+  ): Promise<ApiResponse<User[]>> {
     const params = buildListQuery({ page, perPage, q, sortBy, order })
     if (isActive !== '') {
       params.set('isActive', isActive)
@@ -23,10 +30,7 @@ export class UserService {
   }
 
   async getById(id: number): Promise<ApiResponse<User>> {
-    const response = await apiService.client.get<ApiResponse<User>>(
-      `/user/${id}`,
-      this.authHeaders
-    )
+    const response = await apiService.client.get<ApiResponse<User>>(`/user/${id}`, this.authHeaders)
     return response.data
   }
 

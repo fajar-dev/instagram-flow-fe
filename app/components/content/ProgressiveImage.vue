@@ -20,7 +20,10 @@
       loading="lazy"
       decoding="async"
       class="absolute inset-0 size-full transition duration-700 ease-out motion-reduce:transition-none"
-      :class="[loaded ? 'opacity-100 blur-none' : 'opacity-0 blur-md', contain ? 'object-contain' : 'object-cover']"
+      :class="[
+        loaded ? 'opacity-100 blur-none' : 'opacity-0 blur-md',
+        contain ? 'object-contain' : 'object-cover'
+      ]"
       @load="reveal"
       @error="fail"
     >
@@ -41,26 +44,44 @@
 <script setup lang="ts">
 import { mediaService } from '~/services/content/media-service'
 
-const props = defineProps<{ assetId: string, alt: string, width?: number, height?: number, frameRatio?: number, contain?: boolean }>()
+const props = defineProps<{
+  assetId: string
+  alt: string
+  width?: number
+  height?: number
+  frameRatio?: number
+  contain?: boolean
+}>()
 const container = ref<HTMLElement | null>(null)
 const sources = ref<{ previewUrl: string, thumbnailUrl: string } | null>(null)
 const loaded = ref(false)
 const failed = ref(false)
 const visible = ref(false)
 const naturalRatio = ref<number | null>(null)
-const ratio = computed(() => props.frameRatio || naturalRatio.value || ((props.width && props.height) ? props.width / props.height : 4 / 3))
+const ratio = computed(
+  () =>
+    props.frameRatio
+    || naturalRatio.value
+    || (props.width && props.height ? props.width / props.height : 4 / 3)
+)
 let generation = 0
 let observer: IntersectionObserver | undefined
 
 function reveal(event: Event) {
   const image = event.target as HTMLImageElement
-  if (image.currentSrc !== sources.value?.previewUrl) return
-  if (image.naturalWidth && image.naturalHeight) naturalRatio.value = image.naturalWidth / image.naturalHeight
+  if (image.currentSrc !== sources.value?.previewUrl) {
+    return
+  }
+  if (image.naturalWidth && image.naturalHeight) {
+    naturalRatio.value = image.naturalWidth / image.naturalHeight
+  }
   loaded.value = true
 }
 
 function fail(event: Event) {
-  if ((event.target as HTMLImageElement).currentSrc === sources.value?.previewUrl) failed.value = true
+  if ((event.target as HTMLImageElement).currentSrc === sources.value?.previewUrl) {
+    failed.value = true
+  }
 }
 
 watch([() => props.assetId, visible], async ([assetId, isVisible]) => {
@@ -69,12 +90,18 @@ watch([() => props.assetId, visible], async ([assetId, isVisible]) => {
   loaded.value = false
   failed.value = false
   naturalRatio.value = null
-  if (!isVisible) return
+  if (!isVisible) {
+    return
+  }
   try {
     const response = await mediaService.previews(assetId)
-    if (current === generation) sources.value = response.data
+    if (current === generation) {
+      sources.value = response.data
+    }
   } catch {
-    if (current === generation) failed.value = true
+    if (current === generation) {
+      failed.value = true
+    }
   }
 })
 onMounted(() => {
@@ -82,13 +109,18 @@ onMounted(() => {
     visible.value = true
     return
   }
-  observer = new IntersectionObserver(([entry]) => {
-    if (entry?.isIntersecting) {
-      visible.value = true
-      observer?.disconnect()
-    }
-  }, { rootMargin: '300px' })
-  if (container.value) observer.observe(container.value)
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry?.isIntersecting) {
+        visible.value = true
+        observer?.disconnect()
+      }
+    },
+    { rootMargin: '300px' }
+  )
+  if (container.value) {
+    observer.observe(container.value)
+  }
 })
 onUnmounted(() => {
   generation++

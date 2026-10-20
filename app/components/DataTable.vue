@@ -93,24 +93,27 @@ const page = defineModel<number>('page', { default: 1 })
 const perPage = defineModel<number>('perPage', { default: 10 })
 const expanded = defineModel<Record<string, boolean>>('expanded', { default: () => ({}) })
 
-withDefaults(defineProps<{
-  columns: TableColumn<T>[]
-  data: T[]
-  pagination?: boolean
-  loading?: boolean
-  total?: number
-  from?: number
-  to?: number
-  searchPlaceholder?: string
-  limitOptions?: number[]
-  tableClass?: string
-}>(), {
-  pagination: true,
-  loading: false,
-  total: 0,
-  from: 0,
-  to: 0,
-  limitOptions: () => [10, 25, 50, 100],
-  tableClass: ''
-})
+withDefaults(
+  defineProps<{
+    columns: TableColumn<T>[]
+    data: T[]
+    pagination?: boolean
+    loading?: boolean
+    total?: number
+    from?: number
+    to?: number
+    searchPlaceholder?: string
+    limitOptions?: number[]
+    tableClass?: string
+  }>(),
+  {
+    pagination: true,
+    loading: false,
+    total: 0,
+    from: 0,
+    to: 0,
+    limitOptions: () => [10, 25, 50, 100],
+    tableClass: ''
+  }
+)
 </script>

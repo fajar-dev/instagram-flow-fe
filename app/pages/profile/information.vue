@@ -9,7 +9,9 @@
           :ui="{ root: 'size-24 text-3xl border-2 border-default' }"
         />
 
-        <div class="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+        <div
+          class="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+        >
           <UIcon
             name="i-lucide-camera"
             class="size-6 text-white"
@@ -134,26 +136,30 @@ const formInfo = reactive<UpdateProfilePayload>({
   photo: null
 })
 
-const infoSchema = computed(() => z.object({
-  name: z.string().trim().min(1, t('pages.profile.information.nameRequired')),
-  email: z.string().trim().min(1, t('pages.profile.information.emailRequired')).email(t('pages.profile.information.emailInvalid'))
-}))
+const infoSchema = computed(() =>
+  z.object({
+    name: z.string().trim().min(1, t('pages.profile.information.nameRequired')),
+    email: z
+      .string()
+      .trim()
+      .min(1, t('pages.profile.information.emailRequired'))
+      .email(t('pages.profile.information.emailInvalid'))
+  })
+)
 
-const {
-  isUploading,
-  previewUrl,
-  uploadFile,
-  clearPreview,
-  setPreviewFromUrl
-} = useImageUpload({
+const { isUploading, previewUrl, uploadFile, clearPreview, setPreviewFromUrl } = useImageUpload({
   upload: file => userService.uploadPhoto(file),
-  onUploaded: (path) => { formInfo.photo = path },
+  onUploaded: (path) => {
+    formInfo.photo = path
+  },
   successMessage: () => t('pages.profile.information.photoUploadSuccess'),
   errorMessage: () => t('pages.profile.information.photoUploadFailed')
 })
 
 watch(photoFile, (file) => {
-  if (file) uploadFile(file)
+  if (file) {
+    uploadFile(file)
+  }
 })
 
 const removePhoto = () => {
@@ -172,10 +178,16 @@ const populateProfile = () => {
 }
 
 const handleInfoSubmit = async () => {
-  if (isSavingInfo.value || isUploading.value) return
+  if (isSavingInfo.value || isUploading.value) {
+    return
+  }
   isSavingInfo.value = true
   try {
-    const response = await authService.updateProfile({ ...formInfo, name: formInfo.name.trim(), email: formInfo.email.trim() })
+    const response = await authService.updateProfile({
+      ...formInfo,
+      name: formInfo.name.trim(),
+      email: formInfo.email.trim()
+    })
     if (response.success) {
       toast.add({
         title: t('pages.profile.information.updatedSuccess'),
@@ -190,7 +202,11 @@ const handleInfoSubmit = async () => {
   }
 }
 
-watch(() => authState.user, () => {
-  populateProfile()
-}, { immediate: true })
+watch(
+  () => authState.user,
+  () => {
+    populateProfile()
+  },
+  { immediate: true }
+)
 </script>

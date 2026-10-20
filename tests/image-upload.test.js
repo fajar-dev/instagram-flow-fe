@@ -15,8 +15,11 @@ async function withUploadContext(run) {
   } finally {
     cleanup.forEach(callback => callback())
     names.forEach((name, index) => {
-      if (previous[index] === undefined) delete globalThis[name]
-      else globalThis[name] = previous[index]
+      if (previous[index] === undefined) {
+        delete globalThis[name]
+      } else {
+        globalThis[name] = previous[index]
+      }
     })
   }
 }
@@ -26,7 +29,10 @@ test('closing an avatar editor ignores a pending upload response', async () => {
     let finish
     const uploaded = []
     const upload = useImageUpload({
-      upload: () => new Promise((resolve) => { finish = resolve }),
+      upload: () =>
+        new Promise((resolve) => {
+          finish = resolve
+        }),
       onUploaded: path => uploaded.push(path),
       successMessage: () => 'saved',
       errorMessage: () => 'failed'
@@ -47,7 +53,9 @@ test('a failed avatar replacement preserves the existing preview and stored path
   await withUploadContext(async (toasts) => {
     const uploaded = []
     const upload = useImageUpload({
-      upload: async () => { throw new Error('offline') },
+      upload: async () => {
+        throw new Error('offline')
+      },
       onUploaded: path => uploaded.push(path),
       successMessage: () => 'saved',
       errorMessage: () => 'failed'

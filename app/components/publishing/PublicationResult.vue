@@ -45,7 +45,13 @@
       </div>
       <div class="space-y-1">
         <dt class="text-muted">
-          {{ $t(publication.publishedAt ? 'pages.publishing.publishedAt' : 'pages.publishing.scheduledAt') }}
+          {{
+            $t(
+              publication.publishedAt
+                ? 'pages.publishing.publishedAt'
+                : 'pages.publishing.scheduledAt'
+            )
+          }}
         </dt>
         <dd class="font-medium text-highlighted break-words">
           {{ formatContentDate(publication.publishedAt || publication.scheduledAt, locale) }} WIB

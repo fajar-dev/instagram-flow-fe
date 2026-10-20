@@ -63,12 +63,19 @@ const handleError = useServiceError()
 const saving = ref(false)
 const form = reactive({ notes: '' })
 const schema = z.object({ notes: z.string().max(2000) })
+
 async function submit() {
   const { draft, revision } = props.detail
-  if (saving.value || !draft || !revision) return
+  if (saving.value || !draft || !revision) {
+    return
+  }
   saving.value = true
   try {
-    await draftService.reject(draft.id, { revisionId: revision.id, contentHash: revision.contentHash, notes: form.notes })
+    await draftService.reject(draft.id, {
+      revisionId: revision.id,
+      contentHash: revision.contentHash,
+      notes: form.notes
+    })
     toast.add({ title: t('pages.publishing.rejected'), color: 'success' })
     open.value = false
     emit('rejected')

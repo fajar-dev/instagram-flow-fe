@@ -4,7 +4,9 @@ export function useLightbox() {
   const lightboxAlt = useState('lightbox-alt', () => '')
 
   function openLightbox(src: string, alt = '') {
-    if (!src) return
+    if (!src) {
+      return
+    }
     lightboxImage.value = src
     lightboxAlt.value = alt
     lightboxOpen.value = true

@@ -61,7 +61,11 @@
               :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
               class="text-dimmed hover:text-toned p-1 hover:bg-transparent cursor-pointer"
               :aria-label="$t('pages.auth.signIn.togglePasswordVisibility')"
-              @click="() => { showPassword = !showPassword }"
+              @click="
+                () => {
+                  showPassword = !showPassword
+                }
+              "
             />
           </template>
         </UInput>
@@ -164,10 +168,12 @@ const showToast = (type: 'success' | 'error', title: string) => {
   })
 }
 
-const loginSchema = computed(() => z.object({
-  email: z.email(t('pages.auth.signIn.emailInvalid')),
-  password: z.string().min(1, t('pages.auth.signIn.passwordRequired'))
-}))
+const loginSchema = computed(() =>
+  z.object({
+    email: z.email(t('pages.auth.signIn.emailInvalid')),
+    password: z.string().min(1, t('pages.auth.signIn.passwordRequired'))
+  })
+)
 
 const config = useRuntimeConfig()
 const googleClient = config.public.googleSignIn?.clientId
@@ -191,7 +197,9 @@ const googleClient = config.public.googleSignIn?.clientId
   : null
 
 const handleGoogleLogin = () => {
-  if (!googleClient?.isReady.value) return
+  if (!googleClient?.isReady.value) {
+    return
+  }
   googleLoading.value = true
   googleClient.login()
 }

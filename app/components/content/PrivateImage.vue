@@ -37,29 +37,39 @@ const props = defineProps<{
 const url = ref('')
 const loading = ref(false)
 let version = 0
+
 function clear() {
-  if (url.value)
+  if (url.value) {
     URL.revokeObjectURL(url.value)
+  }
   url.value = ''
 }
-watch(() => props.path, async (path) => {
-  const current = ++version
-  clear()
-  if (!path) {
-    loading.value = false
-    return
-  }
-  loading.value = true
-  try {
-    const blob = await mediaService.file(path)
-    if (current === version)
-      url.value = URL.createObjectURL(blob)
-  } catch { /* display the unavailable state without toast spam */
-  } finally {
-    if (current === version)
+
+watch(
+  () => props.path,
+  async (path) => {
+    const current = ++version
+    clear()
+    if (!path) {
       loading.value = false
-  }
-}, { immediate: true })
+      return
+    }
+    loading.value = true
+    try {
+      const blob = await mediaService.file(path)
+      if (current === version) {
+        url.value = URL.createObjectURL(blob)
+      }
+    } catch {
+      /* display the unavailable state without toast spam */
+    } finally {
+      if (current === version) {
+        loading.value = false
+      }
+    }
+  },
+  { immediate: true }
+)
 onUnmounted(() => {
   version++
   clear()

@@ -9,7 +9,13 @@
       color="neutral"
       variant="ghost"
       :loading="loading"
-      :label="$t(failed ? 'components.content.infiniteScroll.retry' : 'components.content.infiniteScroll.more')"
+      :label="
+        $t(
+          failed
+            ? 'components.content.infiniteScroll.retry'
+            : 'components.content.infiniteScroll.more'
+        )
+      "
       @click="$emit('requested')"
     />
     <span
@@ -39,13 +45,18 @@ function observe() {
 watch(() => [props.loading, props.hasMore, props.failed], observe, { flush: 'post' })
 onMounted(() => {
   supported.value = 'IntersectionObserver' in window
-  if (!supported.value) return
-  observer = new IntersectionObserver(([entry]) => {
-    if (entry?.isIntersecting && !props.loading && props.hasMore && !props.failed) {
-      observer?.disconnect()
-      emit('requested')
-    }
-  }, { rootMargin: '400px' })
+  if (!supported.value) {
+    return
+  }
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry?.isIntersecting && !props.loading && props.hasMore && !props.failed) {
+        observer?.disconnect()
+        emit('requested')
+      }
+    },
+    { rootMargin: '400px' }
+  )
   observe()
 })
 onUnmounted(() => observer?.disconnect())

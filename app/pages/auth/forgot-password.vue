@@ -17,7 +17,8 @@
       class="space-y-6"
     >
       <p class="text-sm text-muted">
-        {{ $t('pages.auth.forgotPassword.checkEmailTitle') }} · {{ $t('pages.auth.forgotPassword.checkEmailDescription') }}
+        {{ $t('pages.auth.forgotPassword.checkEmailTitle') }} ·
+        {{ $t('pages.auth.forgotPassword.checkEmailDescription') }}
       </p>
 
       <div class="space-y-3">
@@ -29,7 +30,11 @@
           :disabled="resendCooldown > 0"
           @click="handleResend"
         >
-          {{ resendCooldown > 0 ? $t('pages.auth.forgotPassword.resendCooldown', { seconds: resendCooldown }) : $t('pages.auth.forgotPassword.resendEmail') }}
+          {{
+            resendCooldown > 0
+              ? $t('pages.auth.forgotPassword.resendCooldown', { seconds: resendCooldown })
+              : $t('pages.auth.forgotPassword.resendEmail')
+          }}
         </UButton>
 
         <NuxtLink
@@ -118,9 +123,11 @@ const isResending = ref(false)
 const isSubmitted = ref(false)
 const toast = useToast()
 
-const forgotSchema = computed(() => z.object({
-  email: z.email(t('pages.auth.forgotPassword.emailInvalid'))
-}))
+const forgotSchema = computed(() =>
+  z.object({
+    email: z.email(t('pages.auth.forgotPassword.emailInvalid'))
+  })
+)
 
 const RESEND_COOLDOWN_SECONDS = 60
 const resendCooldown = ref(0)
@@ -131,7 +138,9 @@ const startResendCooldown = () => {
   clearInterval(cooldownTimer)
   cooldownTimer = setInterval(() => {
     resendCooldown.value -= 1
-    if (resendCooldown.value <= 0) clearInterval(cooldownTimer)
+    if (resendCooldown.value <= 0) {
+      clearInterval(cooldownTimer)
+    }
   }, 1000)
 }
 

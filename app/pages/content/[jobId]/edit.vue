@@ -72,7 +72,11 @@
               class="space-y-5"
             >
               <p class="text-sm text-muted">
-                {{ $t(editable ? 'pages.contentReview.editorHint' : 'pages.contentReview.readOnlyHint') }}
+                {{
+                  $t(
+                    editable ? 'pages.contentReview.editorHint' : 'pages.contentReview.readOnlyHint'
+                  )
+                }}
               </p>
               <ContentReviewEditorForm
                 :model-value="form"
@@ -132,7 +136,11 @@
 import { parseHashtags } from '~/util/content'
 import { useContentStudio } from '~/composables/content-review/useContentStudio'
 
-definePageMeta({ layout: 'dashboard', alias: ['/content-review/studio/:jobId'], key: route => route.path })
+definePageMeta({
+  layout: 'dashboard',
+  alias: ['/content-review/studio/:jobId'],
+  key: route => route.path
+})
 const jobId = String(useRoute().params.jobId)
 const { t } = useI18n()
 const activePanel = ref('caption')
@@ -141,5 +149,21 @@ const panels = computed(() => [
   { value: 'photos', label: t('pages.contentReview.photosTab') },
   { value: 'publish', label: t('pages.publishing.publish') }
 ])
-const { detail, editable, form, placement, saving, loading, failed, dirty, render, isOutdated, sortedRankings, schema, restoreAi, save, load } = useContentStudio(jobId)
+const {
+  detail,
+  editable,
+  form,
+  placement,
+  saving,
+  loading,
+  failed,
+  dirty,
+  render,
+  isOutdated,
+  sortedRankings,
+  schema,
+  restoreAi,
+  save,
+  load
+} = useContentStudio(jobId)
 </script>

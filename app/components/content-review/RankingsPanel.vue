@@ -42,7 +42,13 @@
           :aria-pressed="primaryAssetId === item.assetId"
           @click="emit('selected', item.assetId)"
         >
-          {{ $t(primaryAssetId === item.assetId ? 'pages.contentReview.selectedPhoto' : 'pages.contentReview.setPrimary') }}
+          {{
+            $t(
+              primaryAssetId === item.assetId
+                ? 'pages.contentReview.selectedPhoto'
+                : 'pages.contentReview.setPrimary'
+            )
+          }}
         </UButton>
       </div>
     </div>

@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
@@ -94,7 +93,6 @@ export default defineNuxtConfig({
           type: 'image/png'
         },
         {
-
           src: '/icons/icon_384x384.png',
           sizes: '384x384',
           type: 'image/png'

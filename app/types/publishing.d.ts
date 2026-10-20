@@ -7,7 +7,17 @@ export interface InstagramAccount {
   expired: boolean
   tokenExpiresAt: string | null
 }
-export type PublicationStatus = 'QUEUED' | 'SCHEDULED' | 'PROCESSING' | 'PUBLISHING' | 'PUBLISHED' | 'FAILED' | 'UNKNOWN' | 'CANCELLED'
+
+export type PublicationStatus
+  = | 'QUEUED'
+    | 'SCHEDULED'
+    | 'PROCESSING'
+    | 'PUBLISHING'
+    | 'PUBLISHED'
+    | 'FAILED'
+    | 'UNKNOWN'
+    | 'CANCELLED'
+
 export interface Publication {
   id: string
   draftId: string
@@ -26,6 +36,7 @@ export interface Publication {
   safeError: string | null
   createdAt: string
 }
+
 export interface PublicationPayload {
   revisionId: string
   accountKey: string
