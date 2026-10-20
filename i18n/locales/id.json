@@ -285,7 +285,7 @@
       "outputs": "Output",
       "consent": "Saya memastikan izin publikasi foto dan penyebutan klien telah diperoleh.",
       "consentRequired": "Izin publikasi wajib dikonfirmasi",
-      "outputRequired": "Pilih minimal satu output",
+      "outputRequired": "Pilih Feed atau Story",
       "choosePhotos": "Pilih atau tarik foto ke sini",
       "uploadLimits": "JPG, PNG atau WEBP; maksimal {count} foto, masing-masing {size} MB.",
       "uploaded": "Terunggah",

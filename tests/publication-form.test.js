@@ -27,6 +27,7 @@ test('publish submits edited content once, preserves retries, and does not requi
   Object.assign(globalThis, replacements)
   try {
     const detail = {
+      job: { output: 'feed' },
       draft: { id: 'draft', contentHash: 'original' },
       batch: { location: 'Jakarta', activity: 'Inspection' },
       renders: [],
@@ -72,6 +73,12 @@ test('publish submits edited content once, preserves retries, and does not requi
     await state.submit()
     expect(calls[2][2]).not.toBe(calls[1][2])
     expect(state.submitting.value).toBe(false)
+    detail.job.output = 'story'
+    await state.submit()
+    expect(calls[3][1].placement).toBe('story')
+    expect(calls[3][1].content.caption).toBe('')
+    expect(calls[3][1].content.hashtags).toEqual([])
+    detail.job.output = 'feed'
     content.title = ''
     expect(state.schema.value.safeParse(state.form).success).toBe(false)
     let finish
@@ -83,7 +90,7 @@ test('publish submits edited content once, preserves retries, and does not requi
     dispose()
     finish()
     await late
-    expect(completed).toBe(2)
+    expect(completed).toBe(3)
   } finally {
     publicationService.create = originalCreate
     for (const [key, value] of Object.entries(previous)) {

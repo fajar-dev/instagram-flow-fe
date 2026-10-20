@@ -6,6 +6,7 @@
     @submit="!disabled && submit()"
   >
     <ContentReviewPublishFields
+      v-if="detail.job.output === 'feed'"
       v-model="form.content"
       :disabled="disabled || submitting"
     />
@@ -39,18 +40,6 @@
       >
         {{ $t('pages.publishing.noAccounts') }}
       </p>
-      <UFormField
-        :label="$t('pages.publishing.placement')"
-        name="placement"
-        required
-      >
-        <USelect
-          v-model="form.placement"
-          :items="placements"
-          :disabled="disabled || submitting"
-          class="w-full"
-        />
-      </UFormField>
       <UFormField
         :label="$t('pages.publishing.source')"
         name="source"
@@ -108,7 +97,7 @@
       </div>
     </div>
     <p
-      v-if="form.placement === 'story'"
+      v-if="detail.job.output === 'story'"
       class="text-sm text-muted"
     >
       {{ $t('pages.publishing.storyHint') }}
@@ -138,7 +127,6 @@ import { usePublicationForm } from '~/composables/publishing/usePublicationForm'
 import type { PublishFormContent } from '~/types/content-review'
 import type { JobDetails } from '~/types/ai-job'
 
-const placement = defineModel<string>('placement', { required: true })
 const content = defineModel<PublishFormContent>({ required: true })
 const props = defineProps<{ detail: JobDetails, disabled?: boolean }>()
 const emit = defineEmits<{ created: [], preview: [path: string] }>()
@@ -151,10 +139,6 @@ const { accounts, loading, submitting, form, schema, design, loadAccounts, submi
       emit('created')
     }
   )
-const placements = computed(() => [
-  { label: t('pages.contentReview.feed'), value: 'feed' },
-  { label: t('pages.contentReview.story'), value: 'story' }
-])
 const sources = computed(() => [
   { label: t('pages.publishing.photo'), value: 'photo' },
   { label: t('pages.publishing.design'), value: 'design', disabled: !design.value }
@@ -166,19 +150,6 @@ const scheduled = computed({
   }
 })
 
-watch(
-  placement,
-  (value) => {
-    form.placement = value === 'story' ? 'story' : 'feed'
-  },
-  { immediate: true }
-)
-watch(
-  () => form.placement,
-  (value) => {
-    placement.value = value
-  }
-)
 watch(
   () =>
     form.source === 'design' && design.value

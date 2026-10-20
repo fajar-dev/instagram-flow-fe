@@ -4,7 +4,7 @@ import type { PublishFormContent } from '~/types/content-review'
 
 export function useContentDetail(jobId: string) {
   const detail = ref<JobDetails | null>(null)
-  const placement = ref('feed')
+  const placement = computed(() => detail.value?.job.output || 'feed')
   const form = reactive<PublishFormContent>({
     title: '',
     caption: '',
