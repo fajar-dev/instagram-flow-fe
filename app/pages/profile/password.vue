@@ -116,7 +116,6 @@ const handlePasswordSubmit = async () => {
     if (response.success) {
       toast.add({
         title: t('pages.profile.password.updatedSuccess'),
-        color: 'success',
         icon: 'i-lucide-circle-check'
       })
       formPassword.oldPassword = ''

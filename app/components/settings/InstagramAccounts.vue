@@ -12,13 +12,7 @@
       v-if="loading"
       class="h-32 w-full"
     />
-    <p
-      v-else-if="failed"
-      class="text-sm text-error"
-    >
-      {{ $t('components.requestState.failed') }}
-    </p>
-    <UCard v-else>
+    <UCard v-else-if="!failed">
       <p
         v-if="!accounts.length"
         class="text-sm text-muted"
@@ -125,7 +119,7 @@ async function verify(key: string) {
   checking.value = key
   try {
     usernames.value[key] = (await instagramService.verify(key)).data.username
-    toast.add({ title: t('pages.publishing.verified'), color: 'success' })
+    toast.add({ title: t('pages.publishing.verified') })
   } catch (error) {
     handleError(error)
   } finally {

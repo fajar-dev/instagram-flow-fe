@@ -107,7 +107,6 @@ const handleSubmit = async () => {
     if (response.success) {
       toast.add({
         title: t('components.user.addModal.createdSuccess'),
-        color: 'success',
         icon: 'i-lucide-circle-check'
       })
       emit('created')

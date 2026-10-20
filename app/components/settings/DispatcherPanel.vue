@@ -12,14 +12,8 @@
       v-if="loading"
       class="h-64 w-full"
     />
-    <p
-      v-else-if="failed"
-      class="text-sm text-muted"
-    >
-      {{ $t('components.requestState.failed') }}
-    </p>
     <div
-      v-else-if="settings"
+      v-else-if="!failed && settings"
       class="space-y-4"
     >
       <p
@@ -99,7 +93,7 @@ async function save() {
   try {
     settings.value = (await settingsService.updateSettings(enabled.value)).data
     enabled.value = settings.value.dispatchEnabled
-    toast.add({ title: t('pages.content.saved'), color: 'success' })
+    toast.add({ title: t('pages.content.saved') })
   } catch (error) {
     handleError(error)
   } finally {

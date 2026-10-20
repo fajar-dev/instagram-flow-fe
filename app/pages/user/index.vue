@@ -218,7 +218,6 @@ const handleDelete = async () => {
     if (response.success) {
       toast.add({
         title: t('pages.user.deletedSuccess'),
-        color: 'success',
         icon: 'i-lucide-circle-check'
       })
     }
