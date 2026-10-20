@@ -17,7 +17,13 @@
         v-else-if="loaded && !rows.length && !canDecide"
         class="text-sm text-muted"
       >
-        {{ $t(detail.draft?.reviewStatus === 'REJECTED' ? 'pages.publishing.rejectedEmpty' : 'pages.publishing.empty') }}
+        {{
+          $t(
+            detail.draft?.reviewStatus === 'REJECTED'
+              ? 'pages.publishing.rejectedEmpty'
+              : 'pages.publishing.empty'
+          )
+        }}
       </p>
       <PublishingPublicationResult
         v-for="row in rows"
@@ -66,71 +72,16 @@
 </template>
 
 <script setup lang="ts">
-import { publicationService } from '~/services/publishing/publication-service'
-import { mediaService } from '~/services/content/media-service'
-import type { Publication } from '~/types/publishing'
+import { usePublications } from '~/composables/publishing/usePublications'
 import type { JobDetails } from '~/types/ai-job'
 
 const props = defineProps<{ detail: JobDetails, dirty?: boolean }>()
 const emit = defineEmits<{ changed: [] }>()
-const { t } = useI18n()
-const handleError = useServiceError()
-const toast = useToast()
-const { openLightbox, closeLightbox } = useLightbox()
-const rows = ref<Publication[]>([])
-const loaded = ref(false)
 const rejectOpen = ref(false)
-const busy = ref('')
-const previewing = ref('')
-let previewUrl = ''
-let disposed = false
-const canDecide = computed(() => props.detail.draft?.reviewStatus === 'READY_FOR_REVIEW' && loaded.value && !rows.value.length)
-const canPublish = computed(() => canDecide.value && !failed.value && !props.dirty && props.detail.batch.publicationPermission)
-const { failed, load } = useLatestRequest(
-  () => publicationService.list(props.detail.draft!.id),
-  (response) => {
-    rows.value = [...response.data].reverse()
-    loaded.value = true
-  }
-)
-async function changed() {
-  await load()
-  emit('changed')
-}
-async function action(id: string, operation: 'retry' | 'cancel') {
-  if (busy.value) return
-  busy.value = id
-  try {
-    await publicationService[operation](id)
-    toast.add({ title: t('pages.publishing.updated'), color: 'success' })
-    await changed()
-  } catch (error) {
-    handleError(error)
-  } finally {
-    busy.value = ''
-  }
-}
-async function preview(row: Publication) {
-  if (previewing.value) return
-  previewing.value = row.id
-  try {
-    const blob = await mediaService.file(`publications/${row.id}/image`)
-    if (disposed) return
-    if (previewUrl) URL.revokeObjectURL(previewUrl)
-    previewUrl = URL.createObjectURL(blob)
-    openLightbox(previewUrl, row.accountLabel)
-  } catch (error) {
-    handleError(error)
-  } finally {
-    previewing.value = ''
-  }
-}
-usePolling(load, 10000)
-onUnmounted(() => {
-  disposed = true
-  if (previewUrl) {
-    closeLightbox()
-    URL.revokeObjectURL(previewUrl)
-  }
-})
+const { rows, loaded, busy, previewing, canDecide, canPublish, failed, changed, action, preview }
+  = usePublications(
+    () => props.detail,
+    () => !!props.dirty,
+    () => emit('changed')
+  )
 </script>
