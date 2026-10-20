@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useContentDetail } from '../app/composables/content/useContentDetail'
 import { useLatestRequest } from '../app/composables/useLatestRequest'
 import { jobService } from '../app/services/ai-job/job-service'
@@ -10,6 +10,7 @@ test('processing becomes editable on the same page without polling over unsaved 
   let response = { job: { completedAt: null }, draft: null }
   const cleanup = []
   const replacements = {
+    computed,
     reactive,
     ref,
     useLatestRequest,

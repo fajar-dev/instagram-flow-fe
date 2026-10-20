@@ -1,3 +1,7 @@
+## 21 Oktober 2026 — Satu output per konten
+
+Mengganti daftar output dengan pilihan tunggal Feed atau Story sejak upload. Preview dan publikasi mengikuti pilihan tersebut; Story tidak menampilkan field caption/hashtag posting. Backend memvalidasi output callback dan publikasi; workflow n8n, Swagger dan regression tests mengikuti kontrak baru. Migration backend tambahan mengonversi job lama tanpa reset database. Verifikasi frontend: 52 tes, typecheck, lint dan build lulus.
+
 ## 20 Oktober 2026 — Penataan dokumentasi
 
 Memisahkan aturan, arsitektur, fitur, referensi, operasional backend, dan arsip audit. Indeks per kategori serta tautan silang diperbarui. Tidak mengubah runtime aplikasi.

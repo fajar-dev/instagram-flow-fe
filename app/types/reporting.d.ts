@@ -7,7 +7,7 @@ export interface ContentRecord {
   projectName?: string
   projectLocation?: string
   photoCount?: number
-  requestedOutputs?: string[]
+  output?: 'feed' | 'story'
   uploaderName?: string
   uploaderPhoto?: string | null
   event?: string

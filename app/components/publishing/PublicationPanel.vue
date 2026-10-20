@@ -37,7 +37,6 @@
     <PublishingPublicationForm
       v-if="canDecide && detail.draft"
       v-model="content"
-      v-model:placement="placement"
       :detail="detail"
       :disabled="!canPublish || !!busy"
       @preview="emit('preview', $event)"
@@ -68,7 +67,6 @@ import { usePublications } from '~/composables/publishing/usePublications'
 import type { PublishFormContent } from '~/types/content-review'
 import type { JobDetails } from '~/types/ai-job'
 
-const placement = defineModel<string>('placement', { required: true })
 const content = defineModel<PublishFormContent>({ required: true })
 const props = defineProps<{ detail: JobDetails }>()
 const emit = defineEmits<{ changed: [], preview: [path: string] }>()
@@ -82,7 +80,6 @@ const { rows, loaded, busy, previewing, canDecide, canPublish, failed, changed, 
 watch(rows, (publications, previous) => {
   const publication = publications[0]
   if (publication) {
-    placement.value = publication.placement
     emit('preview', `publications/${publication.id}/image`)
   } else if (previous?.length) {
     emit('preview', '')

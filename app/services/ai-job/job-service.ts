@@ -12,13 +12,13 @@ class JobService {
     ).data
   }
 
-  async process(batchId: string, requestedOutputs: string[], key: string) {
+  async process(batchId: string, output: 'feed' | 'story', key: string) {
     return (
       await apiService.client.post<
         ApiResponse<{
           jobId: string
         }>
-      >(`/batches/${batchId}/process`, { requestedOutputs }, { headers: requestHeaders(key) })
+      >(`/batches/${batchId}/process`, { output }, { headers: requestHeaders(key) })
     ).data
   }
 

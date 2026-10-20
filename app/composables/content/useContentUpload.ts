@@ -34,7 +34,7 @@ export function useContentUpload() {
     clientName: '',
     description: '',
     publicationPermission: false,
-    requestedOutputs: ['feed', 'story'] as ('feed' | 'story')[]
+    output: 'feed' as 'feed' | 'story'
   })
   const schema = computed(() =>
     z.object({
@@ -47,7 +47,7 @@ export function useContentUpload() {
       publicationPermission: z
         .boolean()
         .refine(value => value, t('pages.content.consentRequired')),
-      requestedOutputs: z.array(z.enum(['feed', 'story'])).min(1, t('pages.content.outputRequired'))
+      output: z.enum(['feed', 'story'])
     })
   )
   const files = ref<File[]>([])
@@ -66,7 +66,7 @@ export function useContentUpload() {
   const batchKey = crypto.randomUUID()
   const processKey = crypto.randomUUID()
   const processingRequested = ref(false)
-  let submittedOutputs: string[] | undefined
+  let submittedOutput: 'feed' | 'story' | undefined
   const busy = ref(false)
   const validating = computed(() => entries.value.some(entry => entry.status === 'validating'))
   const uploadedCount = computed(
@@ -137,9 +137,9 @@ export function useContentUpload() {
     }
     busy.value = true
     try {
-      submittedOutputs ??= [...form.requestedOutputs]
+      submittedOutput ??= form.output
       processingRequested.value = true
-      const result = (await jobService.process(batchId.value, submittedOutputs, processKey)).data
+      const result = (await jobService.process(batchId.value, submittedOutput, processKey)).data
       if (!disposed) {
         await navigateTo(`/content/${result.jobId}`)
       }
@@ -166,7 +166,7 @@ export function useContentUpload() {
     busy.value = true
     try {
       if (!batchId.value) {
-        const { requestedOutputs, ...metadata } = form
+        const { output, ...metadata } = form
         batchId.value = (await batchService.batch(metadata, batchKey)).data.id
       }
       if (disposed) {

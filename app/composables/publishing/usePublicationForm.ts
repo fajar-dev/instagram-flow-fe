@@ -22,7 +22,6 @@ export function usePublicationForm(
     content,
     accountKey: '',
     source: 'photo' as 'photo' | 'design',
-    placement: 'feed' as 'feed' | 'story',
     mode: 'now' as 'now' | 'schedule',
     date: '',
     time: ''
@@ -46,7 +45,7 @@ export function usePublicationForm(
         && content.primaryAssetId === ai.selectedAssetIds[0]
     return original
       ? detail().renders.find(
-          r => r.placement === form.placement && r.assetId === content.primaryAssetId
+          r => r.placement === detail().job.output && r.assetId === content.primaryAssetId
         )
       : undefined
   })
@@ -58,7 +57,10 @@ export function usePublicationForm(
       .object({
         content: z.object({
           title: z.string().trim().min(1, t('pages.content.validation')).max(300),
-          caption: z.string().trim().min(1, t('pages.content.validation')).max(10000),
+          caption:
+            detail().job.output === 'story'
+              ? z.string()
+              : z.string().trim().min(1, t('pages.content.validation')).max(10000),
           primaryAssetId: z.string().min(1, t('pages.content.validation')),
           location: z.string().trim().min(1, t('pages.content.validation')).max(200),
           activity: z.string().trim().min(1, t('pages.content.validation')).max(200),
@@ -69,7 +71,6 @@ export function usePublicationForm(
         }),
         accountKey: z.string().min(1, t('pages.publishing.accountRequired')),
         source: z.enum(['photo', 'design']),
-        placement: z.enum(['feed', 'story']),
         mode: z.enum(['now', 'schedule']),
         date: z.string(),
         time: z.string()
@@ -92,10 +93,10 @@ export function usePublicationForm(
             message: t('pages.publishing.designUnavailable')
           })
         }
-        if (value.placement === 'feed' && Array.from(caption.value).length > 2200) {
+        if (detail().job.output === 'feed' && Array.from(caption.value).length > 2200) {
           ctx.addIssue({
             code: 'custom',
-            path: ['placement'],
+            path: ['content', 'caption'],
             message: t('pages.publishing.captionTooLong')
           })
         }
@@ -133,14 +134,14 @@ export function usePublicationForm(
         content: {
           primaryAssetId: content.primaryAssetId,
           title: content.title.trim(),
-          caption: content.caption.trim(),
-          hashtags: parseHashtags(content.hashtagText),
+          caption: detail().job.output === 'story' ? '' : content.caption.trim(),
+          hashtags: detail().job.output === 'story' ? [] : parseHashtags(content.hashtagText),
           location: content.location.trim(),
           activity: content.activity.trim()
         },
         accountKey: form.accountKey,
         source: form.source,
-        placement: form.placement,
+        placement: detail().job.output,
         scheduledAt: form.mode === 'schedule' ? publicationSchedule(form.date, form.time) : null
       }
       const body = JSON.stringify(payload)

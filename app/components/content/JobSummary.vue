@@ -22,11 +22,7 @@
           {{ $t('pages.content.outputs') }}
         </dt>
         <dd class="text-toned">
-          {{
-            detail.job.requestedOutputs
-              .map((output) => $t(`pages.contentReview.${output}`))
-              .join(' · ')
-          }}
+          {{ $t(`pages.contentReview.${detail.job.output}`) }}
         </dd>
       </div>
       <div

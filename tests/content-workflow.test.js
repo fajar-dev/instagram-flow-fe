@@ -19,7 +19,7 @@ test('split batch/job clients preserve idempotency headers and request payloads'
     return response(config, { data: { id: 'batch-1', jobId: 'job-1' } })
   }
   expect((await batchService.batch({ projectName: 'AMTI' }, 'batch-key')).data.id).toBe('batch-1')
-  expect((await jobService.process('batch-1', ['feed'], 'process-key')).data.jobId).toBe('job-1')
+  expect((await jobService.process('batch-1', 'feed', 'process-key')).data.jobId).toBe('job-1')
   await jobService.retry('job-1', 'retry-key')
   expect(calls.map(call => call.headers['Idempotency-Key'])).toEqual([
     'batch-key',
@@ -31,7 +31,7 @@ test('split batch/job clients preserve idempotency headers and request payloads'
     '/batches/batch-1/process',
     '/jobs/job-1/retry'
   ])
-  expect(JSON.parse(calls[1].data)).toEqual({ requestedOutputs: ['feed'] })
+  expect(JSON.parse(calls[1].data)).toEqual({ output: 'feed' })
 })
 
 test('draft client preserves content guards and media requests remain private blobs', async () => {
@@ -67,7 +67,7 @@ test('all JSON feature clients return the same ApiResponse envelope as user', as
     batchService.batch({}, 'batch-key'),
     batchService.upload('batch', new File(['x'], 'image.png'), () => {}),
     jobService.details('job'),
-    jobService.process('batch', ['feed'], 'process-key'),
+    jobService.process('batch', 'feed', 'process-key'),
     jobService.retry('job', 'retry-key'),
     draftService.reject('draft', {}),
     mediaService.archive('asset'),

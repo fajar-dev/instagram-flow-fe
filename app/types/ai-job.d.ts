@@ -5,7 +5,7 @@ export interface Job {
   id: string
   batchId: string
   status: string
-  requestedOutputs: string[]
+  output: 'feed' | 'story'
   retryable: boolean
   attemptNo: number
   createdAt: string

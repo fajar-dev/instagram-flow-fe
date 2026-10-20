@@ -47,12 +47,15 @@
       </UFormField>
       <UFormField
         :label="$t('pages.content.outputs')"
-        name="requestedOutputs"
+        name="output"
         required
       >
-        <UCheckboxGroup
-          v-model="form.requestedOutputs"
-          :items="['feed', 'story']"
+        <URadioGroup
+          v-model="form.output"
+          :items="[
+            { label: $t('pages.contentReview.feed'), value: 'feed' },
+            { label: $t('pages.contentReview.story'), value: 'story' }
+          ]"
           :disabled="busy || processingRequested"
           orientation="horizontal"
         />

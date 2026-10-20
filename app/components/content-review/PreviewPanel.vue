@@ -4,19 +4,6 @@
       <h2 class="text-base font-semibold text-highlighted">
         {{ $t('pages.contentReview.preview') }}
       </h2>
-      <UTabs
-        v-model="placement"
-        :items="
-          outputs.map((value) => ({
-            label:
-              value === 'story' ? $t('pages.contentReview.story') : $t('pages.contentReview.feed'),
-            value
-          }))
-        "
-        :content="false"
-        size="sm"
-        variant="pill"
-      />
     </div>
     <ContentReviewInstagramFeedPreview
       v-if="placement === 'feed'"
@@ -34,13 +21,12 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  outputs: string[]
+  placement: 'feed' | 'story'
   primaryAssetId: string
   path?: string
   caption: string
   hashtags: string[]
   location: string
 }>()
-const placement = defineModel<string>({ required: true })
 const imagePath = computed(() => props.path || `assets/${props.primaryAssetId}/preview`)
 </script>

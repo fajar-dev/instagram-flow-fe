@@ -171,9 +171,7 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
           id: 'outputs',
           header: () => t('components.reporting.recordList.outputs'),
           cell: ({ row }: { row: { original: ContentRecord } }) =>
-            (row.original.requestedOutputs || [])
-              .map(output => t(`pages.contentReview.${output}`))
-              .join(' · ') || '—'
+            row.original.output ? t(`pages.contentReview.${row.original.output}`) : '—'
         }
       ]
     : []),

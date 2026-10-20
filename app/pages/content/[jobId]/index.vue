@@ -15,8 +15,7 @@
       <div class="min-w-0 lg:col-span-5 lg:sticky lg:top-6">
         <ContentReviewPreviewPanel
           v-if="detail.draft"
-          v-model="placement"
-          :outputs="detail.draft.reviewStatus === 'PUBLISH' ? [placement] : ['feed', 'story']"
+          :placement="placement"
           :primary-asset-id="form.primaryAssetId"
           :caption="form.caption"
           :hashtags="parseHashtags(form.hashtagText)"
@@ -34,7 +33,6 @@
           <PublishingPublicationPanel
             v-if="detail.draft && detail.draft.reviewStatus !== 'REJECTED'"
             v-model="form"
-            v-model:placement="placement"
             :detail="detail"
             @preview="previewPath = $event"
             @changed="load"
