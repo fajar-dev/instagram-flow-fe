@@ -3,7 +3,7 @@
   <div class="space-y-4 shrink-0 select-none">
     <!-- Top Row: Page Title & Description -->
     <div class="flex items-start justify-between gap-4">
-      <div class="flex flex-col gap-1">
+      <div class="min-w-0 flex-1 flex flex-col gap-1">
         <h2 class="text-xl md:text-2xl font-bold text-highlighted tracking-tight">
           {{ title }}
         </h2>
@@ -14,6 +14,15 @@
           {{ description }}
         </p>
       </div>
+      <UBreadcrumb
+        :items="breadcrumbs"
+        class="hidden max-w-md shrink-0 pt-1 lg:block"
+        :ui="{ list: 'justify-end flex-wrap', link: 'text-sm font-normal' }"
+      >
+        <template #separator>
+          <span class="mx-2 text-muted">/</span>
+        </template>
+      </UBreadcrumb>
     </div>
 
     <!-- Middle Row: Tab links -->
@@ -43,4 +52,5 @@ interface Props {
 }
 
 defineProps<Props>()
+const { breadcrumbs } = useBreadcrumbs()
 </script>
