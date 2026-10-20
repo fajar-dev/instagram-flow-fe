@@ -16,7 +16,7 @@ Daftar ini memetakan kebutuhan aplikasi ke komponen yang sudah ada, bukan katalo
 | Gallery/infinite scroll | content/MediaGallery, InfiniteScroll | UButton |
 | Preview gambar | ImagePreview, ImageLightbox, useLightbox | UModal, UButton |
 | Preview privat/progresif | content/PrivateImage, ProgressiveImage | ImagePreview |
-| Editor | content-review/EditorForm, PreviewPanel, RankingsPanel | UForm, UCard, UButton |
+| Publish | content-review/PublishFields, PreviewPanel, RankingsPanel | UForm, UCard, UButton |
 | Keputusan konten | publishing/PublicationPanel, RejectModal; content-review/RejectionNotice | Aksi Publish/Reject dan catatan penolakan |
 | Feedback aksi | useToast, useServiceError | Toast Nuxt UI |
 

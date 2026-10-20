@@ -17,7 +17,8 @@ bun run dev
 
 - Overview: ringkasan aktivitas dan status konten.
 - Content: job dan draft dalam satu menu, tab berdasarkan status dengan count.
-- Detail/Editor: foto carousel, summary/timeline, caption, pemilihan foto, review dan history.
+- Review: foto carousel, summary/timeline, caption dan keputusan Publish/Reject.
+- Publish: penyesuaian caption/foto dan pemilihan akun serta jadwal dalam satu form.
 - Media: galeri masonry, thumbnail blur ke gambar penuh, infinite scroll dan lightbox.
 - Activity Logs, Integration Settings, User dan Profile.
 

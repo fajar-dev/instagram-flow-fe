@@ -11,10 +11,10 @@ Form memakai UForm, schema Zod, UFormField, label, placeholder dan atribut requi
 ## Detail dan editor konten
 
 - `content/JobHeader.vue`: navigasi Detail/Editor tanpa tombol Back.
-- `content/JobSummary.vue`: status, revision, safe error, metadata/deskripsi, timeline created/started/completed, dan detail teknis.
+- `content/JobSummary.vue`: status, safe error, metadata/deskripsi, timeline created/started/completed, dan detail teknis.
 - `content/AssetSlider.vue`: carousel dengan panah di dalam frame pada mobile/desktop; panah/dots hanya jika lebih dari satu aset.
 - `content-review/PreviewPanel.vue`: preview feed/story dan keadaan outdated.
-- `EditorForm`, `RankingsPanel`: form caption dan pemilihan foto. `RejectionNotice` menampilkan catatan penolakan revisi aktif; keputusan Publish/Reject berada pada panel publishing.
+- `PublishFields`, `RankingsPanel`: field caption dan pemilihan foto dalam UForm publikasi. `RejectionNotice` menampilkan catatan penolakan; keputusan Publish/Reject tersedia dari detail.
 
 Tab editor memakai UTabs pill compact dengan color primary. Panel memakai v-show agar state form tidak hilang saat pindah tab. Perubahan belum disimpan tetap ditandai sebelum review.
 
