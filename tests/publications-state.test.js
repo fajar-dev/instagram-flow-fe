@@ -47,7 +47,6 @@ test('publication preview releases its blob without closing another image, and i
     mediaService.file = async () => new Blob(['preview'])
     const state = usePublications(
       () => ({ batch: {} }),
-      () => false,
       () => {}
     )
     await poll()

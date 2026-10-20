@@ -8,12 +8,6 @@
     <div class="space-y-5">
       <div class="flex flex-wrap items-center gap-3">
         <ContentStatusBadge :status="detail.draft?.reviewStatus || detail.job.status" />
-        <span
-          v-if="detail.revision"
-          class="text-xs text-muted"
-        >
-          {{ $t('pages.contentReview.revision') }} {{ detail.revision.revisionNo }}
-        </span>
       </div>
       <p
         v-if="detail.job.safeError"

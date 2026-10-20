@@ -95,7 +95,9 @@
       "unexpected": "Please try again."
     },
     "authLayout": {
-      "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia"
+      "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia",
+      "headline": "Share the story behind every project.",
+      "description": "Prepare, review and publish your Instagram content with AMTI."
     },
     "mobileSidebar": {
       "title": "Utility",
@@ -108,9 +110,6 @@
         "uploader": "Uploader",
         "actions": "Actions"
       }
-    },
-    "requestState": {
-      "failed": "Unable to load data. Please try again."
     },
     "content": {
       "infiniteScroll": {
@@ -259,7 +258,12 @@
         "failed": "Failed",
         "publish": "Publish"
       },
-      "periodPlaceholder": "Select a period"
+      "periodPlaceholder": "Select a period",
+      "bannerTitle": "Turn project stories into your next post.",
+      "bannerDescription": "Bring your documentation together, refine AI-assisted content and prepare your next Instagram publication.",
+      "viewContent": "View content",
+      "workspace": "AMTI · Content workspace",
+      "reviewHint": "Review the caption and photos, then publish or reject."
     },
     "content": {
       "upload": "Upload Content",
@@ -363,30 +367,17 @@
       "finished": "Completed"
     },
     "contentReview": {
-      "studio": "AI Studio",
-      "review": "Content Review",
-      "previewWarning": "SVG preview — not ready for Instagram publishing",
-      "primaryOnly": "AI may select up to 5 photos. V0.2 renders only the first selected photo.",
-      "revision": "Revision",
       "rankings": "AI photo rankings",
       "setPrimary": "Set as primary photo",
       "preview": "Content preview",
-      "saveRevision": "Save revision",
-      "restoreAi": "Restore AI suggestion",
-      "notReady": "Results are not available yet. Check job status.",
-      "editorTitle": "Content editor",
-      "editorHint": "Refine the caption and save your changes before publishing.",
       "rankingsHint": "Compare the AI suggestions and choose the primary photo.",
       "selectedPhoto": "Selected photo",
       "feed": "Feed",
       "story": "Story",
-      "unsaved": "Unsaved changes",
-      "photosTab": "Photos",
-      "backToCaption": "Continue to caption and save",
-      "readOnlyHint": "This content is read-only after publishing or rejection.",
       "rejectionTitle": "Rejection note",
       "rejectionEmpty": "This content was rejected without a note.",
       "instagramAccount": "Instagram account",
+      "storyReply": "Send message",
       "fullCaption": "Show full caption",
       "lessCaption": "Show less"
     },
@@ -407,7 +398,7 @@
     },
     "publishing": {
       "title": "Instagram publishing",
-      "description": "Publish this project once to one Instagram account, now or on a schedule.",
+      "description": "Adjust the caption and photo, then choose an account and publish now or schedule.",
       "publish": "Publish",
       "accountsTitle": "Instagram accounts",
       "accountsHint": "Manage your Instagram accounts and check their connection.",
@@ -420,12 +411,12 @@
       "verify": "Check connection",
       "verified": "Instagram account verified",
       "selectAccounts": "Select an Instagram account",
-      "accountRequired": "Select at least one account",
+      "accountRequired": "Select an account",
       "placement": "Placement",
       "source": "Image source",
       "photo": "Selected photo",
       "design": "AI design",
-      "designUnavailable": "AI design is available only for an unchanged original revision with a matching render. The selected photo can still be published.",
+      "designUnavailable": "AI design requires unchanged AI content and a matching render. You can publish the selected photo after editing.",
       "mode": "Publication time",
       "date": "Date (WIB)",
       "time": "Time (WIB)",
@@ -436,7 +427,7 @@
       "preview": "Preview image",
       "imageHint": "The final JPEG fits the chosen format with a white background when needed.",
       "storyHint": "Stories require an Instagram Business account. The caption is not attached to the story image.",
-      "snapshotHint": "One project creates one post. After publishing, its content and account are locked. A failed delivery can retry the same post; cancellation is final. The worker must remain online.",
+      "snapshotHint": "Your changes are saved when you publish or schedule. One project creates one post; content and account are then locked.",
       "close": "Close",
       "queued": "Publication queued",
       "empty": "No publications for this content yet.",
@@ -454,7 +445,6 @@
         "UNKNOWN": "Verification required",
         "CANCELLED": "Cancelled"
       },
-      "readyRequired": "Save the current revision before publishing or rejecting.",
       "reject": "Reject",
       "rejectTitle": "Reject this content?",
       "rejectNotes": "Reason (optional)",

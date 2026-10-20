@@ -2,19 +2,7 @@
   <div class="space-y-5">
     <div class="space-y-4">
       <p
-        v-if="canDecide && dirty"
-        class="text-sm text-muted"
-      >
-        {{ $t('pages.publishing.readyRequired') }}
-      </p>
-      <p
-        v-if="failed"
-        class="text-sm text-error"
-      >
-        {{ $t('components.requestState.failed') }}
-      </p>
-      <p
-        v-else-if="loaded && !rows.length && !canDecide"
+        v-if="!failed && loaded && !rows.length && !canDecide"
         class="text-sm text-muted"
       >
         {{
@@ -46,15 +34,18 @@
         {{ $t('pages.publishing.description') }}
       </p>
       <PublishingPublicationForm
+        v-model="content"
+        v-model:placement="placement"
         :detail="detail"
         :disabled="!canPublish || !!busy"
+        @preview="emit('preview', $event)"
         @created="changed"
       >
         <template #secondary="{ submitting }">
           <UButton
             color="error"
             variant="ghost"
-            :disabled="submitting || !!busy || dirty || failed"
+            :disabled="submitting || !!busy || failed"
             @click="rejectOpen = true"
           >
             {{ $t('pages.publishing.reject') }}
@@ -63,7 +54,7 @@
       </PublishingPublicationForm>
     </template>
     <PublishingRejectModal
-      v-if="detail.draft && detail.revision"
+      v-if="detail.draft"
       v-model="rejectOpen"
       :detail="detail"
       @rejected="changed"
@@ -73,15 +64,24 @@
 
 <script setup lang="ts">
 import { usePublications } from '~/composables/publishing/usePublications'
+import type { PublishFormContent } from '~/types/content-review'
 import type { JobDetails } from '~/types/ai-job'
 
-const props = defineProps<{ detail: JobDetails, dirty?: boolean }>()
-const emit = defineEmits<{ changed: [] }>()
+const placement = defineModel<string>('placement', { required: true })
+const content = defineModel<PublishFormContent>({ required: true })
+const props = defineProps<{ detail: JobDetails }>()
+const emit = defineEmits<{ changed: [], preview: [path: string] }>()
 const rejectOpen = ref(false)
 const { rows, loaded, busy, previewing, canDecide, canPublish, failed, changed, action, preview }
   = usePublications(
     () => props.detail,
-    () => !!props.dirty,
     () => emit('changed')
   )
+watch(rows, (publications) => {
+  const publication = publications[0]
+  if (publication) {
+    placement.value = publication.placement
+    emit('preview', `publications/${publication.id}/image`)
+  }
+})
 </script>

@@ -7,13 +7,13 @@
       <HeaderTab
         :to="`/content/${jobId}`"
         :label="$t('pages.content.detail')"
-        :active="!editing"
+        :active="!publishing"
       />
       <HeaderTab
         v-if="detail?.draft"
-        :to="`/content/${jobId}/edit`"
-        :label="$t('pages.contentReview.editorTitle')"
-        :active="editing"
+        :to="`/content/${jobId}/publish`"
+        :label="$t('pages.publishing.publish')"
+        :active="publishing"
       />
     </template>
   </Header>
@@ -22,5 +22,5 @@
 <script setup lang="ts">
 import type { JobDetails } from '~/types/ai-job'
 
-defineProps<{ jobId: string, detail: JobDetails | null, editing?: boolean }>()
+defineProps<{ jobId: string, detail: JobDetails | null, publishing?: boolean }>()
 </script>

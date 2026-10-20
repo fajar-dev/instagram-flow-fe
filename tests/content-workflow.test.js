@@ -34,19 +34,17 @@ test('split batch/job clients preserve idempotency headers and request payloads'
   expect(JSON.parse(calls[1].data)).toEqual({ requestedOutputs: ['feed'] })
 })
 
-test('draft client preserves revision guards and media requests remain private blobs', async () => {
+test('draft client preserves content guards and media requests remain private blobs', async () => {
   const calls = []
   apiService.client.defaults.adapter = async (config) => {
     calls.push(config)
     return response(config, new Blob(['private preview']))
   }
-  await draftService.edit('draft-1', { expectedRevisionId: 'revision-1', title: 'Updated' })
-  await draftService.reject('draft-1', { revisionId: 'revision-1', contentHash: 'hash', notes: '' })
+  await draftService.reject('draft-1', { contentHash: 'hash', notes: '' })
   await mediaService.file('renders/render-1')
-  expect(JSON.parse(calls[0].data).expectedRevisionId).toBe('revision-1')
-  expect(JSON.parse(calls[1].data).contentHash).toBe('hash')
-  expect(calls[2].responseType).toBe('blob')
-  expect(calls[2].headers.Authorization).toStartWith('Bearer ')
+  expect(JSON.parse(calls[0].data).contentHash).toBe('hash')
+  expect(calls[1].responseType).toBe('blob')
+  expect(calls[1].headers.Authorization).toStartWith('Bearer ')
 })
 
 test('reporting and settings clients retain envelopes and query parameters', async () => {
@@ -71,7 +69,6 @@ test('all JSON feature clients return the same ApiResponse envelope as user', as
     jobService.details('job'),
     jobService.process('batch', ['feed'], 'process-key'),
     jobService.retry('job', 'retry-key'),
-    draftService.edit('draft', {}),
     draftService.reject('draft', {}),
     mediaService.archive('asset'),
     settingsService.settings(),

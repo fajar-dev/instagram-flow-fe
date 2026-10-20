@@ -2,8 +2,8 @@ import { expect, test } from 'bun:test'
 import { computed } from 'vue'
 import { useBreadcrumbs } from '../app/composables/useBreadcrumbs'
 
-test('current and legacy editor breadcrumbs link to the same content detail', () => {
-  const route = { path: '/content/example/edit' }
+test('publish breadcrumbs link to the content review', () => {
+  const route = { path: '/content/example/publish' }
   const replacements = {
     computed,
     useRoute: () => route,
@@ -20,11 +20,9 @@ test('current and legacy editor breadcrumbs link to the same content detail', ()
   Object.assign(globalThis, replacements)
   try {
     const current = useBreadcrumbs().breadcrumbs.value
-    route.path = '/content-review/studio/example'
-    const legacy = useBreadcrumbs().breadcrumbs.value
-    expect(legacy).toEqual(current)
-    expect(legacy[1].to).toBe('/content/example')
-    expect(legacy[2].to).toBeUndefined()
+    expect(current[1].to).toBe('/content/example')
+    expect(current[2].label).toBe('pages.publishing.publish')
+    expect(current[2].to).toBeUndefined()
     route.path = '/content/example'
     expect(useBreadcrumbs().breadcrumbs.value).toEqual([
       { label: 'pages.content.title', to: '/content' },
