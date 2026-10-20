@@ -9,7 +9,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
-    "test": "bun test tests"
+    "test": "bun test tests",
+    "format": "prettier --write \"app/**/*.{vue,ts,js}\" \"tests/**/*.js\" nuxt.config.ts eslint.config.mjs && eslint . --fix"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.108",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@nuxt/eslint": "^1.15.2",
     "eslint": "^10.4.0",
+    "prettier": "^3.9.10",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.0"
   },
