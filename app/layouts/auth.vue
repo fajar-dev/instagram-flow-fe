@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-dvh w-full bg-muted/40 p-2">
+  <div class="flex min-h-dvh w-full bg-muted/30 p-2">
     <aside
       class="relative isolate hidden w-2/5 shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-neutral-950 p-8 text-white lg:flex xl:p-12"
     >
