@@ -53,10 +53,10 @@
             :columns="columns"
             :loading="loading"
             :ui="{
-              thead: 'bg-muted',
+              thead: 'bg-primary/5',
               th: 'px-5 py-3 text-xs font-semibold whitespace-nowrap',
               td: 'px-5 py-4 text-sm text-highlighted',
-              tr: 'transition-colors hover:bg-muted/30 motion-reduce:transition-none',
+              tr: 'transition-colors hover:bg-primary/1 motion-reduce:transition-none',
               empty: 'py-12 text-center text-sm text-muted'
             }"
             :class="['w-full', tableClass]"
@@ -75,7 +75,7 @@
       <div
         v-if="pagination"
         class="flex flex-col sm:flex-row items-center justify-between gap-3"
-        :class="!$slots.content ? 'border-t border-default bg-muted px-5 py-3' : ''"
+        :class="!$slots.content ? 'border-t border-default bg-primary/5 px-5 py-3' : ''"
       >
         <span class="text-xs tabular-nums">
           {{ $t('components.dataTable.showing', { from: from || 0, to: to || 0, total }) }}

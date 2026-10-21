@@ -34,7 +34,7 @@
           <USelect
             v-model="period"
             :items="
-              ['today', 'this_week', 'this_month', 'last_7_days', 'last_30_days'].map((value) => ({
+              ['today', 'this_week', 'this_month'].map((value) => ({
                 label: $t(`pages.analytics.periods.${value}`),
                 value
               }))

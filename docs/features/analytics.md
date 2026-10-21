@@ -28,11 +28,11 @@ Insight pada Content mempertahankan metrik semula (Feed/Reels: views, reach, lik
 
 ## Periode kalender
 
-Pilihan Today, This week, This month, Last 7 days dan Last 30 days memakai batas hari Asia/Jakarta (WIB). Minggu dimulai Senin; bulan dimulai tanggal 1; semua rentang berakhir pada waktu pengambilan data. Rentang 7/30 hari mencakup hari ini. Default This week. Cache memasukkan awal rentang agar tidak memakai data rentang kemarin saat berganti hari/minggu/bulan. Top posts tetap memakai angka lifetime dan tidak difilter periode akun.
+Pilihan Today, This week dan This month memakai batas hari Asia/Jakarta (WIB). Minggu dimulai Senin; bulan dimulai tanggal 1; semua rentang berakhir pada waktu pengambilan data. Default This week. Cache memasukkan awal rentang agar tidak memakai data rentang kemarin saat berganti hari/minggu/bulan. Top posts tetap memakai angka lifetime dan tidak difilter periode akun.
 
 ## Radar akun
 
-Hanya statistik akun memakai RadarChart, membandingkan periode terpilih dengan bagian berjalan periode sebelumnya. Today bergeser satu hari, This week tujuh hari, This month mulai tanggal 1 bulan sebelumnya (dibatasi akhir bulan jika lebih pendek), last7/last30 bergeser 7/30 hari. Rentang aktual tersedia melalui tooltip pembanding. Setiap sumbu (reach, likes, comments, saves, shares, engagement rate) dinormalisasi terhadap maksimum kedua periode; maksimum menjadi 100. Nol tidak dianggap data hilang, null tidak diplot. Minimal tiga sumbu tersedia untuk radar. Nilai asli kedua periode tetap ditampilkan. Insight Content tetap radial tanpa pembanding.
+Hanya statistik akun memakai RadarChart, membandingkan periode terpilih dengan bagian berjalan periode sebelumnya. Today bergeser satu hari, This week tujuh hari, This month mulai tanggal 1 bulan sebelumnya (dibatasi akhir bulan jika lebih pendek). Rentang aktual tersedia melalui tooltip pembanding. Setiap sumbu (reach, likes, comments, saves, shares, engagement rate) dinormalisasi terhadap maksimum kedua periode; maksimum menjadi 100. Nol tidak dianggap data hilang, null tidak diplot. Minimal tiga sumbu tersedia untuk radar. Nilai asli kedua periode tetap ditampilkan. Insight Content tetap radial tanpa pembanding.
 
 
 Statistik akun menampilkan Views, Reach, Interactions, dan Engagement rate sebagai ringkasan utama, lalu radar dan metrik pendukung. Indikator tren menghitung (sekarang − sebelumnya) / sebelumnya × 100%; ER memakai selisih poin persentase. Baseline nol dengan nilai baru positif ditulis “Dari nol”, kedua nilai nol menghasilkan 0%, dan null menghasilkan tanda —. Tooltip indikator menampilkan arah dan nilai sebelumnya. Tidak ada sparkline sintetis: data yang tersedia adalah agregat dua periode, bukan deret waktu harian.

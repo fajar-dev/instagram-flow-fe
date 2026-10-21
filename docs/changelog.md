@@ -444,3 +444,13 @@ Settings displays the AI dispatcher above Instagram accounts with a shared conte
 ## 2026-10-19 — Ready → Publish / Reject
 
 Removed intermediate review decisions. One project now targets one account and one publication, enforced with a unique project constraint and serialized decisions. Publish starts delivery directly; Reject preserves the revision/hash guard. The editor locks after either decision, and failed delivery retries the same publication. Content tabs, counts, overview, API contracts, translations and migration history are aligned.
+
+## 21 Oktober 2026 — Filter periode Analytics
+
+Filter Analytics hanya menampilkan Today, This week dan This month. Pilihan Last 7 days/Last 30 days serta tipe dan terjemahan frontend yang tidak digunakan dihapus.
+
+## 21 Oktober 2026 — Card metrik Analytics
+
+Card ringkasan menempatkan label dan badge tren di bagian atas, nilai utama di bawah, serta nilai periode sebelumnya sebagai keterangan. Warna angka mengikuti arah tren; angka tetap total periode, bukan selisih. Mobile memakai satu kolom agar label dan badge tidak berdesakan.
+
+Header card Account performance dihapus. Radar dan metrik pendukung dipisahkan dalam dua panel sejajar. Metrik memakai baris ringkas dengan label kiri serta angka/tren rata kanan; informasi pembanding tersedia di bawah radar.

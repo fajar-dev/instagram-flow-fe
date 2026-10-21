@@ -7,7 +7,7 @@
     v-else-if="report"
     class="space-y-5"
   >
-    <dl class="grid grid-cols-2 gap-4 xl:grid-cols-4">
+    <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <AnalyticsMetricStat
         v-for="name in primaryMetrics"
         :key="name"
@@ -19,54 +19,38 @@
         prominent
       />
     </dl>
-    <div class="rounded-lg border border-default bg-default">
+    <div class="grid items-stretch gap-4 lg:grid-cols-5">
       <div
-        class="flex flex-wrap items-center justify-between gap-2 border-b border-default px-5 py-4"
+        class="flex min-w-0 flex-col justify-center gap-4 rounded-lg border border-default bg-default px-4 py-6 sm:px-6 lg:col-span-2"
       >
-        <h2 class="text-base font-semibold text-highlighted">
-          {{ $t('pages.analytics.performance') }}
-        </h2>
-        <UTooltip :text="comparisonText">
-          <button
-            type="button"
-            class="inline-flex items-center gap-1.5 text-xs text-muted"
-          >
-            {{ $t('pages.analytics.comparedWithPrevious') }}
-            <UIcon
-              name="i-lucide-info"
-              class="size-4"
-            />
-          </button>
-        </UTooltip>
-      </div>
-      <div class="grid lg:grid-cols-5">
-        <div class="min-w-0 border-b border-default p-4 lg:col-span-2 lg:border-r lg:border-b-0">
-          <div class="flex items-center justify-between px-1">
-            <p class="text-sm font-medium text-highlighted">
-              {{ $t('pages.analytics.accountRadar') }}
-            </p>
-            <UTooltip :text="$t('pages.analytics.radarHint')">
-              <UButton
-                icon="i-lucide-info"
-                color="neutral"
-                variant="ghost"
-                size="xs"
-                :aria-label="$t('pages.analytics.accountRadar')"
+        <AnalyticsAccountRadar :report="report" />
+        <div class="flex justify-center">
+          <UTooltip :text="`${comparisonText} · ${$t('pages.analytics.radarHint')}`">
+            <button
+              type="button"
+              class="inline-flex items-center gap-1.5 rounded text-xs text-muted transition-colors hover:text-default focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              {{ $t('pages.analytics.comparedWithPrevious') }}
+              <UIcon
+                name="i-lucide-info"
+                class="size-3.5"
               />
-            </UTooltip>
-          </div>
-          <AnalyticsAccountRadar :report="report" />
+            </button>
+          </UTooltip>
         </div>
-        <dl class="grid content-center grid-cols-2 gap-x-6 gap-y-7 p-5 sm:p-6 lg:col-span-3">
-          <AnalyticsMetricStat
-            v-for="metric in secondaryMetrics"
-            :key="metric.name"
-            :label="metricLabel(metric.name)"
-            :value="metric.value"
-            :previous="insightValue(report.previous, metric.name)"
-          />
-        </dl>
       </div>
+      <dl
+        class="divide-y divide-default rounded-lg border border-default bg-default px-5 sm:px-6 lg:col-span-3"
+      >
+        <AnalyticsMetricStat
+          v-for="metric in secondaryMetrics"
+          :key="metric.name"
+          class="py-4"
+          :label="metricLabel(metric.name)"
+          :value="metric.value"
+          :previous="insightValue(report.previous, metric.name)"
+        />
+      </dl>
     </div>
     <p class="text-xs text-muted">
       {{ $t('pages.analytics.updated', { time: formatContentDate(report.fetchedAt, locale) }) }}
