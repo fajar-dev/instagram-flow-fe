@@ -1,26 +1,41 @@
 <template>
-  <div class="min-w-0">
-    <dt class="text-sm text-muted">
+  <div
+    class="min-w-0"
+    :class="
+      prominent
+        ? 'grid grid-cols-2 items-start gap-x-2 gap-y-3'
+        : 'flex items-center justify-between gap-4'
+    "
+  >
+    <dt
+      class="text-sm text-muted"
+      :class="prominent ? 'self-center' : undefined"
+    >
       {{ label }}
     </dt>
-    <dd class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
+    <dd :class="prominent ? 'contents' : 'flex shrink-0 items-center justify-end gap-4'">
       <span
-        :class="prominent ? 'text-3xl' : 'text-xl'"
-        class="font-semibold tabular-nums tracking-tight text-highlighted"
+        :class="
+          prominent ? ['col-span-2 row-start-2 text-3xl', valueColor] : 'text-lg text-highlighted'
+        "
+        class="font-semibold tabular-nums tracking-tight"
       >
         {{ rate ? formatRate(value, locale) : formatMetric(value, locale) }}
       </span>
       <UTooltip :text="tooltip">
         <span
           tabindex="0"
-          class="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-xs font-medium tabular-nums"
-          :class="
+          class="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium tabular-nums"
+          :class="[
+            prominent ? 'col-start-2 row-start-1 justify-self-end' : 'min-w-16 justify-center',
             trend.direction === 'up'
               ? 'bg-success/10 text-success'
               : trend.direction === 'down'
                 ? 'bg-error/10 text-error'
-                : 'bg-elevated text-muted'
-          "
+                : prominent
+                  ? 'bg-elevated text-muted'
+                  : 'text-muted'
+          ]"
         >
           <UIcon
             :name="icon"
@@ -29,6 +44,12 @@
           {{ trendLabel }}
         </span>
       </UTooltip>
+      <span
+        v-if="prominent"
+        class="col-span-2 text-xs leading-relaxed text-muted"
+      >
+        {{ $t('pages.analytics.previousValue', { value: previousLabel }) }}
+      </span>
     </dd>
   </div>
 </template>
@@ -49,8 +70,8 @@ const trend = computed(() => metricTrend(props.value, props.previous, props.rate
 const icon = computed(
   () =>
     ({
-      up: 'i-lucide-trending-up',
-      down: 'i-lucide-trending-down',
+      up: 'i-lucide-arrow-up',
+      down: 'i-lucide-arrow-down',
       flat: 'i-lucide-minus',
       unavailable: 'i-lucide-minus'
     })[trend.value.direction]
@@ -67,13 +88,22 @@ const trendLabel = computed(() => {
   )
   return props.rate ? t('pages.analytics.percentagePoints', { value }) : `${value}%`
 })
+const valueColor = computed(() => {
+  if (trend.value.direction === 'up') {
+    return 'text-success'
+  }
+  if (trend.value.direction === 'down') {
+    return 'text-error'
+  }
+  return 'text-highlighted'
+})
+const previousLabel = computed(() =>
+  props.rate ? formatRate(props.previous, locale.value) : formatMetric(props.previous, locale.value)
+)
 const tooltip = computed(() => {
-  const previous = props.rate
-    ? formatRate(props.previous, locale.value)
-    : formatMetric(props.previous, locale.value)
   return [
     t(`pages.analytics.trend.${trend.value.direction}`),
-    t('pages.analytics.previousValue', { value: previous }),
+    t('pages.analytics.previousValue', { value: previousLabel.value }),
     ...(props.rate ? [t('pages.analytics.rateHint')] : [])
   ].join(' · ')
 })

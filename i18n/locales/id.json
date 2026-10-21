@@ -493,9 +493,7 @@
       "periods": {
         "today": "Hari ini",
         "this_week": "Minggu ini",
-        "this_month": "Bulan ini",
-        "last_7_days": "7 hari terakhir",
-        "last_30_days": "30 hari terakhir"
+        "this_month": "Bulan ini"
       },
       "accountRadar": "Perbandingan performa akun",
       "comparisonUnavailable": "Metrik pembanding belum cukup untuk menampilkan radar.",
@@ -503,7 +501,6 @@
       "currentPeriod": "Periode terpilih",
       "previousPeriod": "Periode sebelumnya",
       "previousValue": "Sebelumnya: {value}",
-      "performance": "Performa akun",
       "comparedWithPrevious": "vs. periode sebelumnya",
       "fromZero": "Dari nol",
       "percentagePoints": "{value} poin",

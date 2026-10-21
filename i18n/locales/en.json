@@ -493,9 +493,7 @@
       "periods": {
         "today": "Today",
         "this_week": "This week",
-        "this_month": "This month",
-        "last_7_days": "Last 7 days",
-        "last_30_days": "Last 30 days"
+        "this_month": "This month"
       },
       "accountRadar": "Account performance comparison",
       "comparisonUnavailable": "Not enough comparable metrics to display the radar.",
@@ -503,7 +501,6 @@
       "currentPeriod": "Selected period",
       "previousPeriod": "Previous period",
       "previousValue": "Previous: {value}",
-      "performance": "Account performance",
       "comparedWithPrevious": "vs. previous period",
       "fromZero": "From zero",
       "percentagePoints": "{value} pp",
