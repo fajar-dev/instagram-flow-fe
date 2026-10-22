@@ -1,5 +1,4 @@
 export interface PublishContent {
-  primaryAssetId: string
   title: string
   caption: string
   hashtags: string[]
@@ -19,7 +18,6 @@ export interface PublishFormContent {
   title: string
   caption: string
   hashtagText: string
-  primaryAssetId: string
   location: string
   activity: string
 }

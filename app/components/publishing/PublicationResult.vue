@@ -50,10 +50,10 @@
       </div>
       <div class="space-y-1">
         <dt class="text-muted">
-          {{ $t('pages.publishing.source') }}
+          {{ $t('pages.publishing.imageCount') }}
         </dt>
         <dd class="font-medium text-highlighted">
-          {{ $t(`pages.publishing.${publication.source}`) }}
+          {{ publication.imageCount }}
         </dd>
       </div>
 
@@ -92,15 +92,6 @@
         {{ $t('pages.publishing.retry') }}
       </UButton>
       <UButton
-        variant="outline"
-        color="neutral"
-        icon="i-lucide-image"
-        :loading="previewing"
-        @click="emit('preview')"
-      >
-        {{ $t('pages.publishing.preview') }}
-      </UButton>
-      <UButton
         v-if="['QUEUED', 'SCHEDULED', 'FAILED'].includes(publication.status)"
         variant="ghost"
         color="neutral"
@@ -118,7 +109,7 @@ import type { Publication } from '~/types/publishing'
 import { publicationColor } from '~/util/publication'
 import { formatContentDate } from '~/util/content'
 
-defineProps<{ publication: Publication, busy: boolean, retrying: boolean, previewing: boolean }>()
-const emit = defineEmits<{ preview: [], retry: [], cancel: [] }>()
+defineProps<{ publication: Publication, busy: boolean, retrying: boolean }>()
+const emit = defineEmits<{ retry: [], cancel: [] }>()
 const { locale } = useI18n()
 </script>

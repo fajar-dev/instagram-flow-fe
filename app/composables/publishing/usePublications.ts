@@ -1,5 +1,4 @@
 import { publicationService } from '../../services/publishing/publication-service'
-import { mediaService } from '../../services/content/media-service'
 import type { Publication } from '~/types/publishing'
 import type { JobDetails } from '~/types/ai-job'
 
@@ -7,12 +6,9 @@ export function usePublications(detail: () => JobDetails, completed: () => void)
   const { t } = useI18n()
   const handleError = useServiceError()
   const toast = useToast()
-  const { openLightbox, closeLightbox, lightboxImage } = useLightbox()
   const rows = ref<Publication[]>([])
   const loaded = ref(false)
   const busy = ref('')
-  const previewing = ref('')
-  let previewUrl = ''
   let disposed = false
   const canDecide = computed(
     () => detail().draft?.reviewStatus === 'READY_FOR_REVIEW' && loaded.value && !rows.value.length
@@ -26,7 +22,7 @@ export function usePublications(detail: () => JobDetails, completed: () => void)
       return draftId ? publicationService.list(draftId) : { data: [] }
     },
     (response) => {
-      rows.value = [...response.data].reverse()
+      rows.value = response.data
       loaded.value = true
     }
   )
@@ -59,40 +55,10 @@ export function usePublications(detail: () => JobDetails, completed: () => void)
     }
   }
 
-  async function preview(row: Publication) {
-    if (previewing.value) {
-      return
-    }
-    previewing.value = row.id
-    try {
-      const blob = await mediaService.file(`publications/${row.id}/image`)
-      if (disposed) {
-        return
-      }
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl)
-      }
-      previewUrl = URL.createObjectURL(blob)
-      openLightbox(previewUrl, row.accountLabel)
-    } catch (error) {
-      if (!disposed) {
-        handleError(error)
-      }
-    } finally {
-      previewing.value = ''
-    }
-  }
-
   usePolling(load, 10000)
   onUnmounted(() => {
     disposed = true
-    if (previewUrl) {
-      if (lightboxImage.value === previewUrl) {
-        closeLightbox()
-      }
-      URL.revokeObjectURL(previewUrl)
-    }
   })
 
-  return { rows, loaded, busy, previewing, canDecide, canPublish, failed, changed, action, preview }
+  return { rows, loaded, busy, canDecide, canPublish, failed, changed, action }
 }

@@ -37,7 +37,6 @@ test('publish submits edited content once, preserves retries, and does not requi
       title: 'Final title',
       caption: 'Edited caption',
       hashtagText: '#AMTI',
-      primaryAssetId: 'photo',
       location: 'Jakarta',
       activity: 'Inspection'
     })
@@ -63,7 +62,6 @@ test('publish submits edited content once, preserves retries, and does not requi
       title: 'Final title',
       caption: 'Edited caption',
       hashtags: ['#AMTI'],
-      primaryAssetId: 'photo',
       location: 'Jakarta',
       activity: 'Inspection'
     })
@@ -91,6 +89,26 @@ test('publish submits edited content once, preserves retries, and does not requi
     finish()
     await late
     expect(completed).toBe(3)
+    content.title = 'Original title'
+    detail.aiResult = {
+      rawTitle: 'Original title',
+      rawCaption: 'Original caption',
+      rawHashtags: [],
+      selectedAssetIds: ['photo']
+    }
+    detail.renders = [{ id: 'ai-image', placement: 'feed', assetId: 'photo' }]
+    const designState = usePublicationForm(
+      () => detail,
+      content,
+      () => {}
+    )
+    expect(designState.form.renderIds).toEqual(['ai-image'])
+    content.caption = 'A new caption does not change image pixels'
+    content.hashtagText = '#Edited'
+    expect(designState.form.renderIds).toEqual(['ai-image'])
+    content.title = 'A different image title'
+    expect(designState.form.renderIds).toEqual(['ai-image'])
+    dispose()
   } finally {
     publicationService.create = originalCreate
     for (const [key, value] of Object.entries(previous)) {

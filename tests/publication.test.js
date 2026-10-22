@@ -24,7 +24,6 @@ test('publication requests preserve account selection, schedule, final content a
     expectedContentHash: 'hash',
     content: { title: 'Final', caption: 'Edited at publish' },
     accountKey: 'one',
-    source: 'photo',
     placement: 'feed',
     scheduledAt: '2026-10-20T02:30:00.000Z'
   }

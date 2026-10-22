@@ -19,8 +19,6 @@
           :publication="row"
           :busy="!!busy"
           :retrying="busy === row.id"
-          :previewing="previewing === row.id"
-          @preview="preview(row)"
           @cancel="action(row.id, 'cancel')"
           @retry="action(row.id, 'retry')"
         />
@@ -69,20 +67,22 @@ import type { JobDetails } from '~/types/ai-job'
 
 const content = defineModel<PublishFormContent>({ required: true })
 const props = defineProps<{ detail: JobDetails }>()
-const emit = defineEmits<{ changed: [], preview: [path: string] }>()
+const emit = defineEmits<{ changed: [], preview: [paths: string[]] }>()
 const rejectOpen = ref(false)
-const { rows, loaded, busy, previewing, canDecide, canPublish, failed, changed, action, preview }
-  = usePublications(
-    () => props.detail,
-    () => emit('changed')
-  )
+const { rows, loaded, busy, canDecide, canPublish, failed, changed, action } = usePublications(
+  () => props.detail,
+  () => emit('changed')
+)
 
 watch(rows, (publications, previous) => {
   const publication = publications[0]
   if (publication) {
-    emit('preview', `publications/${publication.id}/image`)
+    emit(
+      'preview',
+      publication.renderIds.map(id => `renders/${id}`)
+    )
   } else if (previous?.length) {
-    emit('preview', '')
+    emit('preview', [])
   }
 })
 </script>

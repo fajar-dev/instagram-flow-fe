@@ -14,6 +14,7 @@
         <UFormField
           v-for="field in fields"
           :key="field"
+          :class="{ 'sm:col-span-2': field === 'projectName' }"
           :label="$t(`pages.content.fields.${field}`)"
           :name="field"
           :description="field === 'documentationDate' ? $t('pages.content.dateHint') : undefined"
@@ -58,16 +59,6 @@
           ]"
           :disabled="busy || processingRequested"
           orientation="horizontal"
-        />
-      </UFormField>
-      <UFormField
-        name="publicationPermission"
-        required
-      >
-        <UCheckbox
-          v-model="form.publicationPermission"
-          :disabled="busy || Boolean(batchId)"
-          :label="$t('pages.content.consent')"
         />
       </UFormField>
       <UFileUpload
@@ -155,6 +146,16 @@
       >
         {{ $t('pages.content.staged') }}
       </p>
+      <UFormField
+        name="publicationPermission"
+        required
+      >
+        <UCheckbox
+          v-model="form.publicationPermission"
+          :disabled="busy || Boolean(batchId)"
+          :label="$t('pages.content.consent')"
+        />
+      </UFormField>
       <UButton
         type="submit"
         icon="i-lucide-sparkles"

@@ -22,11 +22,12 @@ export type PublicationStatus
 
 export interface Publication {
   id: string
+  renderIds: string[]
+  imageCount: number
   draftId: string
   accountKey: string
   accountLabel: string
   caption: string
-  source: 'photo' | 'design'
   placement: 'feed' | 'story'
   status: PublicationStatus
   scheduledAt: string
@@ -41,7 +42,7 @@ export interface PublicationPayload {
   expectedContentHash: string
   content: PublishContent
   accountKey: string
-  source: 'photo' | 'design'
+  renderIds: string[]
   placement: 'feed' | 'story'
   scheduledAt: string | null
 }
