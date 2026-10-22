@@ -1,3 +1,15 @@
+## 21 Oktober 2026 — Audit alur konten
+
+Menghapus primaryAssetId dari draft/form dan fallback preview foto mentah/snapshot tunggal. Preview menggunakan render AI berurutan, termasuk konten ditolak. Pilihan template tidak ada dalam input upload. Fixture tes diselaraskan dengan kontrak aktif tanpa source photo.
+
+## 21 Oktober 2026 — Penyederhanaan form upload
+
+Menghapus pilihan Post template, state/validasi form serta terjemahan yang tidak dipakai. Batch baru menggunakan default backend yang sudah tersedia. Nama proyek memakai satu baris penuh, aktivitas/lokasi dan tanggal/klien berpasangan, persetujuan publikasi berada sebelum tombol proses setelah foto.
+
+## 21 Oktober 2026 — Swipe pada Content preview
+
+Preview Feed memakai carousel Nuxt UI pada area foto, dengan swipe sentuh, drag mouse, navigasi keyboard, panah, indikator titik dan nomor slide. Header akun serta caption tetap diam. Urutan mengikuti pilihan publikasi dan kembali ke slide pertama saat pilihan berubah. Tap foto tetap membuka lightbox; Story tetap satu gambar.
+
 ## 21 Oktober 2026 — Satu output per konten
 
 Mengganti daftar output dengan pilihan tunggal Feed atau Story sejak upload. Preview dan publikasi mengikuti pilihan tersebut; Story tidak menampilkan field caption/hashtag posting. Backend memvalidasi output callback dan publikasi; workflow n8n, Swagger dan regression tests mengikuti kontrak baru. Migration backend tambahan mengonversi job lama tanpa reset database. Verifikasi frontend: 52 tes, typecheck, lint dan build lulus.
@@ -454,3 +466,15 @@ Filter Analytics hanya menampilkan Today, This week dan This month. Pilihan Last
 Card ringkasan menempatkan label dan badge tren di bagian atas, nilai utama di bawah, serta nilai periode sebelumnya sebagai keterangan. Warna angka mengikuti arah tren; angka tetap total periode, bukan selisih. Mobile memakai satu kolom agar label dan badge tidak berdesakan.
 
 Header card Account performance dihapus. Radar dan metrik pendukung dipisahkan dalam dua panel sejajar. Metrik memakai baris ringkas dengan label kiri serta angka/tren rata kanan; informasi pembanding tersedia di bawah radar.
+
+## 21 Oktober 2026 — Desain gambar AI
+
+Upload memilih gaya desain AMTI. Preview memakai gambar yang benar-benar diedit AI melalui n8n, bukan komposisi SVG backend. Caption/hashtag dapat diedit tanpa membatalkan gambar. Perubahan konteks gambar mengharuskan pemilihan foto atau pemulihan isian. Hapus preview debounced dan renderer template lama.
+
+## 21 Oktober 2026 — Carousel Feed
+
+Feed mendukung upload 19 foto, edit AI untuk setiap foto, pemilihan maksimal 10 slide dan urutan eksplisit. UI pilihan foto utama diganti pilihan hasil edit dan drag reorder; Story tetap satu gambar. Publishing menyimpan snapshot media berurutan dan progress child container; langsung/jadwal menggunakan satu parent carousel. Kontrak API dan workflow n8n diperbarui.
+
+## 21 Oktober 2026 — Tampilan pilihan slide
+
+Pilihan slide kembali memakai daftar horizontal: gambar hasil edit di kiri, skor dan penjelasan AI di kanan. Nomor urutan, checkbox pilihan, drag handle serta tombol pindah tetap tersedia.

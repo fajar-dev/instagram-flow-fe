@@ -10,12 +10,19 @@
       v-model="form.content"
       :disabled="disabled || submitting"
     />
-    <ContentReviewRankingsPanel
-      :rankings="detail.aiResult?.rankings || []"
-      :primary-asset-id="form.content.primaryAssetId"
-      :disabled="disabled || submitting"
-      @selected="form.content.primaryAssetId = $event"
-    />
+    <UFormField
+      name="renderIds"
+      :label="$t('pages.publishing.postOrder')"
+      required
+    >
+      <PublishingSlideSelection
+        v-model="form.renderIds"
+        :renders="detail.renders"
+        :rankings="detail.aiResult?.rankings || []"
+        :limit="detail.job.output === 'feed' ? 10 : 1"
+        :disabled="disabled || submitting"
+      />
+    </UFormField>
     <USeparator />
     <div class="space-y-4">
       <UFormField
@@ -39,24 +46,6 @@
         class="text-sm text-muted"
       >
         {{ $t('pages.publishing.noAccounts') }}
-      </p>
-      <UFormField
-        :label="$t('pages.publishing.source')"
-        name="source"
-        required
-      >
-        <USelect
-          v-model="form.source"
-          :items="sources"
-          :disabled="disabled || submitting"
-          class="w-full"
-        />
-      </UFormField>
-      <p
-        v-if="!design"
-        class="text-xs text-muted"
-      >
-        {{ $t('pages.publishing.designUnavailable') }}
       </p>
       <UFormField
         :label="$t('pages.publishing.mode')"
@@ -129,20 +118,14 @@ import type { JobDetails } from '~/types/ai-job'
 
 const content = defineModel<PublishFormContent>({ required: true })
 const props = defineProps<{ detail: JobDetails, disabled?: boolean }>()
-const emit = defineEmits<{ created: [], preview: [path: string] }>()
-const { t } = useI18n()
-const { accounts, loading, submitting, form, schema, design, loadAccounts, submit }
-  = usePublicationForm(
-    () => props.detail,
-    content.value,
-    () => {
-      emit('created')
-    }
-  )
-const sources = computed(() => [
-  { label: t('pages.publishing.photo'), value: 'photo' },
-  { label: t('pages.publishing.design'), value: 'design', disabled: !design.value }
-])
+const emit = defineEmits<{ created: [], preview: [paths: string[]] }>()
+const { accounts, loading, submitting, form, schema, loadAccounts, submit } = usePublicationForm(
+  () => props.detail,
+  content.value,
+  () => {
+    emit('created')
+  }
+)
 const scheduled = computed({
   get: () => form.mode === 'schedule',
   set: (value: boolean) => {
@@ -151,11 +134,8 @@ const scheduled = computed({
 })
 
 watch(
-  () =>
-    form.source === 'design' && design.value
-      ? `renders/${design.value.id}`
-      : `assets/${form.content.primaryAssetId}/preview`,
-  path => emit('preview', path),
+  () => form.renderIds.map(id => `renders/${id}`),
+  paths => emit('preview', paths),
   { immediate: true }
 )
 onMounted(loadAccounts)

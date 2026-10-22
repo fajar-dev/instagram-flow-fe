@@ -7,26 +7,24 @@
     </div>
     <ContentReviewInstagramFeedPreview
       v-if="placement === 'feed'"
-      :path="imagePath"
+      :paths="paths"
       :caption="caption"
       :hashtags="hashtags"
       :location="location"
     />
     <ContentReviewInstagramStoryPreview
       v-else
-      :path="imagePath"
+      :path="paths[0] || ''"
     />
   </section>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   placement: 'feed' | 'story'
-  primaryAssetId: string
-  path?: string
+  paths: string[]
   caption: string
   hashtags: string[]
   location: string
 }>()
-const imagePath = computed(() => props.path || `assets/${props.primaryAssetId}/preview`)
 </script>

@@ -1,15 +1,12 @@
 import { expect, test } from 'bun:test'
 import { computed, ref } from 'vue'
 import { usePublications } from '../app/composables/publishing/usePublications'
-import { mediaService } from '../app/services/content/media-service'
 import { publicationService } from '../app/services/publishing/publication-service'
 import { useLatestRequest } from '../app/composables/useLatestRequest'
 
-test('publication preview releases its blob without closing another image, and ignores late errors', async () => {
+test('publication actions ignore late errors after unmount and skip loading without a draft', async () => {
   const cleanup = []
   const errors = []
-  const image = ref('')
-  let closed = 0
   let poll
   const replacements = {
     ref,
@@ -18,15 +15,6 @@ test('publication preview releases its blob without closing another image, and i
     useI18n: () => ({ t: key => key }),
     useToast: () => ({ add: () => {} }),
     useServiceError: () => error => errors.push(error),
-    useLightbox: () => ({
-      lightboxImage: image,
-      openLightbox: (src) => {
-        image.value = src
-      },
-      closeLightbox: () => {
-        closed++
-      }
-    }),
     usePolling: (load) => {
       poll = load
     },
@@ -35,7 +23,7 @@ test('publication preview releases its blob without closing another image, and i
   const previous = Object.fromEntries(
     Object.keys(replacements).map(key => [key, globalThis[key]])
   )
-  const file = mediaService.file
+  const cancel = publicationService.cancel
   const list = publicationService.list
   let calls = 0
   Object.assign(globalThis, replacements)
@@ -44,7 +32,6 @@ test('publication preview releases its blob without closing another image, and i
       calls++
       return { data: [] }
     }
-    mediaService.file = async () => new Blob(['preview'])
     const state = usePublications(
       () => ({ batch: {} }),
       () => {}
@@ -52,25 +39,19 @@ test('publication preview releases its blob without closing another image, and i
     await poll()
     expect(calls).toBe(0)
     expect(state.canDecide.value).toBe(false)
-    await state.preview({ id: 'one', accountLabel: 'Account' })
-    const ownedUrl = image.value
-    expect(ownedUrl.startsWith('blob:')).toBe(true)
-    image.value = 'another-image'
     let reject
-    mediaService.file = () =>
+    publicationService.cancel = () =>
       new Promise((resolve, fail) => {
         reject = fail
       })
-    const pending = state.preview({ id: 'two' })
+    const pending = state.action('two', 'cancel')
     cleanup.forEach(callback => callback())
     reject(new Error('Late failure'))
     await pending
-    expect(closed).toBe(0)
     expect(errors).toEqual([])
-    expect(state.previewing.value).toBe('')
-    await expect(fetch(ownedUrl)).rejects.toThrow()
+    expect(state.busy.value).toBe('')
   } finally {
-    mediaService.file = file
+    publicationService.cancel = cancel
     publicationService.list = list
     for (const [key, value] of Object.entries(previous)) {
       if (value === undefined) {

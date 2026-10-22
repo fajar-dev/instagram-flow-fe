@@ -16,11 +16,10 @@
         <ContentReviewPreviewPanel
           v-if="detail.draft"
           :placement="placement"
-          :primary-asset-id="form.primaryAssetId"
           :caption="form.caption"
           :hashtags="parseHashtags(form.hashtagText)"
           :location="form.location"
-          :path="previewPath"
+          :paths="previewPaths"
         />
         <ContentAssetSlider
           v-else
@@ -34,7 +33,7 @@
             v-if="detail.draft && detail.draft.reviewStatus !== 'REJECTED'"
             v-model="form"
             :detail="detail"
-            @preview="previewPath = $event"
+            @preview="selectedPreviewPaths = $event"
             @changed="load"
           />
           <div
@@ -84,6 +83,12 @@ import { useContentDetail } from '~/composables/content/useContentDetail'
 
 definePageMeta({ layout: 'dashboard', key: route => route.path })
 const jobId = String(useRoute().params.jobId)
-const previewPath = ref('')
+const selectedPreviewPaths = ref<string[] | null>(null)
 const { detail, placement, form, loading, load, retrying, retry } = useContentDetail(jobId)
+const previewPaths = computed(
+  () =>
+    selectedPreviewPaths.value
+    ?? detail.value?.renders.map(render => `renders/${render.id}`)
+    ?? []
+)
 </script>

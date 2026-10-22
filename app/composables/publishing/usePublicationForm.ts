@@ -21,7 +21,15 @@ export function usePublicationForm(
   const form = reactive({
     content,
     accountKey: '',
-    source: 'photo' as 'photo' | 'design',
+    renderIds: detail()
+      .renders.slice()
+      .sort(
+        (a, b) =>
+          Number(b.assetId === detail().aiResult?.selectedAssetIds[0])
+          - Number(a.assetId === detail().aiResult?.selectedAssetIds[0])
+      )
+      .slice(0, detail().job.output === 'feed' ? 10 : 1)
+      .map(r => r.id),
     mode: 'now' as 'now' | 'schedule',
     date: '',
     time: ''
@@ -32,22 +40,6 @@ export function usePublicationForm(
 
   onUnmounted(() => {
     disposed = true
-  })
-  const design = computed(() => {
-    const ai = detail().aiResult
-    const original
-      = ai
-        && content.title === ai.rawTitle
-        && content.caption === ai.rawCaption
-        && JSON.stringify(parseHashtags(content.hashtagText)) === JSON.stringify(ai.rawHashtags)
-        && content.location === detail().batch.location
-        && content.activity === detail().batch.activity
-        && content.primaryAssetId === ai.selectedAssetIds[0]
-    return original
-      ? detail().renders.find(
-          r => r.placement === detail().job.output && r.assetId === content.primaryAssetId
-        )
-      : undefined
   })
   const caption = computed(() =>
     [content.caption, parseHashtags(content.hashtagText).join(' ')].filter(Boolean).join('\n\n')
@@ -61,7 +53,6 @@ export function usePublicationForm(
             detail().job.output === 'story'
               ? z.string()
               : z.string().trim().min(1, t('pages.content.validation')).max(10000),
-          primaryAssetId: z.string().min(1, t('pages.content.validation')),
           location: z.string().trim().min(1, t('pages.content.validation')).max(200),
           activity: z.string().trim().min(1, t('pages.content.validation')).max(200),
           hashtagText: z.string().refine((value) => {
@@ -70,7 +61,10 @@ export function usePublicationForm(
           }, t('pages.content.validation'))
         }),
         accountKey: z.string().min(1, t('pages.publishing.accountRequired')),
-        source: z.enum(['photo', 'design']),
+        renderIds: z
+          .array(z.string().uuid())
+          .min(1, t('pages.publishing.imagesRequired'))
+          .max(detail().job.output === 'feed' ? 10 : 1),
         mode: z.enum(['now', 'schedule']),
         date: z.string(),
         time: z.string()
@@ -85,13 +79,6 @@ export function usePublicationForm(
               message: t('pages.publishing.scheduleInvalid')
             })
           }
-        }
-        if (value.source === 'design' && !design.value) {
-          ctx.addIssue({
-            code: 'custom',
-            path: ['source'],
-            message: t('pages.publishing.designUnavailable')
-          })
         }
         if (detail().job.output === 'feed' && Array.from(caption.value).length > 2200) {
           ctx.addIssue({
@@ -132,7 +119,6 @@ export function usePublicationForm(
       const payload: PublicationPayload = {
         expectedContentHash: detail().draft!.contentHash,
         content: {
-          primaryAssetId: content.primaryAssetId,
           title: content.title.trim(),
           caption: detail().job.output === 'story' ? '' : content.caption.trim(),
           hashtags: detail().job.output === 'story' ? [] : parseHashtags(content.hashtagText),
@@ -140,7 +126,7 @@ export function usePublicationForm(
           activity: content.activity.trim()
         },
         accountKey: form.accountKey,
-        source: form.source,
+        renderIds: form.renderIds,
         placement: detail().job.output,
         scheduledAt: form.mode === 'schedule' ? publicationSchedule(form.date, form.time) : null
       }
@@ -164,10 +150,5 @@ export function usePublicationForm(
     }
   }
 
-  watch(design, (value) => {
-    if (!value) {
-      form.source = 'photo'
-    }
-  })
-  return { accounts, loading, submitting, form, schema, design, loadAccounts, submit }
+  return { accounts, loading, submitting, form, schema, loadAccounts, submit }
 }

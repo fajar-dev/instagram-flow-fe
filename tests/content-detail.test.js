@@ -41,7 +41,6 @@ test('processing becomes editable on the same page without polling over unsaved 
         title: 'Project',
         caption: 'Generated',
         hashtags: ['#AMTI'],
-        primaryAssetId: 'photo',
         location: 'Jakarta',
         activity: 'Inspection',
         reviewStatus: 'READY_FOR_REVIEW'

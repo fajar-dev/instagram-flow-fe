@@ -9,7 +9,6 @@ export function useContentDetail(jobId: string) {
     title: '',
     caption: '',
     hashtagText: '',
-    primaryAssetId: '',
     location: '',
     activity: ''
   })
@@ -23,7 +22,6 @@ export function useContentDetail(jobId: string) {
           title: draft.title,
           caption: draft.caption,
           hashtagText: draft.hashtags.join(' '),
-          primaryAssetId: draft.primaryAssetId,
           location: draft.location,
           activity: draft.activity
         })
