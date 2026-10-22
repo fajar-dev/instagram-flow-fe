@@ -23,7 +23,7 @@ Page menyusun layout; component menangani UI; composable mengelola state/lifecyc
 
 Plugin API adalah composition root. Jangan memanggil composable Nuxt atau request dari constructor service singleton. Service memakai apiService, requestHeaders dan ApiResponse dari app/types/api; tidak menampilkan toast/navigasi atau mengganti exception dengan undefined.
 
-Ambil useServiceError saat setup sebelum await. Auth state readonly; pertahankan single refresh coordination dan jangan logout karena network error biasa. Gunakan useLatestRequest/polling sesuai lifecycle. Review langsung menuju Publish atau Reject. Edit hanya di form Publish dan dikirim bersama aksi publish; gunakan hash konten untuk guard. Desain AI tidak boleh digunakan bila konten berubah.
+Ambil useServiceError saat setup sebelum await. Auth state readonly; pertahankan single refresh coordination dan jangan logout karena network error biasa. Gunakan useLatestRequest/polling sesuai lifecycle. Review langsung menuju Publish atau Reject. Edit hanya di form Publish dan dikirim bersama aksi publish; gunakan hash konten untuk guard. Desain berasal dari gambar hasil edit AI melalui n8n. Caption/hashtag boleh diubah tanpa mengubah gambar; perubahan metadata tidak merender ulang gambar; urutan publikasi memakai renderIds dan bukan pilihan foto utama. Tidak ada komposisi template di backend atau preview otomatis lokal.
 
 Semua user aktif memiliki akses yang sama. Callback secret hanya milik backend/n8n. Tidak ada credential AI/MinIO di frontend. READY_FOR_REVIEW langsung menuju PUBLISH atau REJECTED.
 
@@ -50,4 +50,4 @@ Draft menyimpan isi konten langsung. Tidak ada entity, endpoint edit, nomor, ata
 
 ## Output tunggal — 21 Oktober 2026
 
-Setiap job memilih satu `output`: `feed` atau `story` sejak proses upload. Output tidak dapat diganti saat publish. Event n8n memakai scalar `output`; callback berisi tepat satu render sesuai output job. Feed memuat caption/hashtag; Story tidak memiliki caption/hashtag posting (payload kosong). Jangan mengembalikan checkbox multi-output, tab pemilih preview, atau pilihan placement pada form publish.
+Setiap job memilih satu `output`: `feed` atau `story` sejak proses upload. Output tidak dapat diganti saat publish. Event n8n memakai scalar `output`; callback Feed berisi satu render AI per foto upload (maksimal 19), sedangkan Story tetap satu render. Publikasi Feed memilih 1–10 render unik dalam urutan eksplisit; Story tepat satu. Feed memuat caption/hashtag; Story tidak memiliki caption/hashtag posting (payload kosong). Jangan mengembalikan checkbox multi-output, tab pemilih preview, atau pilihan placement pada form publish.
