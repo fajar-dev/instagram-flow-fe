@@ -97,7 +97,29 @@
     "authLayout": {
       "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia",
       "headline": "Bagikan cerita di balik setiap project.",
-      "description": "Siapkan, tinjau, dan publikasikan konten Instagram bersama AMTI."
+      "description": "Siapkan, tinjau, dan publikasikan konten Instagram bersama AMTI.",
+      "slides": {
+        "story": {
+          "headline": "Bagikan cerita di balik setiap project.",
+          "description": "Siapkan, tinjau, dan publikasikan konten Instagram bersama AMTI."
+        },
+        "aiDesign": {
+          "headline": "Otomatisasi alur desain berbasis AI.",
+          "description": "Hasilkan materi visual berkualitas tinggi secara konsisten dan terukur."
+        },
+        "review": {
+          "headline": "Tinjau dan kurasi konten secara presisi.",
+          "description": "Pemeriksaan internal yang rapi sebelum materi resmi tayang ke publik."
+        },
+        "schedule": {
+          "headline": "Jadwalkan postingan Instagram tanpa repot.",
+          "description": "Integrasi langsung dengan Graph API untuk Feed dan Story multi-akun."
+        },
+        "analytics": {
+          "headline": "Pantau performa dan insight publikasi.",
+          "description": "Analitik engagement mendalam untuk mengoptimalkan jangkauan bisnis."
+        }
+      }
     },
     "mobileSidebar": {
       "title": "Utility",
@@ -166,6 +188,8 @@
         "forgotPassword": "Lupa kata sandi?",
         "continueWithGoogle": "Lanjutkan dengan Google",
         "continueWithMicrosoft": "Lanjutkan dengan Microsoft",
+        "google": "Google",
+        "microsoft": "Microsoft",
         "emailRequired": "Email wajib diisi",
         "passwordRequired": "Kata sandi wajib diisi",
         "loginSuccess": "Berhasil masuk! Selamat datang.",

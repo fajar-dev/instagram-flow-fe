@@ -1,11 +1,19 @@
 <template>
   <div class="w-full max-w-md mx-auto">
-    <div class="flex flex-col gap-5 mb-6">
-      <div class="space-y-1">
-        <h1 class="text-3xl font-bold text-highlighted">
+    <div class="flex flex-col gap-4 mb-8">
+      <div
+        class="flex size-12 items-center justify-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/20"
+      >
+        <UIcon
+          name="i-lucide-log-in"
+          class="size-6"
+        />
+      </div>
+      <div class="space-y-2">
+        <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
           {{ $t('pages.auth.signIn.login') }}
         </h1>
-        <p class="text-toned">
+        <p class="text-base text-toned">
           {{ $t('pages.auth.signIn.description') }}
         </p>
       </div>
@@ -14,7 +22,7 @@
     <UForm
       :state="state"
       :schema="loginSchema"
-      class="space-y-4"
+      class="space-y-5"
       @submit="handleLogin"
     >
       <UFormField
@@ -70,7 +78,7 @@
         </UInput>
       </UFormField>
 
-      <div class="flex flex-col gap-3 pt-2">
+      <div class="flex flex-col gap-3.5 pt-3">
         <UButton
           type="submit"
           block
@@ -82,14 +90,14 @@
 
         <USeparator
           :label="$t('pages.auth.signIn.or')"
-          class="my-2"
+          class="my-2.5"
         />
 
         <UButton
           type="button"
           block
           variant="soft"
-          color="neutral"
+          color="primary"
           :disabled="googleLoading || loading || !googleClient?.isReady.value"
           @click="handleGoogleLogin"
         >
@@ -120,11 +128,12 @@
           </template>
           {{ $t('pages.auth.signIn.continueWithGoogle') }}
         </UButton>
+
         <UButton
           type="button"
           block
           variant="soft"
-          color="neutral"
+          color="primary"
         >
           <template #leading>
             <svg

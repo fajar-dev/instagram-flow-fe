@@ -1,11 +1,19 @@
 <template>
   <div class="w-full max-w-md mx-auto">
-    <div class="flex flex-col gap-5 mb-6">
-      <div class="space-y-1">
-        <h1 class="text-3xl font-bold text-highlighted">
+    <div class="flex flex-col gap-4 mb-8">
+      <div
+        class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20"
+      >
+        <UIcon
+          name="i-lucide-key-round"
+          class="size-6"
+        />
+      </div>
+      <div class="space-y-2">
+        <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
           {{ $t('pages.auth.forgotPassword.title') }}
         </h1>
-        <p class="text-toned">
+        <p class="text-base text-toned">
           {{ $t('pages.auth.forgotPassword.description') }}
         </p>
       </div>
@@ -20,7 +28,7 @@
         {{ $t('pages.auth.forgotPassword.checkEmailDescription') }}
       </p>
 
-      <div class="space-y-3">
+      <div class="space-y-3.5">
         <UButton
           block
           variant="soft"
@@ -53,7 +61,7 @@
       v-else
       :state="state"
       :schema="forgotSchema"
-      class="space-y-4"
+      class="space-y-5"
       @submit="handleSubmit"
     >
       <UFormField
@@ -71,7 +79,7 @@
         />
       </UFormField>
 
-      <div class="flex flex-col gap-3 pt-2">
+      <div class="flex flex-col gap-3.5 pt-3">
         <UButton
           type="submit"
           block

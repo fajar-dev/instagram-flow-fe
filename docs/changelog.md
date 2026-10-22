@@ -1,3 +1,7 @@
+## 22 Oktober 2026 — Penyegaran tampilan layout dan halaman autentikasi
+
+Menambahkan rotasi headline dan deskripsi dinamis pada layout autentikasi dengan animasi typewriter dan indikator slide. Menyelaraskan hierarki visual, ikon header, dan form autentikasi (sign-in, forgot-password, reset-password). Memastikan komputasi slide bertipe aman dengan fallback default.
+
 ## 21 Oktober 2026 — Audit alur konten
 
 Menghapus primaryAssetId dari draft/form dan fallback preview foto mentah/snapshot tunggal. Preview menggunakan render AI berurutan, termasuk konten ditolak. Pilihan template tidak ada dalam input upload. Fixture tes diselaraskan dengan kontrak aktif tanpa source photo.

@@ -97,7 +97,29 @@
     "authLayout": {
       "copyright": "{year} © PT. Asset Monitoring Teknologi Indonesia",
       "headline": "Share the story behind every project.",
-      "description": "Prepare, review and publish your Instagram content with AMTI."
+      "description": "Prepare, review and publish your Instagram content with AMTI.",
+      "slides": {
+        "story": {
+          "headline": "Share the story behind every project.",
+          "description": "Prepare, review and publish your Instagram content with AMTI."
+        },
+        "aiDesign": {
+          "headline": "Automate AI-powered design workflows.",
+          "description": "Generate high-quality visual assets consistently and at scale."
+        },
+        "review": {
+          "headline": "Review and curate content with precision.",
+          "description": "Seamless internal verification before content goes live to the public."
+        },
+        "schedule": {
+          "headline": "Schedule Instagram posts effortlessly.",
+          "description": "Direct integration with Graph API for multi-account Feed and Story."
+        },
+        "analytics": {
+          "headline": "Track performance and publication insights.",
+          "description": "In-depth engagement analytics to optimize your business reach."
+        }
+      }
     },
     "mobileSidebar": {
       "title": "Utility",
@@ -166,6 +188,8 @@
         "forgotPassword": "Forgot password?",
         "continueWithGoogle": "Continue with Google",
         "continueWithMicrosoft": "Continue with Microsoft",
+        "google": "Google",
+        "microsoft": "Microsoft",
         "emailRequired": "Email is required",
         "passwordRequired": "Password is required",
         "loginSuccess": "Login success! Welcome.",
