@@ -22,12 +22,41 @@
         aria-hidden="true"
       />
     </header>
-    <ContentPrivateImage
-      :path="path"
-      :alt="$t('pages.contentReview.preview')"
-      placement="feed"
-      class="rounded-none"
-    />
+    <div class="relative">
+      <UCarousel
+        ref="carousel"
+        v-slot="{ item }"
+        :items="paths.length ? paths : ['']"
+        :arrows="paths.length > 1"
+        :dots="paths.length > 1"
+        :prev="{ size: 'xs', variant: 'solid' }"
+        :next="{ size: 'xs', variant: 'solid' }"
+        :ui="{
+          container: 'ms-0',
+          item: 'ps-0',
+          prev: 'start-3 sm:start-3 disabled:invisible',
+          next: 'end-3 sm:end-3 disabled:invisible',
+          dots: 'bottom-3 gap-1.5',
+          dot: 'size-1.5 bg-white/50 data-[state=active]:bg-white'
+        }"
+        @select="active = $event"
+      >
+        <ContentPrivateImage
+          :path="item"
+          :alt="$t('pages.contentReview.preview')"
+          placement="feed"
+          class="rounded-none select-none"
+        />
+      </UCarousel>
+      <span
+        v-if="paths.length > 1"
+        class="pointer-events-none absolute top-3 right-3 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white tabular-nums"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {{ active + 1 }} / {{ paths.length }}
+      </span>
+    </div>
     <div class="space-y-3 p-4">
       <div
         class="flex items-center gap-4 text-highlighted"
@@ -82,6 +111,22 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ path: string, caption: string, hashtags: string[], location: string }>()
+const props = defineProps<{
+  paths: string[]
+  caption: string
+  hashtags: string[]
+  location: string
+}>()
+const carousel = useTemplateRef('carousel')
+const active = ref(0)
 const expanded = ref(false)
+
+watch(
+  () => props.paths.join('|'),
+  async () => {
+    active.value = 0
+    await nextTick()
+    carousel.value?.emblaApi?.scrollTo(0, true)
+  }
+)
 </script>
