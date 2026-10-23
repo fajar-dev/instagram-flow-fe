@@ -25,7 +25,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiUrl: process.env.API_BASE_URL || 'http://localhost:4000/api'
+      apiUrl: process.env.API_BASE_URL || 'http://localhost:4000/api',
+      microsoftClientId: process.env.MICROSOFT_CLIENT_ID || '',
+      microsoftTenantId: process.env.MICROSOFT_TENANT_ID || 'common',
+      microsoftRedirectUri: process.env.MICROSOFT_REDIRECT_URI || ''
     }
   },
 

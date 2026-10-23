@@ -196,7 +196,12 @@
         "loginFailed": "Login failed. Please try again.",
         "togglePasswordVisibility": "Toggle Password Visibility",
         "emailInvalid": "Enter a valid email address",
-        "googleUnavailable": "Google sign-in is temporarily unavailable. Please sign in with your email."
+        "googleUnavailable": "Google sign-in is temporarily unavailable. Please sign in with your email.",
+        "microsoftUnavailable": "Microsoft sign-in is temporarily unavailable. Please sign in with your email.",
+        "processing": "Processing authentication...",
+        "popupBlocked": "Allow popups in your browser and try again.",
+        "popupTimeout": "Sign-in timed out. Please try again.",
+        "popupExpired": "This sign-in window has expired. Close it and sign in again."
       },
       "forgotPassword": {
         "title": "Forgot Password",

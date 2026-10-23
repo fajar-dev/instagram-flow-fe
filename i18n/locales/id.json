@@ -196,7 +196,12 @@
         "loginFailed": "Gagal masuk. Silakan coba lagi.",
         "togglePasswordVisibility": "Tampilkan/Sembunyikan Kata Sandi",
         "emailInvalid": "Masukkan alamat email yang valid",
-        "googleUnavailable": "Login Google sementara tidak tersedia. Silakan masuk dengan email Anda."
+        "googleUnavailable": "Login Google sementara tidak tersedia. Silakan masuk dengan email Anda.",
+        "microsoftUnavailable": "Login Microsoft sementara tidak tersedia. Silakan masuk dengan email Anda.",
+        "processing": "Memproses autentikasi...",
+        "popupBlocked": "Izinkan popup di browser Anda, lalu coba lagi.",
+        "popupTimeout": "Waktu masuk habis. Silakan coba lagi.",
+        "popupExpired": "Jendela masuk ini sudah kedaluwarsa. Tutup dan masuk kembali."
       },
       "forgotPassword": {
         "title": "Lupa Kata Sandi",

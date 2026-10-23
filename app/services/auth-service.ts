@@ -91,6 +91,15 @@ export class AuthService {
     return response.data
   }
 
+  async microsoft(code: string, codeVerifier: string): Promise<AuthResponse> {
+    const response = await apiService.client.post<AuthResponse>('/auth/microsoft', {
+      code,
+      codeVerifier
+    })
+    this.setSession(response.data)
+    return response.data
+  }
+
   async forgotPassword(email: string): Promise<ApiResponse<null>> {
     const response = await apiService.client.post<ApiResponse<null>>('/auth/forgot-password', {
       email

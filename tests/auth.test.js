@@ -268,3 +268,20 @@ test('a rejected profile update preserves the previous user and surfaces the err
   )
   expect(auth.user.value.name).toBe('User')
 })
+
+test('microsoft login posts authorization code and establishes session', async () => {
+  browserStorage()
+  apiService.configure('http://api.test', () => 'en')
+  const auth = new AuthService()
+  apiService.client.defaults.adapter = async (config) => {
+    expect(config.url).toBe('/auth/microsoft')
+    expect(JSON.parse(config.data)).toEqual({
+      code: 'ms-code',
+      codeVerifier: 'test-verifier'
+    })
+    return response(config, session)
+  }
+  const result = await auth.microsoft('ms-code', 'test-verifier')
+  expect(result.data.accessToken).toBe('access')
+  expect(auth.user.value?.email).toBe('user@example.com')
+})
