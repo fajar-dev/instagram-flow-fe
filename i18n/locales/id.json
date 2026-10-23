@@ -56,14 +56,14 @@
         "active": "Aktif",
         "inactive": "Nonaktif",
         "cancel": "Batal",
-        "save": "Simpan",
         "nameRequired": "Nama wajib diisi",
         "emailRequired": "Email wajib diisi",
         "emailInvalid": "Masukkan alamat email yang valid",
         "passwordMin": "Kata sandi minimal 6 karakter",
         "photoUploadSuccess": "Foto berhasil diunggah!",
         "photoUploadFailed": "Gagal mengunggah foto",
-        "createdSuccess": "Pengguna berhasil dibuat!"
+        "createdSuccess": "Pengguna berhasil dibuat!",
+        "save": "Simpan"
       },
       "updateModal": {
         "title": "Ubah Pengguna",
@@ -282,12 +282,12 @@
       "scope": "Periksa konten, lalu publikasikan atau tolak. Satu project, satu postingan.",
       "period": "Periode (hari)",
       "metrics": {
-        "batches": "Total batch",
-        "assets": "Total foto",
+        "batches": "Total proyek",
         "processing": "Sedang diproses",
         "ready": "Siap review",
         "failed": "Gagal",
-        "publish": "Publikasi"
+        "publish": "Publikasi",
+        "rejected": "Ditolak"
       },
       "periodPlaceholder": "Pilih periode",
       "bannerTitle": "Jadikan cerita proyek sebagai postingan berikutnya.",
@@ -319,11 +319,9 @@
       "uploadLimits": "JPG, PNG atau WEBP; maksimal {count} foto, masing-masing {size} MB.",
       "uploaded": "Terunggah",
       "remove": "Hapus foto",
-      "staged": "Batch tersimpan. Jika gagal, tekan proses lagi untuk melanjutkan upload yang tersisa.",
+      "staged": "Proyek disimpan. Jika terputus, proses kembali untuk melanjutkan unggahan tersisa.",
       "process": "Proses dengan AI",
       "validation": "Periksa nilai dan batas panjang field",
-      "saved": "Perubahan tersimpan",
-      "save": "Simpan",
       "fields": {
         "projectName": "Nama proyek",
         "activity": "Aktivitas",
@@ -374,12 +372,18 @@
       "retryUpload": "Coba ulang upload yang gagal",
       "processUploaded": "Proses {count} gambar yang berhasil",
       "title": "Content",
-      "listDescription": "Kelola proses dan review konten berdasarkan status. Menampilkan data 30 hari terakhir.",
+      "listDescription": "Kelola pemrosesan dan publikasi konten berdasarkan status.",
       "loadingMedia": "Mengambil daftar foto…",
       "archivePhoto": "Arsipkan {name}",
       "downloadPhoto": "Unduh {name}",
       "photos": "Foto proyek",
       "sliderHint": "Geser atau gunakan panah untuk melihat foto.",
+      "decisionActors": {
+        "PUBLISH": "Publikasi diajukan oleh",
+        "REJECTED": "Ditolak oleh",
+        "CANCELLED": "Publikasi dibatalkan oleh",
+        "unavailable": "Pengguna tidak tersedia"
+      },
       "projectSummary": "Ringkasan proyek",
       "pendingStep": "Belum tercatat",
       "technicalDetails": "Detail teknis"
@@ -396,7 +400,7 @@
       "started": "Mulai",
       "finished": "Selesai"
     },
-    "contentReview": {
+    "contentDraft": {
       "rankings": "Peringkat foto dari AI",
       "preview": "Preview konten",
       "feed": "Feed",
@@ -408,7 +412,9 @@
       "fullCaption": "Lihat caption lengkap",
       "lessCaption": "Tampilkan lebih sedikit"
     },
-    "integration": {
+    "settings": {
+      "saved": "Perubahan tersimpan",
+      "save": "Simpan",
       "settings": "Pengaturan",
       "settingsHint": "Kelola akun Instagram dan pengiriman proses AI.",
       "configured": "Terkonfigurasi",
@@ -437,7 +443,7 @@
       "notConfigured": "Belum dikonfigurasi",
       "verify": "Periksa koneksi",
       "verified": "Akun Instagram berhasil diverifikasi",
-      "selectAccounts": "Pilih satu akun Instagram",
+      "selectAccount": "Pilih satu akun Instagram",
       "accountRequired": "Pilih satu akun",
       "placement": "Penempatan",
       "mode": "Waktu publikasi",

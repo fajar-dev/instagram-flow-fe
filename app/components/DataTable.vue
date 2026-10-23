@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4">
+  <div class="min-w-0 space-y-4">
     <!-- Controls -->
     <div
       v-if="controls"
@@ -45,30 +45,29 @@
     >
       <!-- Table -->
       <slot name="content">
-        <div class="overflow-x-auto">
-          <UTable
-            v-model:expanded="expanded"
-            :expanded-options="{ getRowCanExpand: () => true }"
-            :data="data"
-            :columns="columns"
-            :loading="loading"
-            :ui="{
-              thead: 'bg-primary/5',
-              th: 'px-5 py-3 text-xs font-semibold whitespace-nowrap',
-              td: 'px-5 py-4 text-sm text-highlighted',
-              tr: 'transition-colors hover:bg-primary/1 motion-reduce:transition-none',
-              empty: 'py-12 text-center text-sm text-muted'
-            }"
-            :class="['w-full', tableClass]"
-          >
-            <template #expanded="{ row }">
-              <slot
-                name="expanded"
-                :row="row"
-              />
-            </template>
-          </UTable>
-        </div>
+        <UTable
+          v-model:expanded="expanded"
+          :expanded-options="{ getRowCanExpand: () => true }"
+          :data="data"
+          :columns="columns"
+          :loading="loading"
+          :ui="{
+            root: 'w-full max-w-full overscroll-x-contain',
+            base: ['w-full', tableClass].filter(Boolean).join(' '),
+            thead: 'bg-primary/5',
+            th: 'px-5 py-3 text-xs font-semibold whitespace-nowrap',
+            td: 'px-5 py-4 text-sm text-highlighted',
+            tr: 'transition-colors hover:bg-primary/1 motion-reduce:transition-none',
+            empty: 'py-12 text-center text-sm text-muted'
+          }"
+        >
+          <template #expanded="{ row }">
+            <slot
+              name="expanded"
+              :row="row"
+            />
+          </template>
+        </UTable>
       </slot>
 
       <!-- Pagination -->

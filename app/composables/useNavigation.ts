@@ -57,7 +57,7 @@ export const useNavigation = () => {
         },
         {
           id: 'settings',
-          label: t('pages.integration.settings'),
+          label: t('pages.settings.settings'),
           to: '/settings',
           icon: 'i-lucide-settings-2'
         },

@@ -1,13 +1,13 @@
 import { getQueryString } from './query'
 
-/** Processing belongs to jobs; review status belongs to the resulting draft. */
+/** Processing belongs to jobs; decision status belongs to the resulting draft. */
 export const contentTabs = [
   { value: 'QUEUED', resource: 'jobs' },
   { value: 'DISPATCHED', resource: 'jobs' },
   { value: 'PROCESSING', resource: 'jobs' },
-  { value: 'READY_FOR_REVIEW', resource: 'review' },
-  { value: 'PUBLISH', resource: 'review' },
-  { value: 'REJECTED', resource: 'review' },
+  { value: 'READY_FOR_REVIEW', resource: 'drafts' },
+  { value: 'PUBLISH', resource: 'drafts' },
+  { value: 'REJECTED', resource: 'drafts' },
   { value: 'FAILED', resource: 'jobs' }
 ] as const
 

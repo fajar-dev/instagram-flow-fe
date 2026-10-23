@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import { usePublications } from '~/composables/publishing/usePublications'
-import type { PublishFormContent } from '~/types/content-review'
+import type { PublishFormContent } from '~/types/content-draft'
 import type { JobDetails } from '~/types/ai-job'
 
 const content = defineModel<PublishFormContent>({ required: true })

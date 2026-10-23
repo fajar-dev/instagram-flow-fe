@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import { instagramService } from '~/services/instagram/instagram-service'
 import { formatContentDate } from '~/util/content'
-import type { InstagramAccount } from '~/types/publishing'
+import type { InstagramAccount } from '~/types/instagram'
 
 const { t, locale } = useI18n()
 const toast = useToast()

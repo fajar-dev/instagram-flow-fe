@@ -1,29 +1,27 @@
 import { expect, test } from 'bun:test'
 import { latestRejection } from '../app/util/rejection'
 
-const review = (id, decision, createdAt) => ({
+const rejection = (id, createdAt) => ({
   id,
-  decision,
   createdAt,
   notes: id
 })
 const detail = {
-  draft: { reviewStatus: 'REJECTED' },
-  reviews: [
-    review('latest', 'REJECTED', '2026-10-19T10:00:00Z'),
-    review('old', 'REJECTED', '2026-10-19T09:00:00Z'),
-    review('legacy', 'READY_FOR_REVIEW', '2026-10-19T11:00:00Z')
+  draft: { decisionStatus: 'REJECTED' },
+  rejections: [
+    rejection('latest', '2026-10-19T10:00:00Z'),
+    rejection('old', '2026-10-19T09:00:00Z')
   ]
 }
 
 test('rejection notice selects latest relevant decision without mutating audit history', () => {
   expect(latestRejection(detail)?.id).toBe('latest')
-  expect(detail.reviews.map(item => item.id)).toEqual(['latest', 'old', 'legacy'])
+  expect(detail.rejections.map(item => item.id)).toEqual(['latest', 'old'])
 })
 
-test('ready, published and cancelled-without-review content do not inherit old rejection notes', () => {
-  for (const reviewStatus of ['READY_FOR_REVIEW', 'PUBLISH']) {
-    expect(latestRejection({ ...detail, draft: { reviewStatus } })).toBeNull()
+test('ready, published and cancelled-without-rejection content do not inherit old rejection notes', () => {
+  for (const decisionStatus of ['READY_FOR_REVIEW', 'PUBLISH']) {
+    expect(latestRejection({ ...detail, draft: { decisionStatus } })).toBeNull()
   }
-  expect(latestRejection({ ...detail, reviews: [] })).toBeNull()
+  expect(latestRejection({ ...detail, rejections: [] })).toBeNull()
 })

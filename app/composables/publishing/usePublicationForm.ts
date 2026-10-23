@@ -1,10 +1,11 @@
 import { z } from 'zod'
 import { parseHashtags } from '../../util/content'
-import type { PublishFormContent } from '../../types/content-review'
+import type { PublishFormContent } from '../../types/content-draft'
 import { instagramService } from '../../services/instagram/instagram-service'
 import { publicationService } from '../../services/publishing/publication-service'
 import { publicationSchedule } from '../../util/publication'
-import type { InstagramAccount, PublicationPayload } from '../../types/publishing'
+import type { InstagramAccount } from '../../types/instagram'
+import type { PublicationPayload } from '../../types/publishing'
 import type { JobDetails } from '../../types/ai-job'
 
 export function usePublicationForm(

@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import type { PublishFormContent } from '~/types/content-review'
+import type { PublishFormContent } from '~/types/content-draft'
 
 const form = defineModel<PublishFormContent>({ required: true })
 defineProps<{ disabled?: boolean }>()

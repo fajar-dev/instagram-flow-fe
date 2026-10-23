@@ -2,7 +2,7 @@
   <article class="relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl bg-black">
     <ContentPrivateImage
       :path="path"
-      :alt="$t('pages.contentReview.story')"
+      :alt="$t('pages.contentDraft.story')"
       placement="story"
       class="rounded-none bg-black text-white"
     />
@@ -20,7 +20,7 @@
           class="bg-white/20 text-white ring-1 ring-white/40"
         />
         <span class="min-w-0 flex-1 truncate text-sm font-semibold">
-          {{ $t('pages.contentReview.instagramAccount') }}
+          {{ $t('pages.contentDraft.instagramAccount') }}
         </span>
         <UIcon
           name="i-lucide-pause"
@@ -41,7 +41,7 @@
       aria-hidden="true"
     >
       <span class="min-w-0 flex-1 truncate rounded-full border border-white/60 px-4 py-2.5 text-sm">
-        {{ $t('pages.contentReview.storyReply') }}
+        {{ $t('pages.contentDraft.storyReply') }}
       </span>
       <UIcon
         name="i-lucide-heart"

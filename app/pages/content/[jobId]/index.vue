@@ -13,7 +13,7 @@
       class="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start"
     >
       <div class="min-w-0 lg:col-span-5 lg:sticky lg:top-6">
-        <ContentReviewPreviewPanel
+        <ContentDraftPreviewPanel
           v-if="detail.draft"
           :placement="placement"
           :caption="form.caption"
@@ -30,7 +30,7 @@
       <div class="min-w-0 lg:col-span-7 space-y-6">
         <UCard>
           <PublishingPublicationPanel
-            v-if="detail.draft && detail.draft.reviewStatus !== 'REJECTED'"
+            v-if="detail.draft && detail.draft.decisionStatus !== 'REJECTED'"
             v-model="form"
             :detail="detail"
             @preview="selectedPreviewPaths = $event"
@@ -40,8 +40,8 @@
             v-else
             class="space-y-5"
           >
-            <ContentStatusBadge :status="detail.draft?.reviewStatus || detail.job.status" />
-            <ContentReviewRejectionNotice
+            <ContentStatusBadge :status="detail.draft?.decisionStatus || detail.job.status" />
+            <ContentDraftRejectionNotice
               v-if="detail.draft"
               :detail="detail"
             />

@@ -109,7 +109,7 @@
       </UButton>
     </div>
     <ReportingRecordList
-      resource="review"
+      resource="drafts"
       fixed-status="READY_FOR_REVIEW"
       :preview-limit="5"
     />
@@ -122,10 +122,10 @@ import { reportingService } from '~/services/reporting/reporting-service'
 definePageMeta({ layout: 'dashboard' })
 const counts = ref<Record<string, number> | null>(null)
 const metrics = [
-  { key: 'assets', icon: 'i-lucide-images' },
   { key: 'processing', icon: 'i-lucide-loader' },
   { key: 'failed', icon: 'i-lucide-circle-alert' },
-  { key: 'publish', icon: 'i-lucide-send' }
+  { key: 'publish', icon: 'i-lucide-send' },
+  { key: 'rejected', icon: 'i-lucide-circle-x' }
 ]
 const { loading, load } = useLatestRequest(
   () => reportingService.overview(),

@@ -10,7 +10,7 @@ export interface Draft extends PublishContent {
   id: string
   jobId: string
   contentHash: string
-  reviewStatus: 'READY_FOR_REVIEW' | 'PUBLISH' | 'REJECTED'
+  decisionStatus: 'READY_FOR_REVIEW' | 'PUBLISH' | 'REJECTED'
   createdAt: string
 }
 

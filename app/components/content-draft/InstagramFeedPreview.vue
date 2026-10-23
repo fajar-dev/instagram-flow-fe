@@ -7,7 +7,7 @@
       />
       <div class="min-w-0 flex-1">
         <p class="text-sm font-semibold text-highlighted">
-          {{ $t('pages.contentReview.instagramAccount') }}
+          {{ $t('pages.contentDraft.instagramAccount') }}
         </p>
         <p
           v-if="location"
@@ -43,7 +43,7 @@
       >
         <ContentPrivateImage
           :path="item"
-          :alt="$t('pages.contentReview.preview')"
+          :alt="$t('pages.contentDraft.preview')"
           placement="feed"
           class="rounded-none select-none"
         />
@@ -103,7 +103,7 @@
           :aria-expanded="expanded"
           @click="expanded = !expanded"
         >
-          {{ $t(expanded ? 'pages.contentReview.lessCaption' : 'pages.contentReview.fullCaption') }}
+          {{ $t(expanded ? 'pages.contentDraft.lessCaption' : 'pages.contentDraft.fullCaption') }}
         </UButton>
       </div>
     </div>

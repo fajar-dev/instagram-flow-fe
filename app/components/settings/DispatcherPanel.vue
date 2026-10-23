@@ -2,10 +2,10 @@
   <div class="min-w-0 space-y-4">
     <div class="space-y-1">
       <h2 class="text-base font-semibold text-highlighted">
-        {{ $t('pages.integration.dispatcher') }}
+        {{ $t('pages.settings.dispatcher') }}
       </h2>
       <p class="text-sm text-muted">
-        {{ $t('pages.integration.dispatcherHint') }}
+        {{ $t('pages.settings.dispatcherHint') }}
       </p>
     </div>
     <USkeleton
@@ -20,7 +20,7 @@
         v-if="!settings.ready"
         class="text-sm text-muted"
       >
-        {{ $t('pages.integration.notReady') }}
+        {{ $t('pages.settings.notReady') }}
       </p>
       <UCard>
         <dl class="grid grid-cols-1 gap-5 text-sm sm:grid-cols-3">
@@ -29,14 +29,10 @@
             :key="key"
           >
             <dt class="text-muted">
-              {{ $t(`pages.integration.settingsFields.${key}`) }}
+              {{ $t(`pages.settings.settingsFields.${key}`) }}
             </dt>
             <dd class="mt-1 font-medium text-highlighted">
-              {{
-                $t(
-                  settings[key] ? 'pages.integration.configured' : 'pages.integration.notConfigured'
-                )
-              }}
+              {{ $t(settings[key] ? 'pages.settings.configured' : 'pages.settings.notConfigured') }}
             </dd>
           </div>
         </dl>
@@ -45,7 +41,7 @@
         >
           <USwitch
             v-model="enabled"
-            :label="$t('pages.integration.enableDispatch')"
+            :label="$t('pages.settings.enableDispatch')"
             :disabled="saving || (!settings.ready && !enabled)"
           />
           <UButton
@@ -55,7 +51,7 @@
             :loading="saving"
             @click="save"
           >
-            {{ $t('pages.content.save') }}
+            {{ $t('pages.settings.save') }}
           </UButton>
         </div>
       </UCard>
@@ -64,8 +60,8 @@
 </template>
 
 <script setup lang="ts">
-import { settingsService } from '~/services/integration/settings-service'
-import type { Settings } from '~/types/integration'
+import { settingsService } from '~/services/settings/settings-service'
+import type { Settings } from '~/types/settings'
 
 const handleError = useServiceError()
 const { t } = useI18n()
@@ -93,7 +89,7 @@ async function save() {
   try {
     settings.value = (await settingsService.updateSettings(enabled.value)).data
     enabled.value = settings.value.dispatchEnabled
-    toast.add({ title: t('pages.content.saved') })
+    toast.add({ title: t('pages.settings.saved') })
   } catch (error) {
     handleError(error)
   } finally {

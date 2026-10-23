@@ -1,6 +1,6 @@
 import { instagramService } from '../../services/instagram/instagram-service'
 import { analyticsService } from '../../services/analytics/analytics-service'
-import type { InstagramAccount } from '~/types/publishing'
+import type { InstagramAccount } from '~/types/instagram'
 import type { InsightReport, AnalyticsPeriod } from '~/types/analytics'
 
 export function useAnalytics() {

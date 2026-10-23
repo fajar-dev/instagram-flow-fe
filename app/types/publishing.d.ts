@@ -1,14 +1,4 @@
-import type { PublishContent } from './content-review'
-
-export interface InstagramAccount {
-  key: string
-  label: string
-  instagramUserId: string
-  enabled: boolean
-  configured: boolean
-  expired: boolean
-  tokenExpiresAt: string | null
-}
+import type { PublishContent } from './content-draft'
 
 export type PublicationStatus
   = | 'QUEUED'

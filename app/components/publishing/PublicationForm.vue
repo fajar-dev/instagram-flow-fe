@@ -5,7 +5,7 @@
     class="space-y-4"
     @submit="!disabled && submit()"
   >
-    <ContentReviewPublishFields
+    <ContentDraftPublishFields
       v-if="detail.job.output === 'feed'"
       v-model="form.content"
       :disabled="disabled || submitting"
@@ -37,7 +37,7 @@
           label-key="label"
           :loading="loading"
           :disabled="disabled || submitting"
-          :placeholder="$t('pages.publishing.selectAccounts')"
+          :placeholder="$t('pages.publishing.selectAccount')"
           class="w-full"
         />
       </UFormField>
@@ -113,7 +113,7 @@
 
 <script setup lang="ts">
 import { usePublicationForm } from '~/composables/publishing/usePublicationForm'
-import type { PublishFormContent } from '~/types/content-review'
+import type { PublishFormContent } from '~/types/content-draft'
 import type { JobDetails } from '~/types/ai-job'
 
 const content = defineModel<PublishFormContent>({ required: true })
