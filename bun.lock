@@ -3,7 +3,7 @@
   "configVersion": 0,
   "workspaces": {
     "": {
-      "name": "fe",
+      "name": "ig-flow-frontend",
       "dependencies": {
         "@iconify-json/lucide": "^1.2.108",
         "@internationalized/date": "^3.12.1",

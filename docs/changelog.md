@@ -1,3 +1,13 @@
+## 23 Oktober 2026 — Istilah keputusan konsisten
+
+- Seragamkan folder, komponen, service, tipe dan namespace locale menjadi content-draft/ContentDraft/contentDraft.
+- Gunakan decisionStatus, rejections dan rejectedBy; daftar draft mengambil /api/drafts. Hapus filter keputusan lama dalam helper penolakan.
+
+## 23 Oktober 2026 — Pelaku keputusan konten
+
+- Summary detail konten menampilkan nama pelaku dan waktu pengajuan publish, reject serta pembatalan. Gunakan label en/id dan format waktu Asia/Jakarta yang sama dengan detail lainnya.
+- Pengajuan publish tetap dibedakan dari status postingan tayang; pengguna yang sudah tidak tersedia ditampilkan dengan fallback tanpa mengambil data pribadi tambahan.
+
 ## 22 Oktober 2026 — Penyegaran tampilan layout dan halaman autentikasi
 
 ## 23 Oktober 2026 — Microsoft popup login
@@ -492,3 +502,23 @@ Feed mendukung upload 19 foto, edit AI untuk setiap foto, pemilihan maksimal 10 
 ## 21 Oktober 2026 — Tampilan pilihan slide
 
 Pilihan slide kembali memakai daftar horizontal: gambar hasil edit di kiri, skor dan penjelasan AI di kanan. Nomor urutan, checkbox pilihan, drag handle serta tombol pindah tetap tersedia.
+
+## 2026-10-23 — Konsistensi istilah lintas fitur
+
+Settings kini memiliki namespace sendiri, tipe akun Instagram dipisahkan dari publikasi, dan istilah UI mengikuti fitur. Analytics hanya menerima Today/This week/This month. Contoh credential memakai Instagram Login; panduan aktif dibersihkan dari alur revisi dan batas carousel lama. Lihat glosarium backend untuk perbedaan job, draft, keputusan dan delivery publikasi.
+
+## 2026-10-23 — Pelaku konten dan tabel mobile
+
+Detail menyertakan nama pengunggah selain pelaku publish/reject/cancel. Lebar kolom identitas pada mobile diperbaiki; kolom aksi memakai helper flex dan sticky kanan yang sama di semua tabel beraksi.
+
+## 2026-10-23 — Perbaikan sticky kolom aksi mobile
+
+Hapus scroll container ganda pada DataTable dan pindahkan batas lebar ke elemen tabel. Kolom aksi kini melekat pada viewport scroll UTable, bukan pembungkus tabel yang melebar di luar layar.
+
+## 2026-10-23 — Lebar tabel dan warning komponen
+
+Elemen tabel memakai w-full selain min-width per halaman agar desktop tidak menyisakan ruang kosong. Render link project menggunakan default slot fungsi Vue, bukan string children yang memicu warning per baris. Modal user tidak lagi menerima color/variant yang bukan prop UModal; modal hapus menyediakan judul/deskripsi aksesibilitas. Source halaman, render fungsi, key daftar, props chart dan referensi terjemahan statis diperiksa. Console live seluruh halaman belum diverifikasi karena akses browser localhost diblokir izin tersimpan.
+
+## 2026-10-23 — Overview penolakan
+
+Kartu Total photos diganti Rejected setelah Publish. Overview API menambahkan rejected berdasarkan status draft REJECTED, mengikuti filter periode yang sama.

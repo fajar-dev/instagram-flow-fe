@@ -6,7 +6,7 @@
 
 Service JSON fitur mengembalikan `ApiResponse<T>` dari response.data Axios. UI membaca `.data` untuk payload dan `.meta` untuk pagination. Download/media binary mengembalikan Blob. Auth mempertahankan kontrak sesi dan refresh tersendiri.
 
-Referensi CRUD: `app/services/user-service.ts`. Client konten berada di folder content, ai-job, content-review, integration dan reporting. Tipe envelope ada di `app/types/api.d.ts`. Jangan membuat facade social atau tipe response lain yang identik.
+Referensi CRUD: `app/services/user-service.ts`. Client konten berada di folder content, ai-job, content-draft, integration dan reporting. Tipe envelope ada di `app/types/api.d.ts`. Jangan membuat facade social atau tipe response lain yang identik.
 
 `app/services/shared/request-headers.ts` membaca token terbaru setiap request dan menambahkan Idempotency-Key jika diberikan. `app/util/query.ts` membangun query list. Jangan menyimpan snapshot token di constructor atau menulis ulang escaping/query di setiap halaman.
 

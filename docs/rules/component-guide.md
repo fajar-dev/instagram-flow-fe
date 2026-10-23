@@ -14,7 +14,7 @@ Satu halaman `/content/:jobId`: preview kiri, card utama kanan, card Summary di 
 
 - `content/JobSummary.vue`: metadata proyek dan ringkasan job; `JobTimeline.vue`: waktu proses.
 - `content/AssetSlider.vue`: foto sumber selama proses AI atau ketika gagal.
-- `content-review/PreviewPanel.vue`: hasil AI; Feed memakai carousel swipe/drag dengan header dan caption tetap, Story satu gambar.
+- `content-draft/PreviewPanel.vue`: hasil AI; Feed memakai carousel swipe/drag dengan header dan caption tetap, Story satu gambar.
 - `publishing/PublicationForm.vue`: metadata, caption Feed, pilihan slide, akun dan jadwal. `SlideSelection.vue` menampilkan gambar AI, skor, alasan dan urutan; maksimal 10 Feed atau satu Story.
 - `publishing/PublicationPanel.vue`: form atau hasil publikasi sesuai status. `RejectionNotice.vue` menampilkan catatan penolakan.
 

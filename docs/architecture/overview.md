@@ -26,14 +26,14 @@ Navigasi memakai `/content`, `/content/:jobId`, dan `/settings`. Alias URL AI Jo
 
 ## Status dan alur
 
-Tab list berasal dari `app/util/content-tabs.ts`. QUEUED, DISPATCHED, PROCESSING dan FAILED membaca resource jobs; READY_FOR_REVIEW, PUBLISH dan REJECTED membaca resource review. Filter default adalah READY_FOR_REVIEW.
+Tab list berasal dari `app/util/content-tabs.ts`. QUEUED, DISPATCHED, PROCESSING dan FAILED membaca resource jobs; READY_FOR_REVIEW, PUBLISH dan REJECTED membaca resource drafts. Filter default adalah READY_FOR_REVIEW.
 
 Review langsung menuju Publish atau Reject. Edit caption/foto hanya dilakukan dalam form Publish; perubahan disimpan bersama postingan atau jadwal, tanpa langkah simpan terpisah. Reject memakai contentHash. Setelah keputusan, konten terkunci. Tidak ada tab editor atau riwayat revisi.
 
 ## Struktur
 
 - `app/pages/`: route dan susunan halaman.
-- `app/components/`: komponen bersama serta folder fitur content, content-review, reporting dan user.
+- `app/components/`: komponen bersama serta folder fitur content, content-draft, reporting dan user.
 - `app/composables/`: state, lifecycle, polling, request terbaru, upload, editor dan reporting.
 - `app/services/`: API client/auth/user dan client per fitur; tanpa toast atau navigasi.
 - `app/types/`: kontrak response dan domain.

@@ -14,7 +14,7 @@ Form upload tidak menawarkan pilihan template. Workflow memakai satu desain cove
 
 Review menampilkan hasil edit AI untuk dipilih dan diurutkan. Caption, hashtag dan metadata dapat diedit tanpa mengubah piksel gambar. Tidak ada renderer template backend atau request preview setelah setiap ketikan. Output Story tetap tanpa caption/hashtag posting.
 
-Lihat [kontrak desain AI](../../../backend/docs/features/post-templates.md).
+Lihat [kontrak desain AI](../../../backend/docs/features/ai-image-design.md).
 
 ## Pemilihan slide Feed
 
