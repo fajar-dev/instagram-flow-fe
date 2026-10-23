@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import { z } from 'zod'
-import { draftService } from '~/services/content-review/draft-service'
+import { draftService } from '~/services/content-draft/draft-service'
 import type { JobDetails } from '~/types/ai-job'
 
 const props = defineProps<{ detail: JobDetails }>()

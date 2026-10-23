@@ -11,7 +11,8 @@ export function usePublications(detail: () => JobDetails, completed: () => void)
   const busy = ref('')
   let disposed = false
   const canDecide = computed(
-    () => detail().draft?.reviewStatus === 'READY_FOR_REVIEW' && loaded.value && !rows.value.length
+    () =>
+      detail().draft?.decisionStatus === 'READY_FOR_REVIEW' && loaded.value && !rows.value.length
   )
   const canPublish = computed(
     () => canDecide.value && !failed.value && detail().batch.publicationPermission

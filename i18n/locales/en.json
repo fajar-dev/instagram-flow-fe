@@ -56,14 +56,14 @@
         "active": "Active",
         "inactive": "Inactive",
         "cancel": "Cancel",
-        "save": "Save",
         "nameRequired": "Name is required",
         "emailRequired": "Email is required",
         "emailInvalid": "Please enter a valid email address",
         "passwordMin": "Password must be at least 6 characters",
         "photoUploadSuccess": "Photo uploaded successfully!",
         "photoUploadFailed": "Failed to upload photo",
-        "createdSuccess": "User created successfully!"
+        "createdSuccess": "User created successfully!",
+        "save": "Save"
       },
       "updateModal": {
         "title": "Edit User",
@@ -282,12 +282,12 @@
       "scope": "Review content, then publish or reject. One project, one post.",
       "period": "Period (days)",
       "metrics": {
-        "batches": "Total batches",
-        "assets": "Total photos",
+        "batches": "Total projects",
         "processing": "Processing",
         "ready": "Ready for review",
         "failed": "Failed",
-        "publish": "Publish"
+        "publish": "Publish",
+        "rejected": "Rejected"
       },
       "periodPlaceholder": "Select a period",
       "bannerTitle": "Turn project stories into your next post.",
@@ -319,11 +319,9 @@
       "uploadLimits": "JPG, PNG or WEBP; up to {count} photos, {size} MB each.",
       "uploaded": "Uploaded",
       "remove": "Remove photo",
-      "staged": "Batch saved. If interrupted, process again to resume remaining uploads.",
+      "staged": "Project saved. If interrupted, process again to resume remaining uploads.",
       "process": "Process with AI",
       "validation": "Check the field value and length",
-      "saved": "Changes saved",
-      "save": "Save",
       "fields": {
         "projectName": "Project name",
         "activity": "Activity",
@@ -374,12 +372,18 @@
       "retryUpload": "Retry failed uploads",
       "processUploaded": "Process {count} uploaded images",
       "title": "Content",
-      "listDescription": "Manage content processing and review by status. Showing the last 30 days.",
+      "listDescription": "Manage content processing and publication by status.",
       "loadingMedia": "Fetching photos…",
       "archivePhoto": "Archive {name}",
       "downloadPhoto": "Download {name}",
       "photos": "Project photos",
       "sliderHint": "Swipe or use the arrows to explore the photos.",
+      "decisionActors": {
+        "PUBLISH": "Publish requested by",
+        "REJECTED": "Rejected by",
+        "CANCELLED": "Publication cancelled by",
+        "unavailable": "User unavailable"
+      },
       "projectSummary": "Project summary",
       "pendingStep": "Not yet recorded",
       "technicalDetails": "Technical details"
@@ -396,7 +400,7 @@
       "started": "Started",
       "finished": "Completed"
     },
-    "contentReview": {
+    "contentDraft": {
       "rankings": "AI photo rankings",
       "preview": "Content preview",
       "feed": "Feed",
@@ -408,7 +412,9 @@
       "fullCaption": "Show full caption",
       "lessCaption": "Show less"
     },
-    "integration": {
+    "settings": {
+      "saved": "Changes saved",
+      "save": "Save",
       "settings": "Settings",
       "settingsHint": "Manage Instagram accounts and AI dispatch.",
       "configured": "Configured",
@@ -437,7 +443,7 @@
       "notConfigured": "Not configured",
       "verify": "Check connection",
       "verified": "Instagram account verified",
-      "selectAccounts": "Select an Instagram account",
+      "selectAccount": "Select an Instagram account",
       "accountRequired": "Select an account",
       "placement": "Placement",
       "mode": "Publication time",

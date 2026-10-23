@@ -38,6 +38,7 @@ import type { TableColumn } from '@nuxt/ui'
 import { useTopPosts } from '~/composables/analytics/useTopPosts'
 import { formatContentDate } from '~/util/content'
 import type { TopPostsReport } from '~/types/analytics'
+import { tableActions, tableActionsMeta } from '~/util/table-actions'
 import { formatMetric, formatRate } from '~/util/number'
 
 const props = defineProps<{ accountKey: string }>()
@@ -52,7 +53,7 @@ const columns = computed<TableColumn<TopPostsReport['items'][number]>[]>(() => [
     cell: ({ row }) =>
       h(
         'p',
-        { class: 'line-clamp-2 max-w-md whitespace-normal' },
+        { class: 'line-clamp-2 min-w-64 max-w-md whitespace-normal' },
         row.original.media.caption || row.original.media.id
       )
   },
@@ -94,29 +95,26 @@ const columns = computed<TableColumn<TopPostsReport['items'][number]>[]>(() => [
   {
     id: 'actions',
     header: () => t('components.reporting.recordList.actions'),
-    meta: {
-      class: {
-        td: 'sticky right-0 z-10 border-l border-default bg-default text-right whitespace-nowrap',
-        th: 'sticky right-0 z-20 border-l border-default bg-muted text-right whitespace-nowrap'
-      }
-    },
+    meta: tableActionsMeta,
     cell: ({ row }) =>
-      h(
-        UTooltip,
-        { text: t('pages.publishing.viewPost') },
-        {
-          default: () =>
-            h(UButton, {
-              'aria-label': t('pages.publishing.viewPost'),
-              'icon': 'i-lucide-external-link',
-              'variant': 'ghost',
-              'size': 'sm',
-              'to': row.original.media.permalink || undefined,
-              'disabled': !row.original.media.permalink,
-              'target': '_blank',
-              'rel': 'noopener noreferrer'
-            })
-        }
+      tableActions(
+        h(
+          UTooltip,
+          { text: t('pages.publishing.viewPost') },
+          {
+            default: () =>
+              h(UButton, {
+                'aria-label': t('pages.publishing.viewPost'),
+                'icon': 'i-lucide-external-link',
+                'variant': 'ghost',
+                'size': 'sm',
+                'to': row.original.media.permalink || undefined,
+                'disabled': !row.original.media.permalink,
+                'target': '_blank',
+                'rel': 'noopener noreferrer'
+              })
+          }
+        )
       )
   }
 ])

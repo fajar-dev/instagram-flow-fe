@@ -1,6 +1,6 @@
 import { jobService } from '../../services/ai-job/job-service'
 import type { JobDetails } from '~/types/ai-job'
-import type { PublishFormContent } from '~/types/content-review'
+import type { PublishFormContent } from '~/types/content-draft'
 
 export function useContentDetail(jobId: string) {
   const detail = ref<JobDetails | null>(null)

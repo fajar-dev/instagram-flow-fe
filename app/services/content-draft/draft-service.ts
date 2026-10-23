@@ -1,7 +1,7 @@
 import type { ApiResponse } from '~/types/api'
 import { apiService } from '../api-service'
 import { requestHeaders } from '../shared/request-headers'
-import type { Draft } from '~/types/content-review'
+import type { Draft } from '~/types/content-draft'
 
 class DraftService {
   async reject(

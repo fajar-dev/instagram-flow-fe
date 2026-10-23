@@ -1,7 +1,7 @@
 import { apiService } from '../api-service'
 import { requestHeaders } from '../shared/request-headers'
 import type { ApiResponse } from '~/types/api'
-import type { Settings } from '~/types/integration'
+import type { Settings } from '~/types/settings'
 
 class SettingsService {
   async settings() {

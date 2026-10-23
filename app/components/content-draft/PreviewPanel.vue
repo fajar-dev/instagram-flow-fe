@@ -2,17 +2,17 @@
   <section class="space-y-4">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <h2 class="text-base font-semibold text-highlighted">
-        {{ $t('pages.contentReview.preview') }}
+        {{ $t('pages.contentDraft.preview') }}
       </h2>
     </div>
-    <ContentReviewInstagramFeedPreview
+    <ContentDraftInstagramFeedPreview
       v-if="placement === 'feed'"
       :paths="paths"
       :caption="caption"
       :hashtags="hashtags"
       :location="location"
     />
-    <ContentReviewInstagramStoryPreview
+    <ContentDraftInstagramStoryPreview
       v-else
       :path="paths[0] || ''"
     />

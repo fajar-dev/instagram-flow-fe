@@ -43,7 +43,7 @@ test('processing becomes editable on the same page without polling over unsaved 
         hashtags: ['#AMTI'],
         location: 'Jakarta',
         activity: 'Inspection',
-        reviewStatus: 'READY_FOR_REVIEW'
+        decisionStatus: 'READY_FOR_REVIEW'
       }
     }
     await poll()
@@ -54,10 +54,10 @@ test('processing becomes editable on the same page without polling over unsaved 
     expect(state.form.caption).toBe('Unsaved edit')
     response = {
       ...response,
-      draft: { ...response.draft, caption: 'Final', reviewStatus: 'PUBLISH' }
+      draft: { ...response.draft, caption: 'Final', decisionStatus: 'PUBLISH' }
     }
     await state.load()
-    expect(state.detail.value.draft.reviewStatus).toBe('PUBLISH')
+    expect(state.detail.value.draft.decisionStatus).toBe('PUBLISH')
     expect(state.form.caption).toBe('Final')
   } finally {
     cleanup.forEach(callback => callback())

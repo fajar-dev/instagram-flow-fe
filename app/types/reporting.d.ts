@@ -1,4 +1,4 @@
-export type ReportResource = 'jobs' | 'review' | 'media' | 'audit-logs'
+export type ReportResource = 'jobs' | 'drafts' | 'media' | 'audit-logs'
 
 /** Common, serialized fields returned by the reporting lists. */
 export interface ContentRecord {
@@ -17,7 +17,7 @@ export interface ContentRecord {
   jobId?: string
   batchId?: string
   status?: string
-  reviewStatus?: string
+  decisionStatus?: string
   safeError?: string | null
   width?: number
   height?: number

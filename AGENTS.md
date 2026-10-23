@@ -46,8 +46,16 @@ Frontend memakai indentasi 2 spasi, single quote, tanpa semicolon dan tanpa trai
 
 ## Penyederhanaan publish — 20 Oktober 2026
 
-Draft menyimpan isi konten langsung. Tidak ada entity, endpoint edit, nomor, atau tabel revisi aktif. Publish menyimpan konten final dan snapshot publikasi secara atomik; Reject mengakhiri konten. Baseline development sudah disusun ulang langsung ke schema final, satu tabel satu file. Tidak ada migration transisi atau tabel revisi. Backup dan verifikasi schema wajib sebelum menyelaraskan ledger database development yang sudah berisi data.
+Draft menyimpan isi konten langsung. Tidak ada entity, endpoint edit, nomor, atau tabel revisi aktif. Publish menyimpan konten final dan snapshot publikasi secara atomik; Reject mengakhiri konten. Baseline development sudah disusun ulang langsung ke schema final, satu tabel satu file. Tidak ada tabel revisi aktif; upgrade schema berikutnya memakai migration tambahan. Backup dan verifikasi schema wajib sebelum menyelaraskan ledger database development yang sudah berisi data.
 
 ## Output tunggal — 21 Oktober 2026
 
 Setiap job memilih satu `output`: `feed` atau `story` sejak proses upload. Output tidak dapat diganti saat publish. Event n8n memakai scalar `output`; callback Feed berisi satu render AI per foto upload (maksimal 19), sedangkan Story tetap satu render. Publikasi Feed memilih 1–10 render unik dalam urutan eksplisit; Story tepat satu. Feed memuat caption/hashtag; Story tidak memiliki caption/hashtag posting (payload kosong). Jangan mengembalikan checkbox multi-output, tab pemilih preview, atau pilihan placement pada form publish.
+
+## Istilah keputusan konten
+
+Gunakan content-draft/ContentDraft/contentDraft untuk module, component dan locale. Status draft memakai decisionStatus; penolakan rejections/rejectedBy; daftar draft GET /api/drafts. READY_FOR_REVIEW tetap istilah status sebelum keputusan. Tidak ada kontrak reviewStatus/reviews/reviewerId atau alias endpoint lama.
+
+## Konsistensi istilah lintas fitur
+
+Settings memakai namespace settings; akun Instagram dimiliki fitur instagram, bukan publishing. Acuan istilah ada di ../backend/docs/reference/terminology.md. Pertahankan perbedaan job AI, execution n8n, draft, keputusan dan delivery publication. Periode analytics hanya today/this_week/this_month; Top posts memakai metrik lifetime.

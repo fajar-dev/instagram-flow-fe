@@ -1,6 +1,8 @@
 <template>
   <UModal
     v-model:open="open"
+    :title="title || $t('components.deleteModal.defaultTitle')"
+    :description="$t('components.deleteModal.defaultDescription', { item: itemName })"
     :ui="{ content: 'sm:max-w-sm' }"
   >
     <template #content>

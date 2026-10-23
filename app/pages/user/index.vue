@@ -57,6 +57,7 @@
 </template>
 
 <script setup lang="ts">
+import { tableActions, tableActionsMeta } from '~/util/table-actions'
 import { formatDate } from '~/util/date'
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
@@ -119,7 +120,7 @@ const columns: TableColumn<User>[] = [
       const name = row.original.name
       const email = row.original.email
       const photo = row.original.photo
-      return h('div', { class: 'flex items-center gap-3' }, [
+      return h('div', { class: 'flex min-w-64 items-center gap-3' }, [
         h(UAvatar, {
           src: photo || undefined,
           alt: name,
@@ -156,29 +157,26 @@ const columns: TableColumn<User>[] = [
   {
     id: 'actions',
     header: () => t('pages.user.columnAction'),
-    meta: {
-      class: {
-        td: 'text-right',
-        th: 'text-right'
-      }
-    },
+    meta: tableActionsMeta,
     cell: ({ row }) => {
-      return h(
-        UDropdownMenu,
-        {
-          'content': {
-            align: 'end'
-          },
-          'items': getRowItems(row),
-          'aria-label': t('pages.user.actionsDropdown')
-        },
-        () =>
-          h(UButton, {
-            'icon': 'i-lucide-ellipsis-vertical',
-            'color': 'neutral',
-            'variant': 'ghost',
+      return tableActions(
+        h(
+          UDropdownMenu,
+          {
+            'content': {
+              align: 'end'
+            },
+            'items': getRowItems(row),
             'aria-label': t('pages.user.actionsDropdown')
-          })
+          },
+          () =>
+            h(UButton, {
+              'icon': 'i-lucide-ellipsis-vertical',
+              'color': 'neutral',
+              'variant': 'ghost',
+              'aria-label': t('pages.user.actionsDropdown')
+            })
+        )
       )
     }
   }

@@ -17,7 +17,7 @@
     >
       <template #filters>
         <USelect
-          v-if="!fixedStatus && (resource === 'jobs' || resource === 'review')"
+          v-if="!fixedStatus && (resource === 'jobs' || resource === 'drafts')"
           v-model="status"
           :placeholder="$t('pages.content.statusPlaceholder')"
           :items="statuses"
@@ -57,6 +57,7 @@ import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import type { ContentRecord, ReportResource } from '~/types/reporting'
 import { useContentRecords } from '~/composables/reporting/useContentRecords'
+import { tableActions, tableActionsMeta } from '~/util/table-actions'
 import { formatContentDate } from '~/util/content'
 
 const props = defineProps<{
@@ -89,10 +90,10 @@ const {
 const UButton = resolveComponent('UButton')
 const UAvatar = resolveComponent('UAvatar')
 const NuxtLink = resolveComponent('NuxtLink')
-const isContent = computed(() => props.resource === 'jobs' || props.resource === 'review')
+const isContent = computed(() => props.resource === 'jobs' || props.resource === 'drafts')
 
 function detailPath(row: ContentRecord) {
-  return `/content/${props.resource === 'review' ? row.jobId : row.id}`
+  return `/content/${props.resource === 'drafts' ? row.jobId : row.id}`
 }
 
 const columns = computed<TableColumn<ContentRecord>[]>(() => [
@@ -105,21 +106,22 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
           : 'pages.content.fields.projectName'
       ),
     cell: ({ row }) =>
-      h('div', { class: 'space-y-1 max-w-sm whitespace-normal' }, [
-        h(
-          isContent.value ? NuxtLink : 'p',
-          {
-            class: 'font-medium text-highlighted break-words',
-            ...(isContent.value
-              ? {
-                  to: detailPath(row.original),
-                  class:
-                    'font-medium text-highlighted break-words hover:text-primary focus-visible:outline-primary'
-                }
-              : {})
-          },
-          row.original.event || row.original.projectName || row.original.id
-        ),
+      h('div', { class: 'min-w-64 max-w-sm space-y-1 whitespace-normal' }, [
+        isContent.value
+          ? h(
+              NuxtLink,
+              {
+                to: detailPath(row.original),
+                class:
+                  'font-medium text-highlighted break-words hover:text-primary focus-visible:outline-primary'
+              },
+              { default: () => row.original.projectName || row.original.id }
+            )
+          : h(
+              'p',
+              { class: 'font-medium text-highlighted break-words' },
+              row.original.event || row.original.projectName || row.original.id
+            ),
         isContent.value
           ? row.original.projectLocation
             ? h('p', { class: 'text-xs text-muted break-words' }, row.original.projectLocation)
@@ -171,7 +173,7 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
           id: 'outputs',
           header: () => t('components.reporting.recordList.outputs'),
           cell: ({ row }: { row: { original: ContentRecord } }) =>
-            row.original.output ? t(`pages.contentReview.${row.original.output}`) : '—'
+            row.original.output ? t(`pages.contentDraft.${row.original.output}`) : '—'
         }
       ]
     : []),
@@ -186,15 +188,17 @@ const columns = computed<TableColumn<ContentRecord>[]>(() => [
         {
           id: 'actions',
           header: () => t('components.reporting.recordList.actions'),
-          meta: { class: { td: 'text-right', th: 'text-right' } },
+          meta: tableActionsMeta,
           cell: ({ row }: { row: { original: ContentRecord } }) =>
-            h(UButton, {
-              'to': detailPath(row.original),
-              'color': 'neutral',
-              'variant': 'ghost',
-              'icon': 'i-lucide-arrow-up-right',
-              'aria-label': t('pages.content.detail')
-            })
+            tableActions(
+              h(UButton, {
+                'to': detailPath(row.original),
+                'color': 'neutral',
+                'variant': 'ghost',
+                'icon': 'i-lucide-arrow-up-right',
+                'aria-label': t('pages.content.detail')
+              })
+            )
         }
       ])
 ])

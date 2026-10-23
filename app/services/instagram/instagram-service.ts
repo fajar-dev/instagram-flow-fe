@@ -1,7 +1,7 @@
 import { apiService } from '../api-service'
 import { requestHeaders } from '../shared/request-headers'
 import type { ApiResponse } from '~/types/api'
-import type { InstagramAccount } from '~/types/publishing'
+import type { InstagramAccount } from '~/types/instagram'
 
 class InstagramService {
   async accounts() {

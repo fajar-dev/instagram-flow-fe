@@ -54,8 +54,8 @@
         <URadioGroup
           v-model="form.output"
           :items="[
-            { label: $t('pages.contentReview.feed'), value: 'feed' },
-            { label: $t('pages.contentReview.story'), value: 'story' }
+            { label: $t('pages.contentDraft.feed'), value: 'feed' },
+            { label: $t('pages.contentDraft.story'), value: 'story' }
           ]"
           :disabled="busy || processingRequested"
           orientation="horizontal"

@@ -1,5 +1,5 @@
 import type { Batch, Asset } from './content'
-import type { Draft } from './content-review'
+import type { Draft } from './content-draft'
 
 export interface Job {
   id: string
@@ -38,17 +38,23 @@ export interface AiResult {
 }
 
 export interface JobDetails {
+  uploader: { id: number, name: string | null }
   job: Job
   batch: Batch
   assets: Asset[]
   draft: Draft | null
   aiResult: AiResult | null
   renders: Render[]
-  reviews: {
+  decisions: {
+    action: 'PUBLISH' | 'REJECTED' | 'CANCELLED'
+    actorId: number | null
+    actorName: string | null
+    createdAt: string
+  }[]
+  rejections: {
     id: string
-    decision: string
     notes: string
-    reviewerId: number
+    rejectedBy: number
     createdAt: string
   }[]
 }

@@ -33,7 +33,7 @@ export function useContentRecords(props: {
   })
   const statuses = computed(() => [
     { label: t('pages.content.all'), value: 'ALL' },
-    ...(props.resource === 'review'
+    ...(props.resource === 'drafts'
       ? ['READY_FOR_REVIEW', 'PUBLISH', 'REJECTED']
       : ['QUEUED', 'DISPATCHED', 'PROCESSING', 'READY_FOR_REVIEW', 'FAILED']
     ).map(value => ({ label: t(`pages.content.status.${value}`), value }))

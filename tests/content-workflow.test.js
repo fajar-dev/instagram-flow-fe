@@ -2,9 +2,9 @@ import { beforeEach, expect, test } from 'bun:test'
 import { apiService } from '../app/services/api-service'
 import { batchService } from '../app/services/content/batch-service'
 import { jobService } from '../app/services/ai-job/job-service'
-import { draftService } from '../app/services/content-review/draft-service'
+import { draftService } from '../app/services/content-draft/draft-service'
 import { mediaService } from '../app/services/content/media-service'
-import { settingsService } from '../app/services/integration/settings-service'
+import { settingsService } from '../app/services/settings/settings-service'
 import { reportingService } from '../app/services/reporting/reporting-service'
 
 const response = (config, data) => ({ config, data, status: 200, statusText: 'OK', headers: {} })

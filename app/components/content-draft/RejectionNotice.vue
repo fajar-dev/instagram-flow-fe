@@ -1,13 +1,13 @@
 <template>
   <section
-    v-if="detail.draft?.reviewStatus === 'REJECTED'"
+    v-if="detail.draft?.decisionStatus === 'REJECTED'"
     class="space-y-2"
   >
     <h3 class="text-sm font-medium text-highlighted">
-      {{ $t('pages.contentReview.rejectionTitle') }}
+      {{ $t('pages.contentDraft.rejectionTitle') }}
     </h3>
     <p class="text-sm text-toned whitespace-pre-line break-words">
-      {{ rejection?.notes.trim() || $t('pages.contentReview.rejectionEmpty') }}
+      {{ rejection?.notes.trim() || $t('pages.contentDraft.rejectionEmpty') }}
     </p>
     <p
       v-if="rejection"

@@ -3,8 +3,6 @@
     v-model:open="open"
     :title="$t('components.user.addModal.title')"
     :description="$t('components.user.addModal.description')"
-    color="neutral"
-    variant="soft"
   >
     <template #body>
       <UserPhotoUpload

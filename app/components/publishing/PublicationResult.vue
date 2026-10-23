@@ -45,7 +45,7 @@
           {{ $t('pages.publishing.placement') }}
         </dt>
         <dd class="font-medium text-highlighted">
-          {{ $t(`pages.contentReview.${publication.placement}`) }}
+          {{ $t(`pages.contentDraft.${publication.placement}`) }}
         </dd>
       </div>
       <div class="space-y-1">
