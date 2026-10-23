@@ -63,6 +63,7 @@
 </template>
 
 <script setup lang="ts">
+import { useAuth } from '~/composables/auth/useAuth'
 import { ref, reactive } from 'vue'
 import { z } from 'zod'
 import type { UpdatePasswordPayload } from '~/types/profile'

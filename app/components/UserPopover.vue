@@ -123,6 +123,7 @@
 </template>
 
 <script setup lang="ts">
+import { useAuth } from '~/composables/auth/useAuth'
 import { getLocaleFlag, localeOptions } from '~/util/locale'
 
 const open = ref(false)

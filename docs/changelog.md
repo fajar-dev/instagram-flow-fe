@@ -1,5 +1,15 @@
 ## 22 Oktober 2026 — Penyegaran tampilan layout dan halaman autentikasi
 
+## 23 Oktober 2026 — Microsoft popup login
+
+- Kelompokkan seluruh composable autentikasi ke composables/auth dan perbarui import konsumen tanpa wrapper di lokasi lama.
+
+- Popup Microsoft diposisikan di tengah jendela browser dengan ukuran menyesuaikan jendela yang lebih kecil.
+
+- Login Microsoft memakai popup dengan state dan PKCE; callback hanya meneruskan code ke opener.
+- Hapus alur redirect/code handling ganda. useSignIn menyatukan sesi, toast dan navigasi login password/Google/Microsoft.
+- Tambah penanganan blocked/closed/timeout, cleanup listener, serta tes validasi callback dan sesi.
+
 Menambahkan rotasi headline dan deskripsi dinamis pada layout autentikasi dengan animasi typewriter dan indikator slide. Menyelaraskan hierarki visual, ikon header, dan form autentikasi (sign-in, forgot-password, reset-password). Memastikan komputasi slide bertipe aman dengan fallback default.
 
 ## 21 Oktober 2026 — Audit alur konten

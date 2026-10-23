@@ -117,6 +117,7 @@
 </template>
 
 <script setup lang="ts">
+import { useAuth } from '~/composables/auth/useAuth'
 import { ref, reactive, watch } from 'vue'
 import { z } from 'zod'
 import type { UpdateProfilePayload } from '~/types/profile'

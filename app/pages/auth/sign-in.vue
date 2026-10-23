@@ -83,7 +83,7 @@
           type="submit"
           block
           color="primary"
-          :loading="loading || googleLoading"
+          :loading="loading || googleLoading || microsoftLoading"
         >
           {{ $t('pages.auth.signIn.login') }}
         </UButton>
@@ -98,7 +98,7 @@
           block
           variant="soft"
           color="primary"
-          :disabled="googleLoading || loading || !googleClient?.isReady.value"
+          :disabled="googleLoading || microsoftLoading || loading || !googleClient?.isReady.value"
           @click="handleGoogleLogin"
         >
           <template #leading>
@@ -134,6 +134,10 @@
           block
           variant="soft"
           color="primary"
+          :disabled="
+            microsoftLoading || googleLoading || loading || !microsoftClient?.isReady.value
+          "
+          @click="handleMicrosoftLogin"
         >
           <template #leading>
             <svg
@@ -169,92 +173,37 @@
         >
           {{ $t('pages.auth.signIn.googleUnavailable') }}
         </p>
+        <p
+          v-if="!microsoftClient"
+          class="text-sm text-toned text-center"
+          role="status"
+        >
+          {{ $t('pages.auth.signIn.microsoftUnavailable') }}
+        </p>
       </div>
     </UForm>
   </div>
 </template>
 
 <script setup lang="ts">
-import { z } from 'zod'
-import { authService } from '~/services/auth-service'
+import { useSignIn } from '~/composables/auth/useSignIn'
 
-const handleServiceError = useServiceError()
-
-definePageMeta({
-  layout: 'auth',
-  middleware: 'guest'
-})
+definePageMeta({ layout: 'auth', middleware: 'guest' })
 
 const { t } = useI18n()
+const {
+  state,
+  showPassword,
+  loginSchema,
+  loading,
+  googleLoading,
+  microsoftLoading,
+  googleClient,
+  microsoftClient,
+  handleLogin,
+  handleGoogleLogin,
+  handleMicrosoftLogin
+} = useSignIn()
 
-useHead(() => ({
-  title: t('pages.auth.signIn.title')
-}))
-
-const state = reactive({
-  email: '',
-  password: ''
-})
-
-const showPassword = ref(false)
-const loading = ref(false)
-const googleLoading = ref(false)
-const toast = useToast()
-
-const showToast = (type: 'success' | 'error', title: string) => {
-  toast.add({
-    title,
-    ...(type === 'error' ? { color: 'error' as const } : {}),
-    icon: type === 'success' ? 'i-lucide-circle-check' : 'i-lucide-circle-x'
-  })
-}
-
-const loginSchema = computed(() =>
-  z.object({
-    email: z.email(t('pages.auth.signIn.emailInvalid')),
-    password: z.string().min(1, t('pages.auth.signIn.passwordRequired'))
-  })
-)
-
-const config = useRuntimeConfig()
-const googleClient = config.public.googleSignIn?.clientId
-  ? useCodeClient({
-      onSuccess: async (response) => {
-        try {
-          await authService.google(response.code)
-          showToast('success', t('pages.auth.signIn.loginSuccess'))
-          navigateTo('/')
-        } catch (error) {
-          handleServiceError(error)
-        } finally {
-          googleLoading.value = false
-        }
-      },
-      onError: () => {
-        googleLoading.value = false
-        showToast('error', t('pages.auth.signIn.loginFailed'))
-      }
-    })
-  : null
-
-const handleGoogleLogin = () => {
-  if (!googleClient?.isReady.value) {
-    return
-  }
-  googleLoading.value = true
-  googleClient.login()
-}
-
-const handleLogin = async () => {
-  loading.value = true
-  try {
-    await authService.login(state.email, state.password)
-    showToast('success', t('pages.auth.signIn.loginSuccess'))
-    navigateTo('/')
-  } catch (error) {
-    handleServiceError(error)
-  } finally {
-    loading.value = false
-  }
-}
+useHead(() => ({ title: t('pages.auth.signIn.title') }))
 </script>
