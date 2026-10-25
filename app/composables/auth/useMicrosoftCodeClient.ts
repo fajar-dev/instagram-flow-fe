@@ -1,6 +1,6 @@
 import { computed, onBeforeUnmount } from 'vue'
-import { openMicrosoftPopup } from '~/util/auth/microsoft-popup'
-import type { MicrosoftCode, MicrosoftPopupOptions } from '~/util/auth/microsoft-popup'
+import { openMicrosoftPopup } from '../../util/auth/microsoft-popup'
+import type { MicrosoftCode, MicrosoftPopupOptions } from '../../util/auth/microsoft-popup'
 
 interface MicrosoftCodeClientOptions extends MicrosoftPopupOptions {
   onSuccess: (response: MicrosoftCode) => void | Promise<void>
