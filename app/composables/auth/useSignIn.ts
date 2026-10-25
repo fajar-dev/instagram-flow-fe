@@ -1,10 +1,12 @@
 import { useMicrosoftCodeClient } from './useMicrosoftCodeClient'
 import { z } from 'zod'
 import type { Ref } from 'vue'
-import { authService } from '~/services/auth-service'
+import { resolveAuthRedirect } from '../../util/auth/redirect'
+import { authService } from '../../services/auth-service'
 
 export function useSignIn() {
   const { t } = useI18n()
+  const route = useRoute()
   const config = useRuntimeConfig()
   const toast = useToast()
   const handleServiceError = useServiceError()
@@ -25,7 +27,7 @@ export function useSignIn() {
     try {
       await request()
       toast.add({ title: t('pages.auth.signIn.loginSuccess'), icon: 'i-lucide-circle-check' })
-      await navigateTo('/')
+      await navigateTo(resolveAuthRedirect(route.query.redirect), { replace: true })
     } catch (error) {
       handleServiceError(error)
     } finally {

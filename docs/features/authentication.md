@@ -23,3 +23,9 @@ Callback wajib berada pada origin aplikasi. Header browser/deployment harus memp
 - `tests/microsoft-popup.test.js` dan `tests/auth.test.js`: regresi popup dan sesi.
 
 Composable dalam subfolder diimpor eksplisit oleh konsumennya; tidak mengandalkan auto-import folder bertingkat.
+
+## Kembali ke halaman tujuan
+
+Halaman yang membutuhkan sesi mengarahkan pengguna ke `/auth/sign-in?redirect=<fullPath>` saat belum login. Jika refresh token ditolak ketika aplikasi berjalan atau saat sesi dipulihkan, URL halaman saat itu juga dipertahankan, termasuk query dan hash. Refresh yang berhasil tetap melanjutkan request tanpa membuka login; gangguan jaringan tidak menghapus sesi.
+
+Login password, Google dan Microsoft memakai penyelesaian login bersama yang membaca tujuan ini setelah autentikasi berhasil. Navigasi memakai replace agar tombol Back tidak kembali ke login. Pengguna yang sudah login dan membuka halaman guest juga mengikuti tujuan redirect. Nilai kosong/tidak valid, URL eksternal dan tujuan halaman auth kembali ke `/`; helper `app/util/auth/redirect.ts` memvalidasi tujuan. Query redirect yang sudah ada pada halaman auth tidak ditimpa oleh respons 401 yang datang terlambat.

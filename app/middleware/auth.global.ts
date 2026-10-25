@@ -1,3 +1,4 @@
+import { signInLocation } from '~/util/auth/redirect'
 import { useAuth } from '~/composables/auth/useAuth'
 
 export default defineNuxtRouteMiddleware((to) => {
@@ -17,6 +18,6 @@ export default defineNuxtRouteMiddleware((to) => {
 
   // Require authentication
   if (!state.token) {
-    return navigateTo('/auth/sign-in')
+    return navigateTo(signInLocation(to.fullPath), { replace: true })
   }
 })

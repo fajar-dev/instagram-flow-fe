@@ -522,3 +522,8 @@ Elemen tabel memakai w-full selain min-width per halaman agar desktop tidak meny
 ## 2026-10-23 — Overview penolakan
 
 Kartu Total photos diganti Rejected setelah Publish. Overview API menambahkan rejected berdasarkan status draft REJECTED, mengikuti filter periode yang sama.
+
+## 25 Oktober 2026 — Tujuan setelah login
+
+- Middleware dan penanganan sesi kedaluwarsa menyimpan path, query dan hash halaman tujuan dalam parameter redirect.
+- Login password/Google/Microsoft kembali ke tujuan internal setelah berhasil, dengan fallback overview dan pencegahan redirect eksternal/loop auth.

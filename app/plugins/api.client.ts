@@ -1,5 +1,6 @@
 import type { Composer } from 'vue-i18n'
 import { apiService } from '~/services/api-service'
+import { signInLocation } from '~/util/auth/redirect'
 import { authService } from '~/services/auth-service'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
@@ -13,7 +14,13 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     token: () => authService.token.value,
     expire: () => {
       authService.clearSession()
-      void nuxtApp.runWithContext(() => navigateTo('/auth/sign-in'))
+      // The browser URL also retains the requested path during initial session hydration.
+      const { pathname, search, hash } = window.location
+      if (pathname === '/auth' || pathname.startsWith('/auth/')) {
+        return
+      }
+      const destination = signInLocation(pathname + search + hash)
+      void nuxtApp.runWithContext(() => navigateTo(destination, { replace: true }))
     }
   })
   await authService.initialize()
