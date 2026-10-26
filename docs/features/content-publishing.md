@@ -23,3 +23,7 @@ Daftar hasil AI menggantikan perbandingan foto utama. Upload sampai 19 foto; pil
 Preview Feed dapat digeser kiri/kanan melalui sentuhan atau drag mouse. Panah, keyboard dan indikator titik menyediakan navigasi alternatif. Hanya gambar yang bergeser; header akun dan caption tetap. Urutan mengikuti pilihan slide, dan tap gambar membuka lightbox.
 
 Form upload disusun menjadi nama proyek, aktivitas/lokasi, tanggal/klien, catatan tambahan, output Feed atau Story, foto, lalu persetujuan publikasi sebelum tombol proses.
+
+## Urutan awal foto
+
+Post order memilih maksimal 10 render Feed berdasarkan skor AI tertinggi ke terendah; Story satu render. Skor sama menjaga urutan respons, tanpa skor ditempatkan terakhir. Pilihan dan urutan hanya diinisialisasi saat form dibuat, sehingga perubahan manual melalui drag/tombol tidak disortir ulang. Foto yang belum dipilih tetap diurutkan berdasarkan skor.
