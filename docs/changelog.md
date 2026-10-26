@@ -1,3 +1,8 @@
+## 26 Oktober 2026 — Urutan foto berdasarkan skor
+
+- Post order memilih maksimal 10 render Feed berdasarkan skor AI tertinggi ke terendah (Story satu). Skor sama mempertahankan urutan awal; foto tanpa skor berada terakhir.
+- Drag/manual order tetap dipertahankan; foto yang belum dipilih juga ditampilkan berdasarkan skor.
+
 ## 23 Oktober 2026 — Istilah keputusan konsisten
 
 - Seragamkan folder, komponen, service, tipe dan namespace locale menjadi content-draft/ContentDraft/contentDraft.
