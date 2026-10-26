@@ -4,6 +4,7 @@ import type { PublishFormContent } from '../../types/content-draft'
 import { instagramService } from '../../services/instagram/instagram-service'
 import { publicationService } from '../../services/publishing/publication-service'
 import { publicationSchedule } from '../../util/publication'
+import { rankSlides } from '../../util/slides'
 import type { InstagramAccount } from '../../types/instagram'
 import type { PublicationPayload } from '../../types/publishing'
 import type { JobDetails } from '../../types/ai-job'
@@ -22,13 +23,7 @@ export function usePublicationForm(
   const form = reactive({
     content,
     accountKey: '',
-    renderIds: detail()
-      .renders.slice()
-      .sort(
-        (a, b) =>
-          Number(b.assetId === detail().aiResult?.selectedAssetIds[0])
-          - Number(a.assetId === detail().aiResult?.selectedAssetIds[0])
-      )
+    renderIds: rankSlides(detail().renders, detail().aiResult?.rankings || [])
       .slice(0, detail().job.output === 'feed' ? 10 : 1)
       .map(r => r.id),
     mode: 'now' as 'now' | 'schedule',

@@ -86,7 +86,7 @@
 
 <script setup lang="ts">
 import type { AiResult, Render } from '~/types/ai-job'
-import { moveSlide } from '~/util/slides'
+import { moveSlide, rankSlides } from '~/util/slides'
 
 const model = defineModel<string[]>({ required: true })
 const props = defineProps<{
@@ -103,7 +103,7 @@ const ordered = computed(() => [
   ...model.value
     .map(id => props.renders.find(r => r.id === id))
     .filter((r): r is Render => !!r),
-  ...props.renders.filter(r => !model.value.includes(r.id))
+  ...rankSlides(props.renders, props.rankings).filter(r => !model.value.includes(r.id))
 ])
 
 function toggle(id: string) {
