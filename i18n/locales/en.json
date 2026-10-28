@@ -299,6 +299,9 @@
     },
     "content": {
       "upload": "Upload Content",
+      "projectDetails": "Project Details",
+      "mediaUpload": "Documentation Photos",
+      "cancel": "Cancel",
       "media": "Media",
       "logs": "Activity Logs",
       "previewUnavailable": "Preview unavailable",

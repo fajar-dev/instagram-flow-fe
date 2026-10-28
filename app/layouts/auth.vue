@@ -1,7 +1,7 @@
 <template>
-  <div class="flex min-h-dvh w-full bg-muted/30 p-2">
+  <div class="fixed inset-0 flex overflow-hidden bg-muted/30 p-2">
     <aside
-      class="relative isolate hidden shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-neutral-950 p-8 text-white lg:flex lg:w-[45%] xl:p-12"
+      class="relative isolate hidden shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-neutral-950 p-6 text-white lg:flex lg:w-[45%] xl:p-10 2xl:p-12"
     >
       <img
         src="/hero.png"
@@ -13,13 +13,14 @@
         class="absolute inset-0 -z-10 bg-linear-to-t from-neutral-950/90 via-transparent to-black/30"
       />
       <div class="flex items-center gap-3">
-        <img
-          src="/logo-light.png"
-          alt="AMTI"
-          class="h-18 w-auto"
-        >
+        <BrandLogo
+          to="/"
+          variant="full"
+          size="xl"
+          color-mode="dark"
+        />
       </div>
-      <div class="max-w-md space-y-5 pt-80 pb-6">
+      <div class="max-w-md space-y-4 pb-2 xl:space-y-5 xl:pb-6">
         <slot name="hero">
           <div class="flex items-center gap-1.5 pb-1">
             <span
@@ -29,23 +30,27 @@
               :class="index === currentSlideIndex ? 'w-6 bg-primary' : 'w-1.5 bg-white/30'"
             />
           </div>
-          <div class="flex min-h-24 flex-col justify-end xl:min-h-28">
-            <h2 class="text-3xl font-semibold leading-tight tracking-tight xl:text-4xl">
+          <div class="flex min-h-20 flex-col justify-end xl:min-h-28">
+            <h2 class="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl xl:text-4xl">
               <span>{{ displayedHeadline }}</span>
               <span
-                class="ml-1 inline-block h-7 w-0.5 animate-pulse bg-primary align-middle xl:h-9"
+                class="ml-1 inline-block h-6 w-0.5 animate-pulse bg-primary align-middle xl:h-9"
                 aria-hidden="true"
               />
             </h2>
           </div>
-          <p class="min-h-12 max-w-sm text-sm leading-relaxed text-white/70 xl:text-base">
+          <p class="min-h-10 max-w-sm text-sm leading-relaxed text-white/70 xl:text-base">
             {{ currentSlide.description }}
           </p>
         </slot>
       </div>
     </aside>
-    <div class="flex min-w-0 flex-1 flex-col px-4 sm:px-8 lg:w-[55%] lg:px-12">
-      <header class="flex min-h-16 items-center justify-between gap-3 py-3">
+    <div
+      class="flex h-full min-w-0 flex-1 flex-col overflow-hidden px-4 sm:px-8 lg:w-[55%] lg:px-10 xl:px-12"
+    >
+      <header
+        class="flex shrink-0 min-h-12 items-center justify-between gap-3 py-2 sm:min-h-14 sm:py-3"
+      >
         <BrandLogo class="lg:hidden" />
         <div class="ml-auto flex items-center gap-1">
           <UColorModeButton
@@ -55,10 +60,14 @@
           <LanguageSwitcher variant="ghost" />
         </div>
       </header>
-      <main class="flex w-full flex-1 items-center py-10 sm:py-16">
+      <main
+        class="flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden py-2 sm:py-4"
+      >
         <slot />
       </main>
-      <footer class="py-5 text-center text-sm leading-relaxed text-muted">
+      <footer
+        class="shrink-0 py-2 text-center text-xs leading-relaxed text-muted sm:py-3 sm:text-sm"
+      >
         {{ $t('components.authLayout.copyright', { year: new Date().getFullYear() }) }}
       </footer>
     </div>
@@ -72,6 +81,15 @@ interface Slide {
 }
 
 const { locale, t } = useI18n()
+
+useHead({
+  htmlAttrs: {
+    class: 'h-dvh overflow-hidden'
+  },
+  bodyAttrs: {
+    class: 'h-dvh overflow-hidden'
+  }
+})
 
 const SLIDE_KEYS = ['story', 'aiDesign', 'review', 'schedule', 'analytics'] as const
 

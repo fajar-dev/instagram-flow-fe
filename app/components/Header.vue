@@ -14,15 +14,10 @@
           {{ description }}
         </p>
       </div>
-      <UBreadcrumb
-        :items="breadcrumbs"
-        class="hidden max-w-md shrink-0 pt-1 lg:block"
-        :ui="{ list: 'justify-end flex-wrap', link: 'text-sm font-normal' }"
-      >
-        <template #separator>
-          <span class="mx-2 text-muted">/</span>
-        </template>
-      </UBreadcrumb>
+
+      <div class="hidden shrink-0 items-center lg:flex">
+        <UserPopover />
+      </div>
     </div>
 
     <!-- Middle Row: Tab links -->
@@ -52,5 +47,4 @@ interface Props {
 }
 
 defineProps<Props>()
-const { breadcrumbs } = useBreadcrumbs()
 </script>

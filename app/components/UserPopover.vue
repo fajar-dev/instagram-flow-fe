@@ -3,12 +3,42 @@
     v-model:open="open"
     v-bind="popoverProps"
   >
-    <!-- Trigger: use slot or default avatar -->
-    <slot>
+    <!-- Trigger: use slot or default avatar/button -->
+    <slot
+      :open="open"
+      :user="authState.user"
+    >
       <UButton
+        v-if="showDetails"
+        variant="ghost"
+        :aria-label="$t('components.sidebar.settings')"
+      >
+        <UAvatar
+          :src="authState.user?.photo ?? undefined"
+          :alt="authState.user?.name"
+          size="md"
+          class="shrink-0"
+        />
+        <div class="flex flex-col min-w-0 text-left pr-0.5">
+          <span
+            class="text-xs font-semibold text-highlighted truncate max-w-[160px] 2xl:max-w-[240px] leading-tight"
+          >
+            {{ authState.user?.name || $t('components.userPopover.profile') }}
+          </span>
+          <span
+            v-if="authState.user?.email"
+            class="text-[11px] text-muted truncate max-w-[160px] 2xl:max-w-[220px] leading-tight"
+          >
+            {{ authState.user.email }}
+          </span>
+        </div>
+      </UButton>
+
+      <UButton
+        v-else
         color="neutral"
         variant="ghost"
-        class="rounded-full p-1"
+        class="rounded-full p-1 cursor-pointer"
         :aria-label="$t('components.sidebar.settings')"
       >
         <UAvatar
@@ -20,26 +50,7 @@
     </slot>
 
     <template #content>
-      <div class="p-2 w-56 space-y-1.5 select-none">
-        <!-- User Info -->
-        <div class="flex items-center gap-3 p-1.5">
-          <UAvatar
-            :src="authState.user?.photo ?? undefined"
-            :alt="authState.user?.name"
-            size="lg"
-          />
-          <div class="min-w-0 flex-1">
-            <h2 class="text-sm font-semibold truncate text-highlighted">
-              {{ authState.user?.name }}
-            </h2>
-            <p class="text-xs text-muted truncate">
-              {{ authState.user?.email }}
-            </p>
-          </div>
-        </div>
-
-        <USeparator />
-
+      <div class="p-2 w-48 space-y-1.5 select-none">
         <!-- Settings Items -->
         <div class="space-y-0.5">
           <UButton
@@ -59,7 +70,7 @@
           <!-- Theme Dropdown Menu -->
           <UDropdownMenu
             :items="themeMenuItems"
-            :content="{ side: 'right', sideOffset: 15 }"
+            :content="{ side: 'left', sideOffset: 8 }"
           >
             <UButton
               color="neutral"
@@ -82,7 +93,7 @@
           <!-- Language Dropdown Menu -->
           <UDropdownMenu
             :items="langMenuItems"
-            :content="{ side: 'right', sideOffset: 15 }"
+            :content="{ side: 'left', sideOffset: 8 }"
           >
             <UButton
               color="neutral"
@@ -135,10 +146,14 @@ const { locale, setLocale, t } = useI18n()
 
 interface Props {
   popoverProps?: Record<string, unknown>
+  showDetails?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
-  popoverProps: () => ({})
+  popoverProps: () => ({
+    content: { side: 'bottom', sideOffset: 8, align: 'end' }
+  }),
+  showDetails: true
 })
 
 const themeOptions = [

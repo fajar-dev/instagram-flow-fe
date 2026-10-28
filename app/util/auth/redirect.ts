@@ -9,7 +9,8 @@ export function resolveAuthRedirect(value: unknown): string {
     const path = value.split(/[?#]/, 1)[0]!
     const decodedPath = decodeURIComponent(path)
     const hasUnsafeCharacters = [...value, ...decodedPath].some(
-      character => character === '\\' || character.charCodeAt(0) <= 32 || character.charCodeAt(0) === 127
+      character =>
+        character === '\\' || character.charCodeAt(0) <= 32 || character.charCodeAt(0) === 127
     )
     if (hasUnsafeCharacters) {
       return '/'

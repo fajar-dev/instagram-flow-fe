@@ -154,17 +154,6 @@
           </template>
         </template>
       </nav>
-
-      <!-- Bottom Section (Fixed at bottom) -->
-      <div class="shrink-0 pt-2.5 flex flex-col items-center gap-3">
-        <USeparator
-          class="px-5"
-          size="sm"
-        />
-        <UserPopover
-          :popover-props="{ content: { side: 'right', sideOffset: 12, align: 'end' } }"
-        />
-      </div>
     </aside>
   </div>
 </template>

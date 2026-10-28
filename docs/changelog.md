@@ -1,3 +1,38 @@
+## 28 Oktober 2026 — Pemisahan card upload dan tombol aksi di card kiri
+
+- Memisahkan form halaman `pages/content/upload.vue` menjadi 2 kartu (`UCard`) terpisah tanpa header: kartu kiri untuk Detail Proyek (metadata, deskripsi, output, izin publikasi, dan tombol aksi) serta kartu kanan untuk Foto Dokumentasi (`UFileUpload` dan preview foto).
+- Menjadikan kartu kiri sticky (`lg:sticky lg:top-6`) seperti pada halaman detail konten agar tetap terlihat saat scroll daftar foto yang banyak.
+- Menempatkan tombol aksi langsung di bagian bawah kartu kiri: tombol Batal (Cancel) di sebelah kiri dan tombol "Proses dengan AI" (serta opsi proses terunggah) di sebelah kanan.
+- Menambahkan key locale `cancel` pada `i18n`.
+
+## 28 Oktober 2026 — UserPopover tombol dengan nama dan email
+
+- Mengubah trigger UserPopover menjadi tombol lengkap dengan avatar, nama pengguna, email, dan ikon chevron.
+- Menambahkan prop showDetails (default true) dan mengaktifkan mode compact pada MobileHeader.
+
+## 28 Oktober 2026 — Pemindahan UserPopover ke Header
+
+- Menghapus UserPopover dan pemisah bawah dari Sidebar desktop.
+- Menambahkan UserPopover di kanan atas komponen Header desktop.
+- Mengatur default posisi popover menghadap ke bawah dan submenu ke kiri agar tidak terpotong tepi layar.
+
+## 28 Oktober 2026 — Penyederhanaan header mobile
+
+- Menghapus judul halaman dan pembatas di MobileHeader.
+- Menghapus composable usePageTitle dan tes terkait.
+
+## 28 Oktober 2026 — Variasi BrandLogo 4 aset
+
+- Menambahkan dukungan untuk 4 jenis aset logo di `public/`: `logo.png` (icon light), `logo-light.png` (icon dark), `logo-full.png` (full light), dan `logo-full-light.png` (full dark).
+- Menambahkan prop `variant` ('icon' | 'full'), `colorMode` ('auto' | 'light' | 'dark'), `size` ('xs' | 'sm' | 'md' | 'lg' | 'xl' | class kustom), dan `isCollapsed` pada komponen BrandLogo.
+- Menambahkan helper utilitas `~/util/logo` dan unit test `tests/logo.test.js`.
+
+## 28 Oktober 2026 — Penghapusan breadcrumb
+
+- Menghapus komponen UBreadcrumb dari Header dan MobileHeader.
+- Menggantikan useBreadcrumbs dengan usePageTitle untuk penentuan judul halaman aktif di MobileHeader tanpa dependensi breadcrumb.
+- Menghapus composable useBreadcrumbs dan tes terkait.
+
 ## 26 Oktober 2026 — Urutan foto berdasarkan skor
 
 - Post order memilih maksimal 10 render Feed berdasarkan skor AI tertinggi ke terendah (Story satu). Skor sama mempertahankan urutan awal; foto tanpa skor berada terakhir.

@@ -1,14 +1,6 @@
 <template>
   <div class="w-full max-w-md mx-auto">
     <div class="flex flex-col gap-4 mb-8">
-      <div
-        class="flex size-12 items-center justify-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/20"
-      >
-        <UIcon
-          name="i-lucide-log-in"
-          class="size-6"
-        />
-      </div>
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
           {{ $t('pages.auth.signIn.login') }}
@@ -93,7 +85,7 @@
           class="my-2.5"
         />
 
-        <UButton
+        <!-- <UButton
           type="button"
           block
           variant="soft"
@@ -127,7 +119,7 @@
             </svg>
           </template>
           {{ $t('pages.auth.signIn.continueWithGoogle') }}
-        </UButton>
+        </UButton> -->
 
         <UButton
           type="button"
@@ -201,7 +193,7 @@ const {
   googleClient,
   microsoftClient,
   handleLogin,
-  handleGoogleLogin,
+  handleGoogleLogin: _handleGoogleLogin,
   handleMicrosoftLogin
 } = useSignIn()
 

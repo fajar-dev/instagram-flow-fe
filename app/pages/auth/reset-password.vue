@@ -4,10 +4,6 @@
       v-if="isValidating"
       class="flex flex-col items-center gap-4 py-12"
     >
-      <UIcon
-        name="i-lucide-loader-circle"
-        class="w-8 h-8 text-primary animate-spin"
-      />
       <p class="text-muted">
         {{ $t('pages.auth.resetPassword.validating') }}
       </p>

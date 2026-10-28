@@ -14,10 +14,23 @@ test('sign-in preserves the complete internal destination through query encoding
 
 test('unsafe, malformed and recursive auth destinations fall back to overview', () => {
   for (const value of [
-    undefined, null, [], ['/content'], '', 'content', 'https://evil.test',
-    '//evil.test', '/\\evil.test', '/%2f%2fevil.test', '/%5cevil.test',
-    '/auth/sign-in?redirect=/content', '/auth/microsoft/callback',
-    '/content/../auth/sign-in', '/%61uth/sign-in', '/%zz', '/\n/evil.test'
+    undefined,
+    null,
+    [],
+    ['/content'],
+    '',
+    'content',
+    'https://evil.test',
+    '//evil.test',
+    '/\\evil.test',
+    '/%2f%2fevil.test',
+    '/%5cevil.test',
+    '/auth/sign-in?redirect=/content',
+    '/auth/microsoft/callback',
+    '/content/../auth/sign-in',
+    '/%61uth/sign-in',
+    '/%zz',
+    '/\n/evil.test'
   ]) {
     expect(resolveAuthRedirect(value)).toBe('/')
   }
@@ -30,7 +43,9 @@ test('password and Google sign-in restore the destination only after successful 
   let rejected = false
   let handledErrors = 0
   const replacements = {
-    computed, reactive, ref,
+    computed,
+    reactive,
+    ref,
     useI18n: () => ({ t: key => key }),
     useRoute: () => ({ query: { redirect: '/content/project-123?tab=publish#photos' } }),
     useRuntimeConfig: () => ({ public: { googleSignIn: { clientId: 'test' } } }),
@@ -46,7 +61,9 @@ test('password and Google sign-in restore the destination only after successful 
       navigations.push(args)
     }
   }
-  const previous = Object.fromEntries(Object.keys(replacements).map(key => [key, globalThis[key]]))
+  const previous = Object.fromEntries(
+    Object.keys(replacements).map(key => [key, globalThis[key]])
+  )
   const login = authService.login
   const google = authService.google
   Object.assign(globalThis, replacements)

@@ -299,6 +299,9 @@
     },
     "content": {
       "upload": "Unggah Konten",
+      "projectDetails": "Detail Proyek",
+      "mediaUpload": "Foto Dokumentasi",
+      "cancel": "Batal",
       "media": "Media",
       "logs": "Log Aktivitas",
       "previewUnavailable": "Preview tidak tersedia",

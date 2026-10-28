@@ -1,14 +1,6 @@
 <template>
   <div class="w-full max-w-md mx-auto">
     <div class="flex flex-col gap-4 mb-8">
-      <div
-        class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20"
-      >
-        <UIcon
-          name="i-lucide-key-round"
-          class="size-6"
-        />
-      </div>
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
           {{ $t('pages.auth.forgotPassword.title') }}
