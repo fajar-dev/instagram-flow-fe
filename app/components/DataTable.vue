@@ -40,7 +40,7 @@
     </div>
     <div
       :class="
-        $slots.content ? 'space-y-4' : 'overflow-hidden rounded-lg border border-default bg-default'
+        $slots.content ? 'space-y-4' : 'clay-card overflow-hidden rounded-3xl border border-default'
       "
     >
       <!-- Table -->
@@ -58,7 +58,7 @@
             th: 'px-5 py-3 text-xs font-semibold whitespace-nowrap',
             td: 'px-5 py-4 text-sm text-highlighted',
             tr: 'transition-colors hover:bg-primary/1 motion-reduce:transition-none',
-            empty: 'py-12 text-center text-sm text-muted'
+            empty: 'py-16 text-center text-sm text-muted'
           }"
         >
           <template #expanded="{ row }">

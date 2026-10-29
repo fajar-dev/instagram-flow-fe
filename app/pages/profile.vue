@@ -18,9 +18,9 @@
       </template>
     </Header>
 
-    <div class="max-w-2xl bg-default border border-default rounded-lg">
+    <UCard class="w-full max-w-3xl">
       <NuxtPage />
-    </div>
+    </UCard>
   </div>
 </template>
 

@@ -4,9 +4,19 @@
       :title="$t('pages.overview.overview')"
       :description="$t('pages.overview.scope')"
     />
-    <section class="overflow-hidden rounded-lg border border-primary/20 bg-primary/5">
-      <div class="grid gap-6 p-6 sm:p-8 lg:grid-cols-3 lg:items-center">
-        <div class="space-y-3 lg:col-span-2">
+    <section class="creative-banner relative overflow-hidden rounded-3xl">
+      <img
+        src="/overview-banner.png"
+        alt=""
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 size-full object-cover opacity-20 lg:opacity-85 dark:lg:opacity-35"
+      >
+      <div
+        class="overview-banner-veil pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      />
+      <div class="relative grid gap-6 p-6 sm:p-8 lg:grid-cols-12 lg:items-center">
+        <div class="relative space-y-3 lg:col-span-6">
           <div
             class="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-primary"
           >
@@ -19,7 +29,7 @@
           <h2 class="text-2xl font-semibold tracking-tight text-highlighted sm:text-3xl">
             {{ $t('pages.overview.bannerTitle') }}
           </h2>
-          <p class="max-w-xl text-sm leading-relaxed text-muted">
+          <p class="max-w-xl text-sm leading-relaxed text-toned">
             {{ $t('pages.overview.bannerDescription') }}
           </p>
           <div class="flex flex-wrap gap-3 pt-2">
@@ -39,39 +49,41 @@
             </UButton>
           </div>
         </div>
-        <NuxtLink
-          to="/content?status=READY_FOR_REVIEW"
-          class="rounded-lg border border-default bg-default p-5 shadow-sm transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary"
-        >
-          <div class="flex items-center justify-between text-primary">
-            <UIcon
-              name="i-lucide-scan-eye"
-              class="size-6"
-            /><UIcon
-              name="i-lucide-arrow-up-right"
-              class="size-5"
-            />
-          </div>
-          <USkeleton
-            v-if="loading && !counts"
-            class="my-3 h-12 w-16"
-          />
-          <p
-            v-else
-            class="my-3 text-4xl font-semibold tabular-nums text-highlighted"
+        <div class="relative lg:col-span-3 lg:col-start-10">
+          <NuxtLink
+            to="/content?status=READY_FOR_REVIEW"
+            class="overview-review-glass block rounded-3xl p-5 transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary"
           >
-            {{ counts?.ready ?? '—' }}
-          </p>
-          <p class="font-medium text-highlighted">{{ $t('pages.overview.metrics.ready') }}</p>
-          <p class="mt-1 text-sm text-muted">{{ $t('pages.overview.reviewHint') }}</p>
-        </NuxtLink>
+            <div class="flex items-center justify-between text-primary">
+              <UIcon
+                name="i-lucide-scan-eye"
+                class="size-6"
+              /><UIcon
+                name="i-lucide-arrow-up-right"
+                class="size-5"
+              />
+            </div>
+            <USkeleton
+              v-if="loading && !counts"
+              class="my-3 h-12 w-16"
+            />
+            <p
+              v-else
+              class="my-3 text-4xl font-semibold tabular-nums text-highlighted"
+            >
+              {{ counts?.ready ?? '—' }}
+            </p>
+            <p class="font-medium text-highlighted">{{ $t('pages.overview.metrics.ready') }}</p>
+            <p class="mt-1 text-sm text-muted">{{ $t('pages.overview.reviewHint') }}</p>
+          </NuxtLink>
+        </div>
       </div>
     </section>
     <dl class="grid grid-cols-2 gap-4 xl:grid-cols-4">
       <div
         v-for="metric in metrics"
         :key="metric.key"
-        class="rounded-lg border border-default bg-default p-5"
+        class="clay-card metric-tile rounded-3xl p-5"
       >
         <dt class="mb-4 flex items-center justify-between gap-2 text-sm text-muted">
           <span>{{ $t(`pages.overview.metrics.${metric.key}`) }}</span><UIcon

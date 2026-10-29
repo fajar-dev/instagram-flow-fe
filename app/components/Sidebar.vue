@@ -2,7 +2,7 @@
 <template>
   <div class="relative h-full shrink-0">
     <aside
-      class="flex flex-col h-full bg-default border border-default rounded-xl shrink-0 justify-between select-none w-24 px-1 py-3"
+      class="flex flex-col h-full sidebar-glass rounded-3xl shrink-0 justify-between select-none w-28 px-2 py-4"
     >
       <!-- Top Section: App/Brand Logo Header -->
       <div class="flex flex-col items-center pb-6 pt-1.5 shrink-0 gap-1">
@@ -17,7 +17,7 @@
       <nav
         class="flex-1 overflow-y-auto min-h-0 py-2.5 space-y-1 pt-4 scrollbar-thin flex flex-col items-center"
       >
-        <!-- Quick Action: Upload Content (Tombol bulat primary, cuma icon awan upload) -->
+        <!-- Quick action: upload content -->
         <div class="mb-5 shrink-0">
           <UTooltip
             :text="$t('pages.content.upload')"
@@ -25,12 +25,12 @@
           >
             <UButton
               to="/content/upload"
-              color="primary"
-              variant="solid"
-              icon="i-lucide-cloud-upload"
-              class="rounded-full size-12 justify-center shadow-xs hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              color="neutral"
+              variant="ghost"
+              icon="i-lucide-plus"
+              class="sidebar-upload rounded-2xl size-12 justify-center cursor-pointer"
               :class="[
-                isUploadActive ? 'ring-2 ring-primary ring-offset-2 ring-offset-bg-default' : ''
+                isUploadActive ? 'ring-2 ring-primary ring-offset-2 ring-offset-transparent' : ''
               ]"
               :ui="{ leadingIcon: 'size-6' }"
               :aria-label="$t('pages.content.upload')"
@@ -65,7 +65,7 @@
                   class="w-14 h-8.5 rounded-full flex items-center justify-center transition-all duration-200"
                   :class="[
                     isParentActive(item)
-                      ? 'bg-primary/10 text-primary shadow-xs'
+                      ? 'clay-active text-primary shadow-xs'
                       : 'text-muted group-hover:bg-muted/60 group-hover:text-highlighted'
                   ]"
                 >
@@ -130,7 +130,7 @@
                 class="w-14 h-8.5 rounded-full flex items-center justify-center transition-all duration-200"
                 :class="[
                   isItemActive(item)
-                    ? 'bg-primary/10 text-primary shadow-xs'
+                    ? 'clay-active text-primary shadow-xs'
                     : 'text-muted group-hover:bg-muted/60 group-hover:text-highlighted'
                 ]"
               >

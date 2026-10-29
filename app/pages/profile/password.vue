@@ -1,9 +1,9 @@
 <template>
-  <div class="p-6 space-y-6">
+  <div class="space-y-6">
     <UForm
       :schema="passwordSchema"
       :state="formPassword"
-      class="space-y-4"
+      class="space-y-5"
       @submit="handlePasswordSubmit"
     >
       <UFormField
@@ -48,7 +48,7 @@
         />
       </UFormField>
 
-      <div class="flex justify-end pt-3 border-t border-default">
+      <div class="flex justify-end border-t border-default/60 pt-5">
         <UButton
           type="submit"
           color="primary"

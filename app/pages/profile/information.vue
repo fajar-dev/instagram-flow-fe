@@ -1,6 +1,6 @@
 <template>
-  <div class="p-6 space-y-6">
-    <div class="flex flex-col sm:flex-row items-center gap-6 pb-4 border-b border-default">
+  <div class="space-y-6">
+    <div class="flex flex-col sm:flex-row items-center gap-5 pb-6 border-b border-default/60">
       <div class="relative group">
         <UAvatar
           :src="previewUrl || undefined"
@@ -36,7 +36,7 @@
         <p class="text-sm text-muted pb-1">
           {{ $t('pages.profile.information.photoHint') }}
         </p>
-        <div class="flex gap-2 justify-center sm:justify-start">
+        <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
           <UFileUpload
             v-slot="{ open: openFilePicker }"
             v-model="photoFile"
@@ -46,7 +46,7 @@
             reset
           >
             <UButton
-              size="xs"
+              size="sm"
               color="neutral"
               variant="outline"
               icon="i-lucide-upload"
@@ -57,7 +57,7 @@
           </UFileUpload>
           <UButton
             v-if="previewUrl || formInfo.photo"
-            size="xs"
+            size="sm"
             color="error"
             variant="outline"
             icon="i-lucide-trash"
@@ -73,7 +73,7 @@
     <UForm
       :schema="infoSchema"
       :state="formInfo"
-      class="space-y-4"
+      class="space-y-5"
       @submit="handleInfoSubmit"
     >
       <UFormField
@@ -101,7 +101,7 @@
         />
       </UFormField>
 
-      <div class="flex justify-end pt-3 border-t border-default">
+      <div class="flex justify-end border-t border-default/60 pt-5">
         <UButton
           type="submit"
           color="primary"

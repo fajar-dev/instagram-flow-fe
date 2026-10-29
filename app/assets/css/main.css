@@ -54,3 +54,246 @@
   --color-red-900: #4b0003;
   --color-red-950: #300002;
 }
+
+/* Creative studio surfaces: shared across dashboard, auth and teleported overlays. */
+:root {
+  --ui-radius: 0.25rem;
+  --ui-bg: #fcfbff;
+  --ui-bg-muted: #f1eff8;
+  --ui-bg-elevated: #eae7f3;
+  --ui-border: #dfdce9;
+  --ui-text-muted: #706c83;
+  --ui-text-highlighted: #30344e;
+  --studio-surface: #ffffffed;
+  --studio-glass: #ffffffb8;
+  --studio-shadow: 8px 10px 26px #72678c0d, 2px 3px 6px #72678c0b, inset 0 2px 2px #fff;
+  --studio-control-shadow: inset 2px 2px 4px #77708c0a, inset -2px -2px 4px #fff;
+}
+.dark {
+  --ui-bg: #202333;
+  --ui-bg-muted: #191c2a;
+  --ui-bg-elevated: #2d3044;
+  --ui-border: #3a3c50;
+  --ui-text-muted: #aaa8bd;
+  --ui-text-highlighted: #eeecfa;
+  --studio-surface: #262938ed;
+  --studio-glass: #262938d9;
+  --studio-shadow: 6px 8px 24px #0002, inset 0 1px 1px #ffffff0d;
+  --studio-control-shadow: inset 2px 2px 4px #0002;
+}
+body {
+  background: var(--ui-bg-muted);
+}
+.creative-shell {
+  background:
+    radial-gradient(ellipse at 85% 0%, #e6e0f580, transparent 45%),
+    radial-gradient(ellipse at 0% 90%, #dcefe680, transparent 40%), #f4f2f8;
+}
+.dark .creative-shell {
+  background: radial-gradient(ellipse at 80% 0%, #46406535, transparent 50%), #191c2a;
+}
+.clay-card {
+  background: var(--studio-surface);
+  border: 1px solid color-mix(in srgb, var(--ui-border) 60%, transparent);
+  box-shadow: var(--studio-shadow);
+}
+.clay-glass {
+  background: var(--studio-glass);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--studio-shadow);
+}
+.clay-control {
+  background-color: var(--ui-bg);
+  box-shadow: var(--studio-control-shadow);
+  min-height: 2.75rem;
+}
+.clay-button {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+.clay-button:not(:disabled):active {
+  transform: translateY(1px);
+}
+.clay-button.bg-primary {
+  box-shadow:
+    inset 0 2px 2px #ffffff30,
+    inset 0 -2px 3px #00000015,
+    0 4px 9px #2d4e6f24;
+}
+.clay-active {
+  background: linear-gradient(135deg, #ede9fc, #e2edf6);
+  box-shadow:
+    inset 0 2px 2px #fff9,
+    0 3px 6px #77708c0c;
+}
+.dark .clay-active {
+  background: #3b3d56;
+}
+.clay-tabs {
+  background: var(--ui-bg-muted);
+  box-shadow: var(--studio-control-shadow);
+}
+.creative-heading {
+  padding: 0.25rem 0 0.75rem;
+}
+.creative-heading h2 {
+  letter-spacing: -0.035em;
+}
+.creative-banner {
+  background: linear-gradient(110deg, #faf8ff, #fcfaf6);
+  border: 1px solid #ffffffd9;
+  box-shadow:
+    0 4px 16px #72678c08,
+    inset 0 1px 0 #fff;
+}
+.dark .creative-banner {
+  background: linear-gradient(110deg, #363248, #273d40);
+  border-color: var(--ui-border);
+  box-shadow: var(--studio-shadow);
+}
+/* Keep decoration behind the metrics and away from the reading area. */
+.metric-tile {
+  --metric-accent: #a393cf;
+  position: relative;
+  isolation: isolate;
+  background: color-mix(in srgb, var(--studio-surface) 94%, var(--metric-accent));
+}
+.metric-tile::before,
+.metric-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.metric-tile::before {
+  background: radial-gradient(
+    ellipse at 100% 100%,
+    color-mix(in srgb, var(--metric-accent) 19%, transparent),
+    transparent 65%
+  );
+}
+.metric-tile::after {
+  background: var(--metric-accent);
+  mask: url('/patterns/metric-curves.svg') right bottom / 180px 140px no-repeat;
+  opacity: 0.2;
+}
+.metric-tile:nth-child(4n + 2) {
+  --metric-accent: #dba694;
+}
+.metric-tile:nth-child(4n + 3) {
+  --metric-accent: #81b5a6;
+}
+.metric-tile:nth-child(4n + 4) {
+  --metric-accent: #c7ae78;
+}
+.dark .metric-tile::after {
+  opacity: 0.14;
+}
+.auth-art {
+  background: #e4daf7;
+  color: #30344e;
+  box-shadow: var(--studio-shadow);
+}
+.auth-hero-copy {
+  background: #fcfaff66;
+  color: #30344e;
+  border: 1px solid #ffffff80;
+  backdrop-filter: blur(20px) saturate(120%);
+  box-shadow:
+    inset 0 1px 0 #ffffff80,
+    0 8px 24px #51416b0a;
+}
+.studio-illustration {
+  max-width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .clay-button {
+    transition: none;
+  }
+  .clay-button:not(:disabled):active {
+    transform: none;
+  }
+}
+
+.clay-control:focus-visible {
+  outline: 2px solid var(--ui-primary);
+  outline-offset: 2px;
+}
+
+.sidebar-glass {
+  background: linear-gradient(160deg, #ffffff80, #ffffff38);
+  border: 1px solid #ffffffb3;
+  backdrop-filter: blur(24px) saturate(130%);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 8px 32px #71658c12;
+}
+.dark .sidebar-glass {
+  background: linear-gradient(160deg, #36394f99, #26293866);
+  border-color: #ffffff1f;
+  box-shadow:
+    inset 0 1px 0 #ffffff14,
+    0 8px 32px #0002;
+}
+.sidebar-upload {
+  color: #42466c;
+  background: linear-gradient(135deg, #dcd4fa, #cce9e0);
+  border: 1px solid #ffffffb3;
+  box-shadow:
+    inset 0 2px 2px #ffffff80,
+    0 4px 10px #75658c1a;
+}
+.sidebar-upload:hover {
+  background: linear-gradient(135deg, #cfc3f4, #bce1d5);
+}
+.dark .sidebar-upload {
+  color: #f1edff;
+  background: linear-gradient(135deg, #615981, #3e716c);
+  border-color: #ffffff33;
+}
+.dark .sidebar-upload:hover {
+  background: linear-gradient(135deg, #716693, #4a837c);
+}
+
+.dark .auth-art {
+  background: #242236;
+  color: #f0edf8;
+}
+.dark .auth-hero-copy {
+  background: #242236b3;
+  color: #f0edf8;
+  border-color: #ffffff26;
+  box-shadow:
+    inset 0 1px 0 #ffffff14,
+    0 8px 24px #0002;
+}
+
+/* Keep the text surface light while preserving the artwork on the right. */
+.overview-banner-veil {
+  background: linear-gradient(100deg, #faf8fff0 0%, #faf8ffcc 42%, #faf8ff33 72%, transparent 100%);
+}
+.dark .overview-banner-veil {
+  background: #25283b99;
+}
+
+.overview-review-glass {
+  background: #ffffff52;
+  border: 1px solid #ffffffa6;
+  backdrop-filter: blur(18px) saturate(115%);
+  box-shadow:
+    inset 0 1px 0 #ffffff80,
+    0 6px 20px #6c618d12;
+}
+.dark .overview-review-glass {
+  background: #26293880;
+  border-color: #ffffff26;
+  box-shadow:
+    inset 0 1px 0 #ffffff14,
+    0 6px 20px #0002;
+}

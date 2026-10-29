@@ -148,77 +148,82 @@
                 v-if="entries.length"
                 class="grid grid-cols-2 sm:grid-cols-3 gap-3"
               >
-                <UCard
+                <article
                   v-for="entry in entries"
                   :key="entry.id"
+                  class="min-w-0 overflow-hidden rounded-xl border border-default/60 bg-default"
                 >
-                  <div
-                    v-if="entry.status !== 'invalid'"
-                    class="relative"
-                  >
-                    <img
-                      :src="entry.url"
-                      :alt="entry.file.name"
-                      class="aspect-square w-full object-cover rounded"
-                    >
-                    <ImagePreview
-                      :src="entry.url"
-                      :alt="entry.file.name"
+                  <div class="relative flex aspect-square items-center justify-center bg-muted/60">
+                    <template v-if="entry.status !== 'invalid'">
+                      <img
+                        :src="entry.url"
+                        :alt="entry.file.name"
+                        class="size-full object-cover"
+                      >
+                      <ImagePreview
+                        :src="entry.url"
+                        :alt="entry.file.name"
+                      />
+                    </template>
+                    <UIcon
+                      v-else
+                      name="i-lucide-image-off"
+                      class="size-8 text-muted"
+                    />
+                    <UButton
+                      v-if="entry.status !== 'uploaded' && !processingRequested"
+                      :disabled="busy"
+                      size="sm"
+                      variant="outline"
+                      color="neutral"
+                      :aria-label="$t('pages.content.remove')"
+                      icon="i-lucide-x"
+                      class="absolute right-2 top-2 z-10 rounded-full bg-default shadow-sm hover:text-error"
+                      @click.stop="remove(entry.id)"
                     />
                   </div>
-                  <UIcon
-                    v-else
-                    name="i-lucide-image-off"
-                    class="size-8 text-muted"
-                  />
-                  <p class="text-xs truncate mt-2 font-medium">
-                    {{ entry.file.name }}
-                  </p>
-                  <p class="text-xs text-muted">
-                    {{ formatFileSize(entry.file.size) }}
-                  </p>
-                  <UProgress
-                    v-if="entry.status === 'uploading'"
-                    :model-value="entry.progress"
-                    class="mt-1"
-                  />
-                  <p
-                    v-if="entry.status === 'uploaded'"
-                    class="text-success text-xs font-medium mt-1"
-                  >
-                    {{ $t('pages.content.uploaded') }}
-                  </p>
-                  <p
-                    v-if="entry.status === 'validating'"
-                    class="text-xs text-muted mt-1"
-                  >
-                    {{ $t('pages.content.validatingImage') }}
-                  </p>
-                  <p
-                    v-if="entry.validationError || entry.error"
-                    class="text-xs text-error mt-1"
-                    role="status"
-                  >
-                    {{
-                      entry.validationError
-                        ? $t(`pages.content.${entry.validationError}`, {
-                          size: limits?.maxUploadMb
-                        })
-                        : entry.error
-                    }}
-                  </p>
-                  <UButton
-                    v-if="entry.status !== 'uploaded' && !processingRequested"
-                    :disabled="busy"
-                    size="xs"
-                    variant="ghost"
-                    color="error"
-                    :aria-label="$t('pages.content.remove')"
-                    icon="i-lucide-x"
-                    class="mt-1"
-                    @click="remove(entry.id)"
-                  />
-                </UCard>
+                  <div class="space-y-1 p-3">
+                    <p
+                      class="truncate text-xs font-medium"
+                      :title="entry.file.name"
+                    >
+                      {{ entry.file.name }}
+                    </p>
+                    <p class="text-xs text-muted">
+                      {{ formatFileSize(entry.file.size) }}
+                    </p>
+                    <UProgress
+                      v-if="entry.status === 'uploading'"
+                      :model-value="entry.progress"
+                      class="mt-1"
+                    />
+                    <p
+                      v-if="entry.status === 'uploaded'"
+                      class="text-success text-xs font-medium mt-1"
+                    >
+                      {{ $t('pages.content.uploaded') }}
+                    </p>
+                    <p
+                      v-if="entry.status === 'validating'"
+                      class="text-xs text-muted mt-1"
+                    >
+                      {{ $t('pages.content.validatingImage') }}
+                    </p>
+                    <p
+                      v-if="entry.validationError || entry.error"
+                      class="text-xs text-error mt-1"
+                      role="status"
+                    >
+                      {{
+                        entry.validationError
+                          ? $t(`pages.content.${entry.validationError}`, {
+                            size: limits?.maxUploadMb
+                          })
+                          : entry.error
+                      }}
+                    </p>
+                  </div>
+                </article>
               </div>
 
               <p

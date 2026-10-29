@@ -5,7 +5,7 @@
   >
     <nav
       :aria-label="$t('components.mobileNavbar.label')"
-      class="relative z-10 mx-3 mb-3 mt-4 rounded-lg border border-default bg-default"
+      class="relative z-10 mx-3 mb-3 mt-4 clay-glass rounded-3xl border border-default"
     >
       <div class="grid grid-cols-5 items-center gap-1 px-2 py-2">
         <template
@@ -34,7 +34,7 @@
             color="neutral"
             variant="ghost"
             :aria-current="isItemActive(item) ? 'page' : undefined"
-            class="min-h-14 min-w-0 flex-col justify-center gap-1 rounded-lg px-1 py-2 text-xs font-medium"
+            class="min-h-14 min-w-0 flex-col justify-center gap-1 rounded-2xl px-1 py-2 text-xs font-medium"
             :class="isItemActive(item) ? 'text-primary bg-primary/10' : 'text-muted'"
           >
             <UIcon

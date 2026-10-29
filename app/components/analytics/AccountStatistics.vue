@@ -11,7 +11,7 @@
       <AnalyticsMetricStat
         v-for="name in primaryMetrics"
         :key="name"
-        class="rounded-lg border border-default bg-default p-4 sm:p-5"
+        class="clay-card metric-tile rounded-3xl border border-default p-4 sm:p-5"
         :label="metricLabel(name)"
         :value="insightValue(report, name)"
         :previous="insightValue(report.previous, name)"
@@ -21,7 +21,7 @@
     </dl>
     <div class="grid items-stretch gap-4 lg:grid-cols-5">
       <div
-        class="flex min-w-0 flex-col justify-center gap-4 rounded-lg border border-default bg-default px-4 py-6 sm:px-6 lg:col-span-2"
+        class="flex min-w-0 flex-col justify-center gap-4 clay-card rounded-3xl border border-default px-4 py-6 sm:px-6 lg:col-span-2"
       >
         <AnalyticsAccountRadar :report="report" />
         <div class="flex justify-center">
@@ -40,7 +40,7 @@
         </div>
       </div>
       <dl
-        class="divide-y divide-default rounded-lg border border-default bg-default px-5 sm:px-6 lg:col-span-3"
+        class="divide-y divide-default clay-card rounded-3xl border border-default px-5 sm:px-6 lg:col-span-3"
       >
         <AnalyticsMetricStat
           v-for="metric in secondaryMetrics"

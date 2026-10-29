@@ -1,47 +1,45 @@
 <template>
-  <div class="fixed inset-0 flex overflow-hidden bg-muted/30 p-2">
+  <div class="fixed inset-0 flex overflow-hidden creative-shell p-3 sm:p-5">
     <aside
-      class="relative isolate hidden shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-neutral-950 p-6 text-white lg:flex lg:w-[45%] xl:p-10 2xl:p-12"
+      class="relative isolate hidden shrink-0 flex-col justify-between overflow-hidden auth-art rounded-3xl p-6 lg:flex lg:w-[45%] xl:p-10 2xl:p-12"
     >
       <img
         src="/hero.png"
         alt=""
         aria-hidden="true"
-        class="absolute inset-0 -z-20 size-full object-cover object-center"
+        class="absolute inset-0 -z-10 size-full object-cover object-center dark:hidden"
       >
-      <div
-        class="absolute inset-0 -z-10 bg-linear-to-t from-neutral-950/90 via-transparent to-black/30"
-      />
+      <img
+        src="/hero-dark.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 -z-10 hidden size-full object-cover object-center dark:block"
+      >
       <div class="flex items-center gap-3">
         <BrandLogo
           to="/"
           variant="full"
           size="xl"
-          color-mode="dark"
         />
       </div>
-      <div class="max-w-md space-y-4 pb-2 xl:space-y-5 xl:pb-6">
+      <div class="auth-hero-copy w-full max-w-md rounded-2xl p-5 xl:p-6">
         <slot name="hero">
-          <div class="flex items-center gap-1.5 pb-1">
-            <span
-              v-for="(_, index) in slides"
-              :key="index"
-              class="h-1 rounded-full transition-all duration-300"
-              :class="index === currentSlideIndex ? 'w-6 bg-primary' : 'w-1.5 bg-white/30'"
-            />
-          </div>
-          <div class="flex min-h-20 flex-col justify-end xl:min-h-28">
-            <h2 class="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl xl:text-4xl">
-              <span>{{ displayedHeadline }}</span>
+          <div class="space-y-3">
+            <h2 class="grid text-2xl font-medium leading-snug tracking-tight xl:text-3xl">
               <span
-                class="ml-1 inline-block h-6 w-0.5 animate-pulse bg-primary align-middle xl:h-9"
+                class="invisible col-start-1 row-start-1"
                 aria-hidden="true"
-              />
+              >{{ currentSlide.headline }}<span>▏</span></span>
+              <span
+                class="col-start-1 row-start-1 font-semibold"
+                aria-hidden="true"
+              >{{ displayedHeadline }}<span class="animate-pulse">▏</span></span>
+              <span class="sr-only">{{ currentSlide.headline }}</span>
             </h2>
+            <p class="max-w-sm text-sm leading-relaxed text-inherit">
+              {{ currentSlide.description }}
+            </p>
           </div>
-          <p class="min-h-10 max-w-sm text-sm leading-relaxed text-white/70 xl:text-base">
-            {{ currentSlide.description }}
-          </p>
         </slot>
       </div>
     </aside>
@@ -61,7 +59,7 @@
         </div>
       </header>
       <main
-        class="flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden py-2 sm:py-4"
+        class="flex min-h-0 w-full flex-1 items-center justify-center overflow-y-auto py-2 sm:py-4"
       >
         <slot />
       </main>
@@ -80,7 +78,7 @@ interface Slide {
   description: string
 }
 
-const { locale, t } = useI18n()
+const { t } = useI18n()
 
 useHead({
   htmlAttrs: {
@@ -98,16 +96,7 @@ const DEFAULT_SLIDE: Slide = {
   description: ''
 }
 
-const TYPE_SPEED = 60
-const DELETE_SPEED = 30
-const PAUSE_COMPLETE = 2400
-const PAUSE_EMPTY = 400
-
 const currentSlideIndex = ref(0)
-const displayedHeadline = ref('')
-const isDeleting = ref(false)
-
-let timer: ReturnType<typeof setTimeout> | undefined
 
 const slides = computed<Slide[]>(() =>
   SLIDE_KEYS.map(key => ({
@@ -119,46 +108,40 @@ const slides = computed<Slide[]>(() =>
 const currentSlide = computed<Slide>(
   () => slides.value[currentSlideIndex.value] ?? slides.value[0] ?? DEFAULT_SLIDE
 )
+const displayedHeadline = ref('')
+let isDeleting = false
+let typingTimer: ReturnType<typeof setTimeout> | undefined
 
-const tick = () => {
-  const currentHeadline = currentSlide.value.headline
+function tick() {
+  const headline = currentSlide.value.headline
 
-  if (!isDeleting.value) {
-    if (displayedHeadline.value.length < currentHeadline.length) {
-      displayedHeadline.value = currentHeadline.slice(0, displayedHeadline.value.length + 1)
-      timer = setTimeout(tick, TYPE_SPEED)
-    } else {
-      isDeleting.value = true
-      timer = setTimeout(tick, PAUSE_COMPLETE)
-    }
-  } else {
-    if (displayedHeadline.value.length > 0) {
-      displayedHeadline.value = currentHeadline.slice(0, displayedHeadline.value.length - 1)
-      timer = setTimeout(tick, DELETE_SPEED)
-    } else {
-      isDeleting.value = false
+  if (isDeleting) {
+    displayedHeadline.value = displayedHeadline.value.slice(0, -1)
+    if (!displayedHeadline.value) {
       currentSlideIndex.value = (currentSlideIndex.value + 1) % slides.value.length
-      timer = setTimeout(tick, PAUSE_EMPTY)
+      return
     }
+    typingTimer = setTimeout(tick, 30)
+    return
   }
+
+  displayedHeadline.value = headline.slice(0, displayedHeadline.value.length + 1)
+  if (displayedHeadline.value === headline) {
+    isDeleting = true
+    typingTimer = setTimeout(tick, 2400)
+    return
+  }
+  typingTimer = setTimeout(tick, 60)
 }
 
-watch(locale, () => {
-  if (timer) {
-    clearTimeout(timer)
-  }
-  isDeleting.value = false
+function restartTyping() {
+  clearTimeout(typingTimer)
   displayedHeadline.value = ''
-  timer = setTimeout(tick, 200)
-})
+  isDeleting = false
+  typingTimer = setTimeout(tick, 400)
+}
 
-onMounted(() => {
-  timer = setTimeout(tick, 400)
-})
-
-onUnmounted(() => {
-  if (timer) {
-    clearTimeout(timer)
-  }
-})
+watch(() => currentSlide.value.headline, restartTyping)
+onMounted(restartTyping)
+onUnmounted(() => clearTimeout(typingTimer))
 </script>

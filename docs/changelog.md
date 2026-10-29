@@ -1,3 +1,114 @@
+## 29 Oktober 2026 — Pola dekoratif kartu metrik
+
+- Perhalus kartu metrik Overview/Analytics: permukaan lebih netral, glow pastel dan lengkungan SVG tipis di sudut kanan bawah; warna mengikuti masing-masing kartu tanpa grid yang ramai.
+- Pola memudar di area teks, mengikuti radius kartu dan mendukung dark mode tanpa mengubah data atau interaksi.
+
+## 29 Oktober 2026 — Permukaan banner lebih ringan
+
+- Hapus lapisan abu-lavender merata; gunakan ivory–lavender muda pada area teks yang memudar menuju ilustrasi kanan.
+- Lembutkan shadow banner, pertahankan kontras teks/tombol dan varian dark mode.
+
+## 29 Oktober 2026 — Glass kartu siap review
+
+- Kartu Ready for review pada banner memakai permukaan transparan dengan blur, border ringan dan varian dark mode.
+
+## 29 Oktober 2026 — Seimbangkan warna banner
+
+- Ganti gradient navy berat dengan lapisan lavender keabu-abuan merata. Gunakan kembali token teks tema agar banner selaras dengan halaman pastel dan dark mode.
+
+## 29 Oktober 2026 — Kontras banner overview
+
+- Redupkan area teks banner dengan lapisan biru AMTI dan teks terang; ilustrasi kanan tetap terlihat. Sesuaikan lapisan untuk mobile dan dark mode.
+
+## 29 Oktober 2026 — Background ilustrasi overview
+
+- Ganti ilustrasi kamera banner dengan satu background studio konten AMTI: kartu jembatan/gedung, pesawat kertas dan elemen landscape pastel.
+- Pertahankan area teks kiri dan kartu siap review kanan; kurangi opacity pada mobile dan dark mode agar tetap terbaca. Hapus aset kamera SVG yang tidak dipakai.
+
+## 29 Oktober 2026 — Layout preview foto upload
+
+- Gunakan tile foto ringkas tanpa padding kartu berlapis; preview dan placeholder error memiliki rasio persegi yang sama.
+- Pindahkan tombol hapus ke kanan atas preview, terpisah dari pemicu lightbox. Nama, ukuran, progress dan error tetap di bawah gambar.
+
+## 29 Oktober 2026 — Tutup lightbox dari pinggiran gambar
+
+- Batasi elemen gambar sesuai dimensi preview dan pindahkan padding ke pembungkus transparan. Klik ruang kosong pembungkus menutup lightbox, sementara klik gambar tidak menutupnya. Escape dan tombol close tetap memakai perilaku modal.
+
+## 29 Oktober 2026 — Background ImageLightbox
+
+- Pastikan kontainer lightbox transparan, tanpa border dan shadow meskipun modal mewarisi tema clay global. Overlay di belakang gambar tetap dipertahankan.
+
+## 29 Oktober 2026 — Aset hero khusus dark mode
+
+- Tambahkan hero-dark.png dengan komposisi AMTI × Instagram dan pencahayaan navy/ungu.
+- Ganti aset mengikuti tema aplikasi dan hapus filter penggelapan hero light.
+
+## 29 Oktober 2026 — Dark mode area kiri
+
+- Hero auth mengikuti dark mode melalui filter gambar, glass gelap dan teks terang; logo memakai varian otomatis.
+- Pertahankan glass dan tombol pastel versi dark pada sidebar desktop.
+
+## 29 Oktober 2026 — Sidebar glass dan tombol upload
+
+- Sidebar desktop memakai frosted glass transparan, blur dan highlight ringan dengan varian dark mode.
+- Tombol upload menggunakan kotak rounded pastel dan ikon plus, tetap memiliki tooltip, label aksesibel dan penanda halaman aktif.
+
+## 29 Oktober 2026 — Pemanggilan SVG langsung
+
+- Panggil aset ilustrasi langsung melalui img pada Header dan overview. Hapus komponen pembungkus CreativeIllustration yang tidak diperlukan.
+
+## 29 Oktober 2026 — Ilustrasi SVG per halaman
+
+- Pisahkan ilustrasi ke sepuluh file SVG di public/illustrations; komponen bersama hanya menampilkan aset.
+- Bedakan ilustrasi setiap area navigasi dengan mapping route, termasuk content detail, upload, media, settings, users, profile dan activity logs.
+
+## 29 Oktober 2026 — Hapus indikator hero
+
+- Hapus tombol indikator titik pada panel hero auth; typing dan pergantian teks otomatis tetap berjalan.
+
+## 29 Oktober 2026 — Glass panel hero
+
+- Ubah panel teks auth menjadi glass transparan 40% dengan blur 20px, garis tepi ringan dan highlight inset; pertahankan teks navy serta typing.
+
+## 29 Oktober 2026 — Kontras teks dan typing hero
+
+- Kembalikan typing dan pergantian slide otomatis, dengan cleanup timer dan reset saat bahasa/slide berubah.
+- Letakkan teks navy pada panel ivory dengan glass tipis agar terbaca di atas ilustrasi. Cadangkan tinggi judul dan sediakan kalimat utuh untuk screen reader.
+
+## 29 Oktober 2026 — Tipografi hero auth
+
+- Perkecil judul hero dan gunakan bobot medium, jarak deskripsi rapat, serta indikator di bawah teks.
+- Hapus state/timer animasi mengetik. Slide kini dipilih melalui tombol berlabel sehingga kalimat selalu tampil utuh.
+
+## 29 Oktober 2026 — Hero pastel AMTI × Instagram
+
+- Ganti aset hero dengan ilustrasi clay kamera, Instagram, jembatan dan sensor monitoring.
+- Gunakan logo AMTI biru asli dan teks navy tanpa overlay gelap agar selaras dengan latar pastel.
+
+## 29 Oktober 2026 — Kejelasan background auth
+
+- Hapus opacity rendah dan blend luminosity pada hero auth agar warna dan detail gambar kembali terlihat. Gunakan gradient gelap di bawah untuk teks.
+
+## 29 Oktober 2026 — Hero auth tanpa ilustrasi bertumpuk
+
+- Hapus ilustrasi kamera tambahan di atas hero auth; pertahankan satu gambar hero sebagai visual utama.
+
+## 29 Oktober 2026 — Konsistensi Profile
+
+- Ganti pembungkus Profile lama dengan UCard bersama; tab informasi dan password mengikuti padding, radius, shadow dan lebar form settings.
+- Samakan jarak field/footer dan perbesar tombol foto agar lebih nyaman digunakan.
+
+## 29 Oktober 2026 — Koreksi radius kartu
+
+- Normalkan token radius Nuxt UI menjadi 0.25rem agar kartu, banner, tabel dan navigasi memiliki sudut lembut tanpa berbentuk kapsul. Warna pastel dan efek clay tetap dipertahankan.
+
+## 29 Oktober 2026 — Creative studio UI
+
+- Terapkan claymorphism lembut dan glass pada navigasi, dengan token light/dark bersama, tombol pill, form rounded, dan bayangan inset.
+- Perbarui layout auth/dashboard, header, sidebar, bottom bar, overview, tabel dan kartu analytics; komponen Nuxt UI meneruskan tema ke halaman lain.
+- Tambahkan empat ilustrasi SVG dekoratif yang dipakai ulang tanpa dependensi baru.
+- Pertahankan alur bisnis, API, data, dan mockup Instagram.
+
 ## 28 Oktober 2026 — Pemisahan card upload dan tombol aksi di card kiri
 
 - Memisahkan form halaman `pages/content/upload.vue` menjadi 2 kartu (`UCard`) terpisah tanpa header: kartu kiri untuk Detail Proyek (metadata, deskripsi, output, izin publikasi, dan tombol aksi) serta kartu kanan untuk Foto Dokumentasi (`UFileUpload` dan preview foto).
