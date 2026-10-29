@@ -23,7 +23,12 @@
         </p>
       </div>
 
-      <div class="hidden shrink-0 items-center lg:flex">
+      <div class="hidden shrink-0 items-center gap-1 lg:flex">
+        <UColorModeButton
+          color="neutral"
+          variant="ghost"
+        />
+        <LanguageSwitcher variant="ghost" />
         <UserPopover />
       </div>
     </div>

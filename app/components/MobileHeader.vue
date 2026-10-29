@@ -6,10 +6,15 @@
       <BrandLogo
         to="/"
         variant="full"
-        size="lg"
+        size="h-7 sm:h-12"
       />
     </div>
-    <div class="shrink-0">
+    <div class="flex shrink-0 items-center gap-1">
+      <UColorModeButton
+        color="neutral"
+        variant="ghost"
+      />
+      <LanguageSwitcher variant="ghost" />
       <UserPopover :show-details="false" />
     </div>
   </header>

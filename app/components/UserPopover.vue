@@ -11,7 +11,7 @@
       <UButton
         v-if="showDetails"
         variant="ghost"
-        :aria-label="$t('components.sidebar.settings')"
+        :aria-label="$t('components.userPopover.profile')"
       >
         <UAvatar
           :src="authState.user?.photo ?? undefined"
@@ -39,7 +39,7 @@
         color="neutral"
         variant="ghost"
         class="rounded-full p-1 cursor-pointer"
-        :aria-label="$t('components.sidebar.settings')"
+        :aria-label="$t('components.userPopover.profile')"
       >
         <UAvatar
           :src="authState.user?.photo ?? undefined"
@@ -67,51 +67,6 @@
           >
             {{ $t('components.userPopover.profile') }}
           </UButton>
-          <!-- Theme Dropdown Menu -->
-          <UDropdownMenu
-            :items="themeMenuItems"
-            :content="{ side: 'left', sideOffset: 8 }"
-          >
-            <UButton
-              color="neutral"
-              variant="ghost"
-              :icon="currentThemeIcon"
-              class="w-full justify-start cursor-pointer"
-            >
-              {{ $t('components.userPopover.theme') }}
-            </UButton>
-
-            <template #item-trailing="{ item }">
-              <UIcon
-                v-if="item.active"
-                name="i-lucide-check"
-                class="size-4 text-primary shrink-0"
-              />
-            </template>
-          </UDropdownMenu>
-
-          <!-- Language Dropdown Menu -->
-          <UDropdownMenu
-            :items="langMenuItems"
-            :content="{ side: 'left', sideOffset: 8 }"
-          >
-            <UButton
-              color="neutral"
-              variant="ghost"
-              :icon="currentLocaleFlag"
-              class="w-full justify-start cursor-pointer"
-            >
-              {{ $t('components.userPopover.language') }}
-            </UButton>
-
-            <template #item-trailing="{ item }">
-              <UIcon
-                v-if="item.active"
-                name="i-lucide-check"
-                class="size-4 text-primary shrink-0"
-              />
-            </template>
-          </UDropdownMenu>
         </div>
 
         <USeparator />
@@ -135,14 +90,12 @@
 
 <script setup lang="ts">
 import { useAuth } from '~/composables/auth/useAuth'
-import { getLocaleFlag, localeOptions } from '~/util/locale'
 
 const open = ref(false)
 const handleServiceError = useServiceError()
 const { state: authState, service: authService } = useAuth()
 const toast = useToast()
-const colorMode = useColorMode()
-const { locale, setLocale, t } = useI18n()
+const { t } = useI18n()
 
 interface Props {
   popoverProps?: Record<string, unknown>
@@ -155,43 +108,6 @@ withDefaults(defineProps<Props>(), {
   }),
   showDetails: true
 })
-
-const themeOptions = [
-  { label: 'Light', value: 'light', icon: 'i-lucide-sun' },
-  { label: 'Dark', value: 'dark', icon: 'i-lucide-moon' },
-  { label: 'System', value: 'system', icon: 'i-lucide-laptop' }
-]
-
-const currentThemeIcon = computed(() => {
-  if (colorMode.value === 'dark') {
-    return 'i-lucide-moon'
-  }
-  return 'i-lucide-sun'
-})
-
-const themeMenuItems = computed(() =>
-  themeOptions.map(opt => ({
-    label: opt.label,
-    icon: opt.icon,
-    active: colorMode.preference === opt.value,
-    onSelect: () => {
-      colorMode.preference = opt.value
-    }
-  }))
-)
-
-const currentLocaleFlag = computed(() => getLocaleFlag(locale.value))
-
-const langMenuItems = computed(() =>
-  localeOptions.map(opt => ({
-    label: opt.label,
-    icon: opt.flag,
-    active: locale.value === opt.value,
-    onSelect: () => {
-      setLocale(opt.value)
-    }
-  }))
-)
 
 const handleLogout = async () => {
   try {
