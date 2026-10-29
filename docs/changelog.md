@@ -1,5 +1,7 @@
 ## 29 Oktober 2026 — Pola dekoratif kartu metrik
 
+- Tambahkan ilustrasi overview dark tersendiri dengan suasana malam; otomatis berganti mengikuti tema, dengan gradasi slate yang memudar ke ilustrasi agar menyatu dengan permukaan dark.
+
 - Pindahkan kontrol tema dan bahasa ke header desktop/mobile menggunakan kontrol yang sama dengan auth; popover pengguna hanya berisi Profile dan Logout.
 
 - Perhalus kartu metrik Overview/Analytics: permukaan lebih netral, glow pastel dan lengkungan SVG tipis di sudut kanan bawah; warna mengikuti masing-masing kartu tanpa grid yang ramai.

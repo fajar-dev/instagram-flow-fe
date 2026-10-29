@@ -9,7 +9,13 @@
         src="/overview-banner.png"
         alt=""
         aria-hidden="true"
-        class="pointer-events-none absolute inset-0 size-full object-cover opacity-20 lg:opacity-85 dark:lg:opacity-35"
+        class="pointer-events-none absolute inset-0 size-full object-cover opacity-20 lg:opacity-85 dark:hidden"
+      >
+      <img
+        src="/overview-banner-dark.png"
+        alt=""
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 hidden size-full object-cover object-left dark:block lg:object-center"
       >
       <div
         class="overview-banner-veil pointer-events-none absolute inset-0"

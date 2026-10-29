@@ -274,12 +274,12 @@ body {
     0 8px 24px #0002;
 }
 
-/* Keep the text surface light while preserving the artwork on the right. */
+/* Blend the text surface into each theme while retaining the artwork. */
 .overview-banner-veil {
   background: linear-gradient(100deg, #faf8fff0 0%, #faf8ffcc 42%, #faf8ff33 72%, transparent 100%);
 }
 .dark .overview-banner-veil {
-  background: #25283b99;
+  background: linear-gradient(100deg, #25283bf0 0%, #25283bcc 42%, #25283b59 72%, #25283b26 100%);
 }
 
 .overview-review-glass {
