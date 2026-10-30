@@ -33,7 +33,6 @@ export function useContentUpload() {
     documentationDate: '',
     clientName: '',
     description: '',
-    publicationPermission: false,
     output: 'feed' as 'feed' | 'story'
   })
   const schema = computed(() =>
@@ -44,9 +43,6 @@ export function useContentUpload() {
       documentationDate: z.iso.date(t('pages.content.validation')),
       description: z.string().max(2000),
       clientName: z.string().max(200),
-      publicationPermission: z
-        .boolean()
-        .refine(value => value, t('pages.content.consentRequired')),
       output: z.enum(['feed', 'story'])
     })
   )

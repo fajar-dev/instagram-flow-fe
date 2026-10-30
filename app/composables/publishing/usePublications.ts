@@ -14,9 +14,7 @@ export function usePublications(detail: () => JobDetails, completed: () => void)
     () =>
       detail().draft?.decisionStatus === 'READY_FOR_REVIEW' && loaded.value && !rows.value.length
   )
-  const canPublish = computed(
-    () => canDecide.value && !failed.value && detail().batch.publicationPermission
-  )
+  const canPublish = computed(() => canDecide.value && !failed.value)
   const { failed, load } = useLatestRequest(
     async () => {
       const draftId = detail().draft?.id

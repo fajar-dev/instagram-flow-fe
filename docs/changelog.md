@@ -1,5 +1,8 @@
 ## 29 Oktober 2026 — Pola dekoratif kartu metrik
 
+- Hapus konfirmasi izin publikasi dari form, kontrak batch, serta syarat pemrosesan AI dan publikasi; seluruh dokumentasi internal telah diizinkan. Label klien disederhanakan menjadi Client name / Nama klien.
+
+
 - Tambahkan ilustrasi overview dark tersendiri dengan suasana malam; otomatis berganti mengikuti tema, dengan gradasi slate yang memudar ke ilustrasi agar menyatu dengan permukaan dark.
 
 - Pindahkan kontrol tema dan bahasa ke header desktop/mobile menggunakan kontrol yang sama dengan auth; popover pengguna hanya berisi Profile dan Logout.

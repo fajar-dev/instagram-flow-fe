@@ -44,7 +44,7 @@ Semua pengguna aktif mempunyai navigasi dan akses yang sama. JWT tetap diperluka
 
 ## Publikasi
 
-Satu halaman `/content/:jobId` memuat preview di kiri, card utama di kanan dan card Summary di bawah. Saat ready for review, form konten, foto, akun dan jadwal langsung muncul dengan aksi Publish/Reject. Publikasi memerlukan status READY_FOR_REVIEW dan consent batch. Pilih akun dari JSON server, urutan render AI, post sekarang atau jadwal WIB. Output Feed/Story mengikuti pilihan saat upload. Desain AI berasal dari workflow n8n. Caption/hashtag dapat berubah; konteks gambar harus tetap cocok dengan hasil AI. Project yang sudah masuk publikasi tidak dapat diedit atau dipublikasikan lagi. Retry publikasi memakai record yang sama; retry AI membuat attempt baru dan hanya attempt terbaru tampil dalam daftar; pembatalan mengakhiri project sebagai REJECTED. Worker backend harus aktif.
+Satu halaman `/content/:jobId` memuat preview di kiri, card utama di kanan dan card Summary di bawah. Saat ready for review, form konten, foto, akun dan jadwal langsung muncul dengan aksi Publish/Reject. Publikasi memerlukan status READY_FOR_REVIEW. Pilih akun dari JSON server, urutan render AI, post sekarang atau jadwal WIB. Output Feed/Story mengikuti pilihan saat upload. Desain AI berasal dari workflow n8n. Caption/hashtag dapat berubah; konteks gambar harus tetap cocok dengan hasil AI. Project yang sudah masuk publikasi tidak dapat diedit atau dipublikasikan lagi. Retry publikasi memakai record yang sama; retry AI membuat attempt baru dan hanya attempt terbaru tampil dalam daftar; pembatalan mengakhiri project sebagai REJECTED. Worker backend harus aktif.
 
 ## Instagram Analytics
 

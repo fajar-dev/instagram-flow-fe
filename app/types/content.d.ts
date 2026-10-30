@@ -6,7 +6,6 @@ export interface Batch {
   documentationDate: string
   description: string
   clientName: string
-  publicationPermission: boolean
   uploaderId: number
   status: string
   createdAt: string

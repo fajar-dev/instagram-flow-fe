@@ -11,7 +11,7 @@
       @submit="submit"
     >
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        <!-- Left Column: Project Details, Consent & Actions (Sticky) -->
+        <!-- Left Column: Project Details & Actions (Sticky) -->
         <div class="min-w-0 lg:sticky lg:top-6">
           <UCard class="w-full">
             <div class="space-y-4">
@@ -68,18 +68,6 @@
                   ]"
                   :disabled="busy || processingRequested"
                   orientation="horizontal"
-                />
-              </UFormField>
-
-              <UFormField
-                name="publicationPermission"
-                required
-                class="pt-1"
-              >
-                <UCheckbox
-                  v-model="form.publicationPermission"
-                  :disabled="busy || Boolean(batchId)"
-                  :label="$t('pages.content.consent')"
                 />
               </UFormField>
 
